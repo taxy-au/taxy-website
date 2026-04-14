@@ -1,0 +1,10 @@
+title: Taxy
+description: "Less chasing. More control. Built for Australian tax workflows."
+url: https://taxy.au
+baseurl: ""
+exclude:
+  - _scrape
+  - Gemfile
+  - Gemfile.lock
+  - README.md
+  - vendor
