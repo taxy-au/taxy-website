@@ -1,7 +1,7 @@
 title: Taxy
 description: "Less chasing. More control. Built for Australian tax workflows."
-url: https://taxy.au
-baseurl: ""
+url: https://taxy-au.github.io
+baseurl: "/taxy-website"
 exclude:
   - _scrape
   - Gemfile
