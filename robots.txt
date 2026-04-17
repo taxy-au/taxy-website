@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://taxy.au/sitemap.xml

@@ -1,7 +1,23 @@
 title: Taxy
-description: "Less chasing. More control. Built for Australian tax workflows."
+tagline: "Less chasing. More control. Built for Australian tax workflows."
+description: "The tax information workflow platform built for Australian accounting firms. Structured requests for every job across the year, so clients know what's needed, staff see progress at a glance, and nothing falls through the cracks."
 url: https://taxy.au
 baseurl: ""
+
+author:
+  name: Taxy
+
+logo: /assets/wp-content/uploads/2024/09/taxy-logo-white.png
+
+social:
+  name: Taxy
+  links:
+    - https://www.linkedin.com/company/104108903
+
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
 exclude:
   - _scrape
   - Gemfile
