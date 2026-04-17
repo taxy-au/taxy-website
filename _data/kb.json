@@ -1,0 +1,191 @@
+[
+  {
+    "slug": "add-period-rollover",
+    "title": "Add period / Rollover",
+    "category": "Useful Features",
+    "category_slug": "useful-features",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "adding-a-client",
+    "title": "Adding a Client",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "adding-an-entity",
+    "title": "Adding an entity",
+    "category": "Entities",
+    "category_slug": "entities",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "adding-categories-and-requirements",
+    "title": "Adding categories and requirements",
+    "category": "Entities",
+    "category_slug": "entities",
+    "updated": "2025-09-21"
+  },
+  {
+    "slug": "attachments-for-accountants",
+    "title": "Attachments for accountants",
+    "category": "Requirements",
+    "category_slug": "requirements",
+    "updated": "2025-11-09"
+  },
+  {
+    "slug": "attachments-for-clients",
+    "title": "Attachments for clients",
+    "category": "Requirements",
+    "category_slug": "requirements",
+    "updated": "2025-11-09"
+  },
+  {
+    "slug": "catalogues",
+    "title": "Catalogues",
+    "category": "Other",
+    "category_slug": "other",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "client-page",
+    "title": "Client page",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-09-21"
+  },
+  {
+    "slug": "clients-dashboard",
+    "title": "Clients dashboard",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-09-21"
+  },
+  {
+    "slug": "editing-catalogues",
+    "title": "Editing catalogues",
+    "category": "Catalogues",
+    "category_slug": "catalogues",
+    "updated": "2025-06-25"
+  },
+  {
+    "slug": "editing-categories",
+    "title": "Editing categories",
+    "category": "Catalogues",
+    "category_slug": "catalogues",
+    "updated": "2025-06-25"
+  },
+  {
+    "slug": "editing-requirements-in-the-catalogue",
+    "title": "Editing requirements in a catalogue",
+    "category": "Catalogues",
+    "category_slug": "catalogues",
+    "updated": "2025-09-11"
+  },
+  {
+    "slug": "entity-types",
+    "title": "Entity types",
+    "category": "Entities",
+    "category_slug": "entities",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "invite-a-client-user",
+    "title": "Invite a Client user",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-06-22"
+  },
+  {
+    "slug": "invite-multiple-client-users-at-once",
+    "title": "Invite multiple client users at once",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-09-21"
+  },
+  {
+    "slug": "inviting-team-members",
+    "title": "Inviting team members",
+    "category": "Team",
+    "category_slug": "team",
+    "updated": "2025-09-21"
+  },
+  {
+    "slug": "logging-in-for-first-time",
+    "title": "Logging in for first time",
+    "category": "Security",
+    "category_slug": "security",
+    "updated": "2025-08-16"
+  },
+  {
+    "slug": "manage-client-page",
+    "title": "Manage Client page",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-11-09"
+  },
+  {
+    "slug": "requirements-for-accountants",
+    "title": "Requirements for accountants",
+    "category": "Requirements",
+    "category_slug": "requirements",
+    "updated": "2025-10-18"
+  },
+  {
+    "slug": "requirements-for-clients",
+    "title": "Requirements for clients",
+    "category": "Requirements",
+    "category_slug": "requirements",
+    "updated": "2025-10-18"
+  },
+  {
+    "slug": "send-email-to-a-client",
+    "title": "Send email to a client",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-11-09"
+  },
+  {
+    "slug": "setting-up-the-client",
+    "title": "Setting up the client",
+    "category": "Clients",
+    "category_slug": "clients",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "setting-up-two-factor-authentication-2fa",
+    "title": "Setting up two-factor authentication (2FA)",
+    "category": "Security",
+    "category_slug": "security",
+    "updated": "2025-06-19"
+  },
+  {
+    "slug": "shoebox",
+    "title": "Shoebox",
+    "category": "Useful Features",
+    "category_slug": "useful-features",
+    "updated": "2025-09-02"
+  },
+  {
+    "slug": "the-settings-page",
+    "title": "The Settings page",
+    "category": "Team",
+    "category_slug": "team",
+    "updated": "2025-10-18"
+  },
+  {
+    "slug": "working-papers",
+    "title": "Working Papers",
+    "category": "Useful Features",
+    "category_slug": "useful-features",
+    "updated": "2025-09-21"
+  },
+  {
+    "slug": "worklist",
+    "title": "Worklist",
+    "category": "Useful Features",
+    "category_slug": "useful-features",
+    "updated": "2025-06-19"
+  }
+]
