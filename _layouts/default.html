@@ -171,6 +171,76 @@ const a=JSON.parse(document.getElementById("wp-emoji-settings").textContent),o=(
 //# sourceURL=https://taxy.au/wp-includes/js/wp-emoji-loader.min.js
 </script>
 
+<script id="taxy-swiper-init">
+(function(){
+  if (typeof Swiper === 'undefined') return;
+
+  function decodeEntities(str) {
+    var t = document.createElement('textarea');
+    t.innerHTML = str;
+    return t.value;
+  }
+
+  function getSize(s) {
+    if (s && typeof s === 'object' && 'size' in s) return Number(s.size) || 0;
+    return Number(s) || 0;
+  }
+
+  function initWidget(widget) {
+    if (widget.dataset.taxySwiperInited === '1') return;
+    widget.dataset.taxySwiperInited = '1';
+
+    var settings = {};
+    try { settings = JSON.parse(decodeEntities(widget.getAttribute('data-settings') || '{}')); }
+    catch (e) { return; }
+
+    var swiperEl = widget.querySelector('.swiper');
+    if (!swiperEl) return;
+
+    var slideCount = swiperEl.querySelectorAll('.swiper-slide').length;
+    if (slideCount <= 1) return;
+
+    var slidesPerView = parseInt(settings.slides_per_view, 10) || 1;
+    var loop = settings.loop === 'yes' && slideCount > slidesPerView;
+
+    var config = {
+      slidesPerView: slidesPerView,
+      spaceBetween: getSize(settings.space_between),
+      slidesPerGroup: parseInt(settings.slides_to_scroll, 10) || 1,
+      speed: settings.speed != null ? Number(settings.speed) || 300 : 300,
+      loop: loop,
+      breakpoints: {
+        0:    { slidesPerView: 1, spaceBetween: getSize(settings.space_between_mobile) },
+        768:  { slidesPerView: Math.min(slidesPerView, 2), spaceBetween: getSize(settings.space_between_tablet) },
+        1025: { slidesPerView: slidesPerView, spaceBetween: getSize(settings.space_between) }
+      }
+    };
+
+    if (settings.show_arrows === 'yes') {
+      var nextBtn = widget.querySelector('.elementor-swiper-button-next');
+      var prevBtn = widget.querySelector('.elementor-swiper-button-prev');
+      if (nextBtn && prevBtn) config.navigation = { nextEl: nextBtn, prevEl: prevBtn };
+    }
+
+    if (settings.pagination) {
+      var paginationEl = widget.querySelector('.swiper-pagination');
+      if (paginationEl) config.pagination = { el: paginationEl, type: settings.pagination, clickable: true };
+    }
+
+    new Swiper(swiperEl, config);
+  }
+
+  function initAll() {
+    document.querySelectorAll('.elementor-widget-testimonial-carousel').forEach(initWidget);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initAll);
+  } else {
+    initAll();
+  }
+})();
+</script>
 
 </body>
 </html>
