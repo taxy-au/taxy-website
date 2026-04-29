@@ -1,10 +1,43 @@
 <link rel='stylesheet' id='elementor-post-125-css' href='{{ site.baseurl }}/assets/wp-content/uploads/elementor/css/post-125.css' media='all' />
 <style id="taxy-pricing-overrides">
+  /* "What firms see" proof column: no card chrome, white text on the
+     dark section bg. Only the purple price card keeps card treatment. */
   .elementor-element.elementor-element-a4be9a6 {
     background-color: transparent !important;
     border-radius: 0 !important;
     box-shadow: none !important;
+    padding-top: 36px !important;
+    padding-right: 16px !important;
+    padding-bottom: 36px !important;
     padding-left: 0 !important;
-    padding-right: 0 !important;
+    align-self: stretch;
+  }
+  .elementor-element.elementor-element-a4be9a6,
+  .elementor-element.elementor-element-a4be9a6 h3,
+  .elementor-element.elementor-element-a4be9a6 p,
+  .elementor-element.elementor-element-a4be9a6 ul,
+  .elementor-element.elementor-element-a4be9a6 li,
+  .elementor-element.elementor-element-a4be9a6 strong {
+    color: #ffffff !important;
+  }
+  /* Pull the bullet markers in line with brand purple for a touch of accent */
+  .elementor-element.elementor-element-a4be9a6 ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  .elementor-element.elementor-element-a4be9a6 li {
+    position: relative;
+    padding-left: 1.25em;
+    margin-bottom: 0.5em;
+  }
+  .elementor-element.elementor-element-a4be9a6 li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #C2A8F9;
   }
 </style>
