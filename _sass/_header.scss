@@ -1,0 +1,43 @@
+// Site header — used by marketing.html.
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: $color-white;
+  border-bottom: 1px solid $color-light-grey;
+}
+
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-3;
+  padding-block: $space-2;
+}
+
+.site-header__logo img { height: 40px; width: auto; }
+
+.site-header__nav {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+}
+
+.site-header__menu {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+
+  a {
+    color: $color-nightshade;
+    font-weight: $fw-medium;
+    font-size: $fs-h5;
+    &:hover { color: $color-purple; text-decoration: none; }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .site-header__menu { display: none; }
+  .site-header__logo img { height: 32px; }
+}

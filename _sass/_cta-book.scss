@@ -1,0 +1,40 @@
+// cta-book partial — shape only. Pages wrap in their own grid for illustrations.
+
+.cta-book__title {
+  font-size: $fs-h2;
+  font-weight: $fw-black;
+  line-height: $lh-display;
+  letter-spacing: -0.01em;
+  color: $color-nightshade;
+  margin-bottom: $space-3;
+
+  @media (max-width: $breakpoint-md) { font-size: 32px; }
+}
+
+.cta-book__subhead {
+  color: $color-purple;
+}
+
+.cta-book__body {
+  font-size: $fs-p;
+  line-height: 1.5;
+  color: $color-nightshade;
+  max-width: 60ch;
+  margin-bottom: $space-3;
+
+  p + p { margin-top: $space-2; }
+}
+
+// Dark-bg variant — used in section--dark blocks.
+.cta-book--dark {
+  .cta-book__title { color: $color-white; }
+  .cta-book__body { color: rgba(255, 255, 255, 0.85); }
+  // subhead stays purple — pops fine against dark.
+}
+
+.cta-book__ctas {
+  display: flex;
+  gap: $space-2;
+  flex-wrap: wrap;
+}
+

@@ -1,0 +1,83 @@
+// Site footer — used by marketing.html.
+
+.site-footer {
+  // Lifted from brand-pack section.on-dark: nightshade base with a purple glow
+  // top-left and a softer pink glow bottom-right.
+  background: $color-nightshade;
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(149, 66, 255, 0.25), transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(250, 98, 171, 0.15), transparent 50%);
+  color: $color-white;
+  padding-block: $space-6 $space-4;
+}
+
+.site-footer__inner {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: $space-5;
+  align-items: start;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
+}
+
+.site-footer__brand img { height: 40px; width: auto; margin-bottom: $space-3; }
+
+.site-footer h5 {
+  margin-bottom: $space-2;
+  color: $color-purple;
+}
+
+.site-footer__list {
+  font-size: $fs-p-small;
+  color: rgba(255, 255, 255, 0.85);
+
+  li { margin-bottom: $space-1; }
+}
+
+.site-footer a {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: $fs-p-small;
+  &:hover { color: $color-purple; text-decoration: none; }
+}
+
+// Defined after .site-footer a so the icon-button styles win source-order
+// at equal specificity.
+.site-footer__social {
+  display: flex;
+  gap: $space-2;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: $color-white;
+    transition: background $t-fast, color $t-fast;
+
+    &:hover, &:focus {
+      background: $color-purple;
+      color: $color-white;
+      text-decoration: none;
+    }
+  }
+
+  svg { width: 18px; height: 18px; fill: currentColor; }
+}
+
+.site-footer__legal {
+  margin-top: $space-5;
+  padding-top: $space-3;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: $fs-p-small;
+  color: rgba(255, 255, 255, 0.6);
+}

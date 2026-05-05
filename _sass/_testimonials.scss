@@ -1,0 +1,108 @@
+// Testimonials carousel — Swiper-driven.
+
+.testimonials__heading {
+  text-align: center;
+  margin-bottom: $space-5;
+  font-size: $fs-h2;
+  font-weight: $fw-black;
+  letter-spacing: -0.01em;
+
+  @media (max-width: $breakpoint-md) { font-size: 32px; }
+}
+
+.testimonials__swiper {
+  position: relative;
+  padding-bottom: $space-5; // space for pagination dots
+  padding-inline: $space-5; // space for arrow buttons on either side
+}
+
+.testimonial {
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-lg;
+  padding: $space-4;
+  display: flex;
+  flex-direction: column;
+  height: auto;
+  box-shadow: $shadow-lift-dark;
+}
+
+.testimonial__text {
+  font-size: $fs-p;
+  line-height: 1.5;
+  color: $color-nightshade;
+  margin: 0 0 $space-3;
+  flex: 1;
+}
+
+.testimonial__footer {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.testimonial__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.testimonial__cite {
+  font-style: normal;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.testimonial__name {
+  font-weight: $fw-bold;
+  font-size: $fs-h5;
+  color: $color-nightshade;
+}
+
+.testimonial__role {
+  font-size: $fs-p-small;
+  color: rgba(37, 29, 49, 0.6);
+}
+
+// Swiper chrome overrides — match brand.
+.testimonials__swiper {
+  .swiper-button-prev,
+  .swiper-button-next {
+    width: 40px;
+    height: 40px;
+    background: $color-white;
+    border: 1px solid $color-light-grey;
+    border-radius: 50%;
+    box-shadow: $shadow-lift-dark;
+    color: $color-purple;
+    margin-top: -28px; // align centre to slide centre
+
+    &::after {
+      font-size: 14px;
+      font-weight: $fw-bold;
+    }
+
+    &:hover { background: $color-offwhite; }
+  }
+
+  .swiper-button-prev { left: 0; }
+  .swiper-button-next { right: 0; }
+
+  .swiper-pagination { bottom: 0; }
+
+  .swiper-pagination-bullet {
+    background: $color-light-grey;
+    opacity: 1;
+  }
+
+  .swiper-pagination-bullet-active { background: $color-purple; }
+
+  @media (max-width: $breakpoint-md) {
+    padding-inline: 0;
+    .swiper-button-prev,
+    .swiper-button-next { display: none; }
+  }
+}

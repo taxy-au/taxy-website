@@ -1,0 +1,73 @@
+// Design tokens — lifted from brand.md §6 + brand-pack.html.
+// Mix target across pages: 60% white / 25% dark / 10% purple / 5% accent.
+
+// Colour — core
+$color-purple: #9542FF;
+$color-nightshade: #251D31;
+$color-white: #FFFFFF;
+
+// Colour — accents (each carries a product-state meaning per brand; use sparingly)
+$color-lavender: #C2A8F9;  // soft bgs, hover, "waiting"
+$color-amber: #F6B047;     // "submitted, pending review"
+$color-pink: #FA62AB;      // review-state callouts
+$color-teal: #60DEC0;      // ready / success
+
+// Colour — utility
+$color-offwhite: #F8F8F8;
+$color-light-grey: #DEDCE0;
+$color-mid-grey: #CCCCCC;
+
+// Type — Lato only, max 2 weights per layout (brand rule §6)
+$font-stack: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+
+$fs-h1: 52px;
+$fs-h2: 44px;
+$fs-h3: 32px;
+$fs-h4: 20px;
+$fs-h5: 16px;
+$fs-p: 18px;
+$fs-p-small: 14px;
+
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-bold: 700;
+$fw-black: 900;
+
+$lh-display: 1;     // 100% — h1/h2/h3
+$lh-tight: 1;       // h4/h5
+$lh-body: 1.2;      // 120% — p
+$lh-loose: 1.4;     // 140% — captions
+
+// Spacing — rem-based ladder
+$space-1: 0.5rem;   // 8
+$space-2: 1rem;     // 16
+$space-3: 1.5rem;   // 24
+$space-4: 2rem;     // 32
+$space-5: 3rem;     // 48
+$space-6: 4rem;     // 64
+$space-7: 6rem;     // 96
+$space-8: 9rem;     // 144
+
+// Section vertical padding targets $space-7–$space-8.
+
+// Radius
+$r-sm: 6px;
+$r-md: 12px;
+$r-lg: 20px;
+$r-xl: 28px;
+
+// Shadow
+$shadow-lift-purple: 0 24px 60px -30px rgba(149, 66, 255, 0.35);
+$shadow-lift-dark: 0 12px 32px -16px rgba(37, 29, 49, 0.25);
+
+// Transition
+$ease: cubic-bezier(0.4, 0, 0.2, 1);
+$t-fast: 180ms $ease;
+$t-med: 360ms $ease;
+$t-slow: 720ms $ease;
+
+// Layout
+$container-max: 1200px;
+$container-pad: $space-3;
+$breakpoint-md: 768px;
+$breakpoint-lg: 1024px;

@@ -1,0 +1,55 @@
+// Body, headings, links, paragraphs at token sizes.
+
+body {
+  font-family: $font-stack;
+  font-size: $fs-p;
+  font-weight: $fw-regular;
+  line-height: $lh-body;
+  color: $color-nightshade;
+  background: $color-white;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1 { font-size: $fs-h1; font-weight: $fw-bold;  line-height: $lh-display; letter-spacing: -0.02em; }
+h2 { font-size: $fs-h2; font-weight: $fw-black; line-height: $lh-display; letter-spacing: -0.01em; }
+h3 { font-size: $fs-h3; font-weight: $fw-black; line-height: $lh-display; }
+h4 { font-size: $fs-h4; font-weight: $fw-medium; line-height: $lh-tight; }
+h5 { font-size: $fs-h5; font-weight: $fw-medium; line-height: $lh-tight; }
+
+p { font-size: $fs-p; line-height: $lh-body; }
+.p-small { font-size: $fs-p-small; line-height: $lh-loose; }
+
+// Default vertical rhythm: 16px between a heading and a directly-following
+// paragraph. Components with explicit spacing (.faq, .prose, .hero) override.
+h2 + p, h3 + p, h4 + p { margin-top: $space-2; }
+
+a {
+  color: $color-purple;
+  text-decoration: none;
+  transition: color $t-fast;
+  &:hover { text-decoration: underline; }
+}
+
+@media (max-width: $breakpoint-md) {
+  h1 { font-size: 36px; }
+  h2 { font-size: 32px; }
+  h3 { font-size: 24px; }
+}
+
+.accent { color: $color-purple; }
+
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  background: $color-nightshade;
+  color: $color-white;
+  padding: $space-2 $space-3;
+  z-index: 1000;
+
+  &:focus {
+    left: $space-2;
+    top: $space-2;
+  }
+}

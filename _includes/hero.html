@@ -1,0 +1,54 @@
+{%- comment -%}
+  Hero partial — patterned on brand-pack §hero.
+
+  Inputs:
+    title              (required) — h1 text; may contain raw HTML for accents
+                                    (e.g. "Less chasing<span class='hero__dot'>.</span>")
+    subtitle           (optional) — paragraph prose, 22px; may contain raw HTML
+                                    (<strong>…</strong>, <span class='hero__accent'>…</span>)
+    body               (optional, raw HTML) — extra paragraph(s) below the subtitle
+    cta_primary_text   (optional) — button label
+    cta_primary_url    (optional) — button href
+    cta_secondary_text (optional)
+    cta_secondary_url  (optional)
+    dark               (optional) — "true" for dark-gradient variant (home only)
+    image              (optional) — illustration src; when present, hero shifts to
+                                    two-column layout (text left, image right)
+    image_alt          (optional) — alt text for image
+{%- endcomment -%}
+
+<section class="hero{% if include.dark == 'true' %} hero--dark{% endif %}{% if include.image %} hero--with-image{% endif %}">
+  <div class="hero__bg-clip hero__bg-clip--one" aria-hidden="true"></div>
+  <div class="hero__bg-clip hero__bg-clip--two" aria-hidden="true"></div>
+
+  <div class="container">
+    <div class="hero__layout">
+      <div class="hero__inner">
+        <h1 class="hero__title">{{ include.title }}</h1>
+
+        {% if include.subtitle %}
+          <p class="hero__subtitle">{{ include.subtitle }}</p>
+        {% endif %}
+
+        {% if include.body %}
+          <div class="hero__body">{{ include.body }}</div>
+        {% endif %}
+
+        {% if include.cta_primary_text %}
+          <div class="hero__ctas">
+            <a class="btn btn--primary" href="{{ include.cta_primary_url | relative_url }}">{{ include.cta_primary_text }}</a>
+            {% if include.cta_secondary_text %}
+              <a class="btn {% if include.dark == 'true' %}btn--ghost-on-dark{% else %}btn--ghost{% endif %}" href="{{ include.cta_secondary_url | relative_url }}">{{ include.cta_secondary_text }}</a>
+            {% endif %}
+          </div>
+        {% endif %}
+      </div>
+
+      {% if include.image %}
+        <div class="hero__image">
+          <img src="{{ include.image | relative_url }}" alt="{{ include.image_alt | default: '' }}" loading="eager">
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>

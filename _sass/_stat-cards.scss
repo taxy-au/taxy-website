@@ -1,0 +1,83 @@
+// Stat cards — pricing-style mirrored cards.
+
+.stat-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-4;
+
+  // Single card: centre and constrain.
+  &:has(> .stat-card:only-child) {
+    grid-template-columns: minmax(0, 480px);
+    justify-content: center;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.stat-card {
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-lg;
+  padding: $space-4;
+  box-shadow: $shadow-lift-dark;
+  text-align: center;
+
+  display: flex;
+  flex-direction: column;
+  // Spread content top↔bottom so card edges anchor to the text block on
+  // the left when the row is stretched.
+  justify-content: space-between;
+  gap: $space-3;
+}
+
+// Dark-gradient variant — same recipe as section--dark / footer.
+.stat-card--dark {
+  background: $color-nightshade;
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(149, 66, 255, 0.35), transparent 60%),
+    radial-gradient(ellipse at 80% 80%, rgba(250, 98, 171, 0.20), transparent 50%);
+  border: none;
+  box-shadow: $shadow-lift-purple;
+
+  .stat-card__value { color: $color-white; }
+  .stat-card__unit { color: rgba(255, 255, 255, 0.85); }
+  .stat-card__supporting { color: rgba(255, 255, 255, 0.85); }
+}
+
+.stat-card__label {
+  font-size: $fs-h4;
+  font-weight: $fw-medium;
+  color: $color-purple;
+  margin-bottom: $space-3;
+}
+
+.stat-card__value-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: $space-1;
+  margin-bottom: $space-2;
+}
+
+.stat-card__value {
+  font-size: $fs-h1;
+  font-weight: $fw-black;
+  line-height: 1;
+  color: $color-nightshade;
+  letter-spacing: -0.02em;
+}
+
+.stat-card__unit {
+  font-size: $fs-h5;
+  font-weight: $fw-medium;
+  color: $color-nightshade;
+  opacity: 0.7;
+}
+
+.stat-card__supporting {
+  font-size: $fs-p-small;
+  color: $color-nightshade;
+  opacity: 0.85;
+}

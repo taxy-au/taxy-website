@@ -1,0 +1,45 @@
+// Prose — long-form body content (privacy policy, terms, articles).
+
+.prose {
+  max-width: 70ch;
+  font-size: $fs-p;
+  line-height: 1.6;
+  color: $color-nightshade;
+
+  > * + * { margin-top: $space-3; }
+
+  h2 {
+    font-size: 28px;
+    font-weight: $fw-black;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-top: $space-5;
+    margin-bottom: $space-1;
+  }
+
+  h3 {
+    font-size: 22px;
+    font-weight: $fw-bold;
+    line-height: 1.2;
+    margin-top: $space-4;
+    margin-bottom: $space-1;
+  }
+
+  p { line-height: 1.6; }
+
+  a {
+    color: $color-purple;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    &:hover { text-decoration-thickness: 2px; }
+  }
+
+  strong, b { font-weight: $fw-bold; }
+
+  ul, ol { padding-left: $space-3; }
+  li { margin-top: $space-1; }
+
+  // Strip the empty paragraph artifacts left by WordPress exports.
+  p:empty { display: none; }
+}

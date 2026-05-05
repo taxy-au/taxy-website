@@ -1,0 +1,41 @@
+{%- comment -%}
+  cta-book.html — closer block. Heading + purple-accent subhead + optional body + dual CTAs.
+
+  Defaults to shared closer copy: "Email wasn't built for modern tax workflows. / See what is."
+  driving to /book-a-meeting/. Override or omit any field.
+
+  Inputs:
+    heading            (default: "Email wasn't built for modern tax workflows.")
+    subhead            (default: "See what is.")
+    body               (optional, raw HTML)
+    cta_primary_text   (default: "Book a meeting")
+    cta_primary_url    (default: "/book-a-meeting/")
+    cta_secondary_text (optional — omitted if absent)
+    cta_secondary_url  (optional)
+    no_ctas            (optional, "true" to suppress the CTA row entirely)
+    level              (optional, "h1" promotes the title from the default h2;
+                        use when this block is the page-level header)
+    dark               (optional, "true" applies dark-bg colour treatment)
+{%- endcomment -%}
+
+{%- assign tag = include.level | default: 'h2' -%}
+
+<div class="cta-book{% if include.dark == 'true' %} cta-book--dark{% endif %}">
+  <{{ tag }} class="cta-book__title">
+    {{ include.heading | default: "Email wasn't built for modern tax workflows." }}<br>
+    <span class="cta-book__subhead">{{ include.subhead | default: "See what is." }}</span>
+  </{{ tag }}>
+
+  {% if include.body %}
+    <div class="cta-book__body">{{ include.body }}</div>
+  {% endif %}
+
+  {% unless include.no_ctas == 'true' %}
+    <div class="cta-book__ctas">
+      <a class="btn btn--primary" href="{{ include.cta_primary_url | default: '/book-a-meeting/' | relative_url }}">{{ include.cta_primary_text | default: "Book a meeting" }}</a>
+      {% if include.cta_secondary_text %}
+        <a class="btn {% if include.dark == 'true' %}btn--ghost-on-dark{% else %}btn--ghost{% endif %}" href="{{ include.cta_secondary_url | relative_url }}">{{ include.cta_secondary_text }}</a>
+      {% endif %}
+    </div>
+  {% endunless %}
+</div>

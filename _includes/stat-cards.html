@@ -1,0 +1,20 @@
+{%- comment -%}
+  stat-cards.html — mirrored stat cards (2-up by default).
+  Inputs:
+    cards (required) — array of { label, value, unit?, supporting_line? }
+{%- endcomment -%}
+
+<div class="stat-cards">
+  {% for card in include.cards %}
+    <article class="stat-card">
+      <h3 class="stat-card__label">{{ card.label }}</h3>
+      <div class="stat-card__value-row">
+        <span class="stat-card__value">{{ card.value }}</span>
+        {% if card.unit %}<span class="stat-card__unit">{{ card.unit }}</span>{% endif %}
+      </div>
+      {% if card.supporting_line %}
+        <p class="stat-card__supporting">{{ card.supporting_line }}</p>
+      {% endif %}
+    </article>
+  {% endfor %}
+</div>

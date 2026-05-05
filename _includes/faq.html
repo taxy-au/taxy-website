@@ -1,0 +1,30 @@
+{%- comment -%}
+  faq.html — accordion using native <details>/<summary>. No JS.
+
+  Inputs:
+    groups (required) — array of { section?, items: [{ q, a }] }
+                        section is optional; items contain HTML in `a`.
+
+  Single-group pages just pass a one-element array with no section.
+{%- endcomment -%}
+
+<div class="faq">
+  {% for group in include.groups %}
+    {% if group.section %}
+      <h2 class="faq__section">{{ group.section }}</h2>
+    {% endif %}
+    <div class="faq__group">
+      {% for item in group.items %}
+        <details class="faq__item">
+          <summary class="faq__q">
+            <span class="faq__q-text">{{ item.q }}</span>
+            <svg class="faq__chevron" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </summary>
+          <div class="faq__a">{{ item.a }}</div>
+        </details>
+      {% endfor %}
+    </div>
+  {% endfor %}
+</div>

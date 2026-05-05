@@ -1,0 +1,11 @@
+{%- comment -%}
+  prose.html — wrapper applying body typography to long-form content.
+  Wrap your page body with:
+    {% capture body %}
+      …content…
+    {% endcapture %}
+    {% include prose.html content=body %}
+{%- endcomment -%}
+<div class="prose">
+  {{ include.content }}
+</div>
