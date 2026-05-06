@@ -1,0 +1,24 @@
+- number: "01"
+  heading: "Structured requests for every job."
+  body: "Templates come configured for every entity type and every workflow — so every request starts with the right queries for the right context, year-round."
+  tags:
+    - "Individuals"
+    - "Trusts"
+    - "Companies"
+    - "New clients"
+
+- number: "02"
+  heading: "See every query that needs action."
+  body: "One dashboard. See which queries are with client or need action across every job you’re running. No hunting through email threads. No status meetings to find out where things stand."
+  tags:
+    - "Waiting"
+    - "Review"
+    - "Ready"
+
+- number: "03"
+  heading: "Designed with clients in mind."
+  body: "One login for every entity, across every request — so clients find it easy to get you the info you need. Clear next steps. Plain-English questions. No clunky portals, no forgotten passwords."
+  tags:
+    - "Single login"
+    - "Every entity"
+    - "Client-first"

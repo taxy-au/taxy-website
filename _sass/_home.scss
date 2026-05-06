@@ -1,0 +1,120 @@
+// Home-page-specific layout pieces.
+
+// Wrapper that owns a continuous paperclip-tile bg across hero + strip,
+// so the pattern reads as one canvas and tiles don't reset at the seam.
+.hero-region {
+  position: relative;
+  overflow: hidden;
+  background: $color-white;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: url('/assets/img/bg-paperclip-tile.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  > * { position: relative; z-index: 1; }
+
+  // Children opt out of their own bg layers — the wrapper handles them.
+  .hero { background: transparent; padding-bottom: $space-3; }
+  .hero::before { display: none; }
+
+  // Home hero primary CTA reads midnight — keeps purple as a single accent
+  // (the "More control." line) rather than competing with the button.
+  .btn--primary {
+    background: $color-nightshade;
+    border-color: $color-nightshade;
+    color: $color-white;
+
+    &:hover,
+    &:focus-visible {
+      background: lighten($color-nightshade, 6%);
+      border-color: lighten($color-nightshade, 6%);
+    }
+  }
+}
+
+.hero-strip {
+  background: transparent;
+}
+
+.hero-strip__inner {
+  padding-block: $space-3;
+  border-top: 1px solid $color-light-grey;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.hero-strip__features {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+
+  li {
+    font-size: 14px;
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+
+    &::before {
+      content: '✓ ';
+      color: $color-teal;
+      font-weight: $fw-black;
+      margin-right: 2px;
+    }
+  }
+}
+
+
+.home-closer__layout {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: $space-6;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
+}
+
+.home-closer__media {
+  display: flex;
+  justify-content: center;
+
+  img {
+    max-width: 380px;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.home-closer__note {
+  margin-top: $space-3;
+  font-size: $fs-p;
+  line-height: 1.5;
+  color: rgba(37, 29, 49, 0.75);
+  max-width: 60ch;
+}
+
+// Centered single-card variant of the carousel testimonial — for Kirsty.
+.testimonial--featured {
+  max-width: 720px;
+  margin-inline: auto;
+
+  .testimonial__text {
+    font-size: $fs-h4;
+    line-height: 1.45;
+  }
+}

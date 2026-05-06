@@ -1,0 +1,30 @@
+{%- comment -%}
+  feature-grid.html — 4-up icon card grid.
+
+  Inputs:
+    heading (required) — h2
+    items   (required) — array of { icon, title, body }
+                         icon is a path under /assets/img/icons/
+{%- endcomment -%}
+
+<section class="section feature-grid">
+  <div class="container">
+    <h2 class="feature-grid__heading">{{ include.heading }}</h2>
+
+    <ul class="feature-grid__items">
+      {% for item in include.items %}
+        <li class="feature-grid__item">
+          <span class="feature-grid__icon" aria-hidden="true">
+            <img src="{{ item.icon | relative_url }}" alt="" width="48" height="48" loading="lazy">
+          </span>
+          <h3 class="feature-grid__title">{{ item.title }}</h3>
+          <p class="feature-grid__body">{{ item.body }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+
+    {% if include.note_html %}
+      <div class="feature-grid__note">{{ include.note_html }}</div>
+    {% endif %}
+  </div>
+</section>

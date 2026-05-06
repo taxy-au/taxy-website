@@ -1,0 +1,69 @@
+<svg width="2560" height="1440" viewBox="0 0 2560 1440" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!--
+      Single paperclip glyph, drawn at the brand-pack's small-clip scale.
+      stroke-width is intentionally absent so each <use> can override it
+      (combined with vector-effect="non-scaling-stroke" on the path so the
+      stroke renders at its specified width regardless of the use's scale).
+    -->
+    <symbol id="clip" viewBox="2255 510 152 188" overflow="visible">
+      <path d="M2347.42 584.741L2316.27 644.125C2311.77 652.703 2303.76 657.374 2295.17 652.873C2286.59 648.372 2285.88 639.12 2290.37 630.542L2343.91 528.45C2350.67 515.573 2368.02 511.37 2380.89 518.121C2393.76 524.872 2402.83 542.931 2396.08 555.809L2338.62 665.378C2329.62 682.544 2304.72 692.369 2280.99 679.921C2262.3 670.118 2252.51 647.668 2262.03 625.211L2283.97 560.76" stroke="#9542FF" stroke-linecap="round" stroke-linejoin="round" fill="none" vector-effect="non-scaling-stroke"/>
+    </symbol>
+  </defs>
+
+  <rect width="2560" height="1440" fill="white"/>
+
+  <g opacity="0.18">
+    <!--
+      32 clips. Mimics the brand-pack §Backgrounds white-paperclip pattern:
+        · 5 stroke-width tiers (chunky → fine) — the original's visual
+          hierarchy. Heavier clips ride lower opacity so they don't dominate.
+        · per-clip opacity 0.3 → 0.6 — subtle layering.
+        · organic placement, no row/col grid; some clips bleed off canvas
+          edges (matches the original's intentional bleed).
+        · ~28% flipped (h or v) to break the silhouette repetition.
+    -->
+
+    <!-- Top-left quadrant -->
+    <g transform="translate(180 220) rotate(-12)">                <use href="#clip" x="-90"  y="-111" width="180" height="222" stroke-width="6.5" opacity="0.32"/></g>
+    <g transform="translate(540 90) rotate(35) scale(-1 1)">      <use href="#clip" x="-50"  y="-62"  width="100" height="124" stroke-width="3.5" opacity="0.45"/></g>
+    <g transform="translate(310 460) rotate(-70)">                <use href="#clip" x="-32"  y="-40"  width="64"  height="79"  stroke-width="2.4" opacity="0.55"/></g>
+    <g transform="translate(820 280) rotate(22)">                 <use href="#clip" x="-72"  y="-89"  width="144" height="178" stroke-width="4.6" opacity="0.4"/></g>
+    <g transform="translate(60 580) rotate(-40) scale(1 -1)">     <use href="#clip" x="-44"  y="-54"  width="88"  height="109" stroke-width="2.6" opacity="0.5"/></g>
+    <g transform="translate(700 590) rotate(58)">                 <use href="#clip" x="-30"  y="-37"  width="60"  height="74"  stroke-width="2.4" opacity="0.55"/></g>
+    <g transform="translate(450 280) rotate(-22) scale(-1 1)">    <use href="#clip" x="-28"  y="-35"  width="56"  height="69"  stroke-width="2.4" opacity="0.6"/></g>
+
+    <!-- Top-right quadrant — includes a chunky clip bleeding past the top edge -->
+    <g transform="translate(2160 -40) rotate(48)">                <use href="#clip" x="-95"  y="-118" width="190" height="235" stroke-width="6.8" opacity="0.32"/></g>
+    <g transform="translate(1690 380) rotate(-25) scale(-1 1)">   <use href="#clip" x="-65"  y="-80"  width="130" height="161" stroke-width="4.8" opacity="0.4"/></g>
+    <g transform="translate(1430 110) rotate(15)">                <use href="#clip" x="-30"  y="-37"  width="60"  height="74"  stroke-width="2.4" opacity="0.55"/></g>
+    <g transform="translate(2400 500) rotate(-58)">               <use href="#clip" x="-50"  y="-62"  width="100" height="124" stroke-width="3.6" opacity="0.45"/></g>
+    <g transform="translate(1880 540) rotate(72) scale(1 -1)">    <use href="#clip" x="-32"  y="-40"  width="64"  height="79"  stroke-width="2.5" opacity="0.55"/></g>
+    <g transform="translate(2280 230) rotate(-32)">               <use href="#clip" x="-38"  y="-47"  width="76"  height="94"  stroke-width="2.6" opacity="0.5"/></g>
+    <g transform="translate(1560 220) rotate(82) scale(-1 1)">    <use href="#clip" x="-44"  y="-54"  width="88"  height="109" stroke-width="3.2" opacity="0.45"/></g>
+    <g transform="translate(2050 380) rotate(-12)">               <use href="#clip" x="-58"  y="-72"  width="116" height="143" stroke-width="3.8" opacity="0.4"/></g>
+
+    <!-- Bottom-left quadrant -->
+    <g transform="translate(330 1100) rotate(28)">                <use href="#clip" x="-78"  y="-97"  width="156" height="193" stroke-width="5.6" opacity="0.35"/></g>
+    <g transform="translate(880 1290) rotate(-50) scale(-1 1)">   <use href="#clip" x="-50"  y="-62"  width="100" height="124" stroke-width="3.5" opacity="0.45"/></g>
+    <g transform="translate(560 920) rotate(15)">                 <use href="#clip" x="-30"  y="-37"  width="60"  height="74"  stroke-width="2.5" opacity="0.55"/></g>
+    <g transform="translate(1100 980) rotate(-78) scale(1 -1)">   <use href="#clip" x="-26"  y="-32"  width="52"  height="64"  stroke-width="2.4" opacity="0.55"/></g>
+    <g transform="translate(140 1380) rotate(40)">                <use href="#clip" x="-58"  y="-72"  width="116" height="143" stroke-width="3.4" opacity="0.45"/></g>
+    <g transform="translate(960 800) rotate(-22)">                <use href="#clip" x="-42"  y="-52"  width="84"  height="104" stroke-width="3.0" opacity="0.5"/></g>
+    <g transform="translate(180 850) rotate(62) scale(-1 1)">     <use href="#clip" x="-72"  y="-89"  width="144" height="178" stroke-width="5.2" opacity="0.34"/></g>
+
+    <!-- Bottom-right quadrant — chunky clip bleeding past the bottom-right corner -->
+    <g transform="translate(2150 950) rotate(-18)">               <use href="#clip" x="-90"  y="-111" width="180" height="222" stroke-width="6.5" opacity="0.3"/></g>
+    <g transform="translate(1690 1100) rotate(38) scale(-1 1)">   <use href="#clip" x="-65"  y="-80"  width="130" height="161" stroke-width="4.4" opacity="0.4"/></g>
+    <g transform="translate(2480 1380) rotate(-65)">              <use href="#clip" x="-78"  y="-97"  width="156" height="193" stroke-width="5.4" opacity="0.32"/></g>
+    <g transform="translate(1500 880) rotate(8) scale(1 -1)">     <use href="#clip" x="-32"  y="-40"  width="64"  height="79"  stroke-width="2.6" opacity="0.55"/></g>
+    <g transform="translate(2180 760) rotate(-45)">               <use href="#clip" x="-30"  y="-37"  width="60"  height="74"  stroke-width="2.4" opacity="0.55"/></g>
+    <g transform="translate(1900 1310) rotate(20)">               <use href="#clip" x="-44"  y="-54"  width="88"  height="109" stroke-width="3.2" opacity="0.5"/></g>
+    <g transform="translate(1380 1240) rotate(-30) scale(-1 1)">  <use href="#clip" x="-28"  y="-35"  width="56"  height="69"  stroke-width="2.4" opacity="0.6"/></g>
+
+    <!-- Center / bridges -->
+    <g transform="translate(1280 720) rotate(55)">                <use href="#clip" x="-50"  y="-62"  width="100" height="124" stroke-width="3.5" opacity="0.4"/></g>
+    <g transform="translate(1230 460) rotate(-38)">               <use href="#clip" x="-30"  y="-37"  width="60"  height="74"  stroke-width="2.4" opacity="0.55"/></g>
+    <g transform="translate(1340 1010) rotate(72) scale(1 -1)">   <use href="#clip" x="-38"  y="-47"  width="76"  height="94"  stroke-width="2.8" opacity="0.5"/></g>
+  </g>
+</svg>

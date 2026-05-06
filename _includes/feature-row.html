@@ -1,0 +1,49 @@
+{%- comment -%}
+  feature-row.html — alternating two-column section: text + product screenshot.
+
+  Inputs:
+    eyebrow      (optional) — small purple label above the heading
+    heading      (required) — h2 text
+    bullets      (required) — array of strings (HTML allowed); rendered as
+                              icon-prefixed list using the brand sparkle mark
+    image        (required) — product screenshot src
+    image_alt    (required) — alt text for image
+    caption      (optional) — h3 takeaway sitting below the image
+    orientation  (optional) — "image-left" or "image-right" (default)
+{%- endcomment -%}
+
+{%- assign orient = include.orientation | default: "image-right" -%}
+
+<section class="section section--tight feature-row feature-row--{{ orient }}">
+  <div class="container">
+    <div class="feature-row__layout">
+      <div class="feature-row__text">
+        {% if include.eyebrow %}
+          <p class="feature-row__eyebrow">{{ include.eyebrow }}</p>
+        {% endif %}
+        <h2 class="feature-row__heading">{{ include.heading }}</h2>
+        <ul class="feature-row__bullets">
+          {% for bullet in include.bullets %}
+            <li class="feature-row__bullet">
+              <span class="feature-row__bullet-icon" aria-hidden="true">
+                <svg viewBox="0 0 256 256" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M175.278 145.621C124.293 162.802 107.485 181.933 95.0567 229.581C82.6283 181.933 65.8209 162.802 14.8359 145.621C65.8209 128.44 82.6283 109.31 95.0567 61.6611C107.485 109.31 124.293 128.44 175.278 145.621Z" stroke="currentColor" stroke-width="10.67" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M238.527 66.1376C209.767 75.7901 200.287 86.5387 193.275 113.309C186.265 86.5387 176.784 75.7901 148.025 66.1376C176.784 56.4851 186.265 45.7365 193.275 18.9661C200.287 45.7365 209.767 56.4851 238.527 66.1376Z" stroke="currentColor" stroke-width="10.67" stroke-linecap="round" stroke-linejoin="round"/>
+                  <path d="M242.265 205.301C220.978 212.295 213.961 220.085 208.771 239.483C203.582 220.085 196.565 212.295 175.277 205.301C196.565 198.307 203.582 190.518 208.771 171.12C213.961 190.518 220.978 198.307 242.265 205.301Z" stroke="currentColor" stroke-width="10.67" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+              <span class="feature-row__bullet-text">{{ bullet }}</span>
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+
+      <figure class="feature-row__media">
+        <img src="{{ include.image | relative_url }}" alt="{{ include.image_alt }}" loading="lazy">
+        {% if include.caption %}
+          <figcaption class="feature-row__caption">{{ include.caption }}</figcaption>
+        {% endif %}
+      </figure>
+    </div>
+  </div>
+</section>

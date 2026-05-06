@@ -11,16 +11,15 @@
     cta_primary_url    (optional) — button href
     cta_secondary_text (optional)
     cta_secondary_url  (optional)
-    dark               (optional) — "true" for dark-gradient variant (home only)
     image              (optional) — illustration src; when present, hero shifts to
                                     two-column layout (text left, image right)
     image_alt          (optional) — alt text for image
+    aside_html         (optional, raw HTML) — arbitrary content for the right
+                                    column (e.g. proof-of-concept card). Mutually
+                                    exclusive with `image`.
 {%- endcomment -%}
 
-<section class="hero{% if include.dark == 'true' %} hero--dark{% endif %}{% if include.image %} hero--with-image{% endif %}">
-  <div class="hero__bg-clip hero__bg-clip--one" aria-hidden="true"></div>
-  <div class="hero__bg-clip hero__bg-clip--two" aria-hidden="true"></div>
-
+<section class="hero{% if include.image or include.aside_html %} hero--with-image{% endif %}">
   <div class="container">
     <div class="hero__layout">
       <div class="hero__inner">
@@ -38,7 +37,7 @@
           <div class="hero__ctas">
             <a class="btn btn--primary" href="{{ include.cta_primary_url | relative_url }}">{{ include.cta_primary_text }}</a>
             {% if include.cta_secondary_text %}
-              <a class="btn {% if include.dark == 'true' %}btn--ghost-on-dark{% else %}btn--ghost{% endif %}" href="{{ include.cta_secondary_url | relative_url }}">{{ include.cta_secondary_text }}</a>
+              <a class="btn btn--ghost" href="{{ include.cta_secondary_url | relative_url }}">{{ include.cta_secondary_text }}</a>
             {% endif %}
           </div>
         {% endif %}
@@ -48,6 +47,8 @@
         <div class="hero__image">
           <img src="{{ include.image | relative_url }}" alt="{{ include.image_alt | default: '' }}" loading="eager">
         </div>
+      {% elsif include.aside_html %}
+        <div class="hero__aside">{{ include.aside_html }}</div>
       {% endif %}
     </div>
   </div>

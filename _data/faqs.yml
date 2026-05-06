@@ -1,3 +1,29 @@
+home:
+  - items:
+      - q: "What is Taxy?"
+        a: |
+          <p>Taxy helps accounting firms structure, send and track client information requests for tax jobs.</p>
+          <p>Clients receive clear requests in one place, and your team can immediately see what has been provided and what is still outstanding.</p>
+
+      - q: "How is Taxy different from using email or a client portal?"
+        a: |
+          <p>Email threads and portals often become a dumping ground for documents and questions, making it hard to see what&rsquo;s still missing.</p>
+          <p>Taxy structures requests so clients know exactly what&rsquo;s required and teams can quickly track progress without digging through emails.</p>
+
+      - q: "How long does it take to get started?"
+        a: |
+          <p>Customers typically send their first request within a few days. Many begin with a single job or multi-entity client group to see how Taxy fits alongside their existing workflow.</p>
+
+      - q: "Will my clients actually use it?"
+        a: |
+          <p>Most firms are surprised by how quickly clients respond when requests are clear and organised.</p>
+          <p>Clients can see exactly what&rsquo;s needed, upload documents or responses in one place, and work through requests at their own pace.</p>
+
+      - q: "Is my data secure in Taxy?"
+        a: |
+          <p>Yes. Security is core to Taxy.</p>
+          <p>All information is encrypted, stored in Australia, and only accessible to authorised users in your workspace.</p>
+
 clients:
   - items:
       - q: "Why has my accountant invited me to Taxy?"

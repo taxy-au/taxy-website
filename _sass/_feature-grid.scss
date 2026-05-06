@@ -1,0 +1,75 @@
+// 4-up icon card grid — collapses to 2-up on tablet, 1-up on mobile.
+
+.feature-grid__heading {
+  text-align: center;
+  margin: 0 0 $space-5;
+  text-wrap: balance;
+}
+
+.feature-grid__items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: $space-4;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: $space-4 $space-5;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
+}
+
+.feature-grid__item {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.feature-grid__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  border-radius: $r-md;
+  background: rgba($color-purple, 0.10);
+  color: $color-purple;
+  margin-bottom: $space-3;
+
+  img {
+    width: 32px;
+    height: 32px;
+    display: block;
+  }
+}
+
+.feature-grid__title {
+  font-size: $fs-h4;
+  margin: 0 0 $space-1;
+}
+
+.feature-grid__body {
+  font-size: $fs-p;
+  line-height: 1.45;
+  margin: 0;
+  color: $color-nightshade;
+}
+
+.feature-grid__note {
+  margin-top: $space-5;
+  padding: $space-4;
+  background: rgba($color-purple, 0.06);
+  border-left: 3px solid $color-purple;
+  border-radius: $r-sm;
+
+  p { margin: 0 0 $space-2; }
+  p:last-child { margin-bottom: 0; }
+  strong { color: $color-purple; }
+}

@@ -1,0 +1,74 @@
+// Proof-of-concept card — brand-pack §Mockups right-card.
+// Lives in the hero's right column via `aside_html`.
+
+.proof-card {
+  background: $color-nightshade;
+  background-image: radial-gradient(ellipse at top right, rgba(149, 66, 255, 0.4), transparent 65%);
+  color: $color-white;
+  padding: $space-4;
+  border-radius: $r-lg;
+  box-shadow: $shadow-lift-dark;
+}
+
+.proof-card__badge {
+  display: inline-block;
+  padding: 4px 10px;
+  background: rgba(149, 66, 255, 0.2);
+  color: $color-lavender;
+  font-size: 10px;
+  font-weight: $fw-bold;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  margin-bottom: 14px;
+}
+
+.proof-card__title {
+  color: $color-white;
+  font-size: $fs-h4;
+  margin: 0 0 8px;
+  line-height: 1.2;
+}
+
+.proof-card__body {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: $fs-p;
+  line-height: 1.45;
+  margin: 0 0 $space-3;
+}
+
+.proof-card__stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: $space-3;
+}
+
+.proof-card__stat-value {
+  display: block;
+  font-weight: $fw-black;
+  font-size: 44px;
+  line-height: 1;
+  color: $color-white;
+  letter-spacing: -0.02em;
+}
+
+.proof-card__stat-unit {
+  font-size: 22px;
+  font-weight: $fw-bold;
+  color: rgba(255, 255, 255, 0.7);
+  margin-left: 2px;
+  letter-spacing: 0;
+}
+
+.proof-card__stat-label {
+  display: block;
+  margin-top: 8px;
+  font-size: 11px;
+  font-weight: $fw-bold;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.3;
+}
