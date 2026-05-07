@@ -26,11 +26,11 @@ needs_swiper: true
 <div class="hero-region">
   {% include hero.html
      title='<span class="hero__line">Less chasing<span class="hero__dot">.</span></span><span class="hero__line hero__line--purple">More control<span class="hero__dot">.</span></span>'
-     subtitle="The tax information workflow platform built specifically for Australian firms. Structured information requests for every tax job across the year."
-     cta_primary_text="Speak to someone"
+     subtitle="The tax workflow platform your team trusts and clients love &ndash; from first request to final review. Built for Australian accountants."
+     cta_primary_text="See the platform"
      cta_primary_url="/book-a-meeting/"
-     cta_secondary_text="Watch a walkthrough"
-     cta_secondary_url="#walkthrough"
+     cta_secondary_text="Get answers"
+     cta_secondary_url="#faqs"
      aside_html=hero_aside
   %}
 
@@ -38,9 +38,8 @@ needs_swiper: true
     <div class="container">
       <div class="hero-strip__inner">
         <ul class="hero-strip__features">
-          <li>Better client experience</li>
-          <li>Secure storage in Australia</li>
-          <li>Manage multi-entity groups with ease</li>
+          <li>Bank-level security</li>
+          <li>Firm-first design</li>
           <li>White-glove support</li>
         </ul>
       </div>
@@ -48,131 +47,240 @@ needs_swiper: true
   </div>
 </div>
 
-{% include concept-card-grid.html
-   eyebrow="The core mechanic"
-   title="Three things that make tax work flow."
-   intro_html='<p>Taxy turns reactive chasing into a structured, year-round information workflow. Three mechanics make it work &mdash; every feature traces back to them.</p><p>One platform. First request to final review.</p>'
-   cards=site.data.concept_cards
-%}
-
-<section class="section section--tight section--offwhite">
+<section id="why" class="section founder">
   <div class="container">
-    <article class="testimonial testimonial--featured">
-      <blockquote class="testimonial__text">&ldquo;Taxy was incredibly easy to get up and running, and the support along the way made a big difference. It&rsquo;s transformed how we collect client information &mdash; everything comes into one place, so we always know what we&rsquo;re waiting on and where each return is up to. I spend far less time in my inbox and more time actually getting work done.&rdquo;</blockquote>
-      <footer class="testimonial__footer">
-        <img class="testimonial__avatar" src="{{ '/assets/wp-content/uploads/2024/09/kirsty.jpeg' | relative_url }}" alt="" width="48" height="48" loading="lazy">
-        <cite class="testimonial__cite">
-          <span class="testimonial__name">Kirsty McDonnell</span>
-          <span class="testimonial__role">Partner, Tax</span>
-        </cite>
-      </footer>
-    </article>
+    <div class="founder-note">
+      <h2>Tax compliance services have become a job of chasing.</h2>
+      <p class="founder-note__lede">Every accounting firm tells the same story. Tax has turned into low-value, reactive work and the people doing it are the most senior &ndash; and expensive.</p>
+    </div>
+
+    <div class="founder-tiles">
+      <article class="founder-tile">
+        <h3 class="founder-tile__heading">Manual query lists</h3>
+        <p class="founder-tile__body">Rebuilt every year from rigid templates that don&rsquo;t flex to individual clients.</p>
+      </article>
+      <article class="founder-tile">
+        <h3 class="founder-tile__heading">Endless email threads</h3>
+        <p class="founder-tile__body">Documents trickle in over weeks and get buried in busy inboxes.</p>
+      </article>
+      <article class="founder-tile">
+        <h3 class="founder-tile__heading">Generic tracking tools</h3>
+        <p class="founder-tile__body">Practice management software lacks the visibility tax jobs need.</p>
+      </article>
+      <article class="founder-tile">
+        <h3 class="founder-tile__heading">Unused client portals</h3>
+        <p class="founder-tile__body">Improvements that promise the world but ignore the client.</p>
+      </article>
+    </div>
   </div>
 </section>
 
-{% include feature-row.html
-   eyebrow="Live dashboard"
-   heading="Every entity. Every FY. One dashboard."
-   bullets=site.data.feature_rows.dashboard
-   image="/assets/img/wattle-group-progress-light.png"
-   image_alt="Taxy live dashboard showing the status of every client return at a glance"
-   caption="No more guessing. No more chasing."
-   orientation="image-right"
-%}
-
-{% include feature-row.html
-   eyebrow="Custom templates"
-   heading="Set up once &ndash; reuse every year."
-   bullets=site.data.feature_rows.templates
-   image="/assets/img/templates-light.png"
-   image_alt="Reusable Taxy templates for tax information requests across client entities"
-   caption="Customise for every client, without the extra work."
-   orientation="image-left"
-%}
-
-{% include feature-row.html
-   eyebrow="Connected conversations"
-   heading="Every reply stays with the request it relates to."
-   bullets=site.data.feature_rows.conversations
-   image="/assets/img/conversation-light.png"
-   image_alt="Threaded client conversations attached to each Taxy request"
-   caption="Clarity and control your inbox just can&rsquo;t match."
-   orientation="image-right"
-%}
-
-<section class="section section--with-clips section--offwhite home-closer">
+<section class="section story">
   <div class="container">
-    <div class="home-closer__layout">
-      <div class="home-closer__text">
-        {% include cta-book.html
-           cta_secondary_text="Watch a walkthrough"
-           cta_secondary_url="#walkthrough"
-        %}
-        <p class="home-closer__note">When you meet with us, it&rsquo;s not just a demo. We&rsquo;ll show how a firm like yours adopts Taxy alongside existing workflows &mdash; and starts seeing value within weeks, not quarters.</p>
-      </div>
-      <div class="home-closer__media">
-        <img src="{{ '/assets/wp-content/uploads/2025/12/footer-hero.png' | relative_url }}" alt="Taxy product illustration" loading="lazy">
+    <div class="story-grid">
+      <div class="story-graphic" aria-hidden="true"></div>
+      <div class="story-head">
+        <h2>In our experience, it doesn&rsquo;t have to be.</h2>
+        <p>Taxy is the culmination of deep tax expertise, industry-leading solution design, modern practice management, and a stubborn focus on the people who use it &ndash; accountants and their clients.</p>
+        <p>The platform is underpinned by three principles:</p>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section section--tight">
-  {% include testimonial-carousel.html
-     heading="What clients have to say"
-     quotes=site.data.testimonials.client_voices
-  %}
-</section>
-
-<section id="walkthrough" class="section section--tight">
+<section class="section mech">
   <div class="container">
-    <h2>See Taxy in action.</h2>
-    <p>Three short clips covering how Taxy helps firms streamline tax information collection and cut down on follow-ups.</p>
-    <div class="video-embed">
-      <iframe src="https://www.loom.com/embed/5b34380d4813431ea16c0b062e64fd55?sid=542a70f5-ef1e-41cd-928e-34edd05a94f2"
-              title="Taxy walkthrough video"
-              frameborder="0"
-              webkitallowfullscreen mozallowfullscreen allowfullscreen
-              loading="lazy"></iframe>
+    <div class="mech-list">
+      {% for card in site.data.concept_cards %}
+        <article class="mech-row">
+          <div class="mech-row__num">{{ card.number }}</div>
+          <div class="mech-row__text">
+            <h3>{{ card.heading }}</h3>
+            <p>{{ card.body }}</p>
+          </div>
+        </article>
+      {% endfor %}
     </div>
   </div>
 </section>
 
-<section class="section section--tight section--offwhite">
+<section class="section firm-proof">
   <div class="container">
-    <h3>Getting started is simple &ndash; we guide you through every step.</h3>
-    <p>We&rsquo;ll handle the setup so your workspace aligns with your existing workflows, not replaces them.</p>
+    <div class="firm-proof__layout">
+      <div class="firm-proof__photo">
+        <img src="{{ '/assets/wp-content/uploads/2024/09/kirsty.jpeg' | relative_url }}" alt="Kirsty McDonnell" loading="lazy">
+      </div>
 
-    <ol class="steps">
-      <li class="step">
-        <span class="step__number" aria-hidden="true">1</span>
-        <span class="step__text">Start by sharing with us how you currently collect and track client tax information.</span>
-      </li>
-      <li class="step">
-        <span class="step__number" aria-hidden="true">2</span>
-        <span class="step__text">Send over any checklists or templates you already use and we&rsquo;ll load them into the platform for you.</span>
-      </li>
-      <li class="step">
-        <span class="step__number" aria-hidden="true">3</span>
-        <span class="step__text">You choose where to begin &ndash; most firms simply start with one multi-entity client group.</span>
-      </li>
-      <li class="step">
-        <span class="step__number" aria-hidden="true">4</span>
-        <span class="step__text">Keep your existing workflow running in parallel until you&rsquo;re comfortable. It&rsquo;ll naturally phase out.</span>
-      </li>
-    </ol>
+      <div class="firm-proof__content">
+        <blockquote class="firm-proof__quote">&ldquo;It&rsquo;s really clear to clients what we need from them, so they respond quickly and their responses are what we asked for. My team don&rsquo;t spend time reviewing partial responses, and I&rsquo;m in my inbox less. There&rsquo;s less frustration across the board.&rdquo;</blockquote>
 
-    <div class="steps-ctas">
-      <a class="btn btn--primary" href="{{ '/book-a-meeting/' | relative_url }}">Talk to us to get started</a>
+        <div class="firm-proof__cite">
+          <div class="firm-proof__cite-name">Kirsty McDonnell</div>
+          <div class="firm-proof__cite-role">Partner, Tax</div>
+        </div>
+
+        <div class="firm-proof__stats">
+      <div>
+        <div class="firm-proof__stat-value">48h</div>
+        <div class="firm-proof__stat-label">Average client response time</div>
+      </div>
+      <div>
+        <div class="firm-proof__stat-value">80%</div>
+        <div class="firm-proof__stat-label">Less time on email admin</div>
+      </div>
+      <div>
+        <div class="firm-proof__stat-value">3 weeks</div>
+        <div class="firm-proof__stat-label">Average job turnaround</div>
+      </div>
+          <div>
+            <div class="firm-proof__stat-value">10x</div>
+            <div class="firm-proof__stat-label">Return on every $1 spent</div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="section section--tight">
+<section class="section client-proof">
   <div class="container">
-    <h2>Frequently asked questions</h2>
-    <p>Accountants usually start exploring Taxy when managing tax return jobs becomes frustrating for their team and clients. These are some of the questions we&rsquo;re most often asked.</p>
-    <p>Looking for more? <a href="{{ '/faqs-for-accounting-firms/' | relative_url }}">FAQs for accountants</a> &middot; <a href="{{ '/faqs-for-clients/' | relative_url }}">FAQs for clients</a>.</p>
+    <div class="client-proof__layout">
+      <div class="client-proof__left">
+        <div class="client-proof__head">
+          <h2>What clients say.</h2>
+        </div>
+
+        <div class="client-proof__voices">
+          {% for voice in site.data.testimonials.client_voices %}
+            <article class="client-voice">
+              <p class="client-voice__quote">&ldquo;{{ voice.quote }}&rdquo; <cite class="client-voice__cite">&mdash; <span class="client-voice__name">{{ voice.name }}</span><span class="client-voice__role">{{ voice.role }}</span></cite></p>
+            </article>
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="client-proof__mockup">
+        <div class="ui-frame">
+          <div class="ui-frame__bar">
+            <div class="ui-frame__dots"><span></span><span></span><span></span></div>
+            <div class="ui-frame__url">app.taxy.au</div>
+          </div>
+          <div class="ui-frame__body">
+            <div class="tx-header">
+              <div class="tx-header__title">Wattle Group</div>
+              <div class="tx-header__sub">Remy Wattle &middot; FY25 ITR</div>
+            </div>
+
+            <div class="tx-progress">
+              <div class="tx-progress__top">
+                <span>4 of 8 completed</span>
+                <span>50%</span>
+              </div>
+              <div class="tx-progress__bar"><div class="tx-progress__fill"></div></div>
+            </div>
+
+            <div class="tx-section">
+              <div class="tx-section__title">ATO Pre-fill</div>
+              <div class="tx-query tx-query--done">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">Confirm your ATO Pre-fill report</div></div>
+                <span class="tx-pill tx-pill--done">Ready</span>
+              </div>
+            </div>
+
+            <div class="tx-section">
+              <div class="tx-section__title">General information</div>
+              <div class="tx-query tx-query--accountant">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">Confirm your address</div></div>
+                <span class="tx-pill tx-pill--accountant">With accountant</span>
+              </div>
+              <div class="tx-query tx-query--accountant">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">Confirm your bank details</div></div>
+                <span class="tx-pill tx-pill--accountant">With accountant</span>
+              </div>
+            </div>
+
+            <div class="tx-section">
+              <div class="tx-section__title">Investments</div>
+              <div class="tx-query tx-query--accountant">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">Buy or sell any assets or investments?</div></div>
+                <span class="tx-pill tx-pill--accountant">With accountant</span>
+              </div>
+            </div>
+
+            <div class="tx-section">
+              <div class="tx-section__title">42 Shrub Rd &mdash; Rental income</div>
+              <div class="tx-query tx-query--current">
+                <div class="tx-query__row">
+                  <div class="tx-query__icon"></div>
+                  <div class="tx-query__text"><div class="tx-query__title">Upload your rental property statements</div></div>
+                  <span class="tx-pill tx-pill--input">Needs your input</span>
+                </div>
+                <div class="tx-ask">
+                  Please upload statements from your property manager showing income and expenses.
+                </div>
+                <div class="tx-actions">
+                  <div class="tx-action tx-action--upload">Upload</div>
+                  <div class="tx-action tx-action--secondary">Add response</div>
+                  <div class="tx-action tx-action--send">Return to accountant</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="tx-section">
+              <div class="tx-section__title">Deductions</div>
+              <div class="tx-query tx-query--input">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">How many hours did you work from home?</div></div>
+                <span class="tx-pill tx-pill--input">Needs your input</span>
+              </div>
+              <div class="tx-query tx-query--input">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">Make any charitable donations?</div></div>
+                <span class="tx-pill tx-pill--input">Needs your input</span>
+              </div>
+              <div class="tx-query tx-query--input">
+                <div class="tx-query__icon"></div>
+                <div class="tx-query__text"><div class="tx-query__title">Personal super contributions?</div></div>
+                <span class="tx-pill tx-pill--input">Needs your input</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="start" class="section poc">
+  <div class="container">
+    <div class="poc__card">
+      <div class="poc__copy">
+        <h2>Try Taxy with one client group.</h2>
+        <p>No commitment. Our team handles the setup and runs alongside your existing workflow until you&rsquo;re comfortable.</p>
+        <div class="poc__ctas">
+          <a class="btn btn--primary" href="{{ '/book-a-meeting/' | relative_url }}">Talk to us</a>
+        </div>
+      </div>
+      <ol class="poc__steps">
+        <li>Tell us how you currently collect and track client tax information.</li>
+        <li>Send over any checklists or templates you already use &mdash; we load them in for you.</li>
+        <li>Choose where to start. Most firms begin with one multi-entity client group.</li>
+        <li>Keep your existing workflow running in parallel. It phases out naturally.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="faqs" class="section faq-section">
+  <div class="container">
+    <div class="faq-section__head">
+      <h2>Frequently asked questions.</h2>
+      <p class="faq-section__more">Looking for more? <a href="{{ '/faqs-for-accounting-firms/' | relative_url }}">FAQs for accountants</a> &middot; <a href="{{ '/faqs-for-clients/' | relative_url }}">FAQs for clients</a></p>
+    </div>
 
     {% include faq.html groups=site.data.faqs.home %}
   </div>

@@ -1,0 +1,325 @@
+// Client-proof section — sticky H2 + voices on left, scrolling worklist on right.
+
+.client-proof {
+  background: $color-offwhite;
+}
+
+.client-proof__layout {
+  display: grid;
+  grid-template-columns: 1fr 1.15fr;
+  gap: $space-5;
+  align-items: start;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    gap: $space-5;
+  }
+}
+
+.client-proof__left {
+  position: sticky;
+  top: $space-7; // clears sticky site header (~72px tall)
+  align-self: start;
+
+  @media (max-width: $breakpoint-lg) {
+    position: static;
+    top: auto;
+  }
+}
+
+.client-proof__head {
+  margin-bottom: $space-5;
+
+  h2 {
+    font-weight: $fw-black;
+    font-size: clamp(34px, 4.4vw, 52px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: $color-nightshade;
+    margin: 0;
+    text-wrap: balance;
+  }
+}
+
+.client-proof__voices {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.client-voice {
+  border-left: 3px solid $color-lavender;
+  padding: 4px 0 4px $space-3;
+
+  &__quote {
+    font-size: 18px;
+    line-height: 1.5;
+    color: $color-nightshade;
+    margin: 0;
+  }
+
+  &__cite {
+    font-size: 15px;
+    font-style: normal;
+    color: rgba(37, 29, 49, 0.55);
+    white-space: nowrap;
+  }
+
+  &__name {
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+  }
+
+  &__role {
+    margin-left: 6px;
+
+    &::before {
+      content: '\00b7';
+      margin-right: 6px;
+      color: rgba(37, 29, 49, 0.4);
+    }
+  }
+}
+
+// Desktop browser frame
+.ui-frame {
+  background: $color-white;
+  border-radius: $r-lg;
+  border: 1px solid $color-light-grey;
+  overflow: hidden;
+  box-shadow: 0 30px 80px -40px rgba(37, 29, 49, 0.25);
+
+  &__bar {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: 10px 14px;
+    background: #f3f1f6;
+    border-bottom: 1px solid $color-light-grey;
+  }
+
+  &__dots {
+    display: flex;
+    gap: 6px;
+
+    span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+    }
+
+    span:nth-child(1) { background: $color-pink; }
+    span:nth-child(2) { background: $color-amber; }
+    span:nth-child(3) { background: $color-teal; }
+  }
+
+  &__url {
+    font-size: 11px;
+    color: rgba(37, 29, 49, 0.5);
+  }
+
+  &__body {
+    padding: $space-4;
+  }
+}
+
+// Mockup content (client-side request view)
+.tx-header {
+  margin-bottom: $space-4;
+
+  &__title {
+    font-size: 22px;
+    font-weight: $fw-black;
+    color: $color-nightshade;
+    margin-bottom: 4px;
+    letter-spacing: -0.01em;
+  }
+
+  &__sub {
+    font-size: 13px;
+    color: rgba(37, 29, 49, 0.6);
+  }
+}
+
+.tx-progress {
+  margin-bottom: $space-4;
+
+  &__top {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: rgba(37, 29, 49, 0.65);
+    margin-bottom: 8px;
+    font-weight: $fw-bold;
+  }
+
+  &__bar {
+    height: 6px;
+    background: $color-light-grey;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+
+  &__fill {
+    height: 100%;
+    width: 50%;
+    background: linear-gradient(90deg, $color-purple, $color-pink);
+    border-radius: 999px;
+  }
+}
+
+.tx-section {
+  margin-bottom: $space-3;
+
+  &__title {
+    font-size: 11px;
+    font-weight: $fw-bold;
+    color: rgba(37, 29, 49, 0.55);
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+}
+
+.tx-query {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 12px;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-md;
+  margin-bottom: 6px;
+  background: $color-white;
+  font-size: 13px;
+  line-height: 1.4;
+
+  &--current {
+    border-color: $color-purple;
+    background: rgba(194, 168, 249, 0.10);
+    box-shadow: 0 8px 24px -16px rgba(149, 66, 255, 0.4);
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0;
+    padding: 12px;
+  }
+
+  &__row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+
+  &__icon {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    // default = not started (hollow grey)
+    background: $color-white;
+    border: 1.5px solid $color-light-grey;
+  }
+
+  &--done &__icon {
+    background: $color-teal;
+    border-color: $color-teal;
+  }
+
+  &--accountant &__icon {
+    background: $color-amber;
+    border-color: $color-amber;
+  }
+
+  &--input &__icon,
+  &--current &__icon {
+    background: $color-white;
+    border: 1.5px solid $color-purple;
+  }
+
+  &__text {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__title {
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+  }
+
+  &--done &__title {
+    color: rgba(37, 29, 49, 0.5);
+    font-weight: $fw-regular;
+  }
+}
+
+// Pills using brand stage colours
+.tx-pill {
+  font-size: 9px;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 3px 7px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+
+  &--done       { background: #dff9ef; color: #0e6b52; }
+  &--input      { background: #efe5ff; color: #6a29c4; }
+  &--accountant { background: #fff3dc; color: #8c5a10; }
+  &--waiting    { background: $color-light-grey; color: rgba(37, 29, 49, 0.55); }
+}
+
+// Expanded query — ask + actions + send (option-3 phone 3 pattern)
+.tx-ask {
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-md;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  margin: 10px 0 8px;
+  color: $color-nightshade;
+
+  &__label {
+    font-size: 9px;
+    color: rgba(37, 29, 49, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    font-weight: $fw-bold;
+  }
+}
+
+.tx-actions {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  width: 100%;
+}
+
+.tx-action {
+  border-radius: $r-md;
+  padding: 12px 10px;
+  text-align: center;
+  font-size: 11px;
+  font-weight: $fw-bold;
+
+  &--upload {
+    background: $color-white;
+    border: 1.5px dashed rgba(149, 66, 255, 0.4);
+    color: $color-purple;
+  }
+
+  &--secondary {
+    background: $color-white;
+    border: 1px solid $color-light-grey;
+    color: $color-nightshade;
+  }
+
+  &--send {
+    background: $color-purple;
+    color: $color-white;
+    border: 1px solid $color-purple;
+  }
+}
