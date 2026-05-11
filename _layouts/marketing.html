@@ -6,7 +6,10 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;500;700;900&display=swap">
+  <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+  <link rel="preconnect" href="https://static.hotjar.com" crossorigin>
+  <link rel="preconnect" href="https://snap.licdn.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap">
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
@@ -71,6 +74,32 @@
   </main>
 
   {% include marketing-footer.html %}
+
+  <script>
+    // Lite-Loom: click-to-load wrapper around the Loom iframe. Replaces the
+    // poster with the real iframe so the player JS (~1MB) only loads on demand.
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.lite-loom');
+      if (!btn) return;
+      var id = btn.dataset.loomId;
+      var sid = btn.dataset.loomSid;
+      if (!id) return;
+      var src = 'https://www.loom.com/embed/' + id +
+                (sid ? '?sid=' + sid + '&autoplay=1' : '?autoplay=1');
+      var iframe = document.createElement('iframe');
+      iframe.src = src;
+      iframe.title = btn.getAttribute('aria-label') || 'Video';
+      iframe.allow = 'autoplay; fullscreen';
+      iframe.allowFullscreen = true;
+      iframe.setAttribute('frameborder', '0');
+      // Replace the button with the iframe in-place; .video-embed styles
+      // give it the 16:9 frame and shadow.
+      var wrap = document.createElement('div');
+      wrap.className = btn.className.replace('lite-loom', '').trim();
+      wrap.appendChild(iframe);
+      btn.replaceWith(wrap);
+    });
+  </script>
 
   {% if page.needs_swiper %}
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>

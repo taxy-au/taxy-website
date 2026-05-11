@@ -1,73 +1,11 @@
-// Homepage problem-and-mechanics block.
-// Pain section: section-head intro + two lavender frustration tiles.
-// Mech section: option-3-style full-bleed list with big lavender numerals.
+// Story + mech list — the "in our experience, it doesn't have to be" solution
+// arc. Shares a wider 1400px frame so the dashboard graphic can bleed off the
+// left viewport edge while the text column stays aligned across both rows.
 
-.pain {
-  padding-bottom: 0; // flow into the mechanics section below
-
-  .pain-tiles {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: $space-4;
-    margin-top: $space-3;
-
-    @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
-      gap: $space-3;
-    }
-  }
-}
-
-.pain-tile {
-  background: $color-lavender;
-  border-radius: $r-xl;
-  padding: $space-5;
-  color: $color-nightshade;
-
-  .pain-tile__lead {
-    font-weight: $fw-black;
-    font-size: 28px;
-    line-height: 1.15;
-    letter-spacing: -0.005em;
-    margin: 0 0 $space-3;
-
-    em {
-      color: $color-purple;
-      font-style: normal;
-    }
-  }
-
-  .pain-tile__follow {
-    font-size: 18px;
-    line-height: 1.5;
-    color: rgba(37, 29, 49, 0.78);
-    margin: 0;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    padding: $space-4;
-    .pain-tile__lead { font-size: 22px; }
-    .pain-tile__follow { font-size: 16px; }
-  }
-}
-
-// Story + mech share a wider 1400px frame so the dashboard graphic can bleed
-// off the left viewport edge while the text column stays aligned across both.
 $story-frame-max: 1400px;
 
 .story {
-  padding-top: $space-4;
-  // Merged section (story + mech list). Bottom padding gives room for the
-  // last mech row's breathing space; the dashboard graphic's glow now fades
-  // naturally through the mech list rather than getting clipped at a section
-  // boundary.
-  padding-bottom: $space-5;
   overflow-x: hidden; // contain any sub-pixel rounding on the left bleed
-
-  @media (max-width: $breakpoint-md) {
-    padding-top: $space-3;
-    padding-bottom: $space-4;
-  }
 }
 
 .story-grid {
@@ -85,37 +23,25 @@ $story-frame-max: 1400px;
   }
 }
 
+// Sits inside .story-graphic; each row is its own card and inherits the bleed.
+// Bleed left: extend from cell-left out by the container's own left-padding,
+// so on viewports ≤ frame width (1400px) the card edge meets viewport-left,
+// and on wider viewports the card stops at the frame edge (whitespace fills
+// the rest). Avoids the card flying further left as the page widens.
 .story-graphic {
-  background: linear-gradient(135deg, rgba(194, 168, 249, 0.15), rgba(149, 66, 255, 0.05));
-  border: 1.5px dashed rgba(149, 66, 255, 0.3);
-  border-left: none;
-  border-radius: 0 $r-lg $r-lg 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: rgba(149, 66, 255, 0.55);
-  font-size: 12px;
-  font-weight: $fw-bold;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  display: block;
 
-  // Bleed left: extend from cell-left back to the viewport edge so column 2
-  // (text) still aligns with the mech-row beneath it.
   @media (min-width: $breakpoint-md) {
-    --story-bleed: calc(clamp(#{$space-2}, 4vw, #{$space-5}) + max(0px, (100vw - #{$story-frame-max}) / 2));
+    --story-bleed: clamp(#{$space-2}, 4vw, #{$space-5});
     margin-left: calc(-1 * var(--story-bleed));
     width: calc(100% + var(--story-bleed));
   }
+}
 
-  @media (max-width: $breakpoint-md) {
-    aspect-ratio: 4 / 3;
-    border-radius: $r-lg;
-    border-left: 1.5px dashed rgba(149, 66, 255, 0.3);
-  }
-
-  &::before {
-    content: 'Dashboard graphic';
-  }
+.dx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .story-head {

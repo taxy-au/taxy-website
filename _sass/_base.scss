@@ -1,13 +1,18 @@
 // Body, headings, links, paragraphs at token sizes.
 
-html {
-  // Offset anchor jumps to exactly the sticky-header height — section top
-  // lands flush with the header's bottom edge (no slice of previous section).
-  scroll-padding-top: 72px;
+// Header height — single source of truth. Referenced from the header itself
+// and from scroll-padding-top so anchor jumps land flush with the header's
+// bottom edge (no slice of previous section).
+:root {
+  --header-height: 72px;
+}
 
-  @media (max-width: $breakpoint-md) {
-    scroll-padding-top: 64px;
-  }
+@media (max-width: $breakpoint-md) {
+  :root { --header-height: 64px; }
+}
+
+html {
+  scroll-padding-top: var(--header-height);
 }
 
 body {
@@ -24,8 +29,8 @@ body {
 h1 { font-size: $fs-h1; font-weight: $fw-bold;  line-height: $lh-display; letter-spacing: -0.02em; }
 h2 { font-size: $fs-h2; font-weight: $fw-black; line-height: $lh-display; letter-spacing: -0.01em; }
 h3 { font-size: $fs-h3; font-weight: $fw-black; line-height: $lh-display; }
-h4 { font-size: $fs-h4; font-weight: $fw-medium; line-height: $lh-tight; }
-h5 { font-size: $fs-h5; font-weight: $fw-medium; line-height: $lh-tight; }
+h4 { font-size: $fs-h4; font-weight: $fw-bold; line-height: $lh-tight; }
+h5 { font-size: $fs-h5; font-weight: $fw-bold; line-height: $lh-tight; }
 
 p { font-size: $fs-p; line-height: $lh-body; }
 .p-small { font-size: $fs-p-small; line-height: $lh-loose; }

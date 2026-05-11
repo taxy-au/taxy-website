@@ -3,11 +3,6 @@
 
 .poc {
   background: $color-white;
-  padding-block: $space-5 $space-6;
-
-  @media (max-width: $breakpoint-md) {
-    padding-block: $space-4 $space-5;
-  }
 }
 
 .poc__copy {

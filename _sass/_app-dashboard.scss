@@ -1,31 +1,6 @@
 // Story-section graphic: floating client rows.
-// Sits inside .story-graphic (which bleeds off the left viewport edge);
-// each row is its own card and inherits that bleed.
-
-.story-graphic--app {
-  background: transparent;
-  border: none;
-  color: $color-nightshade;
-  font-size: inherit;
-  font-weight: inherit;
-  letter-spacing: normal;
-  text-transform: none;
-  display: block;
-  padding: 0;
-
-  &::before { content: none; }
-
-  @media (max-width: $breakpoint-md) {
-    aspect-ratio: auto;
-    background: transparent;
-  }
-}
-
-.dx-list {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+// Sits inside .story-graphic (which bleeds left off the frame edge — see
+// _pain-mech.scss). Each row is its own card and inherits the bleed.
 
 .dx-row {
   background: $color-white;
@@ -78,7 +53,7 @@
 
   &__meta {
     font-size: 12px;
-    font-weight: $fw-medium;
+    font-weight: $fw-bold;
     color: rgba(37, 29, 49, 0.55);
   }
 

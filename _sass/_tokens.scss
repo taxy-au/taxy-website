@@ -17,7 +17,8 @@ $color-offwhite: #F8F8F8;
 $color-light-grey: #DEDCE0;
 $color-mid-grey: #CCCCCC;
 
-// Type — Lato only, max 2 weights per layout (brand rule §6)
+// Type — Lato. 3-weight system: Regular (prose) / Bold (emphasis, small headings,
+// labels, buttons) / Black (major display headings).
 $font-stack: 'Lato', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
 
 $fs-h1: 52px;
@@ -29,7 +30,6 @@ $fs-p: 18px;
 $fs-p-small: 14px;
 
 $fw-regular: 400;
-$fw-medium: 500;
 $fw-bold: 700;
 $fw-black: 900;
 

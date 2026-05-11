@@ -1,97 +1,8 @@
-// Option-3 founder-led mockup, ported as-is for review on the live page.
+// Founder section — title + 4 problem-tile grid.
+// (The original "founder card" pattern was dropped — only the tiles remain.)
 
 .founder {
   background: $color-white;
-  padding-top: $space-4;
-  padding-bottom: $space-5;
-}
-
-.founder-grid {
-  display: grid;
-  grid-template-columns: 320px 1fr;
-  gap: $space-6;
-  align-items: start;
-
-  @media (max-width: 900px) {
-    grid-template-columns: 1fr;
-    gap: $space-4;
-  }
-}
-
-.founder-card {
-  border-radius: $r-xl;
-  overflow: hidden;
-  aspect-ratio: 4 / 5;
-  background: linear-gradient(135deg, #1a0f2b 0%, #3d1a6b 55%, $color-purple 100%);
-  color: $color-white;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  padding: $space-4;
-  position: relative;
-
-  &::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image: url('/assets/img/clip-white-22pt.svg');
-    background-size: 60%;
-    background-position: center 30%;
-    background-repeat: no-repeat;
-    opacity: 0.08;
-  }
-
-  .name {
-    font-weight: $fw-black;
-    font-size: 22px;
-    position: relative;
-  }
-
-  .role {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.7);
-    margin-top: 4px;
-    position: relative;
-  }
-
-  .photo-placeholder {
-    position: absolute;
-    top: 14%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 64%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px dashed rgba(255, 255, 255, 0.25);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: rgba(255, 255, 255, 0.55);
-    font-size: 11px;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    text-align: center;
-    padding: 12px;
-  }
-
-  .initials {
-    position: absolute;
-    top: 14%;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 64%;
-    aspect-ratio: 1;
-    border-radius: 50%;
-    background: $color-white;
-    color: $color-nightshade;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: $fw-black;
-    font-size: 72px;
-    letter-spacing: -0.02em;
-  }
 }
 
 .founder-note {
@@ -117,14 +28,6 @@
     margin: 0 auto;
     max-width: 60ch;
   }
-
-  &__intro {
-    font-size: 18px;
-    line-height: 1.5;
-    color: rgba(37, 29, 49, 0.78);
-    margin: $space-4 auto 0;
-    max-width: 60ch;
-  }
 }
 
 .founder-tiles {
@@ -132,9 +35,6 @@
   grid-template-columns: repeat(4, 1fr);
   gap: $space-3;
   max-width: 1000px;
-  // Top: gap from the lede. Bottom: $space-3 buffer so the tiles → next
-  // section gap matches the hero-strip → founder gap above (which gets a
-  // similar buffer from the hero-strip__inner padding).
   margin: $space-4 auto $space-3;
 
   @media (max-width: $breakpoint-md) {
@@ -153,8 +53,8 @@
 
   &:hover {
     transform: translateY(-4px);
-    border-color: #ef4444;
-    box-shadow: 0 24px 60px -30px rgba(239, 68, 68, 0.45);
+    border-color: $color-pink;
+    box-shadow: 0 24px 60px -30px rgba(250, 98, 171, 0.45);
   }
 }
 

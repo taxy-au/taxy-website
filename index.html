@@ -1,9 +1,8 @@
 ---
 layout: marketing
 title: "Taxy"
-description: "The tax information workflow platform built for Australian accounting firms. Structured requests, visible progress, calmer deadline seasons — without a big-bang implementation."
+description: "The tax workflow platform built for Australian accounting firms. Structured requests, visible progress, calmer deadline seasons — without a big-bang implementation."
 permalink: /
-needs_swiper: true
 ---
 
 {% capture hero_aside %}
@@ -47,7 +46,7 @@ needs_swiper: true
   </div>
 </div>
 
-<section id="platform" class="section founder">
+<section id="platform" class="section section--tight founder">
   <div class="container">
     <div class="founder-note">
       <h2>Tax compliance services have become a job of chasing.</h2>
@@ -75,9 +74,9 @@ needs_swiper: true
   </div>
 </section>
 
-<section class="section story">
+<section class="section section--tight story">
   <div class="story-grid">
-    <div class="story-graphic story-graphic--app" aria-hidden="true">
+    <div class="story-graphic" aria-hidden="true">
       <div class="dx-list">
         <article class="dx-row">
           <span class="dx-pill dx-pill--review">Review</span>
@@ -333,13 +332,29 @@ needs_swiper: true
         <a class="btn btn--primary" href="{{ '/book-a-meeting/' | relative_url }}">Book a meeting</a>
       </div>
     </div>
-    <div class="video-embed poc__video">
-      <iframe src="https://www.loom.com/embed/5b34380d4813431ea16c0b062e64fd55?sid=542a70f5-ef1e-41cd-928e-34edd05a94f2"
-              title="Taxy walkthrough video"
-              frameborder="0"
-              webkitallowfullscreen mozallowfullscreen allowfullscreen
-              loading="lazy"></iframe>
-    </div>
+    {%- comment -%}
+      Lite-Loom wrapper. To swap the video, replace the three values below.
+      Get the poster URL from Loom oEmbed:
+        https://www.loom.com/v1/oembed?url=https://www.loom.com/share/<video-id>
+      → use the `thumbnail_url` field from the response.
+    {%- endcomment -%}
+    <button class="video-embed poc__video lite-loom"
+            type="button"
+            data-loom-id="5b34380d4813431ea16c0b062e64fd55"
+            data-loom-sid="542a70f5-ef1e-41cd-928e-34edd05a94f2"
+            aria-label="Play Taxy walkthrough video">
+      <img class="lite-loom__poster"
+           src="https://cdn.loom.com/sessions/thumbnails/5b34380d4813431ea16c0b062e64fd55-88d79d5eb3e4e1e3.gif"
+           alt=""
+           loading="lazy"
+           decoding="async">
+      <span class="lite-loom__play" aria-hidden="true">
+        <svg viewBox="0 0 64 64" width="64" height="64">
+          <circle cx="32" cy="32" r="32" fill="rgba(0,0,0,0.55)"/>
+          <path d="M26 20 L46 32 L26 44 Z" fill="#fff"/>
+        </svg>
+      </span>
+    </button>
   </div>
 </section>
 

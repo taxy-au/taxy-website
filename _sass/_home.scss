@@ -89,47 +89,7 @@
   }
 }
 
-
-.home-closer__layout {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
-  gap: $space-6;
-  align-items: center;
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-    gap: $space-4;
-  }
-}
-
-.home-closer__media {
-  display: flex;
-  justify-content: center;
-
-  img {
-    max-width: 380px;
-    width: 100%;
-    height: auto;
-  }
-}
-
-.home-closer__note {
-  margin-top: $space-3;
-  font-size: $fs-p;
-  line-height: 1.5;
-  color: rgba(37, 29, 49, 0.75);
-  max-width: 60ch;
-}
-
 // Pricing section on home — dark $9 card on the left, heading + lede on the right.
-.pricing-section {
-  padding-block: $space-6;
-
-  @media (max-width: $breakpoint-md) {
-    padding-block: $space-5;
-  }
-}
-
 .pricing-section__row {
   // Pull the row in from the standard container so the section reads as a
   // contained module — sits between the wide client-proof block above and
@@ -153,16 +113,5 @@
     font-size: $fs-h4;
     color: rgba(37, 29, 49, 0.8);
     max-width: 32ch;
-  }
-}
-
-// Centered single-card variant of the carousel testimonial — for Kirsty.
-.testimonial--featured {
-  max-width: 720px;
-  margin-inline: auto;
-
-  .testimonial__text {
-    font-size: $fs-h4;
-    line-height: 1.45;
   }
 }

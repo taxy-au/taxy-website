@@ -7,6 +7,10 @@
   padding-inline: clamp($space-2, 4vw, $space-5);
 }
 
+// Section vertical rhythm — three tiers used across the site.
+// normal: default $space-7 for standalone content sections
+// tight:  $space-5 for sections that "link" into the next (e.g. the
+//         founder problem-tiles flow straight into the story+mech solution)
 .section {
   padding-block: $space-7;
 
@@ -15,104 +19,12 @@
   }
 }
 
-.section--tight { padding-block: $space-5; }
-.section--loose { padding-block: $space-8; }
+.section--tight {
+  padding-block: $space-5;
 
-.section--dark {
-  // Same recipe as footer: nightshade base with purple-glow top-left and
-  // pink-glow bottom-right.
-  background: $color-nightshade;
-  background-image:
-    radial-gradient(ellipse at 30% 20%, rgba(149, 66, 255, 0.25), transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(250, 98, 171, 0.15), transparent 50%);
-  color: $color-white;
-}
-
-// Decorative paperclip motifs for dark sections — uses white-stroke variant.
-.section--with-clips {
-  position: relative;
-  overflow: hidden;
-
-  > .container { position: relative; z-index: 1; }
-}
-
-.section__clip {
-  position: absolute;
-  background-image: url('/assets/img/clip-white-22pt.svg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  pointer-events: none;
-  z-index: 0;
-}
-
-.section__clip--one {
-  right: -60px;
-  top: 8%;
-  width: 360px;
-  height: 360px;
-  opacity: 0.10;
-  transform: rotate(18deg);
-}
-
-.section__clip--two {
-  left: -100px;
-  bottom: -60px;
-  width: 280px;
-  height: 280px;
-  opacity: 0.06;
-  transform: rotate(-15deg);
-}
-
-@media (max-width: $breakpoint-md) {
-  .section__clip--one { width: 220px; height: 220px; right: -40px; }
-  .section__clip--two { width: 180px; height: 180px; left: -60px; }
-}
-
-.section--offwhite { background: $color-offwhite; }
-
-// Numbered process steps.
-.steps {
-  display: grid;
-  gap: $space-3;
-  margin-top: $space-4;
-
-  @media (min-width: $breakpoint-md) {
-    grid-template-columns: repeat(2, 1fr);
-    gap: $space-4 $space-5;
+  @media (max-width: $breakpoint-md) {
+    padding-block: $space-4;
   }
-}
-
-.step {
-  display: flex;
-  gap: $space-3;
-  align-items: flex-start;
-}
-
-.step__number {
-  width: 36px;
-  height: 36px;
-  flex-shrink: 0;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: $color-purple;
-  color: $color-white;
-  border-radius: 50%;
-  font-weight: $fw-bold;
-  font-size: $fs-h5;
-}
-
-.step__text {
-  font-size: $fs-p;
-  line-height: 1.5;
-  color: $color-nightshade;
-}
-
-.steps-ctas {
-  display: flex;
-  gap: $space-2;
-  flex-wrap: wrap;
-  margin-top: $space-5;
 }
 
 // Two-column row: text + illustration side-by-side, stacks on mobile.
@@ -126,11 +38,6 @@
     grid-template-columns: 1fr;
     gap: $space-4;
   }
-}
-
-.split-row__illustration {
-  max-width: 480px;
-  margin-inline: auto;
 }
 
 // Responsive 16:9 video embed.

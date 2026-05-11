@@ -1,11 +1,11 @@
 <header class="site-header">
   <div class="container site-header__inner">
-    <a class="site-header__logo" href="{{ '/#top' | relative_url }}" aria-label="Taxy home">
+    <a class="site-header__logo" href="{{ '/' | relative_url }}" aria-label="Taxy home">
       <img src="{{ '/assets/img/taxy-logo.svg' | relative_url }}" alt="Taxy" width="133" height="40">
     </a>
 
     <nav class="site-header__menu" aria-label="Primary">
-      <a href="{{ '/#top' | relative_url }}">Home</a>
+      <a href="{{ '/' | relative_url }}#top">Home</a>
       <a href="{{ '/' | relative_url }}#platform">Platform</a>
       <a href="{{ '/' | relative_url }}#results">Results</a>
       <a href="{{ '/' | relative_url }}#client-experience">Client Experience</a>
@@ -15,5 +15,51 @@
     </nav>
 
     <a class="btn btn--primary site-header__login" href="https://app.taxy.au/login">Log In</a>
+
+    <button class="site-header__toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-mobile-nav">
+      <span class="site-header__toggle-bar"></span>
+      <span class="site-header__toggle-bar"></span>
+      <span class="site-header__toggle-bar"></span>
+    </button>
   </div>
+
+  <nav id="site-mobile-nav" class="site-header__mobile" aria-label="Primary mobile" hidden>
+    <a href="{{ '/' | relative_url }}#top">Home</a>
+    <a href="{{ '/' | relative_url }}#platform">Platform</a>
+    <a href="{{ '/' | relative_url }}#results">Results</a>
+    <a href="{{ '/' | relative_url }}#client-experience">Client Experience</a>
+    <a href="{{ '/' | relative_url }}#pricing">Pricing</a>
+    <a href="{{ '/' | relative_url }}#start">Try It</a>
+    <a href="{{ '/' | relative_url }}#faqs">FAQs</a>
+    <a class="btn btn--primary" href="https://app.taxy.au/login">Log In</a>
+  </nav>
 </header>
+
+<script>
+  (function () {
+    var toggle = document.querySelector('.site-header__toggle');
+    var menu = document.getElementById('site-mobile-nav');
+    if (!toggle || !menu) return;
+
+    function setOpen(open) {
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      if (open) menu.removeAttribute('hidden');
+      else menu.setAttribute('hidden', '');
+      document.body.classList.toggle('nav-open', open);
+    }
+
+    toggle.addEventListener('click', function () {
+      setOpen(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    // Close on link tap so the page can scroll to the anchor.
+    menu.addEventListener('click', function (e) {
+      if (e.target.tagName === 'A') setOpen(false);
+    });
+
+    // Close when crossing back to desktop width.
+    var mql = window.matchMedia('(min-width: 769px)');
+    mql.addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+  })();
+</script>

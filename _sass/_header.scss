@@ -14,6 +14,8 @@
   grid-template-columns: auto 1fr auto;
   align-items: center;
   gap: $space-3;
+  // Padding tuned so the rendered header height matches --header-height (72px
+  // desktop, 64px mobile) — keeps anchor scroll-padding in sync.
   padding-block: $space-2;
 }
 
@@ -47,7 +49,73 @@
   justify-self: end;
 }
 
-@media (max-width: $breakpoint-md) {
-  .site-header__menu { display: none; }
-  .site-header__logo img { height: 32px; }
+// Hamburger toggle — desktop hidden, shown on mobile.
+.site-header__toggle {
+  display: none;
+  justify-self: end;
+  background: transparent;
+  border: 0;
+  padding: $space-2;
+  margin: -$space-2; // expand hit target without shifting layout
+  cursor: pointer;
+  width: 44px;
+  height: 44px;
+  position: relative;
 }
+
+.site-header__toggle-bar {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: $color-nightshade;
+  border-radius: 2px;
+  margin: 4px auto;
+  transition: transform $t-fast, opacity $t-fast;
+}
+
+// Mobile drawer — sits below the header bar and pushes content visually.
+.site-header__mobile {
+  display: none;
+  border-top: 1px solid $color-light-grey;
+  background: $color-white;
+  padding: $space-3 clamp($space-2, 4vw, $space-5) $space-4;
+  flex-direction: column;
+  gap: $space-2;
+
+  a {
+    color: $color-nightshade;
+    font-weight: $fw-bold;
+    font-size: 18px;
+    padding-block: $space-2;
+    border-bottom: 1px solid $color-light-grey;
+
+    &:hover { color: $color-purple; text-decoration: none; }
+    &:last-of-type { border-bottom: none; }
+  }
+
+  .btn {
+    align-self: flex-start;
+    margin-top: $space-2;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .site-header__menu,
+  .site-header__login { display: none; }
+
+  .site-header__toggle { display: block; }
+
+  .site-header__mobile:not([hidden]) { display: flex; }
+
+  .site-header__logo img { height: 32px; }
+
+  // Open-state hamburger morphs into an X.
+  .site-header__toggle[aria-expanded="true"] {
+    .site-header__toggle-bar:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .site-header__toggle-bar:nth-child(2) { opacity: 0; }
+    .site-header__toggle-bar:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  }
+}
+
+// Body scroll-lock when mobile nav is open.
+body.nav-open { overflow: hidden; }

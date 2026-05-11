@@ -18,7 +18,7 @@
 
 .client-proof__left {
   position: sticky;
-  top: $space-7; // clears sticky site header (~72px tall)
+  top: calc(var(--header-height) + #{$space-3});
   align-self: start;
 
   @media (max-width: $breakpoint-lg) {
@@ -296,7 +296,6 @@
   &--done       { background: #dff9ef; color: #0e6b52; }
   &--input      { background: #efe5ff; color: #6a29c4; }
   &--accountant { background: #fff3dc; color: #8c5a10; }
-  &--waiting    { background: $color-light-grey; color: rgba(37, 29, 49, 0.55); }
 }
 
 // Expanded query — ask + actions + send (option-3 phone 3 pattern)
