@@ -1,30 +1,43 @@
 ---
-layout: default
-title: "Knowledge Base"
-description: "Guides for using Taxy — setup, client invitations, templates, requests, and day-to-day workflows for accounting firms."
+layout: marketing
+title: "Knowledge base"
+description: "The Taxy knowledge base is being rebuilt. Get in touch if you need help in the meantime."
 permalink: /knowledge-base/
+redirect_from:
+  - /knowledge-base/add-period-rollover/
+  - /knowledge-base/adding-a-client/
+  - /knowledge-base/adding-an-entity/
+  - /knowledge-base/adding-categories-and-requirements/
+  - /knowledge-base/attachments-for-accountants/
+  - /knowledge-base/attachments-for-clients/
+  - /knowledge-base/catalogues/
+  - /knowledge-base/client-page/
+  - /knowledge-base/clients-dashboard/
+  - /knowledge-base/editing-catalogues/
+  - /knowledge-base/editing-categories/
+  - /knowledge-base/editing-requirements-in-the-catalogue/
+  - /knowledge-base/entity-types/
+  - /knowledge-base/invite-a-client-user/
+  - /knowledge-base/invite-multiple-client-users-at-once/
+  - /knowledge-base/inviting-team-members/
+  - /knowledge-base/logging-in-for-first-time/
+  - /knowledge-base/manage-client-page/
+  - /knowledge-base/requirements-for-accountants/
+  - /knowledge-base/requirements-for-clients/
+  - /knowledge-base/send-email-to-a-client/
+  - /knowledge-base/setting-up-the-client/
+  - /knowledge-base/setting-up-two-factor-authentication-2fa/
+  - /knowledge-base/shoebox/
+  - /knowledge-base/the-settings-page/
+  - /knowledge-base/working-papers/
+  - /knowledge-base/worklist/
 ---
 
-<main id="content" class="kb-index" style="max-width: 920px; margin: 40px auto; padding: 0 20px; font-family: Lato, sans-serif;">
-  <h1 style="margin: 0 0 8px; font-size: 36px;">Knowledge Base</h1>
-  <p style="color: #555; margin: 0 0 32px;">Guides for using Taxy.</p>
-
-  {% assign articles = site.data.kb | sort: "title" %}
-  {% assign categories = articles | map: "category" | uniq | sort %}
-
-  {% for cat in categories %}
-    <section style="margin-bottom: 36px;">
-      <h2 style="font-size: 22px; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid #eee;">{{ cat }}</h2>
-      <ul style="list-style: none; padding: 0; margin: 0;">
-        {% for a in articles %}
-          {% if a.category == cat %}
-            <li style="padding: 8px 0; border-bottom: 1px dashed #f0f0f0;">
-              <a href="{{ site.baseurl }}/knowledge-base/{{ a.slug }}/" style="text-decoration: none; color: #1a1a1a; font-size: 16px;">{{ a.title }}</a>
-              {% if a.updated %}<span style="color: #999; font-size: 12px; float: right;">Updated {{ a.updated }}</span>{% endif %}
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
-    </section>
-  {% endfor %}
-</main>
+{% include hero.html
+   title="Knowledge base is being rebuilt."
+   subtitle="We&rsquo;re rewriting our help docs to match how Taxy works today. They&rsquo;ll be back soon. In the meantime, our team is one email away."
+   cta_primary_text="Email us"
+   cta_primary_url="mailto:info@taxy.au"
+   cta_secondary_text="Book a meeting"
+   cta_secondary_url="/book-a-meeting/"
+%}

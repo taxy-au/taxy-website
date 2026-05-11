@@ -1,6 +1,6 @@
 title: Taxy
 tagline: "Less chasing. More control. Built for Australian tax workflows."
-description: "The tax information workflow platform built for Australian accounting firms. Structured requests for every job across the year, so clients know what's needed, staff see progress at a glance, and nothing falls through the cracks."
+description: "The tax workflow platform built for Australian accounting firms. Structured requests for every job across the year, so clients know what's needed, staff see progress at a glance, and nothing falls through the cracks."
 url: https://taxy.au
 baseurl: ""
 
@@ -21,7 +21,11 @@ plugins:
 
 exclude:
   - _scrape
+  - _kb-archive
+  - _tmp
+  - _mockups
   - Gemfile
   - Gemfile.lock
   - README.md
+  - HOMEPAGE-CLEANUP.md
   - vendor
