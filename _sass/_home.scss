@@ -36,7 +36,8 @@
 
   // Children opt out of their own bg layers — the wrapper handles them.
   .hero { background: transparent; padding-bottom: $space-3; }
-  .hero::before { display: none; }
+  .hero::before,
+  .hero::after { display: none; }
 
   // Home hero primary CTA reads midnight — keeps purple as a single accent
   // (the "More control." line) rather than competing with the button.

@@ -24,6 +24,23 @@
   &:hover { background: #7E2EE8; color: $color-white; }
 }
 
+// Midnight variant — sanctioned per brand for pages where purple is already
+// accenting the design (homepage hero, POC closer) and a purple button would
+// dilute the accent. Used alongside .btn--primary: <a class="btn btn--primary btn--dark">.
+.btn--primary.btn--dark {
+  background: $color-nightshade;
+  border-color: $color-nightshade;
+  color: $color-white;
+  box-shadow: $shadow-lift-dark;
+
+  &:hover,
+  &:focus-visible {
+    background: lighten($color-nightshade, 6%);
+    border-color: lighten($color-nightshade, 6%);
+    color: $color-white;
+  }
+}
+
 .btn--ghost {
   background: transparent;
   color: $color-nightshade;

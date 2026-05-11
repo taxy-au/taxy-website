@@ -13,10 +13,6 @@
 
   <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 
-  {% if page.needs_swiper %}
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
-  {% endif %}
-
   <link rel="icon" href="{{ '/assets/wp-content/uploads/2024/09/favicon-150x150.png' | relative_url }}" sizes="32x32">
   <link rel="icon" href="{{ '/assets/wp-content/uploads/2024/09/favicon-300x300.png' | relative_url }}" sizes="192x192">
   <link rel="apple-touch-icon" href="{{ '/assets/wp-content/uploads/2024/09/favicon-300x300.png' | relative_url }}">
@@ -101,29 +97,5 @@
     });
   </script>
 
-  {% if page.needs_swiper %}
-    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js" defer></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('.testimonials__swiper').forEach((el) => {
-          const slides = el.querySelectorAll('.swiper-slide').length;
-          new Swiper(el, {
-            loop: slides > 3,
-            slidesPerView: 1,
-            spaceBetween: 24,
-            pagination: { el: el.querySelector('.swiper-pagination'), clickable: true },
-            navigation: {
-              prevEl: el.querySelector('.swiper-button-prev'),
-              nextEl: el.querySelector('.swiper-button-next')
-            },
-            breakpoints: {
-              768: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 }
-            }
-          });
-        });
-      });
-    </script>
-  {% endif %}
 </body>
 </html>
