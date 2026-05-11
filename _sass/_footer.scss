@@ -1,55 +1,70 @@
 // Site footer — used by marketing.html.
+// Slim single-row footer + thin legal line. Same gradient recipe as the
+// firm-proof dark section above so the page lands consistently.
 
 .site-footer {
-  // Lifted from brand-pack section.on-dark: nightshade base with a purple glow
-  // top-left and a softer pink glow bottom-right.
   background: $color-nightshade;
   background-image:
-    radial-gradient(ellipse at 30% 20%, rgba(149, 66, 255, 0.25), transparent 60%),
-    radial-gradient(ellipse at 80% 80%, rgba(250, 98, 171, 0.15), transparent 50%);
+    radial-gradient(ellipse at 20% 30%, rgba(149, 66, 255, 0.28), transparent 55%),
+    radial-gradient(ellipse at 80% 80%, rgba(250, 98, 171, 0.16), transparent 50%);
   color: $color-white;
-  padding-block: $space-6 $space-4;
+  padding-block: $space-4;
 }
 
-.site-footer__inner {
+.site-footer__main {
+  // Three-cell grid so the links sit at the true horizontal centre of the
+  // container, not biased by the different widths of the logo vs LinkedIn icon.
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: $space-5;
-  align-items: start;
-
-  @media (max-width: $breakpoint-lg) {
-    grid-template-columns: 1fr 1fr;
-  }
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: $space-4;
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
-    gap: $space-4;
+    justify-items: center;
+    gap: $space-3;
   }
 }
 
-.site-footer__brand img { height: 40px; width: auto; margin-bottom: $space-3; }
+.site-footer__logo { justify-self: start; }
+.site-footer__links { justify-self: center; }
+.site-footer__social { justify-self: end; }
 
-.site-footer h5 {
-  margin-bottom: $space-2;
-  color: $color-purple;
+@media (max-width: $breakpoint-md) {
+  .site-footer__logo,
+  .site-footer__links,
+  .site-footer__social { justify-self: center; }
 }
 
-.site-footer__list {
-  font-size: $fs-p-small;
-  color: rgba(255, 255, 255, 0.85);
-
-  li { margin-bottom: $space-1; }
+.site-footer__logo img {
+  height: 32px;
+  width: auto;
+  display: block;
 }
 
-.site-footer a {
-  color: rgba(255, 255, 255, 0.85);
-  font-size: $fs-p-small;
-  &:hover { color: $color-purple; text-decoration: none; }
+.site-footer__links {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  flex-wrap: wrap;
+
+  a {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: $fs-p-small;
+    font-weight: $fw-medium;
+
+    &:hover { color: $color-purple; text-decoration: none; }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    gap: $space-3;
+  }
 }
 
-// Defined after .site-footer a so the icon-button styles win source-order
-// at equal specificity.
 .site-footer__social {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   gap: $space-2;
 
@@ -64,7 +79,8 @@
     color: $color-white;
     transition: background $t-fast, color $t-fast;
 
-    &:hover, &:focus {
+    &:hover,
+    &:focus {
       background: $color-purple;
       color: $color-white;
       text-decoration: none;
@@ -75,9 +91,15 @@
 }
 
 .site-footer__legal {
-  margin-top: $space-5;
+  margin: $space-3 0 0;
   padding-top: $space-3;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: $fs-p-small;
-  color: rgba(255, 255, 255, 0.6);
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+
+  a {
+    color: inherit;
+    &:hover { color: $color-purple; text-decoration: none; }
+  }
 }

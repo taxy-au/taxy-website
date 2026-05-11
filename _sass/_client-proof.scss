@@ -41,6 +41,14 @@
   }
 }
 
+.client-proof__title {
+  white-space: nowrap;
+
+  @media (max-width: $breakpoint-md) {
+    white-space: normal;
+  }
+}
+
 .client-proof__voices {
   display: flex;
   flex-direction: column;
@@ -48,21 +56,42 @@
 }
 
 .client-voice {
-  border-left: 3px solid $color-lavender;
-  padding: 4px 0 4px $space-3;
+  display: grid;
+  grid-template-columns: 56px 1fr;
+  gap: $space-3;
+  align-items: start;
+
+  &__avatar {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // When a voice has no photo, the body still aligns to where the avatar
+  // column would have been.
+  &:not(:has(> .client-voice__avatar)) {
+    grid-template-columns: 1fr;
+  }
+
+  &__body {
+    min-width: 0;
+  }
 
   &__quote {
     font-size: 18px;
-    line-height: 1.5;
+    line-height: 1.55;
     color: $color-nightshade;
-    margin: 0;
+    margin: 0 0 8px;
+    text-wrap: pretty;
   }
 
   &__cite {
-    font-size: 15px;
+    display: block;
+    font-size: 14px;
     font-style: normal;
-    color: rgba(37, 29, 49, 0.55);
-    white-space: nowrap;
+    color: rgba(37, 29, 49, 0.6);
   }
 
   &__name {

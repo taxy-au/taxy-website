@@ -10,12 +10,8 @@
 @import "footer";
 @import "hero";
 @import "prose";
-@import "cta-book";
 @import "faq";
 @import "stat-cards";
-@import "testimonials";
-@import "feature-row";
-@import "feature-grid";
 @import "proof-stats";
 @import "concept";
 @import "proof-card";
@@ -23,5 +19,11 @@
 @import "founder";
 @import "firm-proof";
 @import "client-proof";
+@import "app-dashboard";
 @import "poc";
 @import "home";
+
+// Unused on current pages (homepage went bespoke; pricing collapsed into home):
+//   @import "cta-book"; @import "testimonials";
+//   @import "feature-row"; @import "feature-grid";
+// Partial files retained in _sass/ + _includes/ for future revival.

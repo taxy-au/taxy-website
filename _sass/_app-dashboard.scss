@@ -1,0 +1,157 @@
+// Story-section graphic: floating client rows.
+// Sits inside .story-graphic (which bleeds off the left viewport edge);
+// each row is its own card and inherits that bleed.
+
+.story-graphic--app {
+  background: transparent;
+  border: none;
+  color: $color-nightshade;
+  font-size: inherit;
+  font-weight: inherit;
+  letter-spacing: normal;
+  text-transform: none;
+  display: block;
+  padding: 0;
+
+  &::before { content: none; }
+
+  @media (max-width: $breakpoint-md) {
+    aspect-ratio: auto;
+    background: transparent;
+  }
+}
+
+.dx-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.dx-row {
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-left: none;
+  border-radius: 0 $r-md $r-md 0;
+  padding: 16px 20px 16px clamp(16px, 3vw, 24px);
+  box-shadow: 0 12px 36px -22px rgba(37, 29, 49, 0.22);
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: start;
+  // Slightly larger gap between pill and content visually balances the row's
+  // larger left padding, so name+numbers don't sit jammed against the pill.
+  column-gap: 22px;
+  row-gap: 10px;
+
+  @media (max-width: $breakpoint-md) {
+    border-left: 1px solid $color-light-grey;
+    border-radius: $r-md;
+    padding: 14px 18px;
+  }
+
+  > .dx-pill {
+    // Span both rows so the pill centres vertically in the full card height —
+    // whitespace above the pill matches the whitespace below it.
+    grid-row: 1 / span 2;
+    grid-column: 1;
+    align-self: center;
+  }
+
+  &__title {
+    grid-row: 1;
+    grid-column: 2;
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    column-gap: 10px;
+    row-gap: 2px;
+    min-width: 0;
+  }
+
+  &__name {
+    font-size: 16px;
+    font-weight: $fw-black;
+    color: $color-nightshade;
+    letter-spacing: -0.005em;
+    margin: 0;
+    line-height: 1.2;
+  }
+
+  &__meta {
+    font-size: 12px;
+    font-weight: $fw-medium;
+    color: rgba(37, 29, 49, 0.55);
+  }
+
+  &__stats {
+    grid-row: 2;
+    grid-column: 2;
+    // Stats are sized per-column (see .dx-stat below), so a fixed gap is what
+    // we need — uniform within every row and across all rows. (Previously used
+    // space-between, which spread stats wider than needed.)
+    display: flex;
+    gap: 32px;
+    align-items: baseline;
+  }
+}
+
+.dx-stat {
+  // Per-column widths sized just larger than that column's widest content.
+  // With number left + label right (justify-content: space-between) inside
+  // each stat, the visible content fills the full cell width — so the gap
+  // between adjacent stats reads as the parent's gap, evenly.
+  &:nth-child(1) { flex: 0 0 92px; }   // With client (longest label)
+  &:nth-child(2) { flex: 0 0 62px; }   // Review
+  &:nth-child(3) { flex: 0 0 62px; }   // Ready
+
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 6px;
+  min-width: 0;
+
+  &__num {
+    font-size: 20px;
+    font-weight: $fw-black;
+    color: $color-nightshade;
+    letter-spacing: -0.01em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    flex-shrink: 0;
+  }
+
+  &__label {
+    font-size: 9px;
+    font-weight: $fw-bold;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(37, 29, 49, 0.5);
+    white-space: nowrap;
+  }
+
+  // Highlighted stat picks up the brand colour for both number and label.
+  &--review  &__num, &--review  &__label { color: $color-pink; }
+  &--waiting &__num, &--waiting &__label { color: $color-lavender; }
+  &--done    &__num, &--done    &__label { color: $color-teal; }
+}
+
+// Pill treatment mirrors the client-experience tx-pill pattern:
+// soft-tint background + darker same-family text.
+.dx-pill {
+  font-size: 9px;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 5px 14px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  min-width: 104px;
+  text-align: center;
+  // Trailing letter-spacing on uppercase pulls centred text slightly left;
+  // a small indent rebalances it visually.
+  text-indent: 0.08em;
+
+  &--review  { background: #ffe1ee; color: #b3296c; }
+  &--waiting { background: #efe5ff; color: #6a29c4; }
+  &--done    { background: #dff9ef; color: #0e6b52; }
+}

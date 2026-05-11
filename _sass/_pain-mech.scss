@@ -51,20 +51,33 @@
   }
 }
 
+// Story + mech share a wider 1400px frame so the dashboard graphic can bleed
+// off the left viewport edge while the text column stays aligned across both.
+$story-frame-max: 1400px;
+
 .story {
   padding-top: $space-4;
-  padding-bottom: 0; // flow into mech below
+  // Merged section (story + mech list). Bottom padding gives room for the
+  // last mech row's breathing space; the dashboard graphic's glow now fades
+  // naturally through the mech list rather than getting clipped at a section
+  // boundary.
+  padding-bottom: $space-5;
+  overflow-x: hidden; // contain any sub-pixel rounding on the left bleed
 
   @media (max-width: $breakpoint-md) {
     padding-top: $space-3;
+    padding-bottom: $space-4;
   }
 }
 
 .story-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 2fr;
   gap: $space-5;
-  align-items: start;
+  align-items: stretch; // graphic matches text-column height
+  max-width: $story-frame-max;
+  margin-inline: auto;
+  padding-inline: clamp($space-2, 4vw, $space-5);
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
@@ -73,10 +86,10 @@
 }
 
 .story-graphic {
-  aspect-ratio: 4 / 3;
   background: linear-gradient(135deg, rgba(194, 168, 249, 0.15), rgba(149, 66, 255, 0.05));
-  border-radius: $r-lg;
   border: 1.5px dashed rgba(149, 66, 255, 0.3);
+  border-left: none;
+  border-radius: 0 $r-lg $r-lg 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -85,6 +98,20 @@
   font-weight: $fw-bold;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+
+  // Bleed left: extend from cell-left back to the viewport edge so column 2
+  // (text) still aligns with the mech-row beneath it.
+  @media (min-width: $breakpoint-md) {
+    --story-bleed: calc(clamp(#{$space-2}, 4vw, #{$space-5}) + max(0px, (100vw - #{$story-frame-max}) / 2));
+    margin-left: calc(-1 * var(--story-bleed));
+    width: calc(100% + var(--story-bleed));
+  }
+
+  @media (max-width: $breakpoint-md) {
+    aspect-ratio: 4 / 3;
+    border-radius: $r-lg;
+    border-left: 1.5px dashed rgba(149, 66, 255, 0.3);
+  }
 
   &::before {
     content: 'Dashboard graphic';
@@ -115,23 +142,20 @@
   }
 }
 
-.mech {
-  padding-top: $space-5;
-
-  @media (max-width: $breakpoint-md) {
-    padding-top: $space-4;
-  }
-}
-
 .mech-list {
   // Mirror story-grid so mech rows align with story's right column.
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr 2fr;
   gap: 0 $space-5;
+  max-width: $story-frame-max;
+  margin-inline: auto;
+  margin-top: $space-5; // even follow-on from "...three principles:" line
+  padding-inline: clamp($space-2, 4vw, $space-5);
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
     gap: 0;
+    margin-top: $space-4;
   }
 }
 
@@ -161,7 +185,7 @@
   font-size: 80px;
   letter-spacing: -0.02em;
   line-height: 0.9;
-  color: $color-lavender;
+  color: $color-purple;
 
   @media (max-width: $breakpoint-md) {
     font-size: 48px;

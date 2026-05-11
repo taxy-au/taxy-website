@@ -1,5 +1,6 @@
 _site/
 _scrape/
+_tmp/
 .jekyll-cache/
 .jekyll-metadata
 .sass-cache/

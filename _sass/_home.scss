@@ -121,6 +121,41 @@
   max-width: 60ch;
 }
 
+// Pricing section on home — dark $9 card on the left, heading + lede on the right.
+.pricing-section {
+  padding-block: $space-6;
+
+  @media (max-width: $breakpoint-md) {
+    padding-block: $space-5;
+  }
+}
+
+.pricing-section__row {
+  // Pull the row in from the standard container so the section reads as a
+  // contained module — sits between the wide client-proof block above and
+  // the centred POC block below.
+  max-width: 960px;
+  margin-inline: auto;
+  grid-template-columns: 1fr 1.1fr; // card narrower, copy wider on the right
+  gap: $space-5;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+  }
+}
+
+.pricing-section__copy {
+  h2 { letter-spacing: -0.01em; }
+
+  p {
+    font-size: $fs-h4;
+    color: rgba(37, 29, 49, 0.8);
+    max-width: 32ch;
+  }
+}
+
 // Centered single-card variant of the carousel testimonial — for Kirsty.
 .testimonial--featured {
   max-width: 720px;

@@ -1,47 +1,28 @@
 <footer class="site-footer">
   <div class="container">
-    <div class="site-footer__inner">
-      <div class="site-footer__brand">
-        <a href="{{ '/' | relative_url }}" aria-label="Taxy home">
-          <img src="{{ '/assets/img/taxy-logo-reverse.svg' | relative_url }}" alt="Taxy" width="160" height="48">
-        </a>
-        <ul class="site-footer__social">
-          <li>
-            <a href="http://www.linkedin.com/company/104108903" target="_blank" rel="noopener" aria-label="Taxy on LinkedIn">
-              <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-            </a>
-          </li>
-        </ul>
-      </div>
+    <div class="site-footer__main">
+      <a class="site-footer__logo" href="{{ '/' | relative_url }}" aria-label="Taxy home">
+        <img src="{{ '/assets/img/taxy-logo-reverse.svg' | relative_url }}" alt="Taxy" width="120" height="36">
+      </a>
 
-      <div>
-        <h5>Our details</h5>
-        <ul class="site-footer__list">
-          <li>ABN: 33 666 815 890</li>
-          <li>Email: info@taxy.au</li>
-          <li>Phone: +61 2 7247 2472</li>
-        </ul>
-      </div>
+      <nav class="site-footer__links" aria-label="Footer">
+        <a href="{{ '/faqs-for-accounting-firms/' | relative_url }}">FAQs for accountants</a>
+        <a href="{{ '/faqs-for-clients/' | relative_url }}">FAQs for clients</a>
+        <a href="{{ '/knowledge-base/' | relative_url }}">Knowledge base</a>
+        <a href="{{ '/privacy-policy/' | relative_url }}">Privacy policy</a>
+      </nav>
 
-      <div>
-        <h5>Resources</h5>
-        <ul class="site-footer__list">
-          <li><a href="{{ '/faqs-for-accounting-firms/' | relative_url }}">FAQs for accountants</a></li>
-          <li><a href="{{ '/faqs-for-clients/' | relative_url }}">FAQs for clients</a></li>
-          <li><a href="{{ '/#walkthrough' | relative_url }}">Watch a walkthrough</a></li>
-        </ul>
-      </div>
-
-      <div>
-        <h5>Links</h5>
-        <ul class="site-footer__list">
-          <li><a href="https://app.taxy.au/login">Log in</a></li>
-          <li><a href="{{ '/knowledge-base/' | relative_url }}">Knowledge base</a></li>
-          <li><a href="{{ '/privacy-policy/' | relative_url }}">Privacy policy</a></li>
-        </ul>
-      </div>
+      <ul class="site-footer__social">
+        <li>
+          <a href="http://www.linkedin.com/company/104108903" target="_blank" rel="noopener" aria-label="Taxy on LinkedIn">
+            <svg viewBox="0 0 448 512" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+          </a>
+        </li>
+      </ul>
     </div>
 
-    <p class="site-footer__legal">Copyright {{ 'now' | date: "%Y" }} © Taxy Pty Ltd. All rights reserved.</p>
+    <p class="site-footer__legal">
+      &copy; {{ 'now' | date: "%Y" }} Taxy Pty Ltd &middot; ABN 33 666 815 890 &middot; <a href="mailto:info@taxy.au">info@taxy.au</a> &middot; +61 2 7247 2472
+    </p>
   </div>
 </footer>

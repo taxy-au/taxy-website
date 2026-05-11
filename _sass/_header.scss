@@ -9,32 +9,42 @@
 }
 
 .site-header__inner {
-  display: flex;
+  // Three-cell layout: logo left | menu centred | login right.
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: space-between;
   gap: $space-3;
   padding-block: $space-2;
 }
 
-.site-header__logo img { height: 40px; width: auto; }
+.site-header__logo {
+  justify-self: start;
 
-.site-header__nav {
-  display: flex;
-  align-items: center;
-  gap: $space-4;
+  img { height: 40px; width: auto; display: block; }
 }
 
 .site-header__menu {
+  justify-self: center;
   display: flex;
   align-items: center;
-  gap: $space-3;
+  gap: $space-4;
 
   a {
     color: $color-nightshade;
-    font-weight: $fw-medium;
-    font-size: $fs-h5;
+    font-weight: $fw-bold;
+    font-size: 15px;
+    white-space: nowrap;
     &:hover { color: $color-purple; text-decoration: none; }
   }
+
+  @media (max-width: $breakpoint-lg) {
+    gap: $space-3;
+    a { font-size: 14px; }
+  }
+}
+
+.site-header__login {
+  justify-self: end;
 }
 
 @media (max-width: $breakpoint-md) {

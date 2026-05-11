@@ -2,15 +2,19 @@ client_voices:
   - quote: "If I ever changed accountants, I'd ask the new firm to use Taxy too."
     name: "Chris"
     role: "NSW"
+    photo: "/assets/img/clients/chris.jpeg"
 
   - quote: "It's much easier to send back exactly what my accountant needs."
     name: "Karin"
     role: "NSW"
+    photo: "/assets/img/clients/karin.jpeg"
 
   - quote: "With several entities, I always know if I'm the one holding things up."
     name: "Alison"
     role: "NSW"
+    photo: "/assets/img/clients/alison.jpeg"
 
   - quote: "Being able to look back at past years saved me on my loan application."
     name: "Adrian"
     role: "VIC"
+    photo: "/assets/img/clients/adrian.jpeg"

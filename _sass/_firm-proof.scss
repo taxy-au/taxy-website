@@ -9,25 +9,41 @@
 }
 
 .firm-proof__layout {
+  // Row 1: photo + quote/cite. Photo height bounds to the cite block.
+  // Row 2: stats line spans the full block underneath both.
   display: grid;
-  grid-template-columns: 220px 1fr;
-  gap: $space-4;
+  grid-template-columns: 300px 1fr;
+  grid-template-rows: auto auto;
+  column-gap: $space-5;
+  row-gap: 0;
   align-items: stretch;
 
   @media (max-width: $breakpoint-lg) {
-    grid-template-columns: 180px 1fr;
-    gap: $space-3;
+    grid-template-columns: 240px 1fr;
+    column-gap: $space-4;
   }
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: 1fr;
-    gap: $space-4;
+    grid-template-rows: auto auto auto;
+    row-gap: $space-4;
     align-items: start;
   }
 }
 
 .firm-proof__photo {
+  grid-column: 1;
+  grid-row: 1;
+  position: relative;
+  // Absolute-positioned img doesn't contribute to row height,
+  // so the row sizes to the quote+cite content and the photo
+  // stretches to match — bounded to the cite's baseline.
+  align-self: stretch;
+  min-height: 220px;
+
   img {
+    position: absolute;
+    inset: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -36,12 +52,26 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    max-width: 220px;
+    position: static;
+    max-width: 280px;
+    min-height: 0;
 
     img {
+      position: static;
       aspect-ratio: 4 / 5;
+      width: 100%;
       height: auto;
     }
+  }
+}
+
+.firm-proof__top {
+  grid-column: 2;
+  grid-row: 1;
+
+  @media (max-width: $breakpoint-md) {
+    grid-column: 1;
+    grid-row: 2;
   }
 }
 
@@ -72,6 +102,8 @@
 }
 
 .firm-proof__stats {
+  grid-column: 1 / -1;
+  grid-row: 2;
   margin-top: $space-5;
   padding-top: $space-4;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
@@ -80,6 +112,7 @@
   gap: $space-3;
 
   @media (max-width: $breakpoint-md) {
+    grid-row: 3;
     grid-template-columns: repeat(2, 1fr);
     gap: $space-4 $space-3;
   }

@@ -1,5 +1,15 @@
 // Body, headings, links, paragraphs at token sizes.
 
+html {
+  // Offset anchor jumps to exactly the sticky-header height — section top
+  // lands flush with the header's bottom edge (no slice of previous section).
+  scroll-padding-top: 72px;
+
+  @media (max-width: $breakpoint-md) {
+    scroll-padding-top: 64px;
+  }
+}
+
 body {
   font-family: $font-stack;
   font-size: $fs-p;
