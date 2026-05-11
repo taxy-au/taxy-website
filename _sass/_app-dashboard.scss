@@ -126,7 +126,7 @@
   // a small indent rebalances it visually.
   text-indent: 0.08em;
 
-  &--review  { background: #ffe1ee; color: #b3296c; }
-  &--waiting { background: #efe5ff; color: #6a29c4; }
-  &--done    { background: #dff9ef; color: #0e6b52; }
+  &--review  { background: $pill-review-bg;  color: $pill-review-ink; }
+  &--waiting { background: $pill-waiting-bg; color: $pill-waiting-ink; }
+  &--done    { background: $pill-done-bg;    color: $pill-done-ink; }
 }

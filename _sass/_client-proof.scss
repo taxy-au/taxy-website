@@ -123,7 +123,7 @@
     align-items: center;
     gap: $space-2;
     padding: 10px 14px;
-    background: #f3f1f6;
+    background: $color-offwhite-2;
     border-bottom: 1px solid $color-light-grey;
   }
 
@@ -293,9 +293,9 @@
   white-space: nowrap;
   flex-shrink: 0;
 
-  &--done       { background: #dff9ef; color: #0e6b52; }
-  &--input      { background: #efe5ff; color: #6a29c4; }
-  &--accountant { background: #fff3dc; color: #8c5a10; }
+  &--done       { background: $pill-done-bg;      color: $pill-done-ink; }
+  &--input      { background: $pill-waiting-bg;   color: $pill-waiting-ink; }
+  &--accountant { background: $pill-submitted-bg; color: $pill-submitted-ink; }
 }
 
 // Expanded query — ask + actions + send (option-3 phone 3 pattern)

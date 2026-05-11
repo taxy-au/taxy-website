@@ -14,8 +14,19 @@ $color-teal: #60DEC0;      // ready / success
 
 // Colour — utility
 $color-offwhite: #F8F8F8;
+$color-offwhite-2: #F3F1F6;   // warmer off-white for UI chrome (e.g. browser-frame mockup bars)
 $color-light-grey: #DEDCE0;
 $color-mid-grey: #CCCCCC;
+
+// Colour — supporting shades (brand.md §Supporting Shades)
+$color-nightshade-muted: #3D3548;  // soft-contrast body text — hero subtitles, lede
+$color-purple-pressed: #7E2EE8;    // hover/active on primary purple CTAs (~8% darker)
+
+// Status pill pairs (brand.md §Status Pill Pairs) — canonical, don't substitute.
+$pill-done-bg:      #dff9ef;  $pill-done-ink:      #0e6b52;  // ready / done — teal
+$pill-waiting-bg:   #efe5ff;  $pill-waiting-ink:   #6a29c4;  // waiting / needs input — lavender
+$pill-submitted-bg: #fff3dc;  $pill-submitted-ink: #8c5a10;  // pending accountant — amber
+$pill-review-bg:    #ffe1ee;  $pill-review-ink:    #b3296c;  // review — pink
 
 // Type — Lato. 3-weight system: Regular (prose) / Bold (emphasis, small headings,
 // labels, buttons) / Black (major display headings).

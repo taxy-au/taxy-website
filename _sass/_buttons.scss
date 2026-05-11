@@ -14,6 +14,10 @@
 
   &:hover { text-decoration: none; transform: translateY(-1px); }
   &:active { transform: translateY(0); }
+
+  // Stronger focus ring than the global reset — matches lite-loom treatment so
+  // CTAs read clearly when tabbed to. Each variant below may override colour.
+  &:focus-visible { outline: 3px solid $color-purple; outline-offset: 3px; }
 }
 
 .btn--primary {
@@ -21,7 +25,7 @@
   color: $color-white;
   box-shadow: $shadow-lift-purple;
 
-  &:hover { background: #7E2EE8; color: $color-white; }
+  &:hover { background: $color-purple-pressed; color: $color-white; }
 }
 
 // Midnight variant — sanctioned per brand for pages where purple is already
