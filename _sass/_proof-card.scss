@@ -8,6 +8,13 @@
   padding: $space-4;
   border-radius: $r-lg;
   box-shadow: $shadow-lift-dark;
+
+  @media (max-width: $breakpoint-md) {
+    // Trim inset padding on mobile so the 2-col stats row gets enough
+    // horizontal budget for "Avg client response" / "Client end-to-end" to
+    // sit on one line — no font/letter-spacing change, just give them room.
+    padding: $space-3;
+  }
 }
 
 .proof-card__badge {
@@ -45,10 +52,8 @@
   padding-top: $space-3;
 
   @media (max-width: $breakpoint-md) {
-    // Stack stats vertically on mobile — at narrow widths the side-by-side
-    // labels ("Avg client response", "Client end-to-end") were both wrapping
-    // to two lines.
-    grid-template-columns: 1fr;
+    // Smaller gap pairs with the reduced card padding above to give labels
+    // one-line room without dropping font-size or letter-spacing.
     gap: $space-2;
   }
 }
