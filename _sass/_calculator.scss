@@ -97,6 +97,11 @@
   // Without min-width:0, input[type=date]'s native min-content (calendar
   // button + placeholder) can push past its grid cell at narrow widths.
   min-width: 0;
+  // Strip native iOS Safari styling on input[type=date]; without this its
+  // intrinsic min-width still wins over min-width:0 in practice and the
+  // field overflows the calc card on mobile.
+  appearance: none;
+  -webkit-appearance: none;
   transition: border-color $t-fast, box-shadow $t-fast;
 
   &:focus,
@@ -307,10 +312,19 @@
 
   &[hidden] { display: none; }
 
+  @media (max-width: $breakpoint-md) {
+    // Pull both font + gap in on mobile so labels like
+    // "Pre / post 12 May 2026" / "Indexation factor" don't wrap to two lines
+    // next to their value.
+    font-size: 13px;
+    gap: $space-2;
+  }
+
   dt {
     color: $color-nightshade-muted;
     font-weight: $fw-regular;
     margin: 0;
+    min-width: 0; // allow label to shrink rather than push dd off the row
   }
 
   dd {
@@ -319,6 +333,7 @@
     font-variant-numeric: tabular-nums;
     text-align: right;
     margin: 0;
+    white-space: nowrap; // value stays one line; label wraps if it has to
   }
 }
 
