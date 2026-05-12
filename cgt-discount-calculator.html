@@ -1,0 +1,248 @@
+---
+layout: marketing
+title: "Capital gains tax discount calculator"
+description: "Estimate capital gains tax for individuals, trusts, SMSFs and companies. Built for Australian accounting firms. Models the 12 May 2026 Federal Budget grandfathering rules."
+permalink: /tools/cgt-discount-calculator/
+---
+
+{% include hero.html
+   title="Capital gains tax discount calculator"
+   subtitle="Model a capital gains tax (CGT) event for individuals, trusts, SMSFs and companies. Built for accountants who want a quick sanity check ahead of the 2026 Federal Budget."
+%}
+
+<section class="section section--tight" id="calculator">
+  <div class="container">
+    <div class="budget-watch">
+      <strong>Budget — 12 May 2026.</strong> This calculator uses the hybrid grandfathering proposal as reported by AFR on 4 May 2026 and pre-1999 rules to provide an estimate. We will update it within 24 hours of the budget announcement to ensure accuracy.
+    </div>
+
+    <div class="calc">
+      <div class="calc__layout">
+        <div class="calc__form-col">
+        <form class="calc__form" id="cgt-calc-form" novalidate>
+          <div class="calc__field">
+            <label class="calc__label" for="client-type">Client / entity type</label>
+            <select class="calc__select" id="client-type" name="client-type">
+              <option value="individual">Individual</option>
+              <option value="trust">Trust</option>
+              <option value="smsf">SMSF</option>
+              <option value="company">Company</option>
+            </select>
+          </div>
+
+          <div class="calc__field">
+            <label class="calc__label" for="tax-rate" id="tax-rate-label">Client income bracket</label>
+            <select class="calc__select" id="tax-rate" name="tax-rate"></select>
+          </div>
+
+          <div class="calc__row">
+            <div class="calc__field">
+              <label class="calc__label" for="acq-date">Acquisition date</label>
+              <input class="calc__input" type="date" id="acq-date" name="acq-date" value="2025-01-01">
+            </div>
+            <div class="calc__field">
+              <label class="calc__label" for="disposal-date">Disposal date</label>
+              <input class="calc__input" type="date" id="disposal-date" name="disposal-date" value="2026-07-01">
+            </div>
+          </div>
+
+          <div class="calc__row">
+            <div class="calc__field">
+              <label class="calc__label" for="proceeds">Capital proceeds</label>
+              <div class="calc__money-wrap">
+                <input class="calc__input" type="text" inputmode="decimal" id="proceeds" name="proceeds" value="25000" autocomplete="off">
+              </div>
+            </div>
+            <div class="calc__field">
+              <label class="calc__label" for="cost-base">Cost base</label>
+              <div class="calc__money-wrap">
+                <input class="calc__input" type="text" inputmode="decimal" id="cost-base" name="cost-base" value="10000" autocomplete="off">
+              </div>
+            </div>
+          </div>
+        </form>
+
+        <p class="calc__disclaimer">Note: This is general information only – not financial, tax, or legal advice. Always run client-specific figures through your own working papers.</p>
+        </div>
+
+        <aside class="calc__result" aria-live="polite">
+          <div class="result__card">
+            <div class="result__headline">
+              <div class="result__headline-row result__headline-row--main">
+                <span>Estimated CGT</span>
+                <span id="result-tax">—</span>
+              </div>
+              <div class="result__headline-row">
+                <span>Estimated CGT discount</span>
+                <span id="result-discount-amount">—</span>
+              </div>
+              <div class="result__headline-row">
+                <span>Net proceeds</span>
+                <span id="result-net">—</span>
+              </div>
+            </div>
+
+            <span class="calc__pill" id="result-pill" hidden></span>
+
+            <dl class="result__list">
+              <div class="result__row">
+                <dt>Method</dt>
+                <dd id="result-method">—</dd>
+              </div>
+              <div class="result__row">
+                <dt>Holding period</dt>
+                <dd id="result-holding">—</dd>
+              </div>
+              <div class="result__row">
+                <dt>Capital gain</dt>
+                <dd id="result-gross">—</dd>
+              </div>
+              <div class="result__row" id="row-inflation" hidden>
+                <dt>Inflation rate</dt>
+                <dd>
+                  <input class="result__editable" type="text" inputmode="decimal" id="inflation" value="2.5" autocomplete="off"> %
+                </dd>
+              </div>
+              <div class="result__row" id="row-factor" hidden>
+                <dt id="label-factor">Indexation factor</dt>
+                <dd id="result-factor">—</dd>
+              </div>
+              <div class="result__row" id="row-split" hidden>
+                <dt>Pre / post 12 May 2026</dt>
+                <dd id="result-split">—</dd>
+              </div>
+              <div class="result__row">
+                <dt>Net capital gain</dt>
+                <dd id="result-taxable">—</dd>
+              </div>
+              <div class="result__row">
+                <dt>Tax rate</dt>
+                <dd id="result-rate">—</dd>
+              </div>
+            </dl>
+          </div>
+        </aside>
+      </div>
+
+      <details class="calc__methodology">
+        <summary>How is this calculated?</summary>
+        <div class="calc__methodology-body">
+          <h4>Flat discount rate</h4>
+          <ul>
+            <li>Capital gain = capital proceeds − cost base.</li>
+            <li>If held more than 12 months and the client is eligible, net capital gain = capital gain × (1 − discount rate).</li>
+            <li>Discount rates: individuals 50%, trusts 50% (where the gain is assessed to a resident beneficiary), complying super funds 33.33%, companies 0%.</li>
+            <li>Estimated CGT = net capital gain × the applicable tax rate.</li>
+          </ul>
+
+          <h4>2026 indexation</h4>
+          <ul>
+            <li>Indexed cost base = cost base × (1 + inflation)<sup>years held</sup>.</li>
+            <li>Net capital gain = max(0, capital proceeds − indexed cost base).</li>
+            <li>Estimated CGT = net capital gain × the applicable tax rate. No further discount applies.</li>
+            <li>Inflation defaults to the RBA 2.5% target and is editable inline. Once Budget 2026 publishes figures, we'll switch to ABS CPI.</li>
+          </ul>
+
+          <h4>Hybrid</h4>
+          <ul>
+            <li>The gain is split pro-rata by days held before and after 12 May 2026.</li>
+            <li>The pre-cutoff portion is taxed under the flat discount rate; the post-cutoff portion under 2026 indexation (cost base attributable to that period is compound-indexed over those days).</li>
+            <li>Total net capital gain = pre-cutoff net gain + post-cutoff real gain.</li>
+            <li>Estimated CGT = total net capital gain × the applicable tax rate.</li>
+          </ul>
+
+          <h4>Pre-1985 and pre-1999 acquisitions</h4>
+          <p><strong>Before 20 September 1985.</strong> Assets are pre-CGT and fully exempt — method shows "Pre-CGT exempt" and tax is $0.</p>
+          <p><strong>22 September 1985 to 21 September 1999.</strong> Accountants could elect indexation (CPI frozen at the September 1999 quarter) instead of the discount. The flat discount almost always works out better for modern disposals, so the calculator doesn't model this option — the election is still available on the return.</p>
+        </div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container">
+    <div class="prose">
+      <h2>Capital gains tax discount history and changes</h2>
+      <p>The CGT discount has applied to disposals since 21 September 1999, replacing the indexation method that the May 2026 Federal Budget is expected to revive in a modified form. The calculator above estimates tax payable on a CGT event A1 disposal for a single client across the four entity types that practitioners model day-to-day.</p>
+
+      <h3>Which clients are eligible for the CGT discount?</h3>
+      <p>Resident individual clients and trusts (where the discounted gain is assessed to a resident beneficiary) get 50%. Complying super funds get 33.33% — an effective ~10% on a discounted gain at the 15% accumulation rate. Companies get no discount — straight 25% (base rate entity) or 30% on the full gain. Non-residents lost access to the 50% discount on TAP assets accrued after 8 May 2012 (apportionment rules apply, not modelled here).</p>
+
+      <h3>What's the holding period test?</h3>
+      <p>More than 12 months between acquisition date and CGT event date, with both days excluded from the count. 365 days or fewer means no discount and the full gain is assessable at the entity's rate. The 12-month test runs against the original acquisition date even where the asset has changed character (e.g. rollover, conversion).</p>
+
+      <h3>Which cost-base elements does this calculator pick up?</h3>
+      <p>The single Cost base field expects the total across all five ATO elements — first (acquisition cost), second (incidental costs of acquisition and disposal: brokerage, stamp duty, legals), third (non-deductible costs of ownership for assets acquired after 20 August 1991), fourth (capital improvements), and fifth (capital costs of preserving or defending title). For listed shares and ETFs the cost base usually collapses to element 1 + brokerage.</p>
+
+      <h3>How does the discounted gain hit the return?</h3>
+      <p>The net capital gain flows into item 18 (Total current year capital gains) on the individual return; the discount sits at item 18 V. For trusts the discounted gain is distributed and assessed in the beneficiary's hands at the beneficiary's marginal rate. Complying SMSFs in accumulation pay 15% on the discounted gain (effective ~10%); pension phase is 0%. Companies pay 25% or 30% on the gross gain with no discount applied.</p>
+
+      <h3>What's expected to change in the May 2026 Federal Budget?</h3>
+      <p>Per AFR reporting (4 May 2026), Treasury has prepared a hybrid grandfathering proposal: assets acquired before 12 May 2026 retain the discount for the pre-announcement portion of their holding period; the post-12-May portion is taxed under indexation. Acquisitions on or after 12 May 2026 are fully on the indexation method. The calculator picks the applicable method from the acquisition and disposal dates — these settings will be re-tuned once the actual rules are published.</p>
+
+      <h3>What this calculator doesn't cover</h3>
+      <p>CGT event A1 disposals only. Excludes the small business CGT concessions (15-year exemption, 50% active asset reduction, retirement exemption, rollover), the main residence exemption (full or partial), foreign-resident TAP apportionment, scrip-for-scrip rollover, demerger relief, deceased estate cost-base rules, in-specie transfers, capital losses carried forward, Medicare levy, and offsets. Run client-specific scenarios through your firm's working papers.</p>
+
+      <h3>Is this calculator tax advice?</h3>
+      <p>No — general information and a sanity-check tool for practitioners. Not a substitute for client-specific working papers and reference to ATO published guidance. Use for first-pass estimates and conversations, not for lodgement figures.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="calc-cta">
+      <div class="calc-cta__graphic" aria-hidden="true">
+        <div class="dx-list">
+          <article class="dx-row">
+            <span class="dx-pill dx-pill--review">Review</span>
+            <div class="dx-row__title">
+              <h4 class="dx-row__name">Banksia &amp; Co.</h4>
+              <span class="dx-row__meta">FY25 ITR &middot; 15 May</span>
+            </div>
+            <div class="dx-row__stats">
+              <div class="dx-stat"><span class="dx-stat__num">71</span><span class="dx-stat__label">With client</span></div>
+              <div class="dx-stat dx-stat--review"><span class="dx-stat__num">5</span><span class="dx-stat__label">Review</span></div>
+              <div class="dx-stat"><span class="dx-stat__num">15</span><span class="dx-stat__label">Ready</span></div>
+            </div>
+          </article>
+
+          <article class="dx-row">
+            <span class="dx-pill dx-pill--waiting">Waiting</span>
+            <div class="dx-row__title">
+              <h4 class="dx-row__name">Eucalyptus, E.</h4>
+              <span class="dx-row__meta">FY25 FBT &middot; 21 May</span>
+            </div>
+            <div class="dx-row__stats">
+              <div class="dx-stat dx-stat--waiting"><span class="dx-stat__num">17</span><span class="dx-stat__label">With client</span></div>
+              <div class="dx-stat"><span class="dx-stat__num">0</span><span class="dx-stat__label">Review</span></div>
+              <div class="dx-stat"><span class="dx-stat__num">0</span><span class="dx-stat__label">Ready</span></div>
+            </div>
+          </article>
+
+          <article class="dx-row">
+            <span class="dx-pill dx-pill--done">Completed</span>
+            <div class="dx-row__title">
+              <h4 class="dx-row__name">Wattle Group</h4>
+              <span class="dx-row__meta">FY25 ITR &middot; 31 Mar</span>
+            </div>
+            <div class="dx-row__stats">
+              <div class="dx-stat"><span class="dx-stat__num">0</span><span class="dx-stat__label">With client</span></div>
+              <div class="dx-stat"><span class="dx-stat__num">0</span><span class="dx-stat__label">Review</span></div>
+              <div class="dx-stat dx-stat--done"><span class="dx-stat__num">54</span><span class="dx-stat__label">Ready</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+
+      <div class="calc-cta__body">
+        <h2 class="calc-cta__title">Built for Australian accountants.</h2>
+        <p>Taxy is the tax workflow platform your team trusts and clients love — from first request to final review.</p>
+        <a class="btn btn--primary" href="{{ '/book-a-meeting/' | relative_url }}">Book a meeting</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="{{ '/assets/js/cgt-calculator.js' | relative_url }}" defer></script>

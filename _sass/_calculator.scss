@@ -1,0 +1,429 @@
+// Calculator — accountant-facing CGT modelling tool.
+// Form (left) + live results (right) on desktop; stacked on mobile.
+
+.calc {
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-lg;
+  padding: $space-4;
+  box-shadow: $shadow-lift-dark;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-3;
+    border-radius: $r-md;
+  }
+}
+
+.calc__title {
+  font-size: $fs-h3;
+  font-weight: $fw-black;
+  line-height: $lh-display;
+  color: $color-nightshade;
+  margin: 0 0 $space-3;
+}
+
+.calc__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: $space-4;
+  align-items: stretch;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    gap: $space-3;
+  }
+}
+
+// Left column wraps the form and the disclaimer so the form stays as a
+// <form> element. justify-content + gap pushes the disclaimer to the bottom
+// so it lines up with the bottom of the result card on the right (the grid
+// stretches both columns to equal height).
+.calc__form-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: $space-3;
+}
+
+.calc__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+// Aside stretches via grid; result__card grows to fill the column so the grey
+// panel ends flush with the disclaimer on the left.
+.calc__result {
+  display: flex;
+  flex-direction: column;
+}
+
+.calc__field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  &[hidden] { display: none; }
+}
+
+
+.calc__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.calc__label {
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+}
+
+.calc__input,
+.calc__select {
+  font-family: $font-stack;
+  font-size: $fs-p;
+  font-weight: $fw-regular;
+  color: $color-nightshade;
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-sm;
+  padding: 12px 14px;
+  width: 100%;
+  transition: border-color $t-fast, box-shadow $t-fast;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-purple;
+    box-shadow: 0 0 0 3px rgba($color-purple, 0.18);
+  }
+
+  &:disabled {
+    background: $color-offwhite;
+    color: $color-nightshade-muted;
+    cursor: not-allowed;
+  }
+}
+
+.calc__select {
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M6 9l6 6 6-6' stroke='%23251D31' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 18px;
+  padding-right: 36px;
+}
+
+.calc__money-wrap {
+  position: relative;
+
+  &::before {
+    content: '$';
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: $color-nightshade-muted;
+    font-size: $fs-p;
+    pointer-events: none;
+  }
+
+  .calc__input {
+    padding-left: 28px;
+  }
+}
+
+.calc__hint {
+  font-size: $fs-p-small;
+  color: $color-nightshade-muted;
+  line-height: $lh-loose;
+  margin: 0;
+}
+
+// --- Result panel ----------------------------------------------------------
+
+.result__card {
+  background: $color-offwhite-2;
+  border-radius: $r-md;
+  padding: $space-4;
+  flex: 1;
+}
+
+// Three-row headline above the divider. "Estimated CGT" is the big purple
+// focal number; "discount" and "net proceeds" are bold-$ supporting rows.
+.result__headline {
+  padding-bottom: $space-3;
+  margin-bottom: $space-3;
+  border-bottom: 2px solid $color-nightshade;
+}
+
+.result__headline-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: $space-3;
+  margin-bottom: $space-2;
+
+  &:last-child { margin-bottom: 0; }
+
+  // Default (sub) row — used for discount $ and net proceeds.
+  span:first-child {
+    font-size: $fs-p-small;
+    color: $color-nightshade-muted;
+    font-weight: $fw-regular;
+  }
+
+  span:last-child {
+    font-size: $fs-p;
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+.result__headline-row--main {
+  margin-bottom: $space-3;
+
+  span:first-child {
+    font-size: $fs-p;
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+  }
+
+  span:last-child {
+    font-size: 32px;
+    font-weight: $fw-black;
+    color: $color-purple;
+    line-height: 1;
+  }
+}
+
+// "How is this calculated?" disclosure at the bottom-left of the calc card.
+// Purple +/− toggle; expands to reveal the methodology FAQ accordion.
+.calc__methodology {
+  margin-top: $space-4;
+  padding-top: $space-3;
+  border-top: 1px solid $color-light-grey;
+
+  > summary {
+    cursor: pointer;
+    color: $color-purple;
+    font-weight: $fw-bold;
+    font-size: $fs-p-small;
+    list-style: none;
+    user-select: none;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::before {
+      content: '+';
+      display: inline-block;
+      width: 1em;
+      margin-right: 0.3em;
+    }
+  }
+
+  &[open] > summary {
+    margin-bottom: $space-3;
+
+    &::before { content: '−'; }
+  }
+}
+
+.calc__methodology-body {
+  max-width: 800px;
+  font-size: 12px;
+  color: $color-nightshade-muted;
+  line-height: 1.5;
+
+  h4 {
+    font-size: 12px;
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+    line-height: 1.3;
+    margin: $space-2 0 4px;
+
+    &:first-child { margin-top: 0; }
+  }
+
+  ul {
+    margin: 0;
+    padding-left: $space-2;
+  }
+
+  li { margin-top: 0; }
+
+  p { margin: 4px 0 0; font-size: inherit; line-height: inherit; }
+
+  strong { color: $color-nightshade; font-weight: $fw-bold; }
+}
+
+.calc__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: $space-3;
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: $pill-done-bg;
+  color: $pill-done-ink;
+
+  &[hidden] { display: none; }
+}
+
+.calc__pill--warn {
+  background: $pill-submitted-bg;
+  color: $pill-submitted-ink;
+}
+
+.calc__pill--loss {
+  background: $pill-review-bg;
+  color: $pill-review-ink;
+}
+
+.result__list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin: 0;
+}
+
+.result__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: $space-3;
+  font-size: $fs-p-small;
+
+  &[hidden] { display: none; }
+
+  dt {
+    color: $color-nightshade-muted;
+    font-weight: $fw-regular;
+    margin: 0;
+  }
+
+  dd {
+    color: $color-nightshade;
+    font-weight: $fw-bold;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+    margin: 0;
+  }
+}
+
+// Small inline input for the inflation rate — sits in the result row like
+// any other value, but bordered so accountants can see it's editable.
+.result__editable {
+  font-family: $font-stack;
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+  background: $color-white;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-sm;
+  padding: 2px 6px;
+  width: 56px;
+  transition: border-color $t-fast, box-shadow $t-fast;
+
+  &:focus,
+  &:focus-visible {
+    outline: none;
+    border-color: $color-purple;
+    box-shadow: 0 0 0 2px rgba($color-purple, 0.15);
+  }
+}
+
+// --- Disclaimer ------------------------------------------------------------
+
+.calc__disclaimer {
+  margin: 0;
+  font-size: 12px;
+  font-style: italic;
+  color: $color-nightshade-muted;
+  line-height: $lh-loose;
+}
+
+// --- Budget-watch strip (temporary; remove once updated) -------------------
+// Sits between hero and calculator card. Pink for energy/timeliness (brand:
+// review state, energetic accent). Swap to amber ($pill-submitted-*) if pink
+// reads too loud.
+
+.budget-watch {
+  background: $pill-review-bg;
+  color: $pill-review-ink;
+  border-radius: $r-md;
+  padding: $space-3 $space-4;
+  margin-bottom: $space-4;
+  font-size: $fs-p-small;
+  line-height: $lh-loose;
+  border-left: 4px solid $color-pink;
+
+  strong {
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+  }
+}
+
+// --- Built-for-accountants footer (graphic-led split) ----------------------
+// Two-column: dashboard rows float free on the section background as a
+// graphic, copy + CTA on the right. No outer card chrome — the dashboard
+// itself supplies the visual weight, so wrapping it in another tile reads
+// as one container too many.
+
+.calc-cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: $space-5;
+  align-items: center;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+    gap: $space-4;
+  }
+}
+
+.calc-cta__graphic {
+  .dx-list { gap: 12px; }
+
+  // Restore the left border and full radius the homepage drops for its
+  // left-bleed effect — here the rows sit as standalone floating cards.
+  .dx-row {
+    border-left: 1px solid $color-light-grey;
+    border-radius: $r-md;
+  }
+}
+
+.calc-cta__body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-3;
+}
+
+.calc-cta__title {
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: $fw-black;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: $color-nightshade;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.calc-cta__body p {
+  font-size: $fs-p;
+  color: $color-nightshade-muted;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 48ch;
+}
