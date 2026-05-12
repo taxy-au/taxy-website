@@ -29,7 +29,7 @@
   align-items: stretch;
 
   @media (max-width: $breakpoint-lg) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: $space-3;
   }
 }
@@ -69,11 +69,11 @@
 
 .calc__row {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: $space-3;
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -94,6 +94,9 @@
   border-radius: $r-sm;
   padding: 12px 14px;
   width: 100%;
+  // Without min-width:0, input[type=date]'s native min-content (calendar
+  // button + placeholder) can push past its grid cell at narrow widths.
+  min-width: 0;
   transition: border-color $t-fast, box-shadow $t-fast;
 
   &:focus,

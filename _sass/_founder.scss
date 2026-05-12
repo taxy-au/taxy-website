@@ -60,8 +60,16 @@
   padding: $space-4;
   transition: transform $t-med, border-color $t-med, box-shadow $t-med;
 
-  &:hover,
-  &.is-in-view {
+  &:hover {
+    transform: translateY(-4px);
+    border-color: $color-pink;
+    box-shadow: 0 24px 60px -30px rgba(250, 98, 171, 0.45);
+  }
+
+  // Touch devices don't fire :hover, so the tiles read as flat grey panels.
+  // Apply the hover treatment unconditionally on mobile — better to always
+  // pink than always grey.
+  @media (max-width: $breakpoint-md) {
     transform: translateY(-4px);
     border-color: $color-pink;
     box-shadow: 0 24px 60px -30px rgba(250, 98, 171, 0.45);

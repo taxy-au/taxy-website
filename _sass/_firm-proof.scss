@@ -24,8 +24,15 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-    grid-template-rows: auto auto auto;
+    // Mobile: quote full-width on top, then photo (left) + cite (right) in a
+    // row, then divider, then stats. .firm-proof__top is display:contents so
+    // its children (quote + cite) participate directly in this grid.
+    grid-template-columns: auto minmax(0, 1fr);
+    grid-template-areas:
+      "quote quote"
+      "photo cite"
+      "stats stats";
+    column-gap: $space-3;
     row-gap: $space-4;
     align-items: start;
   }
@@ -52,12 +59,14 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    // Mobile: photo sits after the quote as a smaller credentialing portrait,
-    // not the dominant visual block it is on desktop.
+    // Mobile: small credentialing portrait beside the cite text.
     position: static;
-    max-width: 160px;
+    grid-area: photo;
+    grid-row: auto;
+    grid-column: auto;
+    width: 140px;
     min-height: 0;
-    grid-row: 2;
+    align-self: start;
 
     img {
       position: static;
@@ -73,8 +82,8 @@
   grid-row: 1;
 
   @media (max-width: $breakpoint-md) {
-    grid-column: 1;
-    grid-row: 1;
+    // Let children (quote + cite) become direct grid items of the layout.
+    display: contents;
   }
 }
 
@@ -86,10 +95,20 @@
   letter-spacing: -0.005em;
   color: $color-white;
   text-wrap: pretty;
+
+  @media (max-width: $breakpoint-md) {
+    grid-area: quote;
+  }
 }
 
 .firm-proof__cite {
   margin-top: $space-3;
+
+  @media (max-width: $breakpoint-md) {
+    grid-area: cite;
+    align-self: start;
+    margin-top: 0;
+  }
 }
 
 .firm-proof__cite-name {
@@ -115,12 +134,14 @@
   gap: $space-3;
 
   @media (max-width: $breakpoint-md) {
-    grid-row: 3;
+    grid-area: stats;
+    grid-row: auto;
+    grid-column: auto;
     grid-template-columns: repeat(2, 1fr);
     gap: $space-3;
     // Tighter divide line on mobile — the desktop $space-5 margin reads as
     // dead space once the section stacks.
-    margin-top: $space-3;
+    margin-top: 0;
     padding-top: $space-3;
   }
 }

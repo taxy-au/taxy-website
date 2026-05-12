@@ -33,11 +33,15 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    // Tighter hero on mobile + softer paperclip — the desktop cover scaling
-    // makes individual paperclips read oversized at phone widths.
+    // Match the homepage paperclip feel on inner pages: same scale, same
+    // density. Inner page heroes are content-short (title + subtitle), so a
+    // min-height inflates the paperclip area enough that `cover` scaling
+    // lands at a similar paperclip size to the homepage hero-region.
     padding-block: $space-5 $space-4;
-
-    &::before { opacity: 0.4; }
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 }
 

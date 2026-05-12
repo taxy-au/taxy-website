@@ -85,6 +85,13 @@ $story-frame-max: 1400px;
     color: rgba(37, 29, 49, 0.78);
     margin: 0;
     max-width: 56ch;
+
+    @media (max-width: $breakpoint-md) {
+      // 22px reads as larger than the 19px principles titles below it on
+      // mobile, which makes the lead-in feel heavier than the points it
+      // introduces. Drop to match the proportion desktop has.
+      font-size: 17px;
+    }
   }
 
   p + p {
