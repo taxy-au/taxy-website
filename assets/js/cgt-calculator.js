@@ -1,13 +1,14 @@
 // CGT discount calculator — AU accounting firms.
 //
-// Method is picked automatically from the dates:
-//   - Acquired before 20 Sept 1985 → Pre-CGT exempt (tax = $0)
-//   - Disposal before 12 May 2026  → Discount method (current 50% rule)
-//   - Acquired on/after 12 May 2026 → 2026 indexation (proposed)
-//   - Straddles 12 May 2026        → Hybrid (pro-rata by days held)
+// Reflects the 12 May 2026 Federal Budget:
+//   - CGT discount replaced by cost-base indexation from 1 July 2027
+//   - 30% minimum tax on the indexed (post-cutoff) gain for individuals & trusts
+//   - Pre-1985 assets caught for disposals on or after 1 July 2027
+//   - Companies and complying super funds (incl. SMSFs) excluded — they stay
+//     on the existing discount regime
 //
-// Inflation for the indexed portion is fixed at the RBA 2.5% target until
-// the Budget confirms actual rules; swap CUTOFF + INFLATION here.
+// Inflation defaults to the RBA 2.5% target and is editable inline; final
+// rules will use ABS CPI.
 
 (function () {
   'use strict';
@@ -17,8 +18,9 @@
 
   // --- Constants ------------------------------------------------------------
 
-  const CUTOFF  = new Date('2026-05-12');
+  const CUTOFF  = new Date('2027-07-01');
   const PRE_CGT = new Date('1985-09-20');
+  const MIN_TAX = 0.30;
 
   const CLIENT_DISCOUNT = {
     individual: 0.50,
@@ -26,6 +28,12 @@
     smsf:       1 / 3,
     company:    0,
   };
+
+  // Clients the new indexation + 30% minimum regime applies to. Per the
+  // Budget Papers (12 May 2026) the changes apply to "individuals, trusts
+  // and partnerships". Companies and complying super funds (incl. SMSFs)
+  // stay on the existing discount method.
+  const INDEXABLE = { individual: true, trust: true, smsf: false, company: false };
 
   // Bracket / phase / rate options per client. Labels are the bracket name
   // only — the actual % is shown read-only in a sibling display cell.
@@ -89,6 +97,7 @@
     split:         $('result-split'),
     taxable:       $('result-taxable'),
     rate:          $('result-rate'),
+    rowMinTax:     $('row-min-tax'),
     net:           $('result-net'),
   };
 
@@ -164,11 +173,13 @@
     const days      = daysBetween(acqDateInput.value, disposalInput.value);
     const rate      = parseFloat(taxRateSel.value) || 0;
     const inflation = (parseFloat(inflationInput.value) || 0) / 100;
+    const indexable = !!INDEXABLE[client];
 
     // Reset method-specific rows by default.
     out.rowInflation.hidden = true;
     out.rowFactor.hidden    = true;
     out.rowSplit.hidden     = true;
+    out.rowMinTax.hidden    = true;
 
     // Date validation.
     if (days === null) {
@@ -194,18 +205,45 @@
     const preDays  = Math.max(0, (Math.min(dispMs, cutoffMs) - acqMs) / 86_400_000);
     const postDays = Math.max(0, (dispMs - Math.max(acqMs, cutoffMs)) / 86_400_000);
 
-    let method;       // 'pre-cgt' | 'discount' | 'indexed' | 'hybrid'
+    let method;       // 'pre-cgt' | 'pre-cgt-caught' | 'discount' | 'indexed' | 'hybrid'
     let result;
 
-    if (new Date(acqDateInput.value) < PRE_CGT) {
+    const acqDate     = new Date(acqDateInput.value);
+    const isPreCgtAcq = acqDate < PRE_CGT;
+    // Indexed gains attract a 30% floor on the rate for individuals & trusts.
+    const indexedRate = indexable ? Math.max(rate, MIN_TAX) : rate;
+    const minTaxHit   = indexable && rate < MIN_TAX;
+
+    if (isPreCgtAcq && (!indexable || dispMs < cutoffMs)) {
+      // Fully exempt: pre-1985 acquisition disposed before 1 July 2027,
+      // or held by a client outside the new regime (company / super fund).
       method = 'pre-cgt';
       result = { gross: proceeds - costBase, taxable: 0, tax: 0, discount: 0 };
-    } else if (postDays === 0) {
+    } else if (isPreCgtAcq) {
+      // Pre-1985 asset caught: gain pre-1 July 2027 exempt, post-cutoff portion
+      // taxed under indexation. Cost-base methodology is yet to be confirmed in
+      // the legislation; this pro-rates the user's entered cost base by days.
+      method = 'pre-cgt-caught';
+      const totalDays = preDays + postDays;
+      const postCB    = costBase * (postDays / totalDays);
+      const postProc  = proceeds * (postDays / totalDays);
+      const postR = computeIndexed(postProc, postCB, postDays, indexedRate, inflation);
+      result = {
+        gross:    proceeds - costBase,
+        taxable:  postR.taxable,
+        tax:      postR.tax,
+        preDays, postDays,
+        discount: 0,
+        factor:   postR.factor,
+      };
+    } else if (!indexable || postDays === 0) {
+      // Companies & complying super funds stay on the discount regime
+      // regardless of the cutoff; same when the disposal is entirely pre-cutoff.
       method = 'discount';
       result = computeDiscount(proceeds, costBase, days, client, rate);
     } else if (preDays === 0) {
       method = 'indexed';
-      result = computeIndexed(proceeds, costBase, days, rate, inflation);
+      result = computeIndexed(proceeds, costBase, days, indexedRate, inflation);
     } else {
       method = 'hybrid';
       const totalDays = preDays + postDays;
@@ -214,7 +252,7 @@
       const preProc   = proceeds * (preDays  / totalDays);
       const postProc  = proceeds * (postDays / totalDays);
       const preR  = computeDiscount(preProc, preCB, days, client, rate);
-      const postR = computeIndexed(postProc, postCB, postDays, rate, inflation);
+      const postR = computeIndexed(postProc, postCB, postDays, indexedRate, inflation);
       result = {
         gross:    proceeds - costBase,
         taxable:  preR.taxable + postR.taxable,
@@ -231,12 +269,13 @@
 
     // Method label
     let methodLabel;
-    if (method === 'pre-cgt')           methodLabel = 'Pre-CGT exempt';
-    else if (method === 'hybrid')       methodLabel = 'Hybrid';
-    else if (method === 'indexed')      methodLabel = '2026 indexation';
+    if (method === 'pre-cgt')              methodLabel = 'Pre-CGT exempt';
+    else if (method === 'pre-cgt-caught')  methodLabel = 'Pre-1985 caught (post 1 Jul 2027)';
+    else if (method === 'hybrid')          methodLabel = 'Hybrid';
+    else if (method === 'indexed')         methodLabel = 'Indexation';
     else if (result.gross <= 0 || days <= 365 || client === 'company') {
       methodLabel = 'No discount';
-    } else                              methodLabel = 'Flat discount rate';
+    } else                                 methodLabel = 'Flat discount rate';
     out.method.textContent = methodLabel;
 
     // Status pill (edge cases only)
@@ -244,6 +283,10 @@
       out.pill.hidden = false;
       out.pill.textContent = 'Pre-CGT — acquired before 20 Sept 1985, exempt';
       out.pill.className   = 'calc__pill';
+    } else if (method === 'pre-cgt-caught') {
+      out.pill.hidden = false;
+      out.pill.textContent = 'Pre-1985 asset caught from 1 Jul 2027 — cost-base methodology subject to consultation';
+      out.pill.className   = 'calc__pill calc__pill--warn';
     } else if (result.gross < 0) {
       out.pill.hidden = false;
       out.pill.textContent = `Capital loss — ${fmtMoney(Math.abs(result.gross))} carry-forward`;
@@ -276,7 +319,7 @@
       out.labelFactor.textContent = 'Indexation factor';
       out.factor.textContent      = `× ${result.factor.toFixed(4)}`;
     }
-    if (method === 'hybrid') {
+    if (method === 'hybrid' || method === 'pre-cgt-caught') {
       out.rowSplit.hidden    = false;
       out.split.textContent  = `${Math.round(result.preDays)} / ${Math.round(result.postDays)} days`;
       out.rowInflation.hidden     = false;
@@ -284,6 +327,11 @@
       out.labelFactor.textContent = 'Indexation factor (post-cutoff)';
       out.factor.textContent      = `× ${result.factor.toFixed(4)}`;
     }
+
+    // 30% minimum tax indicator for individuals & trusts whose marginal rate
+    // is below the floor and where indexation has been applied.
+    const indexedMethods = method === 'indexed' || method === 'hybrid' || method === 'pre-cgt-caught';
+    out.rowMinTax.hidden = !(minTaxHit && indexedMethods && result.taxable > 0);
   };
 
   // --- Wire up --------------------------------------------------------------
