@@ -43,6 +43,14 @@
   gap: $space-3;
   border-top: 1px solid rgba(255, 255, 255, 0.15);
   padding-top: $space-3;
+
+  @media (max-width: $breakpoint-md) {
+    // Stack stats vertically on mobile — at narrow widths the side-by-side
+    // labels ("Avg client response", "Client end-to-end") were both wrapping
+    // to two lines.
+    grid-template-columns: 1fr;
+    gap: $space-2;
+  }
 }
 
 .proof-card__stat-value {

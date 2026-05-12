@@ -8,11 +8,15 @@ $story-frame-max: 1400px;
   overflow-x: hidden; // contain any sub-pixel rounding on the left bleed
 
   @media (max-width: $breakpoint-md) {
-    // Re-flow on mobile: head → mech (01/02/03) → graphic. The dashboard
-    // graphic becomes a closing visual rather than separating the "three
-    // principles:" lead-in from the principles themselves.
-    display: flex;
-    flex-direction: column;
+    // Re-flow on mobile: heading → graphic → body → 01/02/03. The dashboard
+    // graphic sits between the section title and its explanatory body so
+    // the reader hits the visual before the prose (matches CGT calc-cta).
+    display: grid;
+    grid-template-areas:
+      "title"
+      "graphic"
+      "body"
+      "mech";
     gap: $space-4;
   }
 }
@@ -27,8 +31,8 @@ $story-frame-max: 1400px;
   padding-inline: clamp($space-2, 4vw, $space-5);
 
   @media (max-width: $breakpoint-md) {
-    // Become transparent so .story-head and .story-graphic become direct
-    // flex children of .story and can be ordered around .mech-list.
+    // Become transparent so .story-graphic and .story-head's children
+    // participate in .story's grid directly.
     display: contents;
   }
 }
@@ -48,16 +52,29 @@ $story-frame-max: 1400px;
   }
 
   @media (max-width: $breakpoint-md) {
-    // .story-grid is display:contents on mobile, so .story-graphic needs its
-    // own inline padding to sit inside the section's gutter.
-    order: 3;
+    grid-area: graphic;
     padding-inline: clamp($space-2, 4vw, $space-5);
   }
 }
 
 .story-head {
+  // Children participate directly in the .story grid on mobile, so
+  // .story-head itself disappears as a layout box.
   @media (max-width: $breakpoint-md) {
-    order: 1;
+    display: contents;
+  }
+}
+
+.story-head__title {
+  @media (max-width: $breakpoint-md) {
+    grid-area: title;
+    padding-inline: clamp($space-2, 4vw, $space-5);
+  }
+}
+
+.story-head__body {
+  @media (max-width: $breakpoint-md) {
+    grid-area: body;
     padding-inline: clamp($space-2, 4vw, $space-5);
   }
 }
@@ -113,8 +130,8 @@ $story-frame-max: 1400px;
   @media (max-width: $breakpoint-md) {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
-    margin-top: 0; // .story flex gap handles vertical rhythm on mobile
-    order: 2;
+    margin-top: 0; // .story grid gap handles vertical rhythm on mobile
+    grid-area: mech;
   }
 }
 
