@@ -87,7 +87,9 @@
   flex-direction: column;
   gap: $space-2;
 
-  a {
+  // :not(.btn) so the Log In button keeps its own white-on-purple treatment
+  // and isn't given a bottom divider line.
+  a:not(.btn) {
     color: $color-nightshade;
     font-weight: $fw-bold;
     font-size: 18px;

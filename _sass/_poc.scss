@@ -28,6 +28,11 @@
     margin: 0 0 $space-4;
     text-wrap: pretty;
   }
+
+  @media (max-width: $breakpoint-md) {
+    // Left-align to match the rest of the stacked sections on mobile.
+    text-align: left;
+  }
 }
 
 .poc__ctas {
@@ -35,6 +40,10 @@
   gap: $space-2;
   flex-wrap: wrap;
   justify-content: center;
+
+  @media (max-width: $breakpoint-md) {
+    justify-content: flex-start;
+  }
 
   // Mirror the hero treatment: primary CTA reads midnight so it stays
   // calm against the white walkthrough that follows.

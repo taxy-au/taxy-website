@@ -76,6 +76,10 @@
   flex-wrap: wrap;
   gap: $space-3;
 
+  @media (max-width: $breakpoint-md) {
+    justify-content: center;
+  }
+
   li {
     font-size: 14px;
     font-weight: $fw-bold;
@@ -102,8 +106,12 @@
   align-items: center;
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     max-width: 100%;
+
+    // On mobile read the heading/lede first, then the price card.
+    .pricing-section__copy { order: 1; }
+    .stat-cards { order: 2; }
   }
 }
 

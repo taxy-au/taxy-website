@@ -31,6 +31,15 @@
   }
 }
 
+.faq-section__more-prefix {
+  // On mobile drop the prefix onto its own line so the two FAQ links can sit
+  // together on the line below — avoids the "links wrap mid-pair" look.
+  @media (max-width: $breakpoint-md) {
+    display: block;
+    margin-bottom: $space-1;
+  }
+}
+
 .faq {
   max-width: 820px;
   margin-inline: auto;

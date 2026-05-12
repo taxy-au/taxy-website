@@ -18,9 +18,14 @@
   row-gap: 10px;
 
   @media (max-width: $breakpoint-md) {
+    // Below 768px the row's desktop min-content (pill 104 + 3 stats + gaps)
+    // exceeds typical phone widths. Stack the pill above title + stats so the
+    // row content area can shrink to its real flex min instead of 442px.
     border-left: 1px solid $color-light-grey;
     border-radius: $r-md;
     padding: 14px 18px;
+    grid-template-columns: 1fr;
+    row-gap: 8px;
   }
 
   > .dx-pill {
@@ -29,6 +34,13 @@
     grid-row: 1 / span 2;
     grid-column: 1;
     align-self: center;
+
+    @media (max-width: $breakpoint-md) {
+      grid-row: 1;
+      grid-column: 1;
+      align-self: auto;
+      justify-self: start;
+    }
   }
 
   &__title {
@@ -40,6 +52,11 @@
     column-gap: 10px;
     row-gap: 2px;
     min-width: 0;
+
+    @media (max-width: $breakpoint-md) {
+      grid-row: 2;
+      grid-column: 1;
+    }
   }
 
   &__name {
@@ -66,6 +83,15 @@
     display: flex;
     gap: 32px;
     align-items: baseline;
+
+    @media (max-width: $breakpoint-md) {
+      grid-row: 3;
+      grid-column: 1;
+      gap: 16px;
+      // Spread stats across the full card width on mobile — the fixed-basis
+      // cells were leaving a visible gap on the right edge.
+      justify-content: space-between;
+    }
   }
 }
 
@@ -125,6 +151,12 @@
   // Trailing letter-spacing on uppercase pulls centred text slightly left;
   // a small indent rebalances it visually.
   text-indent: 0.08em;
+
+  @media (max-width: $breakpoint-md) {
+    // On mobile the pill sits above the row content on its own line, so the
+    // fixed 104px width is no longer needed for cross-row alignment.
+    min-width: auto;
+  }
 
   &--review  { background: $pill-review-bg;  color: $pill-review-ink; }
   &--waiting { background: $pill-waiting-bg; color: $pill-waiting-ink; }

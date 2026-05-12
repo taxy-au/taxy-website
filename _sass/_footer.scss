@@ -58,6 +58,9 @@
 
   @media (max-width: $breakpoint-md) {
     gap: $space-3;
+    // Centre wrapped links so the 2x2 grid lands under the logo rather than
+    // hugging the left edge.
+    justify-content: center;
   }
 }
 

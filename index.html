@@ -74,6 +74,27 @@ permalink: /
   </div>
 </section>
 
+<script>
+  // Mobile: trigger the founder-tile hover glow when each tile scrolls into
+  // view. Touch devices don't fire :hover, so without this the four tiles
+  // read as flat panels on a phone.
+  (function () {
+    if (!('IntersectionObserver' in window)) return;
+    if (!window.matchMedia('(max-width: 768px)').matches) return;
+    var tiles = document.querySelectorAll('.founder-tile');
+    if (!tiles.length) return;
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-in-view');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.35 });
+    tiles.forEach(function (t) { observer.observe(t); });
+  })();
+</script>
+
 <section class="section section--tight story">
   <div class="story-grid">
     <div class="story-graphic" aria-hidden="true">
@@ -265,7 +286,7 @@ permalink: /
                 <div class="tx-actions">
                   <div class="tx-action tx-action--upload">Upload</div>
                   <div class="tx-action tx-action--secondary">Add response</div>
-                  <div class="tx-action tx-action--send">Return to accountant</div>
+                  <div class="tx-action tx-action--send">Return</div>
                 </div>
               </div>
             </div>
@@ -362,7 +383,7 @@ permalink: /
   <div class="container">
     <div class="faq-section__head">
       <h2>Frequently asked questions.</h2>
-      <p class="faq-section__more">Looking for more? <a href="{{ '/faqs-for-accounting-firms/' | relative_url }}">FAQs for accountants</a> &middot; <a href="{{ '/faqs-for-clients/' | relative_url }}">FAQs for clients</a></p>
+      <p class="faq-section__more"><span class="faq-section__more-prefix">Looking for more?</span> <a href="{{ '/faqs-for-accounting-firms/' | relative_url }}">FAQs for accountants</a> &middot; <a href="{{ '/faqs-for-clients/' | relative_url }}">FAQs for clients</a></p>
     </div>
 
     {% include faq.html groups=site.data.faqs.home %}

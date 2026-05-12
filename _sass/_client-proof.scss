@@ -293,6 +293,14 @@
   white-space: nowrap;
   flex-shrink: 0;
 
+  @media (max-width: $breakpoint-md) {
+    // Smaller pill on mobile so query titles have more horizontal room and
+    // don't wrap to 3 lines next to a "NEEDS YOUR INPUT" tag.
+    font-size: 8px;
+    padding: 2px 5px;
+    letter-spacing: 0.05em;
+  }
+
   &--done       { background: $pill-done-bg;      color: $pill-done-ink; }
   &--input      { background: $pill-waiting-bg;   color: $pill-waiting-ink; }
   &--accountant { background: $pill-submitted-bg; color: $pill-submitted-ink; }

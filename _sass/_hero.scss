@@ -31,6 +31,14 @@
     pointer-events: none;
     z-index: 0;
   }
+
+  @media (max-width: $breakpoint-md) {
+    // Tighter hero on mobile + softer paperclip — the desktop cover scaling
+    // makes individual paperclips read oversized at phone widths.
+    padding-block: $space-5 $space-4;
+
+    &::before { opacity: 0.4; }
+  }
 }
 
 .hero__layout {

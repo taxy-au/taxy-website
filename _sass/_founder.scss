@@ -28,6 +28,13 @@
     margin: 0 auto;
     max-width: 60ch;
   }
+
+  @media (max-width: $breakpoint-md) {
+    // Left-align on mobile to match every other section heading on the page —
+    // mixed centre/left reads as inconsistent when sections stack 1-col.
+    text-align: left;
+    h2, &__lede { margin-inline: 0; }
+  }
 }
 
 .founder-tiles {
@@ -38,7 +45,9 @@
   margin: $space-4 auto $space-3;
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: repeat(2, 1fr);
+    // 1-col on mobile so side-by-side tiles can't read as mismatched heights
+    // when copy lengths differ. Each tile stands on its own.
+    grid-template-columns: minmax(0, 1fr);
     gap: $space-2;
     margin-top: $space-3;
   }
@@ -51,7 +60,8 @@
   padding: $space-4;
   transition: transform $t-med, border-color $t-med, box-shadow $t-med;
 
-  &:hover {
+  &:hover,
+  &.is-in-view {
     transform: translateY(-4px);
     border-color: $color-pink;
     box-shadow: 0 24px 60px -30px rgba(250, 98, 171, 0.45);

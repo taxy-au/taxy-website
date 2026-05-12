@@ -6,6 +6,15 @@ $story-frame-max: 1400px;
 
 .story {
   overflow-x: hidden; // contain any sub-pixel rounding on the left bleed
+
+  @media (max-width: $breakpoint-md) {
+    // Re-flow on mobile: head → mech (01/02/03) → graphic. The dashboard
+    // graphic becomes a closing visual rather than separating the "three
+    // principles:" lead-in from the principles themselves.
+    display: flex;
+    flex-direction: column;
+    gap: $space-4;
+  }
 }
 
 .story-grid {
@@ -18,8 +27,9 @@ $story-frame-max: 1400px;
   padding-inline: clamp($space-2, 4vw, $space-5);
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-    gap: $space-4;
+    // Become transparent so .story-head and .story-graphic become direct
+    // flex children of .story and can be ordered around .mech-list.
+    display: contents;
   }
 }
 
@@ -35,6 +45,20 @@ $story-frame-max: 1400px;
     --story-bleed: clamp(#{$space-2}, 4vw, #{$space-5});
     margin-left: calc(-1 * var(--story-bleed));
     width: calc(100% + var(--story-bleed));
+  }
+
+  @media (max-width: $breakpoint-md) {
+    // .story-grid is display:contents on mobile, so .story-graphic needs its
+    // own inline padding to sit inside the section's gutter.
+    order: 3;
+    padding-inline: clamp($space-2, 4vw, $space-5);
+  }
+}
+
+.story-head {
+  @media (max-width: $breakpoint-md) {
+    order: 1;
+    padding-inline: clamp($space-2, 4vw, $space-5);
   }
 }
 
@@ -79,9 +103,10 @@ $story-frame-max: 1400px;
   padding-inline: clamp($space-2, 4vw, $space-5);
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
     gap: 0;
-    margin-top: $space-4;
+    margin-top: 0; // .story flex gap handles vertical rhythm on mobile
+    order: 2;
   }
 }
 
@@ -99,10 +124,14 @@ $story-frame-max: 1400px;
   }
 
   @media (max-width: $breakpoint-md) {
+    // Keep the num inline with title+body on mobile so each principle reads
+    // as one compact block — was stacking the num on its own line, which
+    // pushed bodies into uneven 2-3 line variants.
     grid-column: 1;
-    grid-template-columns: 1fr;
-    gap: $space-2;
-    padding: $space-4 0;
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: $space-2;
+    align-items: baseline;
+    padding: $space-3 0;
   }
 }
 
@@ -114,7 +143,7 @@ $story-frame-max: 1400px;
   color: $color-purple;
 
   @media (max-width: $breakpoint-md) {
-    font-size: 48px;
+    font-size: 28px;
   }
 }
 
@@ -125,6 +154,12 @@ $story-frame-max: 1400px;
     letter-spacing: -0.01em;
     margin: 0 0 $space-2;
     color: $color-nightshade;
+
+    @media (max-width: $breakpoint-md) {
+      // Smaller on mobile so each principle title sits on one line at common
+      // phone widths instead of wrapping next to a 48px number.
+      font-size: 19px;
+    }
   }
 
   p {

@@ -381,18 +381,42 @@
 // as one container too many.
 
 .calc-cta {
+  // Desktop: graphic on the left spanning two rows; title sits top-right
+  // with body (para + button) below it on the right.
+  // Mobile: title, then graphic, then body — so the heading introduces the
+  // visual rather than appearing after it.
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: $space-5;
+  grid-template-areas:
+    "graphic title"
+    "graphic body";
+  column-gap: $space-5;
+  row-gap: $space-3;
   align-items: center;
 
   @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "title"
+      "graphic"
+      "body";
     gap: $space-4;
   }
 }
 
+.calc-cta__title {
+  grid-area: title;
+  font-size: clamp(28px, 3vw, 36px);
+  font-weight: $fw-black;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: $color-nightshade;
+  margin: 0;
+  text-wrap: balance;
+}
+
 .calc-cta__graphic {
+  grid-area: graphic;
   .dx-list { gap: 12px; }
 
   // Restore the left border and full radius the homepage drops for its
@@ -401,23 +425,20 @@
     border-left: 1px solid $color-light-grey;
     border-radius: $r-md;
   }
+
+  // Safety net: even after the mobile dx-row fix, contain any future child
+  // bleed so the whole CGT page can't pick up a horizontal scrollbar.
+  @media (max-width: $breakpoint-md) {
+    overflow-x: hidden;
+  }
 }
 
 .calc-cta__body {
+  grid-area: body;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: $space-3;
-}
-
-.calc-cta__title {
-  font-size: clamp(28px, 3vw, 36px);
-  font-weight: $fw-black;
-  line-height: 1.1;
-  letter-spacing: -0.01em;
-  color: $color-nightshade;
-  margin: 0;
-  text-wrap: balance;
 }
 
 .calc-cta__body p {
