@@ -156,4 +156,12 @@
   color: rgba(255, 255, 255, 0.65);
   line-height: 1.4;
   max-width: 28ch;
+
+  // "Average" → "Avg" swap on mobile so the response-time label doesn't
+  // wrap to two lines (Amanda's phone showed it overflowing on iPhone 14).
+  .short { display: none; }
+  @media (max-width: $breakpoint-md) {
+    .long { display: none; }
+    .short { display: inline; }
+  }
 }

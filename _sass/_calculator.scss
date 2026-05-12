@@ -424,7 +424,8 @@
 
 .calc-cta__title {
   grid-area: title;
-  font-size: clamp(28px, 3vw, 36px);
+  // 32px mobile floor — matches every other section h2.
+  font-size: clamp(32px, 3vw, 36px);
   font-weight: $fw-black;
   line-height: 1.1;
   letter-spacing: -0.01em;

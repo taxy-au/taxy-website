@@ -11,7 +11,9 @@
   text-align: center;
 
   h2 {
-    font-size: clamp(36px, 4.4vw, 56px);
+    // clamp lower bound = 32 so all section h2s land on a single mobile
+    // size; upper bound stays section-specific for desktop visual rhythm.
+    font-size: clamp(32px, 4.4vw, 56px);
     font-weight: $fw-black;
     letter-spacing: -0.02em;
     line-height: 1.05;
@@ -27,6 +29,12 @@
     color: $color-nightshade;
     margin: 0 auto;
     max-width: 60ch;
+
+    @media (max-width: $breakpoint-md) {
+      // Match the story-head lede (17px) so every section's lead paragraph
+      // sits at the same weight on mobile.
+      font-size: 17px;
+    }
   }
 
   @media (max-width: $breakpoint-md) {

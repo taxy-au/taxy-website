@@ -13,7 +13,8 @@
 
   h2 {
     font-weight: $fw-black;
-    font-size: clamp(40px, 5vw, 60px);
+    // 32px mobile floor — matches every other section h2.
+    font-size: clamp(32px, 5vw, 60px);
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: $color-nightshade;
@@ -27,6 +28,11 @@
     color: rgba(37, 29, 49, 0.78);
     margin: 0 0 $space-4;
     text-wrap: pretty;
+
+    @media (max-width: $breakpoint-md) {
+      // Match the founder + story lede sizes on mobile (17px).
+      font-size: 17px;
+    }
   }
 
   @media (max-width: $breakpoint-md) {

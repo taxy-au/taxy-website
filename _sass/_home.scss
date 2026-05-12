@@ -122,5 +122,10 @@
     font-size: $fs-h4;
     color: rgba(37, 29, 49, 0.8);
     max-width: 32ch;
+
+    @media (max-width: $breakpoint-md) {
+      // Match the other section ledes on mobile (17px).
+      font-size: 17px;
+    }
   }
 }

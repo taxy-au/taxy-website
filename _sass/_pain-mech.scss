@@ -71,7 +71,8 @@ $story-frame-max: 1400px;
 .story-head {
   h2 {
     font-weight: $fw-black;
-    font-size: clamp(34px, 4.4vw, 52px);
+    // 32px mobile floor — matches every other section h2.
+    font-size: clamp(32px, 4.4vw, 52px);
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: $color-nightshade;
@@ -164,8 +165,8 @@ $story-frame-max: 1400px;
 
     @media (max-width: $breakpoint-md) {
       // Smaller on mobile so each principle title sits on one line at common
-      // phone widths instead of wrapping next to a 48px number.
-      font-size: 19px;
+      // phone widths instead of wrapping next to a 48px number. 20px = brand H4.
+      font-size: 20px;
     }
   }
 
