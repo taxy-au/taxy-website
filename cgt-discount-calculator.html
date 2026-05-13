@@ -1,19 +1,19 @@
 ---
 layout: marketing
-title: "Capital gains tax discount calculator"
-description: "Estimate capital gains tax for individuals, trusts, SMSFs and companies. Built for Australian accounting firms. Updated for the 12 May 2026 Federal Budget — indexation from 1 July 2027 with a 30% minimum tax."
+title: "Capital gains tax (CGT) discount calculator 2026"
+description: "Model a CGT event under the 12 May 2026 Federal Budget announcements. Built for Australian accountants to use as a guide for client conversations about timing disposals pre or post 1 July 2027."
 permalink: /tools/cgt-discount-calculator/
 ---
 
 {% include hero.html
    title="Capital gains tax discount calculator"
-   subtitle="Model a capital gains tax (CGT) event for individuals, trusts, SMSFs and companies. Updated for the 12 May 2026 Federal Budget."
+   subtitle="Model a capital gains tax (CGT) event under the 12 May 2026 Federal Budget announcements — general guidance for accountants whose clients want information on whether to dispose of an asset pre or post 1 July 2027."
 %}
 
 <section class="section section--tight" id="calculator">
   <div class="container">
     <div class="budget-watch">
-      <strong>Updated — 12 May 2026 Federal Budget.</strong> The 50% CGT discount will be replaced with cost-base indexation from 1 July 2027, with a 30% minimum tax on net capital gains for individuals, trusts and partnerships. Pre-1985 assets are caught for disposals on or after 1 July 2027. Complying super funds (incl. SMSFs) and companies stay on the existing regime. Implementation detail is subject to further Treasury consultation.
+      <strong>Updated — 12 May 2026 Federal Budget.</strong> The 50% CGT discount will be replaced with cost-base indexation from 1 July 2027, with a 30% minimum tax on net capital gains for individuals, trusts and partnerships. Pre-1985 assets are caught for disposals on or after 1 July 2027. Complying super funds (incl. SMSFs) and companies stay on the existing regime. Calculator updated with the announcement; details may change until legislation is in.
     </div>
 
     <div class="calc">
@@ -21,7 +21,7 @@ permalink: /tools/cgt-discount-calculator/
         <div class="calc__form-col">
         <form class="calc__form" id="cgt-calc-form" novalidate>
           <div class="calc__field">
-            <label class="calc__label" for="client-type">Client / entity type</label>
+            <label class="calc__label" for="client-type">Entity type</label>
             <select class="calc__select" id="client-type" name="client-type">
               <option value="individual">Individual</option>
               <option value="trust">Trust</option>
@@ -31,34 +31,37 @@ permalink: /tools/cgt-discount-calculator/
           </div>
 
           <div class="calc__field">
-            <label class="calc__label" for="tax-rate" id="tax-rate-label">Client income bracket</label>
+            <label class="calc__label" for="acq-date">Acquisition date</label>
+            <input class="calc__input" type="date" id="acq-date" name="acq-date" value="2025-01-01">
+          </div>
+
+          <div class="calc__field">
+            <label class="calc__label" for="disposal-date">Disposal date</label>
+            <input class="calc__input" type="date" id="disposal-date" name="disposal-date" value="2030-07-01">
+          </div>
+
+          <div class="calc__field">
+            <label class="calc__label" for="proceeds">Capital proceeds</label>
+            <div class="calc__money-wrap">
+              <input class="calc__input" type="text" inputmode="decimal" id="proceeds" name="proceeds" value="250000" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="calc__field">
+            <label class="calc__label" for="cost-base">Cost base</label>
+            <div class="calc__money-wrap">
+              <input class="calc__input" type="text" inputmode="decimal" id="cost-base" name="cost-base" value="100000" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="calc__field">
+            <label class="calc__label" for="tax-rate" id="tax-rate-label">Income details</label>
             <select class="calc__select" id="tax-rate" name="tax-rate"></select>
           </div>
 
-          <div class="calc__row">
-            <div class="calc__field">
-              <label class="calc__label" for="acq-date">Acquisition date</label>
-              <input class="calc__input" type="date" id="acq-date" name="acq-date" value="2025-01-01">
-            </div>
-            <div class="calc__field">
-              <label class="calc__label" for="disposal-date">Disposal date</label>
-              <input class="calc__input" type="date" id="disposal-date" name="disposal-date" value="2026-07-01">
-            </div>
-          </div>
-
-          <div class="calc__row">
-            <div class="calc__field">
-              <label class="calc__label" for="proceeds">Capital proceeds</label>
-              <div class="calc__money-wrap">
-                <input class="calc__input" type="text" inputmode="decimal" id="proceeds" name="proceeds" value="25000" autocomplete="off">
-              </div>
-            </div>
-            <div class="calc__field">
-              <label class="calc__label" for="cost-base">Cost base</label>
-              <div class="calc__money-wrap">
-                <input class="calc__input" type="text" inputmode="decimal" id="cost-base" name="cost-base" value="10000" autocomplete="off">
-              </div>
-            </div>
+          <div class="calc__field" id="inflation-field" hidden>
+            <label class="calc__label" for="inflation">Annual inflation (%)</label>
+            <input class="calc__input" type="text" inputmode="decimal" id="inflation" name="inflation" value="2.5" autocomplete="off">
           </div>
         </form>
 
@@ -67,107 +70,116 @@ permalink: /tools/cgt-discount-calculator/
 
         <aside class="calc__result" aria-live="polite">
           <div class="result__card">
-            <div class="result__headline">
-              <div class="result__headline-row result__headline-row--main">
-                <span>Estimated CGT</span>
-                <span id="result-tax">—</span>
-              </div>
-              <div class="result__headline-row">
-                <span>Estimated CGT discount</span>
-                <span id="result-discount-amount">—</span>
-              </div>
-              <div class="result__headline-row">
-                <span>Net proceeds</span>
-                <span id="result-net">—</span>
-              </div>
-            </div>
-
             <span class="calc__pill" id="result-pill" hidden></span>
 
-            <dl class="result__list">
-              <div class="result__row">
-                <dt>Method</dt>
-                <dd id="result-method">—</dd>
-              </div>
-              <div class="result__row">
-                <dt>Holding period</dt>
-                <dd id="result-holding">—</dd>
-              </div>
-              <div class="result__row">
-                <dt>Capital gain</dt>
-                <dd id="result-gross">—</dd>
-              </div>
-              <div class="result__row" id="row-inflation" hidden>
-                <dt>Inflation rate</dt>
-                <dd>
-                  <input class="result__editable" type="text" inputmode="decimal" id="inflation" value="2.5" autocomplete="off"> %
-                </dd>
-              </div>
-              <div class="result__row" id="row-factor" hidden>
-                <dt id="label-factor">Indexation factor</dt>
-                <dd id="result-factor">—</dd>
-              </div>
-              <div class="result__row" id="row-split" hidden>
-                <dt>Pre / post 1 July 2027</dt>
-                <dd id="result-split">—</dd>
-              </div>
-              <div class="result__row">
-                <dt>Net capital gain</dt>
-                <dd id="result-taxable">—</dd>
-              </div>
-              <div class="result__row">
-                <dt>Tax rate</dt>
-                <dd id="result-rate">—</dd>
-              </div>
-              <div class="result__row" id="row-min-tax" hidden>
-                <dt>Minimum tax</dt>
-                <dd>30% floor applied to indexed gain</dd>
-              </div>
-            </dl>
+            <div class="compare__grid">
+              <!-- Card 1 — FLAT RATE DISCOUNT (pre-1 July 2027 disposal). Also used for
+                   SMSF, Company, capital loss, sub-12mo, pre-CGT exempt single-card states. -->
+              <article class="compare-card compare-card--pre" id="card-pre" hidden>
+                <header class="compare-card__head">
+                  <h4 id="card-pre-title">Sell by 30 Jun 2027</h4>
+                  <span class="compare-card__sub" id="card-pre-sub">Flat rate discount</span>
+                </header>
+                <dl class="compare-card__rows">
+                  <div class="compare-card__row">
+                    <dt>Gross gain</dt><dd id="cmp-p-gain">—</dd>
+                  </div>
+                  <div class="compare-card__row" id="cmp-p-row-discount">
+                    <dt id="cmp-p-discount-label">50% discount</dt><dd id="cmp-p-discount">—</dd>
+                  </div>
+                  <div class="compare-card__row">
+                    <dt>Net capital gain</dt><dd id="cmp-p-taxable">—</dd>
+                  </div>
+                  <div class="compare-card__row">
+                    <dt>Tax rate</dt><dd id="cmp-p-rate">—</dd>
+                  </div>
+                </dl>
+                <div class="compare-card__total">
+                  <span>Estimated tax</span>
+                  <span id="cmp-p-tax">—</span>
+                </div>
+              </article>
+
+              <!-- Card 2 — 2026 BUDGET INDEXATION (disposal on/after 1 July 2027). Pre/post
+                   rows are expandable to show the inline math. -->
+              <article class="compare-card compare-card--post is-current" id="card-post" hidden>
+                <header class="compare-card__head">
+                  <h4 id="card-post-title">Sell on disposal date</h4>
+                  <span class="compare-card__sub" id="card-post-sub"></span>
+                </header>
+                <dl class="compare-card__rows">
+                  <div class="compare-card__row">
+                    <dt>Gross gain</dt><dd id="cmp-n-gain">—</dd>
+                  </div>
+
+                  <details class="compare-card__row compare-card__row--expand" id="cmp-n-row-discount">
+                    <summary>
+                      <span class="compare-card__expand-label" id="cmp-n-discount-label"></span>
+                      <span class="compare-card__expand-value" id="cmp-n-discount">—</span>
+                    </summary>
+                    <div class="compare-card__expand-body" id="cmp-n-discount-detail"></div>
+                  </details>
+
+                  <details class="compare-card__row compare-card__row--expand" id="cmp-n-row-indexation">
+                    <summary>
+                      <span class="compare-card__expand-label" id="cmp-n-indexation-label"></span>
+                      <span class="compare-card__expand-value" id="cmp-n-indexation">—</span>
+                    </summary>
+                    <div class="compare-card__expand-body" id="cmp-n-indexation-detail"></div>
+                  </details>
+
+                  <div class="compare-card__row">
+                    <dt>Net capital gain</dt><dd id="cmp-n-taxable">—</dd>
+                  </div>
+                  <div class="compare-card__row">
+                    <dt>Tax rate</dt><dd id="cmp-n-rate">—</dd>
+                  </div>
+                </dl>
+                <div class="compare-card__total">
+                  <span>Estimated tax</span>
+                  <span id="cmp-n-tax">—</span>
+                </div>
+                <p class="compare-card__footnote" id="cmp-n-footnote" hidden></p>
+              </article>
+            </div>
+
+            <details class="calc__working" id="calc-working">
+              <summary>Inputs</summary>
+              <div class="calc__working-body" id="working-body"></div>
+            </details>
           </div>
         </aside>
       </div>
 
       <details class="calc__methodology">
-        <summary>How is this calculated?</summary>
+        <summary>Rules &amp; edge cases</summary>
         <div class="calc__methodology-body">
-          <h4>Flat discount rate</h4>
-          <ul>
-            <li>Capital gain = capital proceeds − cost base.</li>
-            <li>If held more than 12 months and the client is eligible, net capital gain = capital gain × (1 − discount rate).</li>
-            <li>Discount rates: individuals 50%, trusts 50% (where the gain is assessed to a resident beneficiary), complying super funds 33.33%, companies 0%.</li>
-            <li>Estimated CGT = net capital gain × the applicable tax rate.</li>
-            <li>Complying super funds (incl. SMSFs) and companies stay on this method indefinitely — the new indexation regime applies only to individuals, trusts and partnerships.</li>
-          </ul>
+          <p>This calculator reflects the 12 May 2026 Federal Budget announcements as currently understood. It's a best-guess estimate pending finalised legislation — until the bill lands, the precise mechanics (cost-base treatment of pre-1985 assets, CPI source, transitional ordering) may move. The cost-base field assumes acquisition and disposal costs have already been rolled in.</p>
 
-          <h4>Indexation (from 1 July 2027)</h4>
-          <ul>
-            <li>Indexed cost base = cost base × (1 + inflation)<sup>years held</sup>.</li>
-            <li>Net capital gain = max(0, capital proceeds − indexed cost base).</li>
-            <li>Estimated CGT = net capital gain × the applicable tax rate, floored at 30% (see Minimum tax below).</li>
-            <li>Inflation defaults to the RBA 2.5% target and is editable inline. Every indexed period in the calculator currently sits in the future, so a single projected rate is the most honest input — once the legislated method beds in we'll switch to a quarterly ABS CPI lookup and update each quarter as new figures are released.</li>
-          </ul>
+          <h4>Who's in the new regime</h4>
+          <p>From 1 July 2027 the 50% CGT discount is replaced by cost-base indexation for individuals, trusts and partnerships. The post-1 July 2027 portion of any indexed gain attracts a 30% minimum tax rate. Complying super funds (incl. SMSFs) and companies are unchanged — super at 33.33% discount, companies at 0%.</p>
 
-          <h4>Hybrid (assets straddling 1 July 2027)</h4>
-          <ul>
-            <li>The gain is split pro-rata by days held before and after 1 July 2027.</li>
-            <li>The pre-cutoff portion is taxed under the flat 50% discount; the post-cutoff portion under indexation (cost base attributable to that period is compound-indexed over those days).</li>
-            <li>Total net capital gain = pre-cutoff net gain + post-cutoff real gain.</li>
-            <li>The 30% minimum tax applies to the indexed portion only.</li>
-          </ul>
+          <h4>Holding period</h4>
+          <p>More than 12 months between acquisition and CGT event, with both days excluded. ≤ 365 days means no discount and no indexation — the full gain is assessable at the entity's rate, even on a hybrid pre/post 1 July 2027 disposal.</p>
 
-          <h4>Minimum tax (individuals, trusts &amp; partnerships)</h4>
-          <p>From 1 July 2027 a minimum tax rate of 30% applies to the indexed portion of a net capital gain for individuals, trusts and partnerships whose marginal rate would otherwise sit below 30% — i.e. clients in the under-$45,000 bracket. Income support recipients including Age Pension recipients are exempt from the floor; the calculator does not currently model this exemption, so for those clients use the 16% rate result as your reference.</p>
+          <h4>Hybrid math (pro-rate the gain)</h4>
+          <p>For disposals straddling 1 July 2027, the calculator computes the full-holding gain under each regime, then attributes time slices: Discount Gain × (preDays/total) + Indexed Gain × (postDays/total). The announcement explicitly rules out revaluation at 1 July 2027, so cost-base splitting isn't appropriate.</p>
 
           <h4>Pre-1985 acquisitions</h4>
-          <p><strong>Disposed before 1 July 2027.</strong> Assets remain pre-CGT and fully exempt — method shows "Pre-CGT exempt" and tax is $0. Same outcome for assets held by complying super funds or companies regardless of disposal date.</p>
-          <p><strong>Disposed on or after 1 July 2027 (individuals, trusts &amp; partnerships).</strong> The asset is caught: the gain accrued before 1 July 2027 remains exempt and the post-cutoff portion is taxed under indexation with the 30% minimum tax. Cost-base methodology is subject to Treasury consultation — the calculator pro-rates the entered cost base by days held over the post-cutoff period as a first-pass estimate.</p>
+          <p><strong>Disposed before 1 July 2027.</strong> Pre-CGT, fully exempt. Same for assets held by complying super funds or companies regardless of disposal date.</p>
+          <p><strong>Disposed on or after 1 July 2027 (individuals, trusts &amp; partnerships).</strong> Caught: pre-1 July 2027 gain remains exempt, post portion is indexed with the 30% minimum tax. Cost-base methodology for these assets is unsettled — the calculator applies indexation to the entered cost base over the full holding then takes the post-portion share as a first-pass estimate. Likely to change once legislation drops.</p>
 
           <h4>Partnerships</h4>
-          <p>CGT events in a partnership flow through to each partner under their own assessment, so the calculator has no separate "partnership" entity. Model a partner's share by entering their portion of proceeds and cost base with the entity type that matches them (Individual or Trust) — the 30% minimum tax then applies in the same way.</p>
+          <p>CGT in a partnership flows through to each partner. Model a partner's share with the entity type that matches them (Individual or Trust) — the 30% minimum tax applies the same way.</p>
 
-          <h4>What this doesn't cover</h4>
-          <p>The new-residential-property carve-out (election between the 50% discount and indexation), the small business CGT concessions, main residence exemption, foreign-resident apportionment, and the pensioner exemption from the 30% minimum are not modelled here. Treasury consultation on early-stage and start-up businesses is ongoing.</p>
+          <h4>Inflation input</h4>
+          <p>Defaults to the RBA 2.5% target and is editable inline. Every indexed period in the calc currently sits in the future, so a single projected rate is the most honest input. CPI information will be plumbed in once ABS quarterly data covers the post-1 July 2027 period.</p>
+
+          <h4>Market value election (MV at 1 July 2027)</h4>
+          <p>Budget Paper No 2 confirms taxpayers will be able to elect to use the asset's market value at 1 July 2027 (determined via ATO-published tools) as the split point between the pre-cutoff discounted portion and the post-cutoff indexed portion. This calculator uses the pro-rata-by-days method, which is the today-available approximation until the ATO valuation tool is released. The two methods produce close but not identical numbers; for typical assets the MV approach is within ~1% of pro-rata. An MV input + dual-display will be added when more asset-specific detail lands.</p>
+
+          <h4>What's not covered</h4>
+          <p>The new-residential-property carve-out (election between the 50% discount and indexation), small business CGT concessions, main residence exemption, foreign-resident apportionment, and the income-support / Age Pension exemption from the 30% minimum tax. Treasury consultation on early-stage and start-up businesses is ongoing.</p>
         </div>
       </details>
     </div>
@@ -193,7 +205,7 @@ permalink: /tools/cgt-discount-calculator/
       <p>The net capital gain flows into item 18 (Total current year capital gains) on the individual return; the discount sits at item 18 V. For trusts the discounted gain is distributed and assessed in the beneficiary's hands at the beneficiary's marginal rate. Complying SMSFs in accumulation pay 15% on the discounted gain (effective ~10%); pension phase is 0%. Companies pay 25% or 30% on the gross gain with no discount applied.</p>
 
       <h3>What changed in the 12 May 2026 Federal Budget?</h3>
-      <p>For disposals on or after 1 July 2027 by individuals, trusts and partnerships, the 50% CGT discount is replaced by inflation-adjusted cost-base indexation. A 30% minimum tax rate applies to the indexed net capital gain (after indexation). Pre-1985 assets — previously fully exempt — are caught from that date. Income support recipients including Age Pension recipients are exempt from the 30% floor. Complying super funds (incl. SMSFs) and companies are unaffected — super funds continue at 33⅓% and companies at 0%. Transitional pro-rata grandfathering: gains accrued on existing investments up to 1 July 2027 retain the 50% discount; gains arising from that date are indexed. Treasury consultation on implementation detail (incl. early-stage and start-up businesses) is ongoing.</p>
+      <p>For disposals on or after 1 July 2027 by individuals, trusts and partnerships, the 50% CGT discount is replaced by inflation-adjusted cost-base indexation. A 30% minimum tax rate applies to the indexed net capital gain (after indexation). Pre-1985 assets — previously fully exempt — are caught from that date. Income support recipients including Age Pension recipients are exempt from the 30% floor. Complying super funds (incl. SMSFs) and companies are unaffected — super funds continue at 33.33% and companies at 0%. Transitional pro-rata grandfathering: gains accrued on existing investments up to 1 July 2027 retain the 50% discount; gains arising from that date are indexed. Treasury consultation on implementation detail (incl. early-stage and start-up businesses) is ongoing.</p>
 
       <h3>What about the new residential property carve-out?</h3>
       <p>Investors in new residential premises can elect either (a) the 50% discount, or (b) cost-base indexation with the 30% minimum tax (pensioners and other income support recipients are exempt from the floor). The calculator does not currently model this election — run both scenarios by toggling the disposal date around 1 July 2027 to compare the methods.</p>

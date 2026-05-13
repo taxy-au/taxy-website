@@ -2,13 +2,18 @@
 //
 // Reflects the 12 May 2026 Federal Budget:
 //   - CGT discount replaced by cost-base indexation from 1 July 2027
-//   - 30% minimum tax on the indexed (post-cutoff) gain for individuals & trusts
+//   - 30% minimum tax on the indexed (post-1 July 2027) gain for individuals,
+//     trusts and partnerships
 //   - Pre-1985 assets caught for disposals on or after 1 July 2027
 //   - Companies and complying super funds (incl. SMSFs) excluded — they stay
 //     on the existing discount regime
 //
-// Inflation defaults to the RBA 2.5% target and is editable inline; final
-// rules will use ABS CPI.
+// Right column renders one or two scenario cards depending on the entered
+// dates and entity type:
+//   - "Sell by 30 Jun 2027" — FLAT RATE DISCOUNT (card-pre)
+//   - "Sell on [disposal date]" — 2026 BUDGET INDEXATION (card-post)
+// Hybrid math pro-rates the GAIN (not cost base/proceeds) per the
+// announcement's no-revaluation-at-1-Jul-2027 stance.
 
 (function () {
   'use strict';
@@ -29,14 +34,8 @@
     company:    0,
   };
 
-  // Clients the new indexation + 30% minimum regime applies to. Per the
-  // Budget Papers (12 May 2026) the changes apply to "individuals, trusts
-  // and partnerships". Companies and complying super funds (incl. SMSFs)
-  // stay on the existing discount method.
   const INDEXABLE = { individual: true, trust: true, smsf: false, company: false };
 
-  // Bracket / phase / rate options per client. Labels are the bracket name
-  // only — the actual % is shown read-only in a sibling display cell.
   const RATE_OPTIONS = {
     individual: [
       { value: 0.16, label: 'Under $45,000' },
@@ -60,10 +59,8 @@
     ],
   };
 
-  // Selector-side label changes by client; the right-hand "Tax rate" cell
-  // stays constant.
   const RATE_LABEL = {
-    individual: 'Client income bracket',
+    individual: 'Income details',
     trust:      'Beneficiary income bracket',
     company:    'Company tax rate',
     smsf:       'SMSF phase',
@@ -82,23 +79,36 @@
   const taxRateLabel   = $('tax-rate-label');
   const inflationInput = $('inflation');
 
-  const out = {
-    discountAmount: $('result-discount-amount'),
-    headline:       $('result-tax'),
-    pill:          $('result-pill'),
-    method:        $('result-method'),
-    holding:       $('result-holding'),
-    gross:         $('result-gross'),
-    rowInflation:  $('row-inflation'),
-    rowFactor:     $('row-factor'),
-    labelFactor:   $('label-factor'),
-    factor:        $('result-factor'),
-    rowSplit:      $('row-split'),
-    split:         $('result-split'),
-    taxable:       $('result-taxable'),
-    rate:          $('result-rate'),
-    rowMinTax:     $('row-min-tax'),
-    net:           $('result-net'),
+  const refs = {
+    pill:            $('result-pill'),
+    inflationField:  $('inflation-field'),
+    cardPre:         $('card-pre'),
+    cardPost:        $('card-post'),
+    pTitle:          $('card-pre-title'),
+    pSub:            $('card-pre-sub'),
+    pGain:           $('cmp-p-gain'),
+    pRowDiscount:    $('cmp-p-row-discount'),
+    pDiscountLabel:  $('cmp-p-discount-label'),
+    pDiscount:       $('cmp-p-discount'),
+    pTaxable:        $('cmp-p-taxable'),
+    pRate:           $('cmp-p-rate'),
+    pTax:            $('cmp-p-tax'),
+    nTitle:          $('card-post-title'),
+    nSub:            $('card-post-sub'),
+    nGain:           $('cmp-n-gain'),
+    nRowDiscount:    $('cmp-n-row-discount'),
+    nDiscountLabel:  $('cmp-n-discount-label'),
+    nDiscount:       $('cmp-n-discount'),
+    nDiscountDetail: $('cmp-n-discount-detail'),
+    nRowIndexation:  $('cmp-n-row-indexation'),
+    nIndexationLabel:$('cmp-n-indexation-label'),
+    nIndexation:     $('cmp-n-indexation'),
+    nIndexationDetail: $('cmp-n-indexation-detail'),
+    nTaxable:        $('cmp-n-taxable'),
+    nRate:           $('cmp-n-rate'),
+    nTax:            $('cmp-n-tax'),
+    nFootnote:       $('cmp-n-footnote'),
+    workingBody:     $('working-body'),
   };
 
   // --- Formatters -----------------------------------------------------------
@@ -107,7 +117,11 @@
     style: 'currency', currency: 'AUD', maximumFractionDigits: 0,
   });
   const fmtMoney = (n) => moneyFmt.format(Math.round(n));
-  const fmtPct   = (n) => new Intl.NumberFormat('en-AU', {
+  const fmtMoneyNeg = (n) => {
+    if (n <= 0) return fmtMoney(n);
+    return `(${fmtMoney(n)})`;
+  };
+  const fmtPct = (n) => new Intl.NumberFormat('en-AU', {
     style: 'percent', minimumFractionDigits: 0, maximumFractionDigits: 2,
   }).format(n);
 
@@ -123,48 +137,205 @@
     return Math.floor((d - a) / 86_400_000);
   };
 
-  // --- Dynamic UI ----------------------------------------------------------
+  // Intl en-AU short renders June/July/Sept as 4-letter forms; en-GB renders
+  // Sept the same way. Manual table keeps card titles uniformly 3-letter
+  // (matches the hardcoded "30 Jun 2027" in the hybrid pre-card).
+  const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const fmtDate = (d) =>
+    `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}`;
+
+  // --- Dynamic UI -----------------------------------------------------------
 
   const renderRateOptions = (clientType) => {
     const opts = RATE_OPTIONS[clientType] || RATE_OPTIONS.individual;
     taxRateSel.innerHTML = opts.map((o) =>
       `<option value="${o.value}"${o.selected ? ' selected' : ''}>${o.label}</option>`
     ).join('');
-    taxRateLabel.textContent = RATE_LABEL[clientType] || 'Tax rate';
+    taxRateLabel.textContent = RATE_LABEL[clientType] || 'Income details';
   };
 
-  // --- Math ----------------------------------------------------------------
+  // --- Scenario computers ---------------------------------------------------
 
-  const computeDiscount = (proceeds, costBase, days, client, rate) => {
+  const scenarioDiscount = (proceeds, costBase, days, client, rate) => {
     const gross = proceeds - costBase;
     const heldOverYear = days > 365;
     const baseDiscount = CLIENT_DISCOUNT[client] ?? 0;
     const discount = (gross > 0 && heldOverYear) ? baseDiscount : 0;
-    const taxable = Math.max(0, gross) * (1 - discount);
-    return { gross, taxable, discount, tax: taxable * rate };
-  };
-
-  const computeIndexed = (proceeds, costBase, days, rate, inflation) => {
-    const years  = days > 0 ? days / 365.25 : 0;
-    const factor = years > 0 ? Math.pow(1 + inflation, years) : 1;
-    const indexedBase = costBase * factor;
-    const realGain    = Math.max(0, proceeds - indexedBase);
+    const discountAmount = Math.max(0, gross) * discount;
+    const taxable = Math.max(0, gross) - discountAmount;
     return {
-      gross: proceeds - costBase,
-      taxable: realGain,
-      factor,
-      indexedBase,
-      tax: realGain * rate,
+      kind: 'discount',
+      gross, discount, discountAmount, taxable,
+      tax: taxable * rate,
+      heldOverYear,
     };
   };
 
-  const clearValues = () => {
-    [out.discountAmount, out.headline, out.method, out.holding, out.gross,
-     out.taxable, out.rate, out.net]
-      .forEach((el) => { el.textContent = '—'; });
+  const scenarioIndexed = (proceeds, costBase, days, effectiveRate, inflation) => {
+    const years  = days > 0 ? days / 365.25 : 0;
+    const factor = years > 0 ? Math.pow(1 + inflation, years) : 1;
+    const indexedBase = costBase * factor;
+    const indexedAdjustment = indexedBase - costBase;
+    const gross  = proceeds - costBase;
+    const heldOverYear = days > 365;
+    const taxable = heldOverYear ? Math.max(0, proceeds - indexedBase) : Math.max(0, gross);
+    return {
+      kind: 'indexed',
+      gross, factor, indexedBase, indexedAdjustment, taxable, years,
+      tax: taxable * effectiveRate,
+      heldOverYear,
+    };
   };
 
-  // --- Calculate -----------------------------------------------------------
+  // Hybrid — pro-rates the GAIN, not cost base/proceeds. Per the announcement,
+  // there's no scope to revalue assets at 1 July 2027, so we compute each
+  // regime as if it applied to the whole holding then attribute portions to
+  // pre/post by days.
+  const scenarioHybrid = (proceeds, costBase, preDays, postDays, client, rate, indexedRate, inflation) => {
+    const totalDays = preDays + postDays;
+    const preFrac   = preDays  / totalDays;
+    const postFrac  = postDays / totalDays;
+    const gross     = proceeds - costBase;
+
+    const baseDiscount  = CLIENT_DISCOUNT[client] ?? 0;
+    const heldOverYear  = totalDays > 365;
+    const discountRate  = (gross > 0 && heldOverYear) ? baseDiscount : 0;
+    const discountTaxable = Math.max(0, gross) * (1 - discountRate);
+    const discountAmount  = Math.max(0, gross) * discountRate;
+
+    const years        = totalDays > 0 ? totalDays / 365.25 : 0;
+    const factor       = years > 0 ? Math.pow(1 + inflation, years) : 1;
+    const indexedBase  = costBase * factor;
+    const indexedGain  = heldOverYear ? Math.max(0, proceeds - indexedBase) : Math.max(0, gross);
+    const indexedAdjustment = Math.max(0, indexedBase - costBase);
+
+    const prePortion  = discountTaxable * preFrac;
+    const postPortion = indexedGain     * postFrac;
+    const taxable     = prePortion + postPortion;
+
+    const preTax  = prePortion  * rate;
+    const postTax = postPortion * indexedRate;
+
+    return {
+      kind: 'hybrid',
+      gross,
+      preDays, postDays, preFrac, postFrac, totalDays,
+      discountTaxable, discountAmount, discountRate,
+      factor, years, indexedBase, indexedGain, indexedAdjustment,
+      prePortion, postPortion,
+      preTax, postTax,
+      taxable,
+      tax: preTax + postTax,
+    };
+  };
+
+  const scenarioPreCgtCaught = (proceeds, costBase, totalDays, postDays, indexedRate, inflation) => {
+    // Pre-portion exempt, post-portion indexed.
+    const postFrac = postDays / totalDays;
+    const years    = totalDays > 0 ? totalDays / 365.25 : 0;
+    const factor   = years > 0 ? Math.pow(1 + inflation, years) : 1;
+    const indexedBase = costBase * factor;
+    const indexedAdjustment = Math.max(0, indexedBase - costBase);
+    const indexedGain = Math.max(0, proceeds - indexedBase);
+    const taxable = indexedGain * postFrac;
+    return {
+      kind: 'pre-cgt-caught',
+      gross: proceeds - costBase,
+      postFrac, factor, years, indexedBase, indexedGain, indexedAdjustment,
+      taxable,
+      tax: taxable * indexedRate,
+    };
+  };
+
+  // --- Render helpers -------------------------------------------------------
+
+  const setPill = (text, klass) => {
+    if (!text) { refs.pill.hidden = true; return; }
+    refs.pill.hidden = false;
+    refs.pill.textContent = text;
+    refs.pill.className   = `calc__pill ${klass || ''}`.trim();
+  };
+
+  const setPreCard = (state) => {
+    if (!state) { refs.cardPre.hidden = true; return; }
+    refs.cardPre.hidden = false;
+    refs.pTitle.textContent = state.title;
+    refs.pSub.textContent   = state.sub;
+    refs.pGain.textContent  = fmtMoney(state.gain);
+    refs.pRowDiscount.hidden = !state.discountLabel;
+    if (state.discountLabel) {
+      refs.pDiscountLabel.textContent = state.discountLabel;
+      refs.pDiscount.textContent      = fmtMoneyNeg(state.discountAmount || 0);
+    }
+    refs.pTaxable.textContent = fmtMoney(state.taxable);
+    refs.pRate.textContent    = state.rateLabel || fmtPct(state.rate || 0);
+    refs.pTax.textContent     = fmtMoney(state.tax);
+  };
+
+  const setPostCard = (state) => {
+    if (!state) { refs.cardPost.hidden = true; return; }
+    refs.cardPost.hidden = false;
+    refs.nTitle.textContent = state.title;
+    refs.nSub.textContent   = state.sub;
+    refs.nGain.textContent  = fmtMoney(state.gain);
+
+    // displayMode: 'contribution' shows positive $ (this portion adds to net
+    // taxable); 'reduction' shows ($X) (this amount subtracts from gross).
+    const fmt = (amount, mode) => mode === 'contribution' ? fmtMoney(amount) : fmtMoneyNeg(amount);
+
+    refs.nRowDiscount.hidden = !state.discountLabel;
+    if (state.discountLabel) {
+      refs.nDiscountLabel.textContent = state.discountLabel;
+      refs.nDiscount.textContent      = fmt(state.discountAmount || 0, state.discountMode);
+      refs.nDiscountDetail.innerHTML  = state.discountDetailHTML || '';
+    }
+
+    refs.nRowIndexation.hidden = !state.indexationLabel;
+    if (state.indexationLabel) {
+      refs.nIndexationLabel.textContent = state.indexationLabel;
+      refs.nIndexation.textContent      = fmt(state.indexationAmount || 0, state.indexationMode);
+      refs.nIndexationDetail.innerHTML  = state.indexationDetailHTML || '';
+    }
+
+    refs.nTaxable.textContent = fmtMoney(state.taxable);
+    refs.nRate.textContent    = state.rateLabel || fmtPct(state.rate || 0);
+    refs.nTax.textContent     = fmtMoney(state.tax);
+
+    if (state.rateFootnote) {
+      refs.nFootnote.hidden      = false;
+      refs.nFootnote.textContent = state.rateFootnote;
+    } else {
+      refs.nFootnote.hidden      = true;
+      refs.nFootnote.textContent = '';
+    }
+
+    refs.cardPost.classList.toggle('is-current', !!state.isCurrent);
+  };
+
+  // --- Working block --------------------------------------------------------
+
+  const workRow = (label, value, extra = '') =>
+    `<div class="work-row${extra}"><span>${label}</span><span>${value}</span></div>`;
+  const workTotalRow = (label, value) => workRow(label, value, ' work-row--total');
+
+  // Body contents for the "+ Inputs" disclosure. Form fields (proceeds, cost
+  // base, dates) aren't repeated. Callers add days pre/post + indexation
+  // factor when those are relevant for the scenario.
+  const wHoldingPeriod = (inputs) =>
+    workRow('Holding period', `${inputs.days.toLocaleString('en-AU')} days (${(inputs.days/365.25).toFixed(1)} years)`);
+
+  const wGrossGain = (inputs) =>
+    workRow('Gross gain', `${fmtMoney(inputs.proceeds)} − ${fmtMoney(inputs.costBase)} = ${fmtMoney(inputs.gross)}`);
+
+  const wIndexationFactor = (inputs, factor) => {
+    const inflationPct = (inputs.inflation * 100).toFixed(2);
+    const yrs = (inputs.days / 365.25).toFixed(1);
+    return workRow('Indexation factor', `(1 + ${inflationPct}%)^${yrs} = × ${factor.toFixed(3)}`);
+  };
+
+  const baseInputs = wHoldingPeriod;
+
+  // --- Calculate ------------------------------------------------------------
 
   const calculate = () => {
     const client    = clientSel.value;
@@ -174,164 +345,293 @@
     const rate      = parseFloat(taxRateSel.value) || 0;
     const inflation = (parseFloat(inflationInput.value) || 0) / 100;
     const indexable = !!INDEXABLE[client];
+    const indexedRate = indexable ? Math.max(rate, MIN_TAX) : rate;
+    const minTaxHit   = indexable && rate < MIN_TAX;
+    const gross = proceeds - costBase;
 
-    // Reset method-specific rows by default.
-    out.rowInflation.hidden = true;
-    out.rowFactor.hidden    = true;
-    out.rowSplit.hidden     = true;
-    out.rowMinTax.hidden    = true;
-
-    // Date validation.
+    // Date validation
     if (days === null) {
-      out.pill.hidden = false;
-      out.pill.textContent = 'Enter acquisition & disposal dates';
-      out.pill.className   = 'calc__pill calc__pill--warn';
-      clearValues();
+      setPill('Enter acquisition & disposal dates', 'calc__pill--warn');
+      setPreCard(null); setPostCard(null);
+      refs.inflationField.hidden = true;
+      refs.workingBody.innerHTML = '';
       return;
     }
     if (days <= 0) {
-      out.pill.hidden = false;
-      out.pill.textContent = 'Disposal date must be after acquisition date';
-      out.pill.className   = 'calc__pill calc__pill--warn';
-      clearValues();
+      setPill('Disposal date must be after acquisition date', 'calc__pill--warn');
+      setPreCard(null); setPostCard(null);
+      refs.inflationField.hidden = true;
+      refs.workingBody.innerHTML = '';
+      // Hide the Show working disclosure entirely in this error state.
+      document.getElementById('calc-working').hidden = true;
+      return;
+    }
+    document.getElementById('calc-working').hidden = false;
+
+    const acqDate  = new Date(acqDateInput.value);
+    const dispDate = new Date(disposalInput.value);
+    const acqMs    = acqDate.getTime();
+    const dispMs   = dispDate.getTime();
+    const cutoffMs = CUTOFF.getTime();
+    const preDays  = Math.max(0, (Math.min(dispMs, cutoffMs) - acqMs) / 86_400_000);
+    const postDays = Math.max(0, (dispMs - Math.max(acqMs, cutoffMs)) / 86_400_000);
+    const isPreCgtAcq = acqDate < PRE_CGT;
+    const dispDateLabel = fmtDate(dispDate);
+
+    const inputs = { acqDate, dispDate, days, costBase, proceeds, gross, inflation, rate, indexedRate, minTaxHit };
+    const wInputs = baseInputs(inputs);
+
+    // --- Edge cases (single-card) ---
+
+    // Pre-1985 exempt
+    if (isPreCgtAcq && (!indexable || dispMs < cutoffMs)) {
+      setPill('Pre-CGT — acquired before 20 September 1985, exempt', 'calc__pill');
+      refs.inflationField.hidden = true;
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'Pre-CGT exempt',
+        gain: gross,
+        discountLabel: 'Pre-CGT exemption',
+        discountAmount: Math.max(0, gross),
+        taxable: 0,
+        rateLabel: 'n/a',
+        tax: 0,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
       return;
     }
 
-    // Grandfathering classification.
-    const acqMs    = new Date(acqDateInput.value).getTime();
-    const dispMs   = new Date(disposalInput.value).getTime();
-    const cutoffMs = CUTOFF.getTime();
-
-    const preDays  = Math.max(0, (Math.min(dispMs, cutoffMs) - acqMs) / 86_400_000);
-    const postDays = Math.max(0, (dispMs - Math.max(acqMs, cutoffMs)) / 86_400_000);
-
-    let method;       // 'pre-cgt' | 'pre-cgt-caught' | 'discount' | 'indexed' | 'hybrid'
-    let result;
-
-    const acqDate     = new Date(acqDateInput.value);
-    const isPreCgtAcq = acqDate < PRE_CGT;
-    // Indexed gains attract a 30% floor on the rate for individuals & trusts.
-    const indexedRate = indexable ? Math.max(rate, MIN_TAX) : rate;
-    const minTaxHit   = indexable && rate < MIN_TAX;
-
-    if (isPreCgtAcq && (!indexable || dispMs < cutoffMs)) {
-      // Fully exempt: pre-1985 acquisition disposed before 1 July 2027,
-      // or held by a client outside the new regime (company / super fund).
-      method = 'pre-cgt';
-      result = { gross: proceeds - costBase, taxable: 0, tax: 0, discount: 0 };
-    } else if (isPreCgtAcq) {
-      // Pre-1985 asset caught: gain pre-1 July 2027 exempt, post-cutoff portion
-      // taxed under indexation. Cost-base methodology is yet to be confirmed in
-      // the legislation; this pro-rates the user's entered cost base by days.
-      method = 'pre-cgt-caught';
-      const totalDays = preDays + postDays;
-      const postCB    = costBase * (postDays / totalDays);
-      const postProc  = proceeds * (postDays / totalDays);
-      const postR = computeIndexed(postProc, postCB, postDays, indexedRate, inflation);
-      result = {
-        gross:    proceeds - costBase,
-        taxable:  postR.taxable,
-        tax:      postR.tax,
-        preDays, postDays,
-        discount: 0,
-        factor:   postR.factor,
-      };
-    } else if (!indexable || postDays === 0) {
-      // Companies & complying super funds stay on the discount regime
-      // regardless of the cutoff; same when the disposal is entirely pre-cutoff.
-      method = 'discount';
-      result = computeDiscount(proceeds, costBase, days, client, rate);
-    } else if (preDays === 0) {
-      method = 'indexed';
-      result = computeIndexed(proceeds, costBase, days, indexedRate, inflation);
-    } else {
-      method = 'hybrid';
-      const totalDays = preDays + postDays;
-      const preCB     = costBase * (preDays  / totalDays);
-      const postCB    = costBase * (postDays / totalDays);
-      const preProc   = proceeds * (preDays  / totalDays);
-      const postProc  = proceeds * (postDays / totalDays);
-      const preR  = computeDiscount(preProc, preCB, days, client, rate);
-      const postR = computeIndexed(postProc, postCB, postDays, indexedRate, inflation);
-      result = {
-        gross:    proceeds - costBase,
-        taxable:  preR.taxable + postR.taxable,
-        tax:      preR.tax + postR.tax,
-        preDays, postDays,
-        discount: preR.discount,
-        factor:   postR.factor,
-      };
+    // Pre-1985 caught (indexable, disposal on/after cutoff)
+    if (isPreCgtAcq) {
+      setPill('Pre-1985 asset caught from 1 July 2027 — cost-base methodology subject to consultation', 'calc__pill--warn');
+      refs.inflationField.hidden = false;
+      const result = scenarioPreCgtCaught(proceeds, costBase, days, postDays, indexedRate, inflation);
+      const preFrac = 1 - result.postFrac;
+      const preExempt = gross * preFrac;
+      const indexDetail = [
+        workRow('Years held',        result.years.toFixed(1)),
+        workRow('Indexation factor', `× ${result.factor.toFixed(3)}`),
+        workRow('Cost base uplift',  fmtMoney(result.indexedAdjustment)),
+        workRow(`× ${Math.round(postDays).toLocaleString('en-AU')}/${Math.round(days).toLocaleString('en-AU')}`, fmtMoney(result.indexedAdjustment * result.postFrac)),
+      ].join('');
+      setPostCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'Indexation on post 1 July 2027 portion',
+        isCurrent: true,
+        gain: gross,
+        discountLabel: 'Pre 1 July 2027 portion (exempt)',
+        discountAmount: preExempt,
+        discountDetailHTML: workRow('Pre-1985 asset', `Gain accrued before 1 July 2027 remains exempt: ${fmtMoney(gross)} × ${(preFrac * 100).toFixed(1)}% = ${fmtMoney(preExempt)}.`),
+        indexationLabel: 'Post 1 July 2027 indexation adj.',
+        indexationAmount: result.indexedAdjustment * result.postFrac,
+        indexationDetailHTML: indexDetail,
+        taxable: result.taxable,
+        rateLabel: `${fmtPct(indexedRate)}*`,
+        tax: result.tax,
+        rateFootnote: '* Pre 1 July 2027 portion exempt (pre-CGT); post portion at the higher of the entity’s marginal rate or 30%.',
+      });
+      setPreCard(null);
+      refs.workingBody.innerHTML = wInputs +
+        workRow('Days pre 1 July 2027',  Math.round(preDays).toLocaleString('en-AU')) +
+        workRow('Days post 1 July 2027', Math.round(postDays).toLocaleString('en-AU')) +
+        wGrossGain(inputs) +
+        wIndexationFactor(inputs, result.factor);
+      return;
     }
 
-    const net = proceeds - costBase - result.tax;
-
-    // --- Render ----------------------------------------------------------
-
-    // Method label
-    let methodLabel;
-    if (method === 'pre-cgt')              methodLabel = 'Pre-CGT exempt';
-    else if (method === 'pre-cgt-caught')  methodLabel = 'Pre-1985 caught (post 1 Jul 2027)';
-    else if (method === 'hybrid')          methodLabel = 'Hybrid';
-    else if (method === 'indexed')         methodLabel = 'Indexation';
-    else if (result.gross <= 0 || days <= 365 || client === 'company') {
-      methodLabel = 'No discount';
-    } else                                 methodLabel = 'Flat discount rate';
-    out.method.textContent = methodLabel;
-
-    // Status pill (edge cases only)
-    if (method === 'pre-cgt') {
-      out.pill.hidden = false;
-      out.pill.textContent = 'Pre-CGT — acquired before 20 Sept 1985, exempt';
-      out.pill.className   = 'calc__pill';
-    } else if (method === 'pre-cgt-caught') {
-      out.pill.hidden = false;
-      out.pill.textContent = 'Pre-1985 asset caught from 1 Jul 2027 — cost-base methodology subject to consultation';
-      out.pill.className   = 'calc__pill calc__pill--warn';
-    } else if (result.gross < 0) {
-      out.pill.hidden = false;
-      out.pill.textContent = `Capital loss — ${fmtMoney(Math.abs(result.gross))} carry-forward`;
-      out.pill.className   = 'calc__pill calc__pill--loss';
-    } else if (result.gross === 0) {
-      out.pill.hidden = false;
-      out.pill.textContent = 'No capital gain';
-      out.pill.className   = 'calc__pill calc__pill--warn';
-    } else {
-      out.pill.hidden = true;
+    // Capital loss
+    if (gross < 0) {
+      setPill(`Capital loss — ${fmtMoney(Math.abs(gross))} carry-forward`, 'calc__pill--loss');
+      refs.inflationField.hidden = true;
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'Capital loss',
+        gain: gross,
+        discountLabel: null,
+        taxable: 0,
+        rateLabel: 'n/a',
+        tax: 0,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
+      return;
     }
 
-    out.holding.textContent  = `${days.toLocaleString('en-AU')} days`;
-    out.gross.textContent    = fmtMoney(result.gross);
-    out.taxable.textContent  = fmtMoney(result.taxable);
-    out.headline.textContent = fmtMoney(result.tax);
-    out.rate.textContent     = fmtPct(rate);
-    out.net.textContent      = fmtMoney(net);
-
-    // Discount amount: dollars of the capital gain not subject to tax under
-    // whichever method applies. = gross − taxable, floored at zero so capital
-    // losses don't render as a "discount".
-    const discountAmount = Math.max(0, result.gross - result.taxable);
-    out.discountAmount.textContent = fmtMoney(discountAmount);
-
-    // Method-specific intermediate rows.
-    if (method === 'indexed') {
-      out.rowInflation.hidden     = false;
-      out.rowFactor.hidden        = false;
-      out.labelFactor.textContent = 'Indexation factor';
-      out.factor.textContent      = `× ${result.factor.toFixed(4)}`;
-    }
-    if (method === 'hybrid' || method === 'pre-cgt-caught') {
-      out.rowSplit.hidden    = false;
-      out.split.textContent  = `${Math.round(result.preDays)} / ${Math.round(result.postDays)} days`;
-      out.rowInflation.hidden     = false;
-      out.rowFactor.hidden        = false;
-      out.labelFactor.textContent = 'Indexation factor (post-cutoff)';
-      out.factor.textContent      = `× ${result.factor.toFixed(4)}`;
+    // Zero gain
+    if (gross === 0) {
+      setPill('No capital gain', 'calc__pill--warn');
+      refs.inflationField.hidden = true;
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'No gain',
+        gain: 0,
+        discountLabel: null,
+        taxable: 0,
+        rateLabel: 'n/a',
+        tax: 0,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
+      return;
     }
 
-    // 30% minimum tax indicator for individuals & trusts whose marginal rate
-    // is below the floor and where indexation has been applied.
-    const indexedMethods = method === 'indexed' || method === 'hybrid' || method === 'pre-cgt-caught';
-    out.rowMinTax.hidden = !(minTaxHit && indexedMethods && result.taxable > 0);
+    // Sub-12-month — no discount, no indexation, full gain taxed
+    if (days <= 365) {
+      setPill(null);
+      refs.inflationField.hidden = true;
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'No discount',
+        gain: gross,
+        discountLabel: null,
+        taxable: gross,
+        rate,
+        tax: gross * rate,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
+      return;
+    }
+
+    // Non-indexable (SMSF, Company) — single card, flat discount path
+    if (!indexable) {
+      const result = scenarioDiscount(proceeds, costBase, days, client, rate);
+      setPill(null);
+      refs.inflationField.hidden = true;
+      const discountPct = (result.discount * 100).toFixed(result.discount === 1/3 ? 2 : 0);
+      const sub = client === 'company' ? 'No discount' : 'Flat rate discount';
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub,
+        gain: gross,
+        discountLabel: client === 'company' ? '0% discount (companies excluded)' : `${discountPct}% discount`,
+        discountAmount: result.discountAmount,
+        taxable: result.taxable,
+        rate,
+        tax: result.tax,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
+      return;
+    }
+
+    // --- Indexable scenarios (individual/trust) ---
+    setPill(null);
+
+    // Disposal pre 1 July 2027 → discount only, no card-post
+    if (postDays === 0) {
+      const result = scenarioDiscount(proceeds, costBase, days, client, rate);
+      refs.inflationField.hidden = true;
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'Flat rate discount',
+        gain: gross,
+        discountLabel: '50% discount',
+        discountAmount: result.discountAmount,
+        taxable: result.taxable,
+        rate,
+        tax: result.tax,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
+      return;
+    }
+
+    // Acquired post 1 July 2027 → indexation only, no card-pre
+    if (preDays === 0) {
+      const result = scenarioIndexed(proceeds, costBase, days, indexedRate, inflation);
+      refs.inflationField.hidden = false;
+      const indexDetail = [
+        workRow('Years held',        result.years.toFixed(1)),
+        workRow('Indexation factor', `× ${result.factor.toFixed(3)}`),
+        workRow('Indexed cost base', fmtMoney(result.indexedBase)),
+      ].join('');
+      setPostCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: 'Indexation',
+        isCurrent: true,
+        gain: gross,
+        discountLabel: null,
+        indexationLabel: 'Indexation cost base adjustment',
+        indexationAmount: result.indexedAdjustment,
+        indexationDetailHTML: indexDetail,
+        taxable: result.taxable,
+        rateLabel: minTaxHit ? `${fmtPct(indexedRate)} (30% min)` : fmtPct(indexedRate),
+        tax: result.tax,
+      });
+      setPreCard(null);
+      refs.workingBody.innerHTML = wInputs +
+        wGrossGain(inputs) +
+        wIndexationFactor(inputs, result.factor);
+      return;
+    }
+
+    // --- Hybrid: dates straddle 1 July 2027 — two cards ---
+    refs.inflationField.hidden = false;
+
+    const sDisc = scenarioDiscount(proceeds, costBase, days, client, rate);
+    const sHyb  = scenarioHybrid(proceeds, costBase, preDays, postDays, client, rate, indexedRate, inflation);
+
+    // Card 1 — pure-discount hypothetical ("Sell by 30 Jun 2027")
+    setPreCard({
+      title: 'Sell by 30 Jun 2027',
+      sub: 'Flat rate discount',
+      gain: sDisc.gross,
+      discountLabel: '50% discount',
+      discountAmount: sDisc.discountAmount,
+      taxable: sDisc.taxable,
+      rate,
+      tax: sDisc.tax,
+    });
+
+    // Card 2 — at entered dates, hybrid (pre-discount + post-indexation)
+    const preDaysStr  = Math.round(sHyb.preDays).toLocaleString('en-AU');
+    const postDaysStr = Math.round(sHyb.postDays).toLocaleString('en-AU');
+    const totalDaysStr = Math.round(sHyb.totalDays).toLocaleString('en-AU');
+
+    // Reduction framing: row values shown as ($X), summing with gross to give
+    // net taxable. preReduction = gross × 50% × preFrac (50% of pre-portion of
+    // gain). postReduction = indexed-CB uplift × postFrac.
+    const preReduction  = sHyb.discountAmount * sHyb.preFrac;
+    const postReduction = sHyb.indexedAdjustment * sHyb.postFrac;
+
+    const discountDetail = [
+      workRow('Gross × 50%',                       fmtMoney(sHyb.discountAmount)),
+      workRow(`× ${preDaysStr}/${totalDaysStr}`,   fmtMoney(preReduction)),
+    ].join('');
+
+    const indexationDetail = [
+      workRow('Years held',        sHyb.years.toFixed(1)),
+      workRow('Indexation factor', `× ${sHyb.factor.toFixed(3)}`),
+      workRow('Cost base uplift',  fmtMoney(sHyb.indexedAdjustment)),
+      workRow(`× ${postDaysStr}/${totalDaysStr}`, fmtMoney(postReduction)),
+    ].join('');
+
+    setPostCard({
+      title: `Sell on ${dispDateLabel}`,
+      sub: 'Hybrid',
+      isCurrent: true,
+      gain: sHyb.gross,
+      discountLabel: 'Pre 1 July 2027 discount',
+      discountAmount: preReduction,
+      discountDetailHTML: discountDetail,
+      indexationLabel: 'Post 1 July 2027 indexation adj.',
+      indexationAmount: postReduction,
+      indexationDetailHTML: indexationDetail,
+      taxable: sHyb.taxable,
+      rateLabel: `${fmtPct(Math.max(rate, indexedRate))}*`,
+      tax: sHyb.tax,
+      rateFootnote: '* Pre 1 July 2027 portion at the entity’s marginal rate; post portion at the higher of the marginal rate or 30%.',
+    });
+
+    // Inputs body: holding period + days pre/post (replaces timeline)
+    // + gross gain formula + indexation factor formula.
+    refs.workingBody.innerHTML = wInputs +
+      workRow('Days pre 1 July 2027',  preDaysStr) +
+      workRow('Days post 1 July 2027', postDaysStr) +
+      wGrossGain(inputs) +
+      wIndexationFactor(inputs, sHyb.factor);
   };
 
   // --- Wire up --------------------------------------------------------------
@@ -342,11 +642,8 @@
   });
   form.addEventListener('input',  calculate);
   form.addEventListener('change', calculate);
-
-  // Inflation lives in the result aside, not the form — listen separately.
   inflationInput.addEventListener('input', calculate);
 
-  // Init
   renderRateOptions(clientSel.value);
   calculate();
 })();
