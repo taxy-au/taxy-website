@@ -154,32 +154,26 @@ permalink: /tools/cgt-discount-calculator/
       <details class="calc__methodology">
         <summary>Rules &amp; edge cases</summary>
         <div class="calc__methodology-body">
-          <p>This calculator reflects the 12 May 2026 Federal Budget announcements as currently understood. It's a best-guess estimate pending finalised legislation — until the bill lands, the precise mechanics (cost-base treatment of pre-1985 assets, CPI source, transitional ordering) may move. The cost-base field assumes acquisition and disposal costs have already been rolled in.</p>
+          <p>This calculator reflects the 12 May 2026 Federal Budget announcements as currently understood — a best-guess estimate pending finalised legislation. Until the bill lands, transitional mechanics (cost-base treatment of pre-1985 assets, CPI source, the split-point methodology) may move. The cost-base field assumes the five ATO cost-base elements are already rolled in, including any AMIT adjustments for managed funds and ETFs.</p>
 
           <h4>Who's in the new regime</h4>
-          <p>From 1 July 2027 the 50% CGT discount is replaced by cost-base indexation for individuals, trusts and partnerships. The post-1 July 2027 portion of any indexed gain attracts a 30% minimum tax rate. Complying super funds (incl. SMSFs) and companies are unchanged — super at 33.33% discount, companies at 0%.</p>
+          <p>From 1 July 2027 the 50% CGT discount is replaced by cost-base indexation for individuals, trusts and partnerships. The post-1 July 2027 portion of any indexed gain attracts a 30% minimum tax rate. Complying super funds (incl. SMSFs) and companies are unchanged — super at the 33.33% discount, companies at 0%.</p>
 
           <h4>Holding period</h4>
-          <p>More than 12 months between acquisition and CGT event, with both days excluded. ≤ 365 days means no discount and no indexation — the full gain is assessable at the entity's rate, even on a hybrid pre/post 1 July 2027 disposal.</p>
+          <p>More than 12 months between acquisition and CGT event, with both days excluded. Budget Paper No 2 retains the 12-month test under the new regime ("cost base indexation for assets held for more than 12 months"). ≤ 365 days means no discount and no indexation — full gain assessable at the entity's rate, including hybrid disposals.</p>
 
-          <h4>Hybrid math (pro-rate the gain)</h4>
-          <p>For disposals straddling 1 July 2027, the calculator computes the full-holding gain under each regime, then attributes time slices: Discount Gain × (preDays/total) + Indexed Gain × (postDays/total). The announcement explicitly rules out revaluation at 1 July 2027, so cost-base splitting isn't appropriate.</p>
+          <h4>Transitional split at 1 July 2027</h4>
+          <p>For disposals straddling 1 July 2027 the calculator computes the full-holding gain under each regime, then attributes time slices: Discount Gain × (preDays/total) + Indexed Gain × (postDays/total). Budget Paper No 2 sets the principle — "changes only apply to gains arising on or after 1 July 2027" and "the 50 per cent CGT discount will continue to apply to gains arising before 1 July 2027" — but doesn't prescribe the apportionment method. Pro-rata-by-days is a transparent working assumption pending legislation; a market-value approach or other split methodology may end up in the final rules.</p>
 
           <h4>Pre-1985 acquisitions</h4>
-          <p><strong>Disposed before 1 July 2027.</strong> Pre-CGT, fully exempt. Same for assets held by complying super funds or companies regardless of disposal date.</p>
-          <p><strong>Disposed on or after 1 July 2027 (individuals, trusts &amp; partnerships).</strong> Caught: pre-1 July 2027 gain remains exempt, post portion is indexed with the 30% minimum tax. Cost-base methodology for these assets is unsettled — the calculator applies indexation to the entered cost base over the full holding then takes the post-portion share as a first-pass estimate. Likely to change once legislation drops.</p>
+          <p><strong>Disposed before 1 July 2027.</strong> Pre-CGT — no CGT event arises. Same treatment continues for assets held by complying super funds or companies regardless of disposal date.</p>
+          <p><strong>Disposed on or after 1 July 2027 (individuals, trusts &amp; partnerships).</strong> Caught: the pre-cutoff portion stays outside CGT, the post-cutoff portion is indexed with the 30% minimum tax. Cost-base methodology for these assets is unsettled — the calculator applies indexation to the entered cost base over the full holding period and takes the post-portion share as a first-pass estimate. Likely to change once legislation drops.</p>
 
           <h4>Partnerships</h4>
           <p>CGT in a partnership flows through to each partner. Model a partner's share with the entity type that matches them (Individual or Trust) — the 30% minimum tax applies the same way.</p>
 
           <h4>Inflation input</h4>
           <p>Defaults to the RBA 2.5% target and is editable inline. Every indexed period in the calc currently sits in the future, so a single projected rate is the most honest input. CPI information will be plumbed in once ABS quarterly data covers the post-1 July 2027 period.</p>
-
-          <h4>Market value election (MV at 1 July 2027)</h4>
-          <p>Budget Paper No 2 confirms taxpayers will be able to elect to use the asset's market value at 1 July 2027 (determined via ATO-published tools) as the split point between the pre-cutoff discounted portion and the post-cutoff indexed portion. This calculator uses the pro-rata-by-days method, which is the today-available approximation until the ATO valuation tool is released. The two methods produce close but not identical numbers; for typical assets the MV approach is within ~1% of pro-rata. An MV input + dual-display will be added when more asset-specific detail lands.</p>
-
-          <h4>What's not covered</h4>
-          <p>The new-residential-property carve-out (election between the 50% discount and indexation), small business CGT concessions, main residence exemption, foreign-resident apportionment, and the income-support / Age Pension exemption from the 30% minimum tax. Treasury consultation on early-stage and start-up businesses is ongoing.</p>
         </div>
       </details>
     </div>
@@ -189,32 +183,26 @@ permalink: /tools/cgt-discount-calculator/
 <section class="section section--tight">
   <div class="container">
     <div class="prose">
-      <h2>Capital gains tax discount history and changes</h2>
-      <p>The CGT discount has applied to disposals since 21 September 1999, replacing the indexation method that the 12 May 2026 Federal Budget revives — in modified form — from 1 July 2027. The calculator above estimates tax payable on a CGT event A1 disposal for a single client across the four entity types that practitioners model day-to-day.</p>
+      <h2>What the 12 May 2026 Federal Budget changed for CGT</h2>
+      <p>For CGT events on or after 1 July 2027, the 50% CGT discount is replaced by cost-base indexation for assets held more than 12 months, with a 30% minimum tax on the resulting net capital gain. The new regime applies to individuals, trusts and partnerships — including their pre-1985 CGT assets, which were previously outside CGT. Income support payment recipients (including Age Pension recipients) are exempt from the 30% minimum tax. Complying super funds and companies are unaffected: super continues at the 33.33% discount (effective ~10% on a discounted gain at the 15% accumulation rate), companies continue with no discount on the gross gain. Final mechanics will follow legislation.</p>
 
-      <h3>Which clients are eligible for the CGT discount?</h3>
-      <p>Resident individual clients and trusts (where the discounted gain is assessed to a resident beneficiary) get 50%. Complying super funds get 33.33% — an effective ~10% on a discounted gain at the 15% accumulation rate. Companies get no discount — straight 25% (base rate entity) or 30% on the full gain. Non-residents lost access to the 50% discount on TAP assets accrued after 8 May 2012 (apportionment rules apply, not modelled here).</p>
+      <h3>Who the new regime affects</h3>
+      <p>The shift from 50% discount to indexation applies to individuals, trusts (gains assessed to resident beneficiaries) and partnerships (flowed through to partners). Complying super funds — including SMSFs — stay on the 33.33% discount. Companies continue on 25% or 30% of the gross gain with no discount applied. Non-residents remain denied the 50% discount on the post-8 May 2012 portion of TAP gains, with apportionment rules unchanged.</p>
 
-      <h3>What's the holding period test?</h3>
-      <p>More than 12 months between acquisition date and CGT event date, with both days excluded from the count. 365 days or fewer means no discount and the full gain is assessable at the entity's rate. The 12-month test runs against the original acquisition date even where the asset has changed character (e.g. rollover, conversion).</p>
+      <h3>The transitional split at 1 July 2027</h3>
+      <p>Gains on assets already held at the cutoff are split into a pre-1 July 2027 portion (eligible for the 50% discount) and a post-1 July 2027 portion (indexed, with the 30% minimum tax). Budget Paper No 2 confirms the principle — changes apply only to gains arising on or after 1 July 2027 — but doesn't specify how the split is calculated. This calculator uses pro-rata-by-days as a transparent working assumption pending legislation; a market-value approach or other apportionment method may be set in the final rules.</p>
 
-      <h3>Which cost-base elements does this calculator pick up?</h3>
-      <p>The single Cost base field expects the total across all five ATO elements — first (acquisition cost), second (incidental costs of acquisition and disposal: brokerage, stamp duty, legals), third (non-deductible costs of ownership for assets acquired after 20 August 1991), fourth (capital improvements), and fifth (capital costs of preserving or defending title). For listed shares and ETFs the cost base usually collapses to element 1 + brokerage.</p>
+      <h3>The new residential property carve-out</h3>
+      <p>Investors in new residential premises will be able to elect either (a) the 50% discount on the full gain, or (b) cost-base indexation with the 30% minimum tax (pensioners and other income-support recipients are exempt from the floor). The calculator doesn't model the election directly — toggle the disposal date around 1 July 2027 to compare the two methods for the same asset.</p>
 
-      <h3>How does the discounted gain hit the return?</h3>
-      <p>The net capital gain flows into item 18 (Total current year capital gains) on the individual return; the discount sits at item 18 V. For trusts the discounted gain is distributed and assessed in the beneficiary's hands at the beneficiary's marginal rate. Complying SMSFs in accumulation pay 15% on the discounted gain (effective ~10%); pension phase is 0%. Companies pay 25% or 30% on the gross gain with no discount applied.</p>
+      <h3>What this calculator models</h3>
+      <p>CGT event A1 disposals only, for a single client, across the four entity types practitioners model day-to-day (Individual, Trust, SMSF, Company). The Cost base field expects the total across the five ATO elements — first (acquisition cost), second (incidental costs of acquisition and disposal: brokerage, stamp duty, legals), third (non-deductible costs of ownership for assets acquired after 20 August 1991), fourth (capital improvements), fifth (capital costs of preserving or defending title) — plus any AMIT cost-base adjustments for managed funds and ETFs. Use the Inputs drop-down on the result card to echo what was entered and copy figures into firm working papers.</p>
 
-      <h3>What changed in the 12 May 2026 Federal Budget?</h3>
-      <p>For disposals on or after 1 July 2027 by individuals, trusts and partnerships, the 50% CGT discount is replaced by inflation-adjusted cost-base indexation. A 30% minimum tax rate applies to the indexed net capital gain (after indexation). Pre-1985 assets — previously fully exempt — are caught from that date. Income support recipients including Age Pension recipients are exempt from the 30% floor. Complying super funds (incl. SMSFs) and companies are unaffected — super funds continue at 33.33% and companies at 0%. Transitional pro-rata grandfathering: gains accrued on existing investments up to 1 July 2027 retain the 50% discount; gains arising from that date are indexed. Treasury consultation on implementation detail (incl. early-stage and start-up businesses) is ongoing.</p>
+      <h3>What this calculator doesn't model</h3>
+      <p>The new-residential-property election, the income-support / Age Pension exemption from the 30% minimum tax, the small business CGT concessions (15-year exemption, 50% active asset reduction, retirement exemption, rollover), the main residence exemption (full or partial), foreign-resident TAP apportionment, scrip-for-scrip rollover, demerger relief, deceased estate cost-base rules, in-specie transfers, capital losses carried forward, Medicare levy and offsets. SMSF pension-phase 0% applies to segregated current pension assets — unsegregated funds use the ECPI proportion, also not modelled. Run client-specific scenarios through your firm's working papers; this is general information, not financial, tax or legal advice.</p>
 
-      <h3>What about the new residential property carve-out?</h3>
-      <p>Investors in new residential premises can elect either (a) the 50% discount, or (b) cost-base indexation with the 30% minimum tax (pensioners and other income support recipients are exempt from the floor). The calculator does not currently model this election — run both scenarios by toggling the disposal date around 1 July 2027 to compare the methods.</p>
-
-      <h3>What this calculator doesn't cover</h3>
-      <p>CGT event A1 disposals only. Excludes the small business CGT concessions (15-year exemption, 50% active asset reduction, retirement exemption, rollover), the main residence exemption (full or partial), foreign-resident TAP apportionment, scrip-for-scrip rollover, demerger relief, deceased estate cost-base rules, in-specie transfers, capital losses carried forward, Medicare levy, offsets, the new-residential-property election and the pensioner exemption from the 30% minimum tax. Run client-specific scenarios through your firm's working papers.</p>
-
-      <h3>Is this calculator tax advice?</h3>
-      <p>No — general information and a sanity-check tool for practitioners. Not a substitute for client-specific working papers and reference to ATO published guidance. Use for first-pass estimates and conversations, not for lodgement figures.</p>
+      <h3>CGT discount history</h3>
+      <p>The 50% CGT discount has applied to disposals by individuals and most trusts since 21 September 1999, replacing the indexation method that applied from the introduction of CGT on 20 September 1985. The 12 May 2026 Federal Budget revives indexation — in modified form, with the 30% minimum tax rate — from 1 July 2027.</p>
     </div>
   </div>
 </section>
