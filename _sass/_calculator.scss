@@ -393,7 +393,12 @@
 .compare__grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: $space-2;
+  // Subgrid row tracks: head | rows (grows) | total | footnote — so both
+  // cards' dividers and "estimated tax" totals line up even when one side
+  // has shorter rows or a footnote.
+  grid-template-rows: auto minmax(0, 1fr) auto auto;
+  column-gap: $space-2;
+  row-gap: 0;
 
   // When only one card is rendered (the other is [hidden]) collapse to one
   // column so the visible card spans the full width.
@@ -403,12 +408,15 @@
 
   @media (max-width: $breakpoint-md) {
     grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: none;
+    row-gap: $space-2;
   }
 }
 
 .compare-card {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 4;
   background: $color-white;
   border: 1px solid $color-light-grey;
   border-radius: $r-md;
@@ -416,6 +424,11 @@
   min-width: 0;
 
   &[hidden] { display: none; }
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+  }
 }
 
 .compare-card--post.is-current {
