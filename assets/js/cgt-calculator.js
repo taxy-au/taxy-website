@@ -1,25 +1,56 @@
 // CGT discount calculator — AU accounting firms.
 //
-// Reflects the 12 May 2026 Federal Budget:
+// Reflects Treasury Laws Amendment (Tax Reform No 1) Bill 2026 (introduced
+// 28 May 2026; Schedule 1) and the Imposition Bill:
 //   - CGT discount replaced by cost-base indexation from 1 July 2027
-//   - 30% minimum tax on the indexed (post-1 July 2027) gain for individuals,
-//     trusts and partnerships
-//   - Pre-1985 assets caught for disposals on or after 1 July 2027
-//   - Companies and complying super funds (incl. SMSFs) excluded — they stay
-//     on the existing discount regime
+//   - 30% minimum tax (new Div 119) on the post-1 July 2027 gain for
+//     individuals, trusts and partnerships
+//   - Pre-1985 assets caught for disposals on or after 1 July 2027 — for ALL
+//     entities including companies (EM Table 1.2, row 2)
+//   - Complying super funds (incl. SMSFs) and companies keep the existing
+//     discount regime for post-1985 assets
+//
+// SPLIT MECHANISM (the key 2026-budget→bill change). For an asset held across
+// 1 July 2027, the bill does NOT pro-rata the gain by days. Instead an
+// individual/trust is DEEMED to dispose of and reacquire the asset at its
+// MARKET VALUE on 1 July 2027 (Sch 1 item 13, Subdiv 112-E, ss 112-155/165):
+//   - Pre leg  (notional gain, deferred): MV@1Jul27 − cost base, OLD law, 50%
+//     discount, no indexation. Not taxed in 2026/27 — assessed when realised.
+//   - Post leg: proceeds − indexed(MV@1Jul27), NEW law, indexed cost base
+//     (Div 960-M), subject to the 30% minimum tax.
+// Default valuation = market value at 1 July 2027. The taxpayer may instead
+// elect a ministerial apportionment method — see ASSUMPTIONS below.
 //
 // Right column renders one or two scenario cards depending on the entered
 // dates and entity type:
 //   - "Sell by 30 Jun 2027" — FLAT RATE DISCOUNT (card-pre)
-//   - "Sell on [disposal date]" — 2026 BUDGET INDEXATION (card-post)
-// Hybrid math pro-rates the GAIN (not cost base/proceeds) per the
-// announcement's no-revaluation-at-1-Jul-2027 stance.
+//   - "Sell on [disposal date]" — MARKET-VALUE SPLIT / INDEXATION (card-post)
 
 (function () {
   'use strict';
 
   const form = document.getElementById('cgt-calc-form');
   if (!form) return;
+
+  // --- ASSUMPTIONS — pending finalised law / instruments --------------------
+  //
+  // These are the levers to revisit when the bill passes and the supporting
+  // legislative instruments are made. Engine structure below is built so only
+  // this block (and the inflation input) needs touching.
+  //
+  //   1. SPLIT_METHOD — 'market-value' is the bill's default (deemed disposal
+  //      at MV@1Jul27). The alternative — an apportionment method "determined
+  //      by the Minister by legislative instrument" (EM 1.110) — is NOT yet
+  //      made, so it is not modelled. When released, add it as a second method
+  //      here and a toggle on the form.
+  //   2. Indexation series — Div 960-M (s 960-275) sets the indexation factor
+  //      off CPI. No published CPI covers post-1 July 2027 yet, so we project a
+  //      single editable inflation rate (RBA 2.5% target default).
+  //   3. Company pre-1985 catch — the bill catches pre-1985 gains for all
+  //      entities, but the deemed-disposal/indexation machinery in Subdiv 112-E
+  //      is written for individuals/trusts. Company cost-base mechanics for the
+  //      post-2027 leg are not spelled out; left as a flagged edge.
+  const SPLIT_METHOD = 'market-value';
 
   // --- Constants ------------------------------------------------------------
 
@@ -70,18 +101,20 @@
 
   const $ = (id) => document.getElementById(id);
 
-  const clientSel      = $('client-type');
-  const acqDateInput   = $('acq-date');
-  const disposalInput  = $('disposal-date');
-  const costBaseInput  = $('cost-base');
-  const proceedsInput  = $('proceeds');
-  const taxRateSel     = $('tax-rate');
-  const taxRateLabel   = $('tax-rate-label');
-  const inflationInput = $('inflation');
+  const clientSel        = $('client-type');
+  const acqDateInput     = $('acq-date');
+  const disposalInput    = $('disposal-date');
+  const costBaseInput    = $('cost-base');
+  const proceedsInput    = $('proceeds');
+  const marketValueInput = $('market-value');
+  const taxRateSel       = $('tax-rate');
+  const taxRateLabel     = $('tax-rate-label');
+  const inflationInput   = $('inflation');
 
   const refs = {
     pill:            $('result-pill'),
     inflationField:  $('inflation-field'),
+    mvField:         $('mv-field'),
     cardPre:         $('card-pre'),
     cardPost:        $('card-post'),
     pTitle:          $('card-pre-title'),
@@ -139,7 +172,7 @@
 
   // Intl en-AU short renders June/July/Sept as 4-letter forms; en-GB renders
   // Sept the same way. Manual table keeps card titles uniformly 3-letter
-  // (matches the hardcoded "30 Jun 2027" in the hybrid pre-card).
+  // (matches the hardcoded "30 Jun 2027" in the straddle pre-card).
   const MONTHS_SHORT = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
   const fmtDate = (d) =>
     `${d.getDate()} ${MONTHS_SHORT[d.getMonth()]} ${d.getFullYear()}`;
@@ -187,63 +220,66 @@
     };
   };
 
-  // Hybrid — pro-rates the GAIN, not cost base/proceeds. Per the announcement,
-  // there's no scope to revalue assets at 1 July 2027, so we compute each
-  // regime as if it applied to the whole holding then attribute portions to
-  // pre/post by days.
-  const scenarioHybrid = (proceeds, costBase, preDays, postDays, client, rate, indexedRate, inflation) => {
-    const totalDays = preDays + postDays;
-    const preFrac   = preDays  / totalDays;
-    const postFrac  = postDays / totalDays;
-    const gross     = proceeds - costBase;
+  // Straddle (post-1985 asset held across 1 July 2027). Market-value split per
+  // the bill: deemed disposal at MV@1Jul27 (Subdiv 112-E).
+  //   - Pre leg:  (MV − cost base), old law, 50% discount, no indexation.
+  //   - Post leg: proceeds − indexed(MV), new law, indexed over POST period.
+  // 12-month test uses the FULL holding period — the deemed disposal is
+  // disregarded for the discount-eligibility rule (EM 1.56–1.57).
+  const scenarioStraddleMV = (proceeds, costBase, marketValue, totalDays, postDays, client, rate, indexedRate, inflation) => {
+    const gross        = proceeds - costBase;
+    const heldOverYear = totalDays > 365;
 
+    // Pre leg — notional gain on the deemed disposal (deferred to realisation).
     const baseDiscount  = CLIENT_DISCOUNT[client] ?? 0;
-    const heldOverYear  = totalDays > 365;
-    const discountRate  = (gross > 0 && heldOverYear) ? baseDiscount : 0;
-    const discountTaxable = Math.max(0, gross) * (1 - discountRate);
-    const discountAmount  = Math.max(0, gross) * discountRate;
+    const preGain       = marketValue - costBase;
+    const discountRate  = (preGain > 0 && heldOverYear) ? baseDiscount : 0;
+    const discountAmount = Math.max(0, preGain) * discountRate;
+    const preTaxable    = Math.max(0, preGain) - discountAmount;
 
-    const years        = totalDays > 0 ? totalDays / 365.25 : 0;
-    const factor       = years > 0 ? Math.pow(1 + inflation, years) : 1;
-    const indexedBase  = costBase * factor;
-    const indexedGain  = heldOverYear ? Math.max(0, proceeds - indexedBase) : Math.max(0, gross);
-    const indexedAdjustment = Math.max(0, indexedBase - costBase);
+    // Post leg — indexation runs on MV over the post-1 July 2027 period only.
+    const postYears  = postDays > 0 ? postDays / 365.25 : 0;
+    const factor     = postYears > 0 ? Math.pow(1 + inflation, postYears) : 1;
+    const indexedMV  = marketValue * factor;
+    const indexedAdjustment = Math.max(0, indexedMV - marketValue);
+    const postGain   = Math.max(0, proceeds - indexedMV);
+    // Reduction actually applied by indexation = post-leg gain before
+    // indexation minus after. Capped so it can zero the post leg but not push
+    // it negative — keeps the card rows reconciling (gross − disc − idx = net).
+    const indexationReduction = Math.max(0, proceeds - marketValue) - postGain;
 
-    const prePortion  = discountTaxable * preFrac;
-    const postPortion = indexedGain     * postFrac;
-    const taxable     = prePortion + postPortion;
-
-    const preTax  = prePortion  * rate;
-    const postTax = postPortion * indexedRate;
+    const preTax  = preTaxable * rate;
+    const postTax = postGain   * indexedRate;
 
     return {
-      kind: 'hybrid',
-      gross,
-      preDays, postDays, preFrac, postFrac, totalDays,
-      discountTaxable, discountAmount, discountRate,
-      factor, years, indexedBase, indexedGain, indexedAdjustment,
-      prePortion, postPortion,
+      kind: 'straddle-mv',
+      gross, marketValue, totalDays, postDays, postYears,
+      preGain, discountRate, discountAmount, preTaxable,
+      factor, indexedMV, indexedAdjustment, indexationReduction, postGain,
       preTax, postTax,
-      taxable,
+      taxable: preTaxable + postGain,
       tax: preTax + postTax,
     };
   };
 
-  const scenarioPreCgtCaught = (proceeds, costBase, totalDays, postDays, indexedRate, inflation) => {
-    // Pre-portion exempt, post-portion indexed.
-    const postFrac = postDays / totalDays;
-    const years    = totalDays > 0 ? totalDays / 365.25 : 0;
-    const factor   = years > 0 ? Math.pow(1 + inflation, years) : 1;
-    const indexedBase = costBase * factor;
-    const indexedAdjustment = Math.max(0, indexedBase - costBase);
-    const indexedGain = Math.max(0, proceeds - indexedBase);
-    const taxable = indexedGain * postFrac;
+  const scenarioPreCgtCaught = (proceeds, costBase, marketValue, postDays, indexedRate, inflation) => {
+    // Pre-1985 asset caught at 1 July 2027. Pre-portion (MV − cost base) is
+    // exempt (pre-CGT); MV@1Jul27 anchors the indexed post leg.
+    const preExempt  = marketValue - costBase;
+    const postYears  = postDays > 0 ? postDays / 365.25 : 0;
+    const factor     = postYears > 0 ? Math.pow(1 + inflation, postYears) : 1;
+    const indexedMV  = marketValue * factor;
+    const indexedAdjustment = Math.max(0, indexedMV - marketValue);
+    const postGain   = Math.max(0, proceeds - indexedMV);
+    // Capped reduction (see scenarioStraddleMV) — keeps the card reconciling.
+    const indexationReduction = Math.max(0, proceeds - marketValue) - postGain;
     return {
       kind: 'pre-cgt-caught',
       gross: proceeds - costBase,
-      postFrac, factor, years, indexedBase, indexedGain, indexedAdjustment,
-      taxable,
-      tax: taxable * indexedRate,
+      marketValue, preExempt, postYears, factor, indexedMV, indexedAdjustment,
+      indexationReduction, postGain,
+      taxable: postGain,
+      tax: postGain * indexedRate,
     };
   };
 
@@ -333,6 +369,17 @@
     return workRow('Indexation factor', `(1 + ${inflationPct}%)^${yrs} = × ${factor.toFixed(3)}`);
   };
 
+  // Indexation factor for the market-value split — runs over the post-1 July
+  // 2027 period only (years derived from postDays, not the full holding).
+  const wIndexationFactorPost = (inputs, factor, postDays) => {
+    const inflationPct = (inputs.inflation * 100).toFixed(2);
+    const yrs = (postDays / 365.25).toFixed(1);
+    return workRow('Post-2027 indexation factor', `(1 + ${inflationPct}%)^${yrs} = × ${factor.toFixed(3)}`);
+  };
+
+  const wMarketValue = (marketValue) =>
+    workRow('Market value 1 Jul 2027', fmtMoney(marketValue));
+
   const baseInputs = wHoldingPeriod;
 
   // --- Calculate ------------------------------------------------------------
@@ -348,6 +395,11 @@
     const indexedRate = indexable ? Math.max(rate, MIN_TAX) : rate;
     const minTaxHit   = indexable && rate < MIN_TAX;
     const gross = proceeds - costBase;
+    const marketValue = parseMoney(marketValueInput.value);
+
+    // Market-value field only matters for straddle / pre-1985-caught states;
+    // hidden by default, revealed by those two branches below.
+    refs.mvField.hidden = true;
 
     // Date validation
     if (days === null) {
@@ -402,18 +454,18 @@
       return;
     }
 
-    // Pre-1985 caught (indexable, disposal on/after cutoff)
+    // Pre-1985 caught (indexable, disposal on/after cutoff). MV@1Jul27 anchors
+    // the post leg; pre-portion (MV − cost base) is exempt.
     if (isPreCgtAcq) {
-      setPill('Pre-1985 asset caught from 1 July 2027 — cost-base methodology subject to consultation', 'calc__pill--warn');
+      setPill('Pre-1985 asset caught from 1 July 2027 — taxed on the post-2027 gain (market-value basis)', 'calc__pill--warn');
       refs.inflationField.hidden = false;
-      const result = scenarioPreCgtCaught(proceeds, costBase, days, postDays, indexedRate, inflation);
-      const preFrac = 1 - result.postFrac;
-      const preExempt = gross * preFrac;
+      refs.mvField.hidden = false;
+      const result = scenarioPreCgtCaught(proceeds, costBase, marketValue, postDays, indexedRate, inflation);
       const indexDetail = [
-        workRow('Years held',        result.years.toFixed(1)),
-        workRow('Indexation factor', `× ${result.factor.toFixed(3)}`),
-        workRow('Cost base uplift',  fmtMoney(result.indexedAdjustment)),
-        workRow(`× ${Math.round(postDays).toLocaleString('en-AU')}/${Math.round(days).toLocaleString('en-AU')}`, fmtMoney(result.indexedAdjustment * result.postFrac)),
+        workRow('Market value 1 Jul 2027', fmtMoney(result.marketValue)),
+        workRow('Post-2027 years',         result.postYears.toFixed(1)),
+        workRow('Indexation factor',       `× ${result.factor.toFixed(3)}`),
+        workRow('Indexed cost base',       fmtMoney(result.indexedMV)),
       ].join('');
       setPostCard({
         title: `Sell on ${dispDateLabel}`,
@@ -421,10 +473,10 @@
         isCurrent: true,
         gain: gross,
         discountLabel: 'Pre 1 July 2027 portion (exempt)',
-        discountAmount: preExempt,
-        discountDetailHTML: workRow('Pre-1985 asset', `Gain accrued before 1 July 2027 remains exempt: ${fmtMoney(gross)} × ${(preFrac * 100).toFixed(1)}% = ${fmtMoney(preExempt)}.`),
+        discountAmount: result.preExempt,
+        discountDetailHTML: workRow('Pre-1985 asset', `Gain accrued before 1 July 2027 remains exempt: market value ${fmtMoney(result.marketValue)} − cost base ${fmtMoney(costBase)} = ${fmtMoney(result.preExempt)}.`),
         indexationLabel: 'Post 1 July 2027 indexation adj.',
-        indexationAmount: result.indexedAdjustment * result.postFrac,
+        indexationAmount: result.indexationReduction,
         indexationDetailHTML: indexDetail,
         taxable: result.taxable,
         rateLabel: `${fmtPct(indexedRate)}*`,
@@ -433,10 +485,10 @@
       });
       setPreCard(null);
       refs.workingBody.innerHTML = wInputs +
-        workRow('Days pre 1 July 2027',  Math.round(preDays).toLocaleString('en-AU')) +
+        wMarketValue(result.marketValue) +
         workRow('Days post 1 July 2027', Math.round(postDays).toLocaleString('en-AU')) +
         wGrossGain(inputs) +
-        wIndexationFactor(inputs, result.factor);
+        wIndexationFactorPost(inputs, result.factor, postDays);
       return;
     }
 
@@ -567,11 +619,22 @@
       return;
     }
 
-    // --- Hybrid: dates straddle 1 July 2027 — two cards ---
+    // --- Straddle: dates straddle 1 July 2027 — two cards ---
+    // Card 2 splits the gain at the 1 July 2027 market value (deemed disposal).
     refs.inflationField.hidden = false;
+    refs.mvField.hidden = false;
+
+    // The two-leg split is well-defined only when the 1 July 2027 market value
+    // sits between the cost base and the proceeds — then both legs are gains.
+    // Outside that band one leg is a notional capital loss; netting it against
+    // the other leg (loss-ordering vs the discount and the 30% floor) isn't
+    // modelled, so the figure can overstate. Flag it rather than mislead.
+    if (marketValue < costBase || marketValue > proceeds) {
+      setPill('Market value is outside the cost base–proceeds range — a notional capital loss arises on one leg that this calculator doesn’t net. Treat the split as indicative.', 'calc__pill--warn');
+    }
 
     const sDisc = scenarioDiscount(proceeds, costBase, days, client, rate);
-    const sHyb  = scenarioHybrid(proceeds, costBase, preDays, postDays, client, rate, indexedRate, inflation);
+    const sStr  = scenarioStraddleMV(proceeds, costBase, marketValue, days, postDays, client, rate, indexedRate, inflation);
 
     // Card 1 — pure-discount hypothetical ("Sell by 30 Jun 2027")
     setPreCard({
@@ -585,53 +648,52 @@
       tax: sDisc.tax,
     });
 
-    // Card 2 — at entered dates, hybrid (pre-discount + post-indexation)
-    const preDaysStr  = Math.round(sHyb.preDays).toLocaleString('en-AU');
-    const postDaysStr = Math.round(sHyb.postDays).toLocaleString('en-AU');
-    const totalDaysStr = Math.round(sHyb.totalDays).toLocaleString('en-AU');
-
+    // Card 2 — at entered dates: market-value split (pre-discount + post-index).
     // Reduction framing: row values shown as ($X), summing with gross to give
-    // net taxable. preReduction = gross × 50% × preFrac (50% of pre-portion of
-    // gain). postReduction = indexed-CB uplift × postFrac.
-    const preReduction  = sHyb.discountAmount * sHyb.preFrac;
-    const postReduction = sHyb.indexedAdjustment * sHyb.postFrac;
+    // net taxable. preReduction = 50% of the pre-1 Jul 2027 notional gain
+    // (MV − cost base); postReduction = indexation uplift on MV. These two
+    // reductions and the gross satisfy: gross − pre − post = net taxable.
+    const postDaysStr = Math.round(sStr.postDays).toLocaleString('en-AU');
+    const discountPct = (sStr.discountRate * 100).toFixed(0);
+    const preReduction  = sStr.discountAmount;
+    const postReduction = sStr.indexationReduction;
 
     const discountDetail = [
-      workRow('Gross × 50%',                       fmtMoney(sHyb.discountAmount)),
-      workRow(`× ${preDaysStr}/${totalDaysStr}`,   fmtMoney(preReduction)),
+      workRow('Notional gain to 1 Jul 2027', `${fmtMoney(marketValue)} − ${fmtMoney(costBase)} = ${fmtMoney(sStr.preGain)}`),
+      workRow(`× ${discountPct}% discount`,  fmtMoney(preReduction)),
     ].join('');
 
     const indexationDetail = [
-      workRow('Years held',        sHyb.years.toFixed(1)),
-      workRow('Indexation factor', `× ${sHyb.factor.toFixed(3)}`),
-      workRow('Cost base uplift',  fmtMoney(sHyb.indexedAdjustment)),
-      workRow(`× ${postDaysStr}/${totalDaysStr}`, fmtMoney(postReduction)),
+      workRow('Market value 1 Jul 2027', fmtMoney(sStr.marketValue)),
+      workRow('Post-2027 years',         sStr.postYears.toFixed(1)),
+      workRow('Indexation factor',       `× ${sStr.factor.toFixed(3)}`),
+      workRow('Indexed cost base',       fmtMoney(sStr.indexedMV)),
     ].join('');
 
     setPostCard({
       title: `Sell on ${dispDateLabel}`,
-      sub: 'Hybrid',
+      sub: 'Market-value split',
       isCurrent: true,
-      gain: sHyb.gross,
+      gain: sStr.gross,
       discountLabel: 'Pre 1 July 2027 discount',
       discountAmount: preReduction,
       discountDetailHTML: discountDetail,
       indexationLabel: 'Post 1 July 2027 indexation adj.',
       indexationAmount: postReduction,
       indexationDetailHTML: indexationDetail,
-      taxable: sHyb.taxable,
+      taxable: sStr.taxable,
       rateLabel: `${fmtPct(Math.max(rate, indexedRate))}*`,
-      tax: sHyb.tax,
-      rateFootnote: '* Pre 1 July 2027 portion at the entity’s marginal rate; post portion at the higher of the marginal rate or 30%.',
+      tax: sStr.tax,
+      rateFootnote: '* Pre 1 July 2027 portion at the entity’s marginal rate (deferred to realisation); post portion at the higher of the marginal rate or 30%.',
     });
 
-    // Inputs body: holding period + days pre/post (replaces timeline)
-    // + gross gain formula + indexation factor formula.
+    // Inputs body: holding period + market value + post-2027 days
+    // + gross gain formula + post-period indexation factor.
     refs.workingBody.innerHTML = wInputs +
-      workRow('Days pre 1 July 2027',  preDaysStr) +
+      wMarketValue(marketValue) +
       workRow('Days post 1 July 2027', postDaysStr) +
       wGrossGain(inputs) +
-      wIndexationFactor(inputs, sHyb.factor);
+      wIndexationFactorPost(inputs, sStr.factor, postDays);
   };
 
   // --- Wire up --------------------------------------------------------------

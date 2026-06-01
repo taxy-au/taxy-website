@@ -744,6 +744,13 @@
   line-height: $lh-loose;
 }
 
+.calc__field-hint {
+  margin: 0;
+  font-size: 12px;
+  color: $color-nightshade-muted;
+  line-height: $lh-loose;
+}
+
 // --- Budget-watch strip (temporary; remove once updated) -------------------
 // Sits between hero and calculator card. Pink for energy/timeliness (brand:
 // review state, energetic accent). Swap to amber ($pill-submitted-*) if pink
