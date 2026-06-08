@@ -8,3 +8,6 @@ vendor/
 .bundle/
 Gemfile.lock
 .DS_Store
+
+# Source video masters — we commit only the transcoded assets/video/*.mp4
+/*.mov
