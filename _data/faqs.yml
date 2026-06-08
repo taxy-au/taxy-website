@@ -28,32 +28,32 @@ clients:
   - items:
       - q: "Why has my accountant invited me to Taxy?"
         a: |
-          <p>Your accountant is using Taxy to collect the information and documents needed to prepare your tax return.</p>
-          <p>Instead of sending long email lists or multiple follow-ups, Taxy organises these requests in one place so you can clearly see what information is required and respond when it suits you.</p>
+          <p>Your accountant is using Taxy to collect the information and documents they need from you.</p>
+          <p>Instead of sending long email lists or multiple follow-ups, Taxy organises everything in one place, so you can see what's needed and respond when it suits you.</p>
 
       - q: "What's the benefit for me?"
         a: |
-          <p>Taxy makes it easier to view and respond to your accountant's information requests compared to long emails and upload portals.</p>
-          <p>Requests are broken into small, manageable items you can complete in your own time. Your accountant can also see live progress, which means less chasing and fewer follow-up emails.</p>
+          <p>Everything your accountant needs from you is set out clearly in one place, so it's far less hassle than digging through long emails or a clunky portal.</p>
+          <p>Requests are broken into small, manageable queries you can complete in your own time. Your accountant can also see live progress, which means less chasing and fewer follow-up emails.</p>
 
       - q: "What do I need to do when I receive a request?"
         a: |
           <p>When you receive the invitation email, simply follow the link to access your request.</p>
-          <p>Once logged in, you'll see a list of items your accountant needs from you. For each item you can upload a document or answer the question directly in Taxy.</p>
+          <p>Once logged in, you'll see a list of queries your accountant needs answered. For each one you can upload a document or answer the question directly in Taxy.</p>
 
       - q: "How long will it take to send all my information?"
         a: |
-          <p>Requests are broken into small, manageable items so you can work through them gradually.</p>
+          <p>Requests are broken into small, manageable queries so you can work through them gradually.</p>
           <p>Some responses may only take a few seconds, while others might involve uploading documents you don't have to hand. Many people find it easier to complete requests over a few short sessions rather than trying to gather everything at once.</p>
 
       - q: "What if I can't answer something?"
         a: |
-          <p>If you've been asked to provide a document you don't have immediately to hand, you can leave that item and come back to it later.</p>
-          <p>You can also add a comment to the item if you're unsure about something. Your accountant will respond in the same place, making it easier to keep track of what you still need to provide.</p>
+          <p>If you've been asked for a document you don't have to hand, you can skip it for now and come back later.</p>
+          <p>If you're unsure about anything, add a comment and your accountant will reply in the same place. That keeps it all in one thread, so nothing slips through.</p>
 
       - q: "Is my information secure?"
         a: |
-          <p>Yes. Taxy is designed to handle sensitive information more securely than email.</p>
+          <p>Yes. Your information is safer in Taxy than it would be over email, which is where this kind of detail usually travels.</p>
           <p>All data is encrypted, stored in Australia, and only accessible to authorised users within your accountant's workspace.</p>
 
       - q: "Who should I contact if I have a question?"
@@ -70,20 +70,24 @@ firms:
     items:
       - q: "What does Taxy actually do?"
         a: |
-          <p>Taxy makes building, sending and tracking client information requests for tax returns much faster and less frustrating.</p>
-          <p>The platform gives accountants and their clients one place to collaborate instead of managing requests across multiple tools.</p>
-          <p>As responses come in, teams can see in real time what has been returned and what is still outstanding without needing to piece together where the job is up to.</p>
+          <p>Taxy is the tax workflow platform built for Australian accounting firms. It gives your team one place to build, send and track the information requests behind every tax job, across the whole year rather than just at lodgement.</p>
+          <p>As responses come in, you can see at a glance what is back and what is still outstanding, without piecing together where each job is up to.</p>
 
       - q: "How is Taxy different from using email or a client portal?"
         a: |
-          <p><strong>Clearer requests:</strong> personalising requests manually is difficult, but generic email templates lead to slow and incomplete responses.</p>
-          <p><strong>A better client experience:</strong> portals are designed for document storage, not client collaboration or tax-specific workflows.</p>
-          <p><strong>Greater visibility:</strong> teams can see at a glance what has been returned and whether a job is ready to be picked up.</p>
+          <p><strong>Clearer requests:</strong> generic email checklists get slow, incomplete responses. Taxy makes each request specific to the client, so they know exactly what to provide.</p>
+          <p><strong>A better client experience:</strong> portals are built for storing files, not guiding a client through what you actually need. Taxy walks them through it, step by step.</p>
+          <p><strong>Greater visibility:</strong> you can see at a glance what's come back and whether a job is ready to be picked up.</p>
 
-      - q: "Where does Taxy fit in the tax return process?"
+      - q: "Where does Taxy fit in a tax job?"
         a: |
-          <p>Taxy supports the early stages of a tax return job from building a client request to the point at which the return is prepared.</p>
-          <p>Because a large portion of tax return work involves collecting and clarifying information, improving this stage helps teams move through returns more efficiently.</p>
+          <p>Taxy supports the early stages of any tax job, from building a client request to the point the information is ready and the work can be prepared.</p>
+          <p>Because so much tax work is really about collecting and clarifying information, improving this stage helps teams move through their jobs more efficiently.</p>
+
+      - q: "Is Taxy built for complex client groups?"
+        a: |
+          <p>Yes. It is purpose-built for the way Australian firms work. A client group can hold many entities (individuals, trusts, partnerships and companies), each with its own request for each financial year, all under one client login.</p>
+          <p>Generic portals are not designed for this. Taxy is.</p>
 
       - q: "Is our information secure in Taxy?"
         a: |
@@ -96,11 +100,11 @@ firms:
       - q: "How long does it take to get started with Taxy?"
         a: |
           <p>Your first request can usually be sent within a few days. The hardest part is often choosing the first client to test with.</p>
-          <p>Most teams evaluate the time savings by running Taxy alongside their existing process. This shows how it works in practice in a low-risk, low-effort way.</p>
+          <p>Most firms run Taxy alongside their existing process at first, so they can see the time savings for themselves without disrupting anything.</p>
 
       - q: "Does getting started involve a big implementation?"
         a: |
-          <p>No. Rather than rolling Taxy out across the whole practice before knowing if it will save time, most new customers start with one multi-entity client group and run a proof of concept.</p>
+          <p>No. Most firms start with a single multi-entity client group and run a proof of concept, rather than rolling Taxy across the whole practice before they know it saves time.</p>
           <p>Once teams see how much time is saved managing requests and follow-ups, they naturally add more of their clients to the platform over time.</p>
 
       - q: "What do we need to do before sending our first request?"
@@ -110,38 +114,43 @@ firms:
 
       - q: "What does the onboarding process look like?"
         a: |
-          <p>If you decide to roll out Taxy to more clients, our team runs a kick off call and ensures any manual effort sits with us, not you.</p>
+          <p>Once you've run a proof of concept and decide to roll Taxy out to more clients, our team runs a kick off call and ensures any manual effort sits with us, not you.</p>
           <p>You'll provide us with some basic client information (securely) and the system does the heavy lifting to put a draft request together for you to review before sending out in your own time.</p>
+
+      - q: "How much does Taxy cost?"
+        a: |
+          <p>$9 per entity per year. Unlimited users, no setup fees, no per-seat charges.</p>
+          <p><a href="/pricing/">See full pricing</a>.</p>
 
   - section: "Client experience"
     items:
       - q: "What do clients see?"
         a: |
-          <p>Initially, clients receive an invitation to access the platform securely.</p>
-          <p>From there, they're guided through your request, broken down into small, manageable worklist items with response fields and upload facilities for each.</p>
+          <p>First, clients get a secure invitation to log in.</p>
+          <p>From there, they're guided through your request, broken into small, manageable queries, each with a response field or document upload.</p>
 
       - q: "Do clients struggle to use Taxy?"
         a: |
-          <p>While introducing new technology to clients should be carefully considered, even our most sceptical customers have found their clients love using it.</p>
-          <p>We've found that compared to the alternatives Taxy is more user-friendly and reduces confusion, resulting in happier clients.</p>
+          <p>It is a fair thing to worry about. Even our most sceptical customers have found their clients prefer it.</p>
+          <p>Compared to email chains and upload portals, Taxy is simpler and clearer, so there is less confusion, not more.</p>
 
       - q: "How do clients know what's still outstanding?"
         a: |
-          <p>Status indicators clearly show which items still require a response and which they've sent back. Once an item has been returned, it disappears from the client's worklist, but they're always able to access historic requests and answers.</p>
+          <p>Status indicators clearly show which queries still need a response and which they've sent back. Once a query has been returned, it disappears from the client's worklist, but they can always go back to past requests and answers.</p>
 
   - section: "Workflow & visibility"
     items:
       - q: "How does Taxy help track outstanding requests?"
         a: |
-          <p>The dashboard provides a clear view of how many items have been returned and which are still outstanding for each client.</p>
+          <p>The dashboard provides a clear view of how many queries have been returned and which are still outstanding for each client.</p>
           <p>As clients respond, progress updates automatically. This makes it easy to see where each job is up to and follow up on missing information without piecing together emails or notes.</p>
 
       - q: "Can we customise requests for different entities or jobs?"
         a: |
           <p>Yes. Tailoring requests is one of the ways Taxy reduces the back-and-forth that comes with generic email requests.</p>
-          <p>Templates are built around common requirements, but each request can include a different combination of questions and documents depending on the client or entity. Templates can also be updated at any time as your processes evolve.</p>
+          <p>Templates are built around common queries, but each request can include a different combination of questions and documents depending on the client or entity. Templates can also be updated at any time as your processes evolve.</p>
 
       - q: "What happens after a client responds with everything?"
         a: |
-          <p>Once the full request has been returned, you can start preparing the return in your lodgement software.</p>
-          <p>Taxy gives you confidence that the information supporting the return is organised in one place and easy to access during final review.</p>
+          <p>Once the full request has been returned, you can move straight into preparing the job in your lodgement software.</p>
+          <p>Taxy gives you confidence that the information behind the job is organised in one place and easy to access during final review.</p>
