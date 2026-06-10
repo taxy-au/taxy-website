@@ -42,4 +42,36 @@
 
   // Strip the empty paragraph artifacts left by WordPress exports.
   p:empty { display: none; }
+
+  // Tables — used by the legal/trust pages (privacy data table, sub-processors, DPA annexes).
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: $space-3;
+    font-size: $fs-p-small;
+    line-height: 1.5;
+  }
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: $space-2;
+    border: 1px solid $color-light-grey;
+  }
+
+  thead th {
+    background: $color-offwhite-2;
+    font-weight: $fw-bold;
+  }
+}
+
+// Long-form legal / policy pages — a little more width for the wider tables.
+.prose--legal {
+  max-width: 820px;
+
+  // Let wide tables scroll rather than blow out the page on narrow screens.
+  @media (max-width: $breakpoint-md) {
+    table { display: block; overflow-x: auto; white-space: nowrap; }
+  }
 }
