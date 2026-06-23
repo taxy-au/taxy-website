@@ -551,6 +551,15 @@
     padding: 1px 0;
 
     span:last-child { color: $color-nightshade; font-weight: $fw-bold; white-space: nowrap; }
+
+    // Small phones (≤380px): the nowrap formula + label can't share one line,
+    // so stack them — label above, value below at full width. Larger phones
+    // keep the single-line label/value row.
+    @media (max-width: 380px) {
+      flex-direction: column;
+      gap: 0;
+      span:last-child { white-space: normal; }
+    }
   }
 }
 
