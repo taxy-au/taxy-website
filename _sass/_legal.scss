@@ -47,6 +47,12 @@
     text-decoration: none;
     &:hover { text-decoration: underline; }
   }
+
+  // Mobile only: pad each link into a ≥24px tap target (WCAG AA) so the dense,
+  // indented sub-items aren't easy to mis-tap. Desktop keeps the tight list.
+  @media (max-width: $breakpoint-md) {
+    a { display: inline-block; padding-block: 5px; }
+  }
 }
 
 // Clearer heading hierarchy so long contracts scan at a glance.

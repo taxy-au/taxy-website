@@ -18,6 +18,13 @@
   // Stronger focus ring than the global reset so CTAs read clearly when tabbed
   // to. Each variant below may override colour.
   &:focus-visible { outline: 3px solid $color-purple; outline-offset: 3px; }
+
+  // Touch-target floor on mobile — keep CTAs ≥44px tall (Apple HIG / WCAG AAA).
+  // Desktop keeps the tighter 40px height. Content stays centred via the flex
+  // alignment above.
+  @media (max-width: $breakpoint-md) {
+    min-height: 44px;
+  }
 }
 
 .btn--primary {
