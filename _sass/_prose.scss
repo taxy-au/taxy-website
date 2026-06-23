@@ -70,8 +70,45 @@
 .prose--legal {
   max-width: 820px;
 
-  // Let wide tables scroll rather than blow out the page on narrow screens.
+  // On mobile, reflow wide tables into one stacked card per row instead of a
+  // horizontal-scroll strip that clips the right-hand columns. Each cell sits
+  // on its own line, labelled with its column header — the labels are copied
+  // onto cells as data-label by the inline script in _layouts/legal.html, so
+  // the Markdown tables stay plain Markdown. Desktop keeps the real <table>.
   @media (max-width: $breakpoint-md) {
-    table { display: block; overflow-x: auto; white-space: nowrap; }
+    table { display: block; border: 0; }
+    tbody { display: block; }
+
+    // Hide the header row visually — its text is surfaced per-cell below.
+    thead { display: none; }
+
+    tr {
+      display: block;
+      padding: $space-2 $space-3;
+      border: 1px solid $color-light-grey;
+      border-radius: $r-md;
+      & + tr { margin-top: $space-2; }
+    }
+
+    td {
+      display: block;
+      padding: $space-1 0;
+      border: 0;
+
+      & + td { border-top: 1px solid $color-light-grey; }
+    }
+
+    // Column label, injected from the header row. Skipped when empty (e.g. the
+    // DPA annex table has no header row — it reads as a clean key→value list).
+    td[data-label]:not([data-label=""])::before {
+      content: attr(data-label);
+      display: block;
+      margin-bottom: 2px;
+      font-size: 11px;
+      font-weight: $fw-black;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: $color-nightshade-muted;
+    }
   }
 }

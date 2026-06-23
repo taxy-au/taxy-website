@@ -40,6 +40,25 @@ layout: marketing
       if (list.children.length) toc.removeAttribute('hidden');
     }
 
+    // Label each table cell with its column header so the CSS can reflow wide
+    // tables into stacked cards on mobile (see .prose--legal table styles).
+    // Tables with no header row (e.g. the DPA annex key→value table) are left
+    // unlabelled and simply stack.
+    if (prose) {
+      prose.querySelectorAll('table').forEach(function (table) {
+        var headers = Array.prototype.map.call(
+          table.querySelectorAll('thead th'),
+          function (th) { return th.textContent.trim(); }
+        );
+        if (!headers.length) return;
+        table.querySelectorAll('tbody tr').forEach(function (row) {
+          Array.prototype.forEach.call(row.children, function (cell, i) {
+            if (headers[i]) cell.setAttribute('data-label', headers[i]);
+          });
+        });
+      });
+    }
+
     // Reveal the back-to-top button once the reader has scrolled past a screen.
     var btn = document.querySelector('.back-to-top');
     if (btn) {
