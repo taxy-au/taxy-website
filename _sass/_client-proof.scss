@@ -92,7 +92,7 @@
     display: block;
     font-size: 14px;
     font-style: normal;
-    color: rgba(37, 29, 49, 0.6);
+    color: $color-nightshade-muted;
   }
 
   &__name {
@@ -145,7 +145,7 @@
 
   &__url {
     font-size: 11px;
-    color: rgba(37, 29, 49, 0.5);
+    color: $color-nightshade-muted;
   }
 
   &__body {
@@ -167,7 +167,7 @@
 
   &__sub {
     font-size: 13px;
-    color: rgba(37, 29, 49, 0.6);
+    color: $color-nightshade-muted;
   }
 }
 
@@ -178,7 +178,7 @@
     display: flex;
     justify-content: space-between;
     font-size: 12px;
-    color: rgba(37, 29, 49, 0.65);
+    color: $color-nightshade-muted;
     margin-bottom: 8px;
     font-weight: $fw-bold;
   }
@@ -204,7 +204,7 @@
   &__title {
     font-size: 11px;
     font-weight: $fw-bold;
-    color: rgba(37, 29, 49, 0.55);
+    color: $color-nightshade-muted;
     margin-bottom: 8px;
     text-transform: uppercase;
     letter-spacing: 0.08em;
@@ -278,7 +278,7 @@
   }
 
   &--done &__title {
-    color: rgba(37, 29, 49, 0.5);
+    color: $color-nightshade-muted;
     font-weight: $fw-regular;
   }
 }
@@ -320,7 +320,7 @@
 
   &__label {
     font-size: 9px;
-    color: rgba(37, 29, 49, 0.5);
+    color: $color-nightshade-muted;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin-bottom: 4px;

@@ -71,7 +71,7 @@
   &__meta {
     font-size: 12px;
     font-weight: $fw-bold;
-    color: rgba(37, 29, 49, 0.55);
+    color: $color-nightshade-muted;
   }
 
   &__stats {
@@ -125,14 +125,15 @@
     font-weight: $fw-bold;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: rgba(37, 29, 49, 0.5);
+    color: $color-nightshade-muted;
     white-space: nowrap;
   }
 
-  // Highlighted stat picks up the brand colour for both number and label.
-  &--review  &__num, &--review  &__label { color: $color-pink; }
-  &--waiting &__num, &--waiting &__label { color: $color-lavender; }
-  &--done    &__num, &--done    &__label { color: $color-teal; }
+  // Highlighted stats use the canonical status inks (the legible member of each
+  // status pair) rather than the bright accents, which fail contrast as text.
+  &--review  &__num, &--review  &__label { color: $pill-review-ink; }
+  &--waiting &__num, &--waiting &__label { color: $pill-waiting-ink; }
+  &--done    &__num, &--done    &__label { color: $pill-done-ink; }
 }
 
 // Pill treatment mirrors the client-experience tx-pill pattern:
