@@ -119,7 +119,7 @@ firms:
 
       - q: "How much does Taxy cost?"
         a: |
-          <p>$9 per entity per year. Unlimited users, no setup fees, no per-seat charges.</p>
+          <p>$9 per entity per year, plus GST. Unlimited users, no setup fees, no per-seat charges.</p>
           <p><a href="/pricing/">See full pricing</a>.</p>
 
   - section: "Client experience"

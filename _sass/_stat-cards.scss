@@ -48,6 +48,7 @@
 
   .stat-card__value { color: $color-white; }
   .stat-card__unit { color: rgba(255, 255, 255, 0.85); }
+  .stat-card__gst { color: rgba(255, 255, 255, 0.6); opacity: 1; }
   .stat-card__supporting { color: rgba(255, 255, 255, 0.85); }
 }
 
@@ -63,7 +64,6 @@
   align-items: baseline;
   justify-content: center;
   gap: $space-1;
-  margin-bottom: $space-2;
 }
 
 .stat-card__value {
@@ -75,10 +75,20 @@
 }
 
 .stat-card__unit {
+  margin: 0;
   font-size: $fs-h5;
   font-weight: $fw-bold;
   color: $color-nightshade;
   opacity: 0.7;
+}
+
+// Small grey "+ GST" qualifier sitting beside the $9 headline.
+.stat-card__gst {
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+  opacity: 0.6;
+  letter-spacing: 0.01em;
 }
 
 .stat-card__supporting {
@@ -97,7 +107,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px; // $9 and 12-month sit tight together
+  gap: $space-1; // $9 / unit / term stacked with even rhythm
 }
 
 .stat-card__sub {
