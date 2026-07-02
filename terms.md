@@ -8,7 +8,9 @@ permalink: /terms/
 
 These terms govern your use of **taxy.au** (the "Website"). Your use of the Taxy platform at
 app.taxy.au is governed separately by our **Cloud Service Agreement** (Standard Terms at
-[taxy.au/legal/terms](/legal/terms/), plus your Cover Page) — not by these terms.
+[taxy.au/legal/terms](/legal/terms/), plus your Cover Page) and, for each individual
+who logs in, our [End User Agreement](/legal/end-user-agreement/) — not by these
+terms.
 
 _Last updated: 8 June 2026._
 

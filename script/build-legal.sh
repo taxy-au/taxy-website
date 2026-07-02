@@ -22,7 +22,7 @@ body() {
   perl -0777 -pe '
     s/<!--.*?-->//gs;                                   # strip non-rendering comment headers
     s/\A\s*#[^\n]*\n+//s;                                # drop the leading H1 (hero shows the title)
-    s{\]\(https://taxy\.au/(legal/dpa|legal/subprocessors|legal/terms|privacy-policy|security)\)}{](/$1/)}g;
+    s{\]\(https://taxy\.au/(legal/dpa|legal/subprocessors|legal/terms|legal/end-user-agreement|privacy-policy|security|terms)\)}{](/$1/)}g;
     s/\A\s+//s; s/\s+\z/\n/s;                            # tidy leading/trailing whitespace
   ' "$1"
 }
@@ -62,6 +62,11 @@ page standard-terms.md legal/terms.md /legal/terms/ \
   "Cloud Service Agreement — Standard Terms" "Cloud Service Agreement — Standard Terms" \
   "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the app.taxy.au platform." \
   "10 June 2026" toc
+
+page end-user-agreement.md legal/end-user-agreement.md /legal/end-user-agreement/ \
+  "End user agreement" "End User Agreement" \
+  "The agreement binding the individuals who log in to app.taxy.au — firm staff and invited clients — covering acceptable use and account security." \
+  "" toc
 
 page dpa.md legal/dpa.md /legal/dpa/ \
   "Data Processing Agreement" "Data Processing Agreement" \
