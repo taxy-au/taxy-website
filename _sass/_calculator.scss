@@ -781,20 +781,19 @@
   }
 }
 
-// --- Budget-watch strip (temporary; remove once updated) -------------------
-// Sits between hero and calculator card. Pink for energy/timeliness (brand:
-// review state, energetic accent). Swap to amber ($pill-submitted-*) if pink
-// reads too loud.
+// --- Update strip -----------------------------------------------------------
+// Sits between hero and calculator card. Quiet lavender note — records what
+// the calculator was updated for and what's still pending, not an alert.
 
 .budget-watch {
-  background: $pill-review-bg;
-  color: $pill-review-ink;
+  background: $pill-waiting-bg;
+  color: $color-nightshade-muted;
   border-radius: $r-md;
   padding: $space-3 $space-4;
   margin-bottom: $space-4;
   font-size: $fs-p-small;
   line-height: $lh-loose;
-  border-left: 4px solid $color-pink;
+  border-left: 4px solid $color-lavender;
 
   strong {
     font-weight: $fw-bold;

@@ -69,11 +69,6 @@
   // Retained-discount rates by asset type (indexable entities only).
   const ASSET_DISCOUNT = { 'new-dwelling': 0.50, 'affordable': 0.60 };
 
-  const ASSET_HINTS = {
-    'new-dwelling': 'Which dwellings qualify as "new" is still to be set by legislative instrument (s 26-160(4)) — results for this asset type are indicative until it’s released.',
-    'affordable': 'Assumes affordable housing through a registered provider for the whole ownership period. The up-to-60% discount prorates by days of affordable use — partial-use figures will differ.',
-  };
-
   // --- Constants ------------------------------------------------------------
 
   const CUTOFF  = new Date('2027-07-01');
@@ -140,7 +135,6 @@
     inflationField:  $('inflation-field'),
     mvField:         $('mv-field'),
     assetField:      $('asset-field'),
-    assetHint:       $('asset-hint'),
     electField:      $('elect-field'),
     cardPre:         $('card-pre'),
     cardPost:        $('card-post'),
@@ -430,8 +424,6 @@
     const resDiscount   = ASSET_DISCOUNT[assetType];
     const isResidential = resDiscount !== undefined;
     refs.assetField.hidden = !indexable;
-    refs.assetHint.hidden  = !(indexable && isResidential);
-    if (isResidential) refs.assetHint.textContent = ASSET_HINTS[assetType];
 
     // Market-value field only matters for straddle / pre-1985-caught states;
     // hidden by default, revealed by those two branches below. Elect toggle
