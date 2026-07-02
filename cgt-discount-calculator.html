@@ -14,7 +14,7 @@ image: /assets/img/og-cgt-calculator.png
 <section class="section section--tight" id="calculator">
   <div class="container">
     <div class="budget-watch">
-      <strong>Updated — the reform is now law (royal assent 26 June 2026).</strong> The Treasury Laws Amendment (Tax Reform No 1) Act 2026 (Act No. 49 of 2026) replaces the 50% CGT discount with cost-base indexation from 1 July 2027, adds a 30% minimum tax on real capital gains for individuals, trusts and partnerships, and brings pre-1985 assets into CGT for disposals on or after that date. Assets held across 1 July 2027 are split at their market value on that day. Complying super funds (incl. SMSFs) and companies keep the existing regime for post-1985 assets. Some mechanics — including the elective ATO apportionment method — still sit in legislative instruments not yet released.
+      <strong>Updated — the reform is now law (royal assent 26 June 2026).</strong> The Treasury Laws Amendment (Tax Reform No 1) Act 2026 (Act No. 49 of 2026) replaces the 50% CGT discount with cost-base indexation from 1 July 2027, adds a 30% minimum tax on real capital gains for individuals, trusts and partnerships, and brings pre-1985 assets into CGT for disposals on or after that date. Assets held across 1 July 2027 are split at their market value on that day. Complying super funds (incl. SMSFs) and companies keep the existing regime for post-1985 assets. Some mechanics — including the elective ATO apportionment method and the criteria for what counts as a "new residential dwelling" — still sit in legislative instruments not yet released.
     </div>
 
     <div class="calc">
@@ -29,6 +29,24 @@ image: /assets/img/og-cgt-calculator.png
               <option value="smsf">SMSF</option>
               <option value="company">Company</option>
             </select>
+          </div>
+
+          <div class="calc__field" id="asset-field">
+            <label class="calc__label" for="asset-type">Asset type</label>
+            <select class="calc__select" id="asset-type" name="asset-type">
+              <option value="other">Shares / other assets</option>
+              <option value="new-dwelling">New residential dwelling</option>
+              <option value="affordable">Affordable housing</option>
+            </select>
+            <p class="calc__field-hint" id="asset-hint" hidden></p>
+          </div>
+
+          <div class="calc__field" id="elect-field" hidden>
+            <label class="calc__check">
+              <input type="checkbox" id="elect-indexation" name="elect-indexation">
+              <span>Elect cost-base indexation instead of the retained discount</span>
+            </label>
+            <p class="calc__field-hint">Routes the gain through the 1 July 2027 market-value split, indexation and the 30% minimum tax. The choice is made by return lodgment and is irrevocable (s 103-25).</p>
           </div>
 
           <div class="calc__field">
@@ -163,7 +181,7 @@ image: /assets/img/og-cgt-calculator.png
       <details class="calc__methodology">
         <summary>Rules &amp; edge cases</summary>
         <div class="calc__methodology-body">
-          <p>This calculator reflects the Treasury Laws Amendment (Tax Reform No 1) Act 2026 (Act No. 49 of 2026, royal assent 26 June 2026) and the accompanying Income Tax Rates Amendment (Tax Reform No 1) Act 2026. The new rules apply from 1 July 2027, and figures remain a guide. Two mechanics still sit in legislative instruments not yet released — the ATO apportionment method (the alternative to a market valuation at 1 July 2027) and the CPI series behind indexation — so the calculator defaults to the market-value split and projects a single editable inflation rate. The cost-base field assumes the five ATO cost-base elements are already rolled in, including any AMIT adjustments for managed funds and ETFs.</p>
+          <p>This calculator reflects the Treasury Laws Amendment (Tax Reform No 1) Act 2026 (Act No. 49 of 2026, royal assent 26 June 2026) and the accompanying Income Tax Rates Amendment (Tax Reform No 1) Act 2026. The new rules apply from 1 July 2027, and figures remain a guide. Three mechanics still await instruments or data — the ATO apportionment method (the alternative to a market valuation at 1 July 2027), the criteria for what counts as a "new residential dwelling" (s 26-160(4)), and the CPI series behind indexation — so the calculator defaults to the market-value split, flags new-dwelling results as indicative, and projects a single editable inflation rate. The cost-base field assumes the five ATO cost-base elements are already rolled in, including any AMIT adjustments for managed funds and ETFs.</p>
 
           <h4>Who's in the new regime</h4>
           <p>From 1 July 2027 the 50% CGT discount is replaced by cost-base indexation for individuals, trusts and partnerships. The post-1 July 2027 portion of any indexed gain attracts a 30% minimum tax rate. Complying super funds (incl. SMSFs) and companies are unchanged — super at the 33.33% discount, companies at 0%.</p>
@@ -177,6 +195,9 @@ image: /assets/img/og-cgt-calculator.png
           <h4>Pre-1985 acquisitions</h4>
           <p><strong>Disposed before 1 July 2027.</strong> Pre-CGT — no CGT event arises (CGT event K6 aside).</p>
           <p><strong>Disposed on or after 1 July 2027.</strong> The gain accrued before 1 July 2027 stays exempt; the gain accruing from that date is brought into CGT and taxed under the new arrangements. The Act applies this to all entities, including companies (EM Table 1.2, row 2). For individuals and trusts the calculator anchors the post-2027 leg on the 1 July 2027 market value and indexes from there. Company cost-base mechanics for the caught portion aren't spelled out in the Act, so the calculator doesn't model a company's pre-1985 catch — it still shows that case as fully exempt. Treat it as out of scope pending detail.</p>
+
+          <h4>Residential dwellings &amp; affordable housing</h4>
+          <p>New residential dwellings (s 115-102) and affordable housing (s 115-125) keep the discount method by default — 50% and up to 60% respectively — and sit outside both the 1 July 2027 deemed disposal and the 30% minimum tax. The individual (or trustee, for flow-through gains) may instead irrevocably elect cost-base indexation (s 103-25 timing); ticking the election box models that path. Two simplifications: which dwellings qualify as "new" awaits the s 26-160(4) legislative instrument, so new-dwelling results are indicative; and the affordable-housing figure assumes affordable use through a registered community housing provider for the entire ownership period — the uplift prorates by days of affordable use, and the elect-out to indexation only exists at the full 60%. Elections apply to individuals and trusts, not companies or super funds.</p>
 
           <h4>Partnerships</h4>
           <p>CGT in a partnership flows through to each partner. Model a partner's share with the entity type that matches them (Individual or Trust) — the 30% minimum tax applies the same way.</p>
@@ -202,13 +223,13 @@ image: /assets/img/og-cgt-calculator.png
       <p>Gains on assets already held at the cutoff are split into a pre-1 July 2027 portion (eligible for the 50% discount) and a post-1 July 2027 portion (indexed, with the 30% minimum tax). The Act sets the split by deeming the asset disposed of and reacquired at its market value on 1 July 2027: the pre-portion is the notional gain up to that value (deferred until the actual sale), and the post-portion is measured from the indexed market value. Market value is the default; a taxpayer may instead elect an ATO apportionment method, to be set by the Minister by legislative instrument and not yet released. This calculator models the market-value path — enter your 1 July 2027 valuation when the field appears.</p>
 
       <h3>The new residential property carve-out</h3>
-      <p>Investors in new residential dwellings can choose to keep the 50% discount method (s 115-102) instead of the new indexation arrangements; making that choice takes the asset out of the 1 July 2027 deemed disposal. What counts as a "new residential dwelling" is to be set by the Minister by legislative instrument. Separately, capital gains from affordable housing can attract an additional discount of up to 60%. The calculator doesn't model these elections — toggle the disposal date around 1 July 2027 to compare the discount and indexation methods for the same asset.</p>
+      <p>Under the Act as passed, keeping the discount is the default for these assets: gains on new residential dwellings retain the 50% discount (s 115-102) and gains from affordable housing retain a discount of up to 60% (s 115-125), and both sit outside the 1 July 2027 deemed disposal and the 30% minimum tax. The taxpayer may instead irrevocably elect cost-base indexation. What counts as a "new residential dwelling" is still to be set by the Minister by legislative instrument. The calculator models both asset types — pick them in the Asset type field, and use the election checkbox to compare the retained discount against the indexation path.</p>
 
       <h3>What this calculator models</h3>
-      <p>CGT event A1 disposals only, for a single client, across the four entity types practitioners model day-to-day (Individual, Trust, SMSF, Company). For disposals straddling 1 July 2027 it also takes a market value at that date to split the gain. The Cost base field expects the total across the five ATO elements — first (acquisition cost), second (incidental costs of acquisition and disposal: brokerage, stamp duty, legals), third (non-deductible costs of ownership for assets acquired after 20 August 1991), fourth (capital improvements), fifth (capital costs of preserving or defending title) — plus any AMIT cost-base adjustments for managed funds and ETFs. Use the Inputs drop-down on the result card to echo what was entered and copy figures into firm working papers.</p>
+      <p>CGT event A1 disposals only, for a single client, across the four entity types practitioners model day-to-day (Individual, Trust, SMSF, Company) — plus, for individuals and trusts, the residential asset types the Act treats differently (new residential dwellings and affordable housing, with their elect-out into indexation). For disposals straddling 1 July 2027 it also takes a market value at that date to split the gain. The Cost base field expects the total across the five ATO elements — first (acquisition cost), second (incidental costs of acquisition and disposal: brokerage, stamp duty, legals), third (non-deductible costs of ownership for assets acquired after 20 August 1991), fourth (capital improvements), fifth (capital costs of preserving or defending title) — plus any AMIT cost-base adjustments for managed funds and ETFs. Use the Inputs drop-down on the result card to echo what was entered and copy figures into firm working papers.</p>
 
       <h3>What this calculator doesn't model</h3>
-      <p>The ATO apportionment method (the alternative to a 1 July 2027 market valuation, pending its legislative instrument), the new-residential-dwelling and affordable-housing elections, a company's pre-1985 catch (caught by the Act but its cost-base mechanics aren't yet specified — the calculator still shows that case as exempt), the income-support / Age Pension exemption from the 30% minimum tax, the small business CGT concessions (15-year exemption, 50% active asset reduction, retirement exemption, rollover), the main residence exemption (full or partial), foreign-resident TAP apportionment, scrip-for-scrip rollover, demerger relief, deceased estate cost-base rules, in-specie transfers, capital losses carried forward, Medicare levy and offsets. SMSF pension-phase 0% applies to segregated current pension assets — unsegregated funds use the ECPI proportion, also not modelled. Run client-specific scenarios through your firm's working papers; this is general information, not financial, tax or legal advice.</p>
+      <p>The ATO apportionment method (the alternative to a 1 July 2027 market valuation, pending its legislative instrument), the day-based proration of the affordable-housing discount (the calculator assumes affordable use for the full ownership period), a company's pre-1985 catch (caught by the Act but its cost-base mechanics aren't yet specified — the calculator still shows that case as exempt), the income-support / Age Pension exemption from the 30% minimum tax, the small business CGT concessions (15-year exemption, 50% active asset reduction, retirement exemption, rollover), the main residence exemption (full or partial), foreign-resident TAP apportionment, scrip-for-scrip rollover, demerger relief, deceased estate cost-base rules, in-specie transfers, capital losses carried forward, Medicare levy and offsets. SMSF pension-phase 0% applies to segregated current pension assets — unsegregated funds use the ECPI proportion, also not modelled. Run client-specific scenarios through your firm's working papers; this is general information, not financial, tax or legal advice.</p>
 
       <h3>CGT discount history</h3>
       <p>The 50% CGT discount has applied to disposals by individuals and most trusts since 21 September 1999, replacing the indexation method that applied from the introduction of CGT on 20 September 1985. The 2026 Tax Reform No 1 Act revives indexation — in modified form, with the 30% minimum tax rate — from 1 July 2027.</p>

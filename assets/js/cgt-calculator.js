@@ -53,17 +53,26 @@
   //      entities, but the deemed-disposal/indexation machinery in Subdiv 112-E
   //      is written for individuals/trusts. Company cost-base mechanics for the
   //      post-2027 leg are not spelled out; left as a flagged edge.
-  //   4. Residential elections (not modelled; would need an asset-type input).
-  //      New residential dwellings (s 115-102) and full-60% affordable housing
+  //   4. Residential elections (modelled via the Asset type input). New
+  //      residential dwellings (s 115-102) and full-60% affordable housing
   //      (s 115-125(6)) KEEP the discount by default — no 1 Jul 27 deemed
   //      split, no 30% min tax (carve-outs in the deemed-disposal provision
   //      (1)(e) and s 119-5(2)(b)-(c)) — with an irrevocable elect-out into
   //      indexation (s 103-25 timing; individuals or trustees, not
   //      companies/super). "New residential dwelling" criteria await the
-  //      s 26-160(4) ministerial instrument (unmade), so that option can't be
-  //      presented definitively yet. Affordable-housing eligibility is existing
-  //      law, but the 60% prorates by affordable-use days.
+  //      s 26-160(4) ministerial instrument (unmade) — that option renders
+  //      with an "indicative" warning pill until it's made. Affordable
+  //      housing assumes full-period affordable use (flat 60%); the day-based
+  //      proration of the uplift is not modelled.
   const SPLIT_METHOD = 'market-value';
+
+  // Retained-discount rates by asset type (indexable entities only).
+  const ASSET_DISCOUNT = { 'new-dwelling': 0.50, 'affordable': 0.60 };
+
+  const ASSET_HINTS = {
+    'new-dwelling': 'Which dwellings qualify as "new" is still to be set by legislative instrument (s 26-160(4)) — results for this asset type are indicative until it’s released.',
+    'affordable': 'Assumes affordable housing through a registered provider for the whole ownership period. The up-to-60% discount prorates by days of affordable use — partial-use figures will differ.',
+  };
 
   // --- Constants ------------------------------------------------------------
 
@@ -115,6 +124,8 @@
   const $ = (id) => document.getElementById(id);
 
   const clientSel        = $('client-type');
+  const assetSel         = $('asset-type');
+  const electCheck       = $('elect-indexation');
   const acqDateInput     = $('acq-date');
   const disposalInput    = $('disposal-date');
   const costBaseInput    = $('cost-base');
@@ -128,6 +139,9 @@
     pill:            $('result-pill'),
     inflationField:  $('inflation-field'),
     mvField:         $('mv-field'),
+    assetField:      $('asset-field'),
+    assetHint:       $('asset-hint'),
+    electField:      $('elect-field'),
     cardPre:         $('card-pre'),
     cardPost:        $('card-post'),
     pTitle:          $('card-pre-title'),
@@ -410,9 +424,20 @@
     const gross = proceeds - costBase;
     const marketValue = parseMoney(marketValueInput.value);
 
+    // Asset type only exists for indexable entities — the s 115-102/115-125
+    // elections are made by individuals or trustees, not companies/super.
+    const assetType     = indexable ? assetSel.value : 'other';
+    const resDiscount   = ASSET_DISCOUNT[assetType];
+    const isResidential = resDiscount !== undefined;
+    refs.assetField.hidden = !indexable;
+    refs.assetHint.hidden  = !(indexable && isResidential);
+    if (isResidential) refs.assetHint.textContent = ASSET_HINTS[assetType];
+
     // Market-value field only matters for straddle / pre-1985-caught states;
-    // hidden by default, revealed by those two branches below.
+    // hidden by default, revealed by those two branches below. Elect toggle
+    // likewise — revealed once dates show the election is available.
     refs.mvField.hidden = true;
+    refs.electField.hidden = true;
 
     // Date validation
     if (days === null) {
@@ -442,6 +467,14 @@
     const postDays = Math.max(0, (dispMs - Math.max(acqMs, cutoffMs)) / 86_400_000);
     const isPreCgtAcq = acqDate < PRE_CGT;
     const dispDateLabel = fmtDate(dispDate);
+
+    // Elect-out into indexation is only a live choice when the retained
+    // discount would otherwise apply to a post-cutoff discount gain. A checked
+    // box is ignored while the toggle is hidden (e.g. affordable disposals
+    // before the cutoff still get their 60%).
+    const electAvailable = isResidential && !isPreCgtAcq && postDays > 0 && days > 365 && gross > 0;
+    refs.electField.hidden = !electAvailable;
+    const electIndexation = electAvailable && electCheck.checked;
 
     const inputs = { acqDate, dispDate, days, costBase, proceeds, gross, inflation, rate, indexedRate, minTaxHit };
     const wInputs = baseInputs(inputs);
@@ -575,6 +608,38 @@
         taxable: result.taxable,
         rate,
         tax: result.tax,
+      });
+      setPostCard(null);
+      refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);
+      return;
+    }
+
+    // --- Residential elections (s 115-102 / s 115-125) — retained discount ---
+    // Default path under the Act: the discount continues (50% new dwelling,
+    // 60% affordable), with no 1 July 2027 deemed split and no 30% minimum
+    // tax (deemed-disposal carve-out (1)(e); s 119-5(2)(b)-(c)). Electing
+    // indexation falls through to the ordinary paths below. New-dwelling
+    // disposals before the cutoff take the ordinary 50% path — s 115-102
+    // only matters for events on or after 1 July 2027.
+    if (isResidential && !electIndexation && (postDays > 0 || assetType === 'affordable')) {
+      const discountAmount = gross * resDiscount;
+      const taxable = gross - discountAmount;
+      const pct = Math.round(resDiscount * 100);
+      refs.inflationField.hidden = true;
+      if (assetType === 'new-dwelling') {
+        setPill('"New residential dwelling" criteria are pending a legislative instrument (s 26-160(4)) — treat this result as indicative.', 'calc__pill--warn');
+      } else {
+        setPill('Assumes affordable housing for the full ownership period — the 60% discount prorates by days of affordable use.', 'calc__pill');
+      }
+      setPreCard({
+        title: `Sell on ${dispDateLabel}`,
+        sub: postDays > 0 ? 'Retained discount — no 1 July 2027 split' : 'Affordable housing discount',
+        gain: gross,
+        discountLabel: assetType === 'affordable' ? `${pct}% discount (s 115-125)` : `${pct}% discount (s 115-102)`,
+        discountAmount,
+        taxable,
+        rate,
+        tax: taxable * rate,
       });
       setPostCard(null);
       refs.workingBody.innerHTML = wInputs + wGrossGain(inputs);

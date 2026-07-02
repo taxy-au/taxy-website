@@ -760,6 +760,27 @@
   line-height: $lh-loose;
 }
 
+// Election checkbox row (asset-type elect-out into indexation).
+.calc__check {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+  line-height: 1.4;
+  cursor: pointer;
+
+  input[type='checkbox'] {
+    flex-shrink: 0;
+    width: 16px;
+    height: 16px;
+    margin: 2px 0 0;
+    accent-color: $color-purple;
+    cursor: pointer;
+  }
+}
+
 // --- Budget-watch strip (temporary; remove once updated) -------------------
 // Sits between hero and calculator card. Pink for energy/timeliness (brand:
 // review state, energetic accent). Swap to amber ($pill-submitted-*) if pink
