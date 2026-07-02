@@ -1,7 +1,9 @@
 // CGT discount calculator — AU accounting firms.
 //
-// Reflects Treasury Laws Amendment (Tax Reform No 1) Bill 2026 (introduced
-// 28 May 2026; Schedule 1) and the Imposition Bill:
+// Reflects Treasury Laws Amendment (Tax Reform No 1) Act 2026 (Act No. 49 of
+// 2026, royal assent 26 June 2026; Schedule 1) and the Income Tax Rates
+// Amendment (Tax Reform No 1) Act 2026. Core mechanics passed unchanged from
+// the introduced bill:
 //   - CGT discount replaced by cost-base indexation from 1 July 2027
 //   - 30% minimum tax (new Div 119) on the post-1 July 2027 gain for
 //     individuals, trusts and partnerships
@@ -10,8 +12,8 @@
 //   - Complying super funds (incl. SMSFs) and companies keep the existing
 //     discount regime for post-1985 assets
 //
-// SPLIT MECHANISM (the key 2026-budget→bill change). For an asset held across
-// 1 July 2027, the bill does NOT pro-rata the gain by days. Instead an
+// SPLIT MECHANISM (the key 2026-budget→legislation change). For an asset held
+// across 1 July 2027, the Act does NOT pro-rata the gain by days. Instead an
 // individual/trust is DEEMED to dispose of and reacquire the asset at its
 // MARKET VALUE on 1 July 2027 (Sch 1 item 13, Subdiv 112-E, ss 112-155/165):
 //   - Pre leg  (notional gain, deferred): MV@1Jul27 − cost base, OLD law, 50%
@@ -32,13 +34,14 @@
   const form = document.getElementById('cgt-calc-form');
   if (!form) return;
 
-  // --- ASSUMPTIONS — pending finalised law / instruments --------------------
+  // --- ASSUMPTIONS — pending supporting instruments -------------------------
   //
-  // These are the levers to revisit when the bill passes and the supporting
-  // legislative instruments are made. Engine structure below is built so only
-  // this block (and the inflation input) needs touching.
+  // The Act is law; these are the levers to revisit when the supporting
+  // legislative instruments are made (apportionment method, CPI series).
+  // Engine structure below is built so only this block (and the inflation
+  // input) needs touching.
   //
-  //   1. SPLIT_METHOD — 'market-value' is the bill's default (deemed disposal
+  //   1. SPLIT_METHOD — 'market-value' is the Act's default (deemed disposal
   //      at MV@1Jul27). The alternative — an apportionment method "determined
   //      by the Minister by legislative instrument" (EM 1.110) — is NOT yet
   //      made, so it is not modelled. When released, add it as a second method
@@ -46,7 +49,7 @@
   //   2. Indexation series — Div 960-M (s 960-275) sets the indexation factor
   //      off CPI. No published CPI covers post-1 July 2027 yet, so we project a
   //      single editable inflation rate (RBA 2.5% target default).
-  //   3. Company pre-1985 catch — the bill catches pre-1985 gains for all
+  //   3. Company pre-1985 catch — the Act catches pre-1985 gains for all
   //      entities, but the deemed-disposal/indexation machinery in Subdiv 112-E
   //      is written for individuals/trusts. Company cost-base mechanics for the
   //      post-2027 leg are not spelled out; left as a flagged edge.
@@ -221,7 +224,7 @@
   };
 
   // Straddle (post-1985 asset held across 1 July 2027). Market-value split per
-  // the bill: deemed disposal at MV@1Jul27 (Subdiv 112-E).
+  // the Act: deemed disposal at MV@1Jul27 (Subdiv 112-E).
   //   - Pre leg:  (MV − cost base), old law, 50% discount, no indexation.
   //   - Post leg: proceeds − indexed(MV), new law, indexed over POST period.
   // 12-month test uses the FULL holding period — the deemed disposal is
