@@ -53,6 +53,16 @@
   //      entities, but the deemed-disposal/indexation machinery in Subdiv 112-E
   //      is written for individuals/trusts. Company cost-base mechanics for the
   //      post-2027 leg are not spelled out; left as a flagged edge.
+  //   4. Residential elections (not modelled; would need an asset-type input).
+  //      New residential dwellings (s 115-102) and full-60% affordable housing
+  //      (s 115-125(6)) KEEP the discount by default — no 1 Jul 27 deemed
+  //      split, no 30% min tax (carve-outs in the deemed-disposal provision
+  //      (1)(e) and s 119-5(2)(b)-(c)) — with an irrevocable elect-out into
+  //      indexation (s 103-25 timing; individuals or trustees, not
+  //      companies/super). "New residential dwelling" criteria await the
+  //      s 26-160(4) ministerial instrument (unmade), so that option can't be
+  //      presented definitively yet. Affordable-housing eligibility is existing
+  //      law, but the 60% prorates by affordable-use days.
   const SPLIT_METHOD = 'market-value';
 
   // --- Constants ------------------------------------------------------------
