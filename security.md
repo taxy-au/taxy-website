@@ -22,7 +22,8 @@ Your data is **encrypted in transit and at rest**. (Specific standards are avail
 questionnaire on request.)
 
 ## Multi-factor authentication & zero-trust access
-Logging in requires **multi-factor authentication**. We run a **zero-trust** model: staff devices
+**Multi-factor authentication** is available on every account, and all Taxy staff access requires
+it. We run a **zero-trust** model: staff devices
 can't store or directly reach customer data, and access to production is least-privilege and
 **logged**. Support staff see sensitive fields (names, tax file numbers, attachments) only on
 explicit, logged request.

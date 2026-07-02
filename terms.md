@@ -12,7 +12,7 @@ app.taxy.au is governed separately by our **Cloud Service Agreement** (Standard 
 who logs in, our [End User Agreement](/legal/end-user-agreement/) — not by these
 terms.
 
-_Last updated: 8 June 2026._
+_Last updated: 2 July 2026._
 
 ## 1. Acceptance
 By using the Website you agree to these terms. If you don't agree, don't use the Website.

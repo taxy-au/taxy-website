@@ -61,7 +61,7 @@ page website-terms-of-use.md terms.md /terms/ \
 page standard-terms.md legal/terms.md /legal/terms/ \
   "Cloud Service Agreement — Standard Terms" "Cloud Service Agreement — Standard Terms" \
   "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the app.taxy.au platform." \
-  "10 June 2026" toc
+  "2 July 2026" toc
 
 page end-user-agreement.md legal/end-user-agreement.md /legal/end-user-agreement/ \
   "End user agreement" "End User Agreement" \

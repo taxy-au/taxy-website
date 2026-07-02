@@ -7,7 +7,7 @@ permalink: /legal/terms/
 toc: true
 ---
 
-_Last updated: 10 June 2026._
+_Last updated: 2 July 2026._
 
 > Adapted from the Common Paper Cloud Service Agreement Standard Terms v2.1 (CC BY 4.0), modified for Australian law. Published at taxy.au/legal/terms.
 
@@ -18,7 +18,7 @@ _Last updated: 10 June 2026._
 
 **1.2 Support.** During the Subscription Period, Provider will provide reasonable technical support for the Cloud Service. Any specific support levels or response times may be described in the Order Form.
 
-**1.3 User Accounts.** Customer is responsible for all actions on Users' accounts and for all Users' compliance with this Agreement. Each User's use of the Product is also subject to the Taxy End User Agreement, available at [taxy.au/legal/end-user-agreement](/legal/end-user-agreement/), and Customer will ensure that each User it invites or allows to access the Product complies with the End User Agreement. Customer and Users must protect the confidentiality of their passwords and login credentials. Customer will promptly notify Provider if it suspects or knows of any fraudulent activity with its accounts, passwords, or credentials, or if they become compromised.
+**1.3 User Accounts.** Customer is responsible for all actions on Users' accounts and for all Users' compliance with this Agreement. Each User's use of the Product is also subject to the Taxy End User Agreement, available at [taxy.au/legal/end-user-agreement](/legal/end-user-agreement/) (as updated from time to time in accordance with its terms), and Customer will ensure that each User it invites or allows to access the Product complies with the End User Agreement. Customer and Users must protect the confidentiality of their passwords and login credentials. Customer will promptly notify Provider if it suspects or knows of any fraudulent activity with its accounts, passwords, or credentials, or if they become compromised.
 
 **1.4 Feedback and Usage Data.** Customer may, but is not required to, give Provider Feedback, in which case Customer gives Feedback "AS IS". Provider may use all Feedback freely without any restriction or obligation. In addition, Provider may collect and analyse Usage Data, and Provider may freely use Usage Data to maintain, improve, enhance, and promote Provider's products and services without restriction or obligation. However, Provider may only disclose Usage Data to others if the Usage Data is aggregated and does not identify Customer or Users.
 
