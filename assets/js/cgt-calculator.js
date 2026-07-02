@@ -621,7 +621,7 @@
       if (assetType === 'new-dwelling') {
         setPill('"New residential dwelling" criteria are pending a legislative instrument (s 26-160(4)) — treat this result as indicative.', 'calc__pill--warn');
       } else {
-        setPill('Assumes affordable housing for the full ownership period — the 60% discount prorates by days of affordable use.', 'calc__pill');
+        setPill('Assumes affordable housing for the full ownership period — the 60% discount prorates by days of affordable use.', 'calc__pill--warn');
       }
       setPreCard({
         title: `Sell on ${dispDateLabel}`,
