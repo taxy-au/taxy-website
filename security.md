@@ -6,7 +6,7 @@ description: "How Taxy protects your clients' data — Australian data residency
 permalink: /security/
 ---
 
-_Last updated: 10 June 2026._
+_Last updated: 2 July 2026._
 
 Taxy holds some of the most sensitive information an accounting practice has — your clients'
 identities, financials and tax details. We treat all of it as restricted and critical. Here's how we

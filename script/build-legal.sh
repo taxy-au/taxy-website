@@ -52,7 +52,7 @@ page privacy-policy.md privacy-policy.md /privacy-policy/ \
 page security.md security.md /security/ \
   "Security" "Security at Taxy" \
   "How Taxy protects your clients' data — Australian data residency, encryption in transit and at rest, MFA and zero-trust access, and our ISMS." \
-  "10 June 2026"
+  "2 July 2026"
 
 page website-terms-of-use.md terms.md /terms/ \
   "Website terms of use" "Website Terms of Use" \
