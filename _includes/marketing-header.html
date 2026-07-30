@@ -58,8 +58,24 @@
       if (e.target.tagName === 'A') setOpen(false);
     });
 
-    // Close when crossing back to desktop width.
-    var mql = window.matchMedia('(min-width: 769px)');
-    mql.addEventListener('change', function (e) { if (e.matches) setOpen(false); });
+    // Escape closes the drawer so keyboard and switch users aren't stranded
+    // inside an open menu. Focus only returns to the toggle if it was already
+    // in the drawer — there's no focus trap, so someone can Tab out into a
+    // form field, and we shouldn't yank their focus back up on Escape.
+    document.addEventListener('keydown', function (e) {
+      if (e.key !== 'Escape') return;
+      if (toggle.getAttribute('aria-expanded') !== 'true') return;
+      var wasInside = menu.contains(document.activeElement);
+      setOpen(false);
+      if (wasInside) toggle.focus();
+    });
+
+    // Close when crossing back to desktop width. Must be the exact complement
+    // of the SCSS breakpoint ($breakpoint-md, 768px): a `min-width: 769px`
+    // query leaves fractional widths like 768.5px — reachable via browser zoom
+    // — matching neither rule, which strands the page scroll-locked with the
+    // toggle hidden and no way to reopen or dismiss the drawer.
+    var mql = window.matchMedia('(max-width: 768px)');
+    mql.addEventListener('change', function (e) { if (!e.matches) setOpen(false); });
   })();
 </script>

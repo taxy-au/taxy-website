@@ -748,6 +748,9 @@
   color: $color-nightshade;
   line-height: 1.4;
   cursor: pointer;
+  // The whole label toggles the box, so the label is the tap target — a single
+  // 14px/1.4 line is only ~20px, under the WCAG 2.2 (2.5.8) 24px floor.
+  min-height: 24px;
 
   input[type='checkbox'] {
     flex-shrink: 0;

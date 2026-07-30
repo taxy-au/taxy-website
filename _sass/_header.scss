@@ -89,6 +89,14 @@
   flex-direction: column;
   gap: $space-2;
 
+  // body.nav-open locks page scroll, so the drawer must scroll itself —
+  // otherwise the lower links are unreachable on a short viewport (landscape
+  // phone, small handset). dvh so mobile browser chrome doesn't clip it.
+  max-height: calc(100vh - var(--header-height));
+  max-height: calc(100dvh - var(--header-height));
+  overflow-y: auto;
+  overscroll-behavior: contain;
+
   // :not(.btn) so the Log In button keeps its own white-on-purple treatment
   // and isn't given a bottom divider line.
   a:not(.btn) {

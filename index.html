@@ -348,6 +348,19 @@ permalink: /
         <a href="{{ '/assets/video/taxy-dashboard.mp4' | relative_url }}">Download the walkthrough</a>.
       </video>
     </div>
+    <script>
+      // Don't autoplay a looping video at people who've asked the OS for less
+      // motion — park it on the poster frame. `controls` means they can still
+      // play it deliberately.
+      (function () {
+        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var v = document.querySelector('.poc__video video');
+        if (!v) return;
+        v.removeAttribute('autoplay');
+        v.loop = false;
+        v.pause();
+      })();
+    </script>
   </div>
 </section>
 
