@@ -1,3 +1,5 @@
+@use "tokens" as *;
+
 // Calculator — accountant-facing CGT modelling tool.
 // Form (left) + live results (right) on desktop; stacked on mobile.
 
@@ -333,30 +335,6 @@
     text-align: right;
     margin: 0;
     white-space: nowrap; // value stays one line; label wraps if it has to
-  }
-}
-
-// Small inline input for the inflation rate — sits in the result row like
-// any other value, but bordered so accountants can see it's editable.
-.result__editable {
-  font-family: $font-stack;
-  font-size: $fs-p-small;
-  font-weight: $fw-bold;
-  color: $color-nightshade;
-  font-variant-numeric: tabular-nums;
-  text-align: right;
-  background: $color-white;
-  border: 1px solid $color-light-grey;
-  border-radius: $r-sm;
-  padding: 2px 6px;
-  width: 56px;
-  transition: border-color $t-fast, box-shadow $t-fast;
-
-  &:focus,
-  &:focus-visible {
-    outline: none;
-    border-color: $color-purple;
-    box-shadow: 0 0 0 2px rgba($color-purple, 0.15);
   }
 }
 

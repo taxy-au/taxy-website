@@ -1,24 +1,26 @@
 ---
 ---
 
-@import "tokens";
-@import "reset";
-@import "base";
-@import "layout";
-@import "buttons";
-@import "header";
-@import "footer";
-@import "hero";
-@import "prose";
-@import "legal";
-@import "faq";
-@import "stat-cards";
-@import "proof-card";
-@import "pain-mech";
-@import "founder";
-@import "firm-proof";
-@import "client-proof";
-@import "app-dashboard";
-@import "poc";
-@import "calculator";
-@import "home";
+// Cascade order matters — each partial is emitted where it's first loaded.
+// Tokens aren't listed: they emit no CSS and every partial pulls them in
+// itself via `@use "tokens" as *`.
+@use "reset";
+@use "base";
+@use "layout";
+@use "buttons";
+@use "header";
+@use "footer";
+@use "hero";
+@use "prose";
+@use "legal";
+@use "faq";
+@use "stat-cards";
+@use "proof-card";
+@use "pain-mech";
+@use "founder";
+@use "firm-proof";
+@use "client-proof";
+@use "app-dashboard";
+@use "poc";
+@use "calculator";
+@use "home";

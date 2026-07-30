@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "tokens" as *;
+
 // POC closer — heading + paragraph + CTA + walkthrough video, all on white.
 // Acts as the section heading for the embedded walkthrough below.
 
@@ -60,8 +63,8 @@
 
     &:hover,
     &:focus-visible {
-      background: lighten($color-nightshade, 6%);
-      border-color: lighten($color-nightshade, 6%);
+      background: color.adjust($color-nightshade, $lightness: 6%);
+      border-color: color.adjust($color-nightshade, $lightness: 6%);
     }
   }
 }

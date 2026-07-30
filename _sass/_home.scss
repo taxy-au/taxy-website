@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "tokens" as *;
+
 // Home-page-specific layout pieces.
 
 // Wrapper that owns a continuous paperclip-tile bg across hero + strip,
@@ -48,8 +51,8 @@
 
     &:hover,
     &:focus-visible {
-      background: lighten($color-nightshade, 6%);
-      border-color: lighten($color-nightshade, 6%);
+      background: color.adjust($color-nightshade, $lightness: 6%);
+      border-color: color.adjust($color-nightshade, $lightness: 6%);
     }
   }
 }

@@ -1,3 +1,5 @@
+@use "tokens" as *;
+
 // Story-section graphic: floating client rows.
 // Sits inside .story-graphic (which bleeds left off the frame edge — see
 // _pain-mech.scss). Each row is its own card and inherits the bleed.

@@ -1,3 +1,6 @@
+@use "sass:color";
+@use "tokens" as *;
+
 // Buttons.
 
 .btn {
@@ -46,8 +49,8 @@
 
   &:hover,
   &:focus-visible {
-    background: lighten($color-nightshade, 6%);
-    border-color: lighten($color-nightshade, 6%);
+    background: color.adjust($color-nightshade, $lightness: 6%);
+    border-color: color.adjust($color-nightshade, $lightness: 6%);
     color: $color-white;
   }
 }
