@@ -1,0 +1,518 @@
+@use "tokens" as *;
+
+// Episode landing page — Accountants Daily Insider × Taxy.
+// Editorial / featured-episode feel: credibility over product pitch.
+// Brief: taxy-ops/content/podcast-episode-page-brief.md §4 (visual feel).
+
+// Narrower measure for comfortable long-form reading.
+.container--reading {
+  max-width: 760px;
+}
+
+.episode {
+  display: block;
+}
+
+// ── Hero ──────────────────────────────────────────────────────────────
+// Two columns at desktop: editorial text left, co-brand image right.
+// Stacks (text then image) below $breakpoint-lg.
+.episode-hero {
+  padding-block: $space-7 $space-5;
+  background: linear-gradient(180deg, $color-offwhite-2 0%, $color-white 100%);
+
+  @media (max-width: $breakpoint-md) {
+    padding-block: $space-5 $space-4;
+  }
+
+  .container {
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: $space-6;
+    align-items: center;
+
+    @media (max-width: $breakpoint-md) {
+      grid-template-columns: 1fr;
+      gap: $space-5;
+    }
+  }
+}
+
+.episode-hero__head {
+  margin: 0;
+}
+
+.episode-hero__eyebrow {
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: $color-purple;
+  margin-bottom: $space-2;
+}
+
+.episode-hero__title {
+  font-size: clamp(30px, 4.5vw, 46px);
+  font-weight: $fw-black;
+  line-height: 1.08;
+  margin: 0 0 $space-3;
+  color: $color-nightshade;
+}
+
+.episode-hero__standfirst {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: $lh-loose;
+  color: $color-nightshade-muted;
+  margin: 0 0 $space-3;
+}
+
+// Episode metadata line — "real media" signal (series · date · runtime).
+.episode-hero__meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-2;
+  font-size: $fs-p-small;
+  color: $color-nightshade-muted;
+  margin: 0 0 $space-4;
+}
+
+.episode-hero__series {
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+}
+
+.episode-hero__meta-sep {
+  color: $color-light-grey;
+}
+
+// Guest / host byline — sits above the co-brand image. Guest leads (this is
+// the guest's own page); host follows.
+.episode-people {
+  display: flex;
+  gap: $space-5;
+  flex-wrap: wrap;
+  margin: 0;
+  padding-top: $space-3;
+  border-top: 1px solid $color-light-grey;
+
+  @media (max-width: $breakpoint-md) {
+    gap: $space-4;
+  }
+}
+
+.episode-people__person {
+  text-align: left;
+}
+
+// Co-brand still (guest × host + Accountants Daily). Placeholder styling until
+// the real image lands Friday (Amanda's launch-post graphic).
+.episode-hero__cobrand {
+  margin: 0;
+}
+
+.episode-cobrand {
+  border-radius: $r-lg;
+  overflow: hidden;
+  box-shadow: $shadow-lift-purple;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.episode-cobrand--placeholder {
+  aspect-ratio: 4 / 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-3;
+  flex-wrap: wrap;
+  background: linear-gradient(135deg, $color-nightshade 0%, $color-purple-pressed 100%);
+  color: $color-white;
+  padding: $space-4;
+}
+
+.episode-cobrand__mark {
+  font-size: clamp(18px, 3vw, $fs-h3);
+  font-weight: $fw-black;
+  letter-spacing: -0.01em;
+}
+
+.episode-cobrand__x {
+  font-size: clamp(18px, 3vw, $fs-h3);
+  font-weight: $fw-regular;
+  color: $color-lavender;
+}
+
+.episode-people__role {
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-purple;
+  margin-bottom: 2px;
+}
+
+.episode-people__name {
+  margin: 0;
+  font-size: $fs-h5;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+
+  span {
+    display: block;
+    font-size: $fs-p-small;
+    font-weight: $fw-regular;
+    color: $color-nightshade-muted;
+  }
+}
+
+// ── Player ────────────────────────────────────────────────────────────
+.episode-player-section {
+  background: $color-white;
+}
+
+.episode-player {
+  max-width: 860px;
+  margin-inline: auto;
+}
+
+.episode-player__placeholder {
+  border: 2px dashed $color-light-grey;
+  border-radius: $r-md;
+  padding: $space-5 $space-4;
+  text-align: center;
+  background: $color-offwhite;
+}
+
+.episode-player__badge {
+  display: inline-block;
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-purple;
+  margin-bottom: $space-1;
+}
+
+.episode-player__msg {
+  margin: 0;
+  color: $color-nightshade-muted;
+}
+
+// "Listen on" platform row — recognisable links, not badge-soup.
+.episode-listen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: $space-2 $space-3;
+  margin-top: $space-3;
+}
+
+.episode-listen__label {
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-nightshade-muted;
+}
+
+.episode-listen__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  a {
+    display: inline-block;
+    padding: 0.4rem $space-2;
+    border: 1px solid $color-light-grey;
+    border-radius: $r-sm;
+    font-size: $fs-p-small;
+    font-weight: $fw-bold;
+    color: $color-nightshade;
+    text-decoration: none;
+    transition: border-color $t-fast, color $t-fast;
+
+    &:hover {
+      border-color: $color-purple;
+      color: $color-purple;
+    }
+  }
+}
+
+// ── Body / long-form ──────────────────────────────────────────────────
+.episode-body {
+  padding-block: $space-6;
+
+  @media (max-width: $breakpoint-md) {
+    padding-block: $space-5;
+  }
+}
+
+.episode-block {
+  & + & {
+    margin-top: $space-6;
+  }
+
+  h2 {
+    font-size: $fs-h3;
+    font-weight: $fw-black;
+    color: $color-nightshade;
+    line-height: 1.1;
+    margin-bottom: $space-3;
+  }
+
+  p {
+    font-size: $fs-p;
+    line-height: $lh-loose;
+    color: $color-nightshade-muted;
+  }
+}
+
+.episode-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+    padding-left: $space-4;
+    font-size: $fs-p;
+    line-height: $lh-loose;
+    color: $color-nightshade-muted;
+
+    & + li {
+      margin-top: $space-2;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.55em;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: $color-purple;
+    }
+  }
+}
+
+// CGT example — the page's single product artefact.
+.episode-tool {
+  background: $color-offwhite-2;
+  border-radius: $r-lg;
+  padding: $space-5;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-4;
+  }
+
+  p {
+    margin-bottom: $space-4;
+  }
+
+  .btn {
+    margin: 0;
+  }
+}
+
+// ── Transcript ────────────────────────────────────────────────────────
+.episode-transcript {
+  border-top: 1px solid $color-light-grey;
+  border-bottom: 1px solid $color-light-grey;
+}
+
+.episode-transcript__summary {
+  cursor: pointer;
+  padding-block: $space-3;
+  font-weight: $fw-bold;
+  font-size: $fs-h5;
+  color: $color-purple;
+  list-style: none;
+
+  &::-webkit-details-marker { display: none; }
+
+  &::before {
+    content: "+ ";
+    font-weight: $fw-black;
+  }
+
+  .episode-transcript[open] &::before {
+    content: "\2013 ";
+  }
+}
+
+.episode-transcript__body {
+  padding-bottom: $space-4;
+
+  p {
+    font-size: $fs-p;
+    line-height: $lh-loose;
+    color: $color-nightshade-muted;
+    margin-bottom: $space-3;
+  }
+
+  b {
+    color: $color-nightshade;
+    font-weight: $fw-bold;
+  }
+}
+
+// ── Attributed pull-quote ─────────────────────────────────────────────
+.episode-pullquote {
+  margin: $space-6 0;
+
+  blockquote {
+    margin: 0;
+    font-size: clamp(22px, 3vw, 30px);
+    font-weight: $fw-bold;
+    line-height: 1.25;
+    color: $color-nightshade;
+    border-left: 4px solid $color-purple;
+    padding-left: $space-4;
+  }
+}
+
+// Inline attribution at the end of the quote — "– Amanda, Taxy".
+.episode-pullquote__attr {
+  display: block;
+  margin-top: $space-2;
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  color: $color-nightshade-muted;
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────
+.episode-faq__item {
+  padding-block: $space-3;
+  border-top: 1px solid $color-light-grey;
+
+  &:last-child {
+    border-bottom: 1px solid $color-light-grey;
+  }
+}
+
+.episode-faq__q {
+  font-size: $fs-h5;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+  margin-bottom: $space-1;
+  line-height: 1.25;
+}
+
+.episode-faq__a {
+  font-size: $fs-p !important;
+  line-height: $lh-loose;
+  color: $color-nightshade-muted;
+  margin: 0;
+}
+
+// ── Guest / host bios ─────────────────────────────────────────────────
+.episode-bio {
+  & + & {
+    margin-top: $space-4;
+    padding-top: $space-4;
+    border-top: 1px solid $color-light-grey;
+  }
+}
+
+// Name and role on one line — name bold, role muted (no purple stack).
+.episode-bio__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: $space-1 $space-2;
+  margin-bottom: $space-2;
+  font-size: $fs-h5;
+  font-weight: $fw-regular;
+  line-height: 1.2;
+}
+
+.episode-bio__name {
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+}
+
+.episode-bio__role {
+  font-size: $fs-p-small;
+  color: $color-nightshade-muted;
+}
+
+.episode-bio__body {
+  font-size: $fs-p !important;
+  line-height: $lh-loose;
+  color: $color-nightshade-muted;
+  margin: 0;
+}
+
+// ── Keep exploring — cards ────────────────────────────────────────────
+.episode-related__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: $space-3;
+
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.episode-card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-4;
+  border: 1px solid $color-light-grey;
+  border-radius: $r-md;
+  text-decoration: none;
+  background: $color-white;
+  transition: border-color $t-fast, box-shadow $t-fast, transform $t-fast;
+
+  &:hover {
+    border-color: $color-purple;
+    box-shadow: $shadow-lift-dark;
+    transform: translateY(-2px);
+  }
+}
+
+.episode-card__label {
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-purple;
+}
+
+.episode-card__title {
+  font-size: $fs-h5;
+  font-weight: $fw-bold;
+  color: $color-nightshade;
+}
+
+.episode-card__desc {
+  font-size: $fs-p-small;
+  line-height: $lh-loose;
+  color: $color-nightshade-muted;
+}
+
+// ── Footer identity (light, no CTA band) ──────────────────────────────
+.episode-identity {
+  padding-block: $space-5 $space-7;
+
+  p {
+    font-size: $fs-p-small;
+    line-height: $lh-loose;
+    color: $color-nightshade-muted;
+    text-align: center;
+    max-width: 60ch;
+    margin-inline: auto;
+    padding-top: $space-4;
+    border-top: 1px solid $color-light-grey;
+  }
+}
