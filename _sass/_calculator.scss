@@ -804,7 +804,11 @@
   column-gap: $space-5;
   row-gap: $space-3;
 
-  @media (max-width: $breakpoint-md) {
+  // Stack below $breakpoint-lg, not -md: between 768–1024 the 50/50 split
+  // squeezes the graphic column below the dx-row's real min (~406px — pill +
+  // three fixed-width stats), so the stats overflow the card and collide with
+  // this column's text. Stacking gives the graphic full width in that band.
+  @media (max-width: $breakpoint-lg) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "title"
