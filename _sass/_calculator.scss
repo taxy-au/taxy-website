@@ -797,23 +797,14 @@
   // Mobile: title, then graphic, then body — so the heading introduces the
   // visual rather than appearing after it.
   display: grid;
-  // Size the graphic column to the capped card (460px) rather than a 50/50
-  // split: a half-container column stretched the cards so their left-packed
-  // stats stranded against empty space, and below ~1000px a 50/50 split even
-  // squeezed the column under the card's ~450px min and the stats overflowed.
-  // Fixed 460 = the card fills it exactly; text takes the rest.
-  grid-template-columns: 460px minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   grid-template-areas:
     "graphic title"
     "graphic body";
   column-gap: $space-5;
   row-gap: $space-3;
 
-  // Stack below 900px. Two-column needs the 460 card + a usable text column
-  // (~300px) + gutters (~860px+), so it survives a half-screen (~960px) but
-  // stacks on small tablets/phones before the text column gets too cramped.
-  // (The dx-row switches to its own stacked layout at $breakpoint-md.)
-  @media (max-width: 900px) {
+  @media (max-width: $breakpoint-md) {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "title"
@@ -838,12 +829,7 @@
 
 .calc-cta__graphic {
   grid-area: graphic;
-  // Cap the card column near the homepage graphic's width (~1fr of its 1400
-  // frame). Without this the rows stretch to fill a half-container (or, when
-  // stacked, the whole container) and the left-packed stats strand against a
-  // wide empty right side. Capped + left-aligned, the stats fill the card in
-  // every state — two-column and stacked alike.
-  .dx-list { gap: 12px; max-width: 460px; }
+  .dx-list { gap: 12px; }
 
   // Restore the left border and full radius the homepage drops for its
   // left-bleed effect — here the rows sit as standalone floating cards.
