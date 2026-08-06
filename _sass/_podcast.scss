@@ -111,39 +111,11 @@
 }
 
 .episode-cobrand {
+  display: block;
+  width: 100%;
+  height: auto;
   border-radius: $r-lg;
-  overflow: hidden;
   box-shadow: $shadow-lift-purple;
-
-  img {
-    display: block;
-    width: 100%;
-    height: auto;
-  }
-}
-
-.episode-cobrand--placeholder {
-  aspect-ratio: 4 / 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: $space-3;
-  flex-wrap: wrap;
-  background: linear-gradient(135deg, $color-nightshade 0%, $color-purple-pressed 100%);
-  color: $color-white;
-  padding: $space-4;
-}
-
-.episode-cobrand__mark {
-  font-size: clamp(18px, 3vw, $fs-h3);
-  font-weight: $fw-black;
-  letter-spacing: -0.01em;
-}
-
-.episode-cobrand__x {
-  font-size: clamp(18px, 3vw, $fs-h3);
-  font-weight: $fw-regular;
-  color: $color-lavender;
 }
 
 .episode-people__role {
@@ -172,6 +144,11 @@
 // ── Player ────────────────────────────────────────────────────────────
 .episode-player-section {
   background: $color-white;
+}
+
+// Tighten the run from the listen row into the transcript toggle.
+.episode-player-section.section--tight {
+  padding-bottom: $space-3;
 }
 
 .episode-player {
@@ -248,10 +225,10 @@
 
 // ── Body / long-form ──────────────────────────────────────────────────
 .episode-body {
-  padding-block: $space-6;
+  padding-block: $space-4 $space-6;
 
   @media (max-width: $breakpoint-md) {
-    padding-block: $space-5;
+    padding-block: $space-3 $space-5;
   }
 }
 
@@ -304,23 +281,38 @@
   }
 }
 
-// CGT example — the page's single product artefact.
-.episode-tool {
+// Example-in-action callout — the CGT tool, folded into the Q&A context.
+.episode-callout {
+  margin-top: $space-4;
+  padding: $space-4;
+  border-radius: $r-md;
   background: $color-offwhite-2;
-  border-radius: $r-lg;
-  padding: $space-5;
-
-  @media (max-width: $breakpoint-md) {
-    padding: $space-4;
-  }
 
   p {
-    margin-bottom: $space-4;
-  }
-
-  .btn {
+    font-size: $fs-p;
+    line-height: $lh-loose;
+    color: $color-nightshade-muted;
     margin: 0;
   }
+
+  a {
+    font-weight: $fw-bold;
+    color: $color-purple;
+    text-decoration: none;
+    white-space: nowrap;
+
+    &:hover { text-decoration: underline; }
+  }
+}
+
+.episode-callout__label {
+  display: block;
+  font-size: $fs-p-small;
+  font-weight: $fw-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $color-purple;
+  margin-bottom: $space-1;
 }
 
 // ── Transcript ────────────────────────────────────────────────────────
@@ -452,67 +444,14 @@
   margin: 0;
 }
 
-// ── Keep exploring — cards ────────────────────────────────────────────
-.episode-related__grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: $space-3;
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.episode-card {
+// ── Keep exploring — closing block (identity line + next-step buttons) ─
+.episode-outro__actions {
   display: flex;
-  flex-direction: column;
-  gap: $space-1;
-  padding: $space-4;
-  border: 1px solid $color-light-grey;
-  border-radius: $r-md;
-  text-decoration: none;
-  background: $color-white;
-  transition: border-color $t-fast, box-shadow $t-fast, transform $t-fast;
+  flex-wrap: wrap;
+  gap: $space-3;
+  margin-top: $space-4;
 
-  &:hover {
-    border-color: $color-purple;
-    box-shadow: $shadow-lift-dark;
-    transform: translateY(-2px);
-  }
-}
-
-.episode-card__label {
-  font-size: $fs-p-small;
-  font-weight: $fw-bold;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: $color-purple;
-}
-
-.episode-card__title {
-  font-size: $fs-h5;
-  font-weight: $fw-bold;
-  color: $color-nightshade;
-}
-
-.episode-card__desc {
-  font-size: $fs-p-small;
-  line-height: $lh-loose;
-  color: $color-nightshade-muted;
-}
-
-// ── Footer identity (light, no CTA band) ──────────────────────────────
-.episode-identity {
-  padding-block: $space-5 $space-7;
-
-  p {
-    font-size: $fs-p-small;
-    line-height: $lh-loose;
-    color: $color-nightshade-muted;
-    text-align: center;
-    max-width: 60ch;
-    margin-inline: auto;
-    padding-top: $space-4;
-    border-top: 1px solid $color-light-grey;
+  .btn {
+    margin: 0;
   }
 }
