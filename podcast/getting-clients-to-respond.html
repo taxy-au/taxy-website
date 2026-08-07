@@ -11,19 +11,7 @@ author: Amanda Walker
 {%- comment -%}
   Episode landing page — Accountants Daily Insider × Taxy.
   Build brief: taxy-ops/content/podcast-episode-page-brief.md (copy final, Amanda-approved 2026-08-04).
-  Page live Fri 7 Aug 2026.
-
-  TWO ITEMS LAND ON FRIDAY (launch day), see #episode-player + #cobrand-hero:
-    1. Episode player embed — replace the .episode-player__placeholder block with
-       Momentum's embed code, and set the real "Listen on Accountants Daily" href.
-    2. Co-brand hero image — /assets/img/podcast/episode-cobrand-hero.png
-       (Amanda × Jerome + Accountants Daily branding, AAA × Taxy pattern). This same
-       file is the OG/share image (front matter `image` above) and the LinkedIn pin
-       graphic. Depends on a still from the record (Momentum / Lyndsey's video).
-       Fallback if the still isn't ready: headshot + AD-logo co-brand tile.
-
-  H1 = Momentum's final published episode title. If theirs differs from the working
-  title below, use theirs (SEO / recognition consistency).
+  Live Fri 7 Aug 2026 — Spotify episode player embedded (episode 2nl2gB0x5qZhcizd8mdTM4).
 {%- endcomment -%}
 
 <article class="episode">
@@ -64,26 +52,18 @@ author: Amanda Walker
 
   <section class="section section--tight episode-player-section" id="episode-player" aria-label="Listen to the episode">
     <div class="container">
-      {%- comment -%}
-        FRIDAY: replace this placeholder with the Momentum / Accountants Daily embed,
-        and point the fallback link at the real episode URL.
-      {%- endcomment -%}
       <div class="episode-player">
-        <div class="episode-player__placeholder">
-          <span class="episode-player__badge">Episode</span>
-          <p class="episode-player__msg">The player goes live when the episode drops on Friday 7 August 2026.</p>
-        </div>
-        {%- comment -%}
-          FRIDAY: set the real per-episode URLs (from the publisher) on each link below.
-          Placeholders point at the show pages for now. Drop any platform the episode
-          isn't syndicated to rather than leaving a dead link.
-        {%- endcomment -%}
+        <iframe class="episode-player__spotify"
+          src="https://open.spotify.com/embed/episode/2nl2gB0x5qZhcizd8mdTM4?utm_source=generator"
+          width="100%" height="232" loading="lazy" allowfullscreen
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          title="Listen to &ldquo;Designing workflows to save time and better serve clients&rdquo; on Spotify"></iframe>
+
         <div class="episode-listen">
           <span class="episode-listen__label">Listen on</span>
           <ul class="episode-listen__links">
-            <li><a href="https://www.accountantsdaily.com.au/podcasts/accountants-daily-insider">Accountants Daily</a></li>
-            <li><a href="https://open.spotify.com/">Spotify</a></li>
-            <li><a href="https://www.youtube.com/channel/UCDEKqIqs6uW7HXnAVncc-tg">YouTube</a></li>
+            <li><a href="https://www.accountantsdaily.com.au/tax-compliance/22760-designing-workflows-to-save-time-and-better-serve-clients">Accountants Daily</a></li>
+            <li><a href="https://open.spotify.com/episode/2nl2gB0x5qZhcizd8mdTM4">Spotify</a></li>
           </ul>
         </div>
       </div>

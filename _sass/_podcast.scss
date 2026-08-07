@@ -156,27 +156,14 @@
   margin-inline: auto;
 }
 
-.episode-player__placeholder {
-  border: 2px dashed $color-light-grey;
+// Spotify episode embed. Spotify clamps its own player to ~152–352px tall and
+// paints rounded corners itself; we just make it fill the column.
+.episode-player__spotify {
+  display: block;
+  width: 100%;
+  min-height: 232px;
+  border: 0;
   border-radius: $r-md;
-  padding: $space-5 $space-4;
-  text-align: center;
-  background: $color-offwhite;
-}
-
-.episode-player__badge {
-  display: inline-block;
-  font-size: $fs-p-small;
-  font-weight: $fw-bold;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  color: $color-purple;
-  margin-bottom: $space-1;
-}
-
-.episode-player__msg {
-  margin: 0;
-  color: $color-nightshade-muted;
 }
 
 // "Listen on" platform row — recognisable links, not badge-soup.

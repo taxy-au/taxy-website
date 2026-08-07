@@ -1,0 +1,32 @@
+{%- comment -%}
+  Site-wide launch ribbon — sits between the header and the page, on every page
+  except the podcast episode itself (guarded in _layouts/marketing.html).
+  Dismissible; the dismissal is remembered per browser so it doesn't reappear as
+  the visitor moves around the site. Bump the storage key to re-show a new campaign.
+{%- endcomment -%}
+<aside class="site-banner" id="site-banner" aria-label="Announcement">
+  <div class="site-banner__inner">
+    <a class="site-banner__link" href="{{ '/podcast/getting-clients-to-respond/' | relative_url }}">
+      <span class="site-banner__tag">New podcast</span>
+      <span class="site-banner__text">Amanda Walker on the Accountants&nbsp;Daily Insider &mdash; designing workflows to save time &amp; better serve clients</span>
+      <span class="site-banner__cta">Listen<span aria-hidden="true"> &rarr;</span></span>
+    </a>
+    <button class="site-banner__dismiss" type="button" aria-label="Dismiss announcement">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+</aside>
+<script>
+  (function () {
+    var key = 'taxy-banner-podcast-adi-2026-08';
+    var el = document.getElementById('site-banner');
+    if (!el) return;
+    // Hide synchronously (before paint) if already dismissed, so there's no flash.
+    try { if (localStorage.getItem(key)) { el.hidden = true; return; } } catch (e) {}
+    var btn = el.querySelector('.site-banner__dismiss');
+    if (btn) btn.addEventListener('click', function () {
+      el.hidden = true;
+      try { localStorage.setItem(key, '1'); } catch (e) {}
+    });
+  })();
+</script>
