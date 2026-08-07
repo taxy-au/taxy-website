@@ -24,21 +24,23 @@
     padding-block: $space-5 $space-4;
   }
 
-  // Landscape co-brand banner on top, editorial text beneath.
+  // Two columns at desktop: editorial text left, square co-brand image right.
+  // Stacks (text then image) below $breakpoint-md.
   .container {
-    display: flex;
-    flex-direction: column;
-    gap: $space-5;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: $space-6;
+    align-items: center;
 
     @media (max-width: $breakpoint-md) {
-      gap: $space-4;
+      grid-template-columns: 1fr;
+      gap: $space-5;
     }
   }
 }
 
 .episode-hero__head {
   margin: 0;
-  max-width: 820px; // comfortable reading measure beneath the full-width banner
 }
 
 .episode-hero__eyebrow {
@@ -103,8 +105,7 @@
   text-align: left;
 }
 
-// Co-brand landscape banner (guest × host + Accountants Daily), full container
-// width at the top of the hero.
+// Co-brand still (guest × host + Accountants Daily), square, beside the headline.
 .episode-hero__cobrand {
   margin: 0;
 }
