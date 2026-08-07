@@ -1,12 +1,12 @@
 {%- comment -%}
   Site-wide launch ribbon — a thin, non-dismissible line between the header and
   the page, on every marketing page except the podcast episode it points to
-  (guarded in _layouts/marketing.html).
+  (guarded in _layouts/marketing.html). The whole bar is clickable; the episode
+  title carries the visible link styling.
 {%- endcomment -%}
 <aside class="site-banner" aria-label="Announcement">
   <a class="site-banner__link" href="{{ '/podcast/getting-clients-to-respond/' | relative_url }}">
-    <span class="site-banner__tag">New podcast</span>
-    <span class="site-banner__text">Amanda Walker on the Accountants&nbsp;Daily Insider</span>
-    <span class="site-banner__cta">Listen<span aria-hidden="true"> &rarr;</span></span>
+    <span class="site-banner__tag">Listen now</span>
+    <span class="site-banner__title">Designing workflows to save time &mdash; on the Accountants&nbsp;Daily Insider</span>
   </a>
 </aside>

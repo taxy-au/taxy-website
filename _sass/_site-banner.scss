@@ -23,8 +23,8 @@
   color: inherit;
   text-decoration: none;
 
-  &:hover .site-banner__cta,
-  &:focus-visible .site-banner__cta { text-decoration: underline; }
+  &:hover .site-banner__title,
+  &:focus-visible .site-banner__title { text-decoration-thickness: 2px; }
 }
 
 .site-banner__tag {
@@ -33,12 +33,9 @@
   letter-spacing: 0.06em;
 }
 
-.site-banner__text {
+// The episode title carries the visible link affordance.
+.site-banner__title {
   font-weight: $fw-bold;
-}
-
-.site-banner__cta {
-  font-weight: $fw-bold;
-  white-space: nowrap;
   text-decoration: underline;
+  text-underline-offset: 2px;
 }
