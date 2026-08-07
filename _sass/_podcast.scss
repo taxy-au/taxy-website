@@ -24,21 +24,21 @@
     padding-block: $space-5 $space-4;
   }
 
+  // Landscape co-brand banner on top, editorial text beneath.
   .container {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: $space-6;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: $space-5;
 
     @media (max-width: $breakpoint-md) {
-      grid-template-columns: 1fr;
-      gap: $space-5;
+      gap: $space-4;
     }
   }
 }
 
 .episode-hero__head {
   margin: 0;
+  max-width: 820px; // comfortable reading measure beneath the full-width banner
 }
 
 .episode-hero__eyebrow {
@@ -85,8 +85,7 @@
   color: $color-light-grey;
 }
 
-// Guest / host byline — sits above the co-brand image. Guest leads (this is
-// the guest's own page); host follows.
+// Guest / host byline. Guest leads (this is the guest's own page); host follows.
 .episode-people {
   display: flex;
   gap: $space-5;
@@ -104,8 +103,8 @@
   text-align: left;
 }
 
-// Co-brand still (guest × host + Accountants Daily). Placeholder styling until
-// the real image lands Friday (Amanda's launch-post graphic).
+// Co-brand landscape banner (guest × host + Accountants Daily), full container
+// width at the top of the hero.
 .episode-hero__cobrand {
   margin: 0;
 }
