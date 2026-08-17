@@ -1,4 +1,5 @@
 @use "tokens" as *;
+@use "graphic-split" as *;
 
 // Story + mech list — the "in our experience, it doesn't have to be" solution
 // arc. Shares a wider 1400px frame so the dashboard graphic can bleed off the
@@ -24,9 +25,7 @@ $story-frame-max: 1400px;
 }
 
 .story-grid {
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  gap: $space-5;
+  @include graphic-split;
   align-items: stretch; // graphic matches text-column height
   max-width: $story-frame-max;
   margin-inline: auto;
@@ -34,49 +33,48 @@ $story-frame-max: 1400px;
 
   @media (max-width: $breakpoint-md) {
     // Become transparent so .story-graphic and .story-head's children
-    // participate in .story's grid directly.
+    // participate in .story's grid directly. Must stay after the mixin —
+    // `display: contents` makes the grid properties above inert, which is what
+    // hands the phone-tier reflow to .story's own grid.
     display: contents;
   }
 }
 
-// Sits inside .story-graphic; each row is its own card and inherits the bleed.
-// Bleed left: extend from cell-left out by the container's own left-padding,
-// so on viewports ≤ frame width (1400px) the card edge meets viewport-left,
-// and on wider viewports the card stops at the frame edge (whitespace fills
-// the rest). Avoids the card flying further left as the page widens.
 .story-graphic {
   display: block;
-
-  @media (min-width: $breakpoint-md) {
-    --story-bleed: clamp(#{$space-2}, 4vw, #{$space-5});
-    margin-left: calc(-1 * var(--story-bleed));
-    width: calc(100% + var(--story-bleed));
-  }
+  grid-area: graphic;
+  @include graphic-bleed;
 
   @media (max-width: $breakpoint-md) {
-    grid-area: graphic;
     padding-inline: clamp($space-2, 4vw, $space-5);
   }
 }
 
 .story-head {
-  // Children participate directly in the .story grid on mobile, so
-  // .story-head itself disappears as a layout box.
-  @media (max-width: $breakpoint-md) {
-    display: contents;
-  }
+  // Never a layout box: the title and body are placed individually, so they can
+  // separate at the mid tier (body drops full-width, title stays beside the
+  // graphic) and reflow into .story's own grid on phones.
+  display: contents;
 }
 
 .story-head__title {
+  grid-area: title;
+
+  @media (max-width: $graphic-split-mid) and (min-width: #{$breakpoint-md + 0.02}) {
+    // Alone beside the full height of the graphic once the body drops away,
+    // so centre it rather than leaving it parked at the bottom of the row.
+    align-self: center;
+  }
+
   @media (max-width: $breakpoint-md) {
-    grid-area: title;
     padding-inline: clamp($space-2, 4vw, $space-5);
   }
 }
 
 .story-head__body {
+  grid-area: body;
+
   @media (max-width: $breakpoint-md) {
-    grid-area: body;
     padding-inline: clamp($space-2, 4vw, $space-5);
   }
 }
@@ -95,8 +93,17 @@ $story-frame-max: 1400px;
     line-height: 1.05;
     letter-spacing: -0.02em;
     color: $color-nightshade;
-    margin: 0 0 $space-3;
+    // No bottom margin: the title and body are separate grid items now, so the
+    // grid's own row-gap sets this. Leaving the margin on stacked the two and
+    // doubled the space under the heading.
+    margin: 0;
     text-wrap: balance;
+
+    @media (max-width: $breakpoint-md) {
+      // Phone tier places the graphic between the title and the body, and
+      // .story's grid gap alone is tighter under the heading than it was.
+      margin-bottom: $space-3;
+    }
   }
 
   p {
@@ -129,6 +136,14 @@ $story-frame-max: 1400px;
   margin-top: $space-5; // even follow-on from "...three principles:" line
   padding-inline: clamp($space-2, 4vw, $space-5);
 
+  // Mid tier: the body prose above has gone full-width, so the principles
+  // follow it. Left in column 2 they'd start ~490px in from a paragraph that
+  // begins at the frame edge, which reads as a misalignment rather than an
+  // indent.
+  @media (max-width: $graphic-split-mid) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
   @media (max-width: $breakpoint-md) {
     grid-template-columns: minmax(0, 1fr);
     gap: 0;
@@ -140,6 +155,10 @@ $story-frame-max: 1400px;
 .mech-row {
   grid-column: 2; // sit only in the right column, whitespace on left
   border-bottom: 1px solid $color-light-grey;
+
+  @media (max-width: $graphic-split-mid) {
+    grid-column: 1; // follows .mech-list's single full-width column
+  }
   padding: $space-5 0;
   display: grid;
   grid-template-columns: 80px minmax(0, 1fr);

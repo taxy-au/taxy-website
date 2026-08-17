@@ -1,0 +1,81 @@
+@use "tokens" as *;
+
+// Shared "dashboard graphic beside a heading" split.
+//
+// Used by the homepage story section (.story-grid) and the CGT calculator's
+// closing CTA (.calc-cta). Both pair the same .dx-row cards with a heading and
+// a block of copy, so both reflow the same way.
+//
+// The constraint that drives the whole thing: a .dx-row cannot render narrower
+// than ~451px. Its pill (104px), three stat cells (92/62/62) and their gaps are
+// all fixed pixels with no shrink, so the graphic column can never be expressed
+// as a plain percentage of a narrow viewport — half of a sub-900px container
+// falls under that floor and the stats burst out of the card. `1fr` of a
+// `1fr 2fr` split solves both halves of that at once: its automatic min-content
+// minimum holds the floor, and a third of the frame is always comfortably
+// inside a 50% ceiling.
+//
+// Three tiers:
+//   wide   graphic | heading, copy beneath the heading beside the graphic
+//   mid    graphic | heading, copy drops full-width beneath both
+//   phone  fully stacked — heading, graphic, copy
+//
+// The mid tier is the point of the pattern: a heading stays legible in a narrow
+// column long after prose stops being comfortable in one, so the copy is what
+// gives way first, not the layout.
+
+// Wide → mid. At $breakpoint-lg the copy column is down to ~430px against a
+// 56ch measure, so it reads better full-width than squeezed beside the cards.
+$graphic-split-mid: $breakpoint-lg;
+
+@mixin graphic-split($gap: $space-5) {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-areas:
+    "graphic title"
+    "graphic body";
+  column-gap: $gap;
+  row-gap: $space-3;
+
+  @media (max-width: $graphic-split-mid) {
+    grid-template-areas:
+      "graphic title"
+      "body    body";
+  }
+
+  // Phone tier is $breakpoint-md so it changes over in step with .dx-row's own
+  // stacked layout — the row goes full-width exactly when the split does.
+  @media (max-width: $breakpoint-md) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "title"
+      "graphic"
+      "body";
+    gap: $space-4;
+  }
+}
+
+// Left bleed: extend from the cell's left edge out by the frame's own
+// padding, so on viewports up to the frame width the card edge meets the
+// viewport edge, and beyond it the card stops at the frame edge rather than
+// drifting further left as the page widens.
+@mixin graphic-bleed {
+  --graphic-bleed: clamp(#{$space-2}, 4vw, #{$space-5});
+
+  @media (min-width: $breakpoint-md) {
+    margin-left: calc(-1 * var(--graphic-bleed));
+    width: calc(100% + var(--graphic-bleed));
+  }
+
+  // Cards give up their left border and left radius so the bleed reads as the
+  // card running off the page, not as a card parked against the edge.
+  .dx-row {
+    border-left: none;
+    border-radius: 0 $r-md $r-md 0;
+
+    @media (max-width: $breakpoint-md) {
+      border-left: 1px solid $color-light-grey;
+      border-radius: $r-md;
+    }
+  }
+}

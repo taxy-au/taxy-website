@@ -1,4 +1,5 @@
 @use "tokens" as *;
+@use "graphic-split" as *;
 
 // Calculator — accountant-facing CGT modelling tool.
 // Form (left) + live results (right) on desktop; stacked on mobile.
@@ -789,29 +790,11 @@
 // as one container too many.
 
 .calc-cta {
-  // Desktop: graphic on the left spanning two rows; title sits top-right
-  // with body (para + button) below it on the right. Title aligns to the
-  // end of its row and body to the start of its row so they cluster across
-  // the row-gap in the middle of the graphic's height, rather than each
-  // floating in the center of a stretched track.
-  // Mobile: title, then graphic, then body — so the heading introduces the
-  // visual rather than appearing after it.
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  grid-template-areas:
-    "graphic title"
-    "graphic body";
-  column-gap: $space-5;
-  row-gap: $space-3;
-
-  @media (max-width: $breakpoint-md) {
-    grid-template-columns: minmax(0, 1fr);
-    grid-template-areas:
-      "title"
-      "graphic"
-      "body";
-    gap: $space-4;
-  }
+  // Same split as the homepage story section — see _graphic-split.scss for the
+  // three tiers and the 451px card floor that dictates them. Title sits beside
+  // the graphic and stays there down to phone widths; the copy is what drops
+  // full-width when the column gets tight.
+  @include graphic-split;
 }
 
 .calc-cta__title {
@@ -825,18 +808,18 @@
   color: $color-nightshade;
   margin: 0;
   text-wrap: balance;
+
+  @media (max-width: $graphic-split-mid) and (min-width: #{$breakpoint-md + 0.02}) {
+    // Alone beside the full height of the graphic once the body drops away,
+    // so centre it rather than leaving it parked at the bottom of the row.
+    align-self: center;
+  }
 }
 
 .calc-cta__graphic {
   grid-area: graphic;
+  @include graphic-bleed;
   .dx-list { gap: 12px; }
-
-  // Restore the left border and full radius the homepage drops for its
-  // left-bleed effect — here the rows sit as standalone floating cards.
-  .dx-row {
-    border-left: 1px solid $color-light-grey;
-    border-radius: $r-md;
-  }
 
   // Safety net: even after the mobile dx-row fix, contain any future child
   // bleed so the whole CGT page can't pick up a horizontal scrollbar.
