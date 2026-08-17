@@ -42,13 +42,26 @@
   height: 32px;
   width: auto;
   display: block;
+  // The reset's `img { max-width: 100% }` makes this logo's min-content
+  // contribution resolve to zero, which let its 1fr track collapse to ~1px
+  // whenever the links' `auto` track wanted the whole container — so the
+  // footer logo was invisible at every width above $breakpoint-md. Opting out
+  // of that cap gives the track a real minimum to hold open.
+  max-width: none;
 }
 
 .site-footer__links {
   display: flex;
   align-items: center;
-  gap: $space-4;
+  // 16px, not 32: with the logo restored to its real width the eight links
+  // needed a gap of ~18px or less to stay on one line inside the 1200px
+  // container, so 32px orphaned "Sub-processors" onto a line of its own.
+  gap: $space-2;
   flex-wrap: wrap;
+  // Centre at every width, not just on mobile. Below ~1200px the links still
+  // wrap, and while the nav block as a whole is centred by the grid, the links
+  // inside it were packing to flex-start — stranding a short final line left.
+  justify-content: center;
 
   a {
     color: rgba(255, 255, 255, 0.85);
@@ -59,11 +72,10 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    // Tighten the inter-link gap but pad each link vertically so every footer
-    // link is a comfortable ≥44px tap target — the footer doubles as the nav
-    // on the utility/legal pages, so mis-taps here are costly.
-    gap: $space-2;
-    justify-content: center;
+    // Pad each link vertically so every footer link is a comfortable ≥44px tap
+    // target — the footer doubles as the nav on the utility/legal pages, so
+    // mis-taps here are costly. (The inter-link gap is now $space-2 at every
+    // width, so there's nothing left to tighten here.)
     a { padding-block: $space-2; }
   }
 }
