@@ -11,7 +11,7 @@
 # Source:  override the source folder with  LEGAL_SRC=/path/to/legal  script/build-legal.sh
 set -euo pipefail
 
-SRC="${LEGAL_SRC:-/Users/amanda/code/taxy-ops/legal}"
+SRC="${LEGAL_SRC:-/Users/amanda/code/taxy/taxy-ops/legal}"
 DST="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"   # repo root
 
 [ -d "$SRC" ] || { echo "Source folder not found: $SRC (set LEGAL_SRC)"; exit 1; }
