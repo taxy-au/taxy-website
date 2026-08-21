@@ -122,6 +122,16 @@ firms:
           <p>$9 per entity per year, plus GST. Unlimited users, no setup fees, no per-seat charges.</p>
           <p><a href="/pricing/">See full pricing</a>.</p>
 
+      - q: "Is Taxy an annual commitment?"
+        a: |
+          <p>Yes. Taxy is a 12-month subscription, invoiced annually in advance based on the number of entities in your account.</p>
+          <p>It renews automatically for another 12 months unless you let us know at least 30 days before your renewal date. You can also remove entities before renewal, so you only pay for the ones you'll actually use next year.</p>
+
+      - q: "Can we cancel part-way through the year?"
+        a: |
+          <p>You can stop using Taxy whenever you like, but fees already paid for the current 12 months aren't refundable.</p>
+          <p>That's the main reason most firms start with a single client group rather than the whole practice. The full detail is in our <a href="/legal/terms/">terms</a>.</p>
+
   - section: "Client experience"
     items:
       - q: "What do clients see?"
