@@ -27,8 +27,11 @@ body() {
   ' "$1"
 }
 
-page() {  # page <src> <dst> <permalink> <title> <heading> <description> [stampdate] [toc]
-  local src="$SRC/$1" dst="$DST/$2" permalink="$3" title="$4" heading="$5" desc="$6" stamp="${7:-}" toc="${8:-}"
+# "Last updated" is NOT set here. It lives in the source .md, on its own line
+# immediately after the H1 — one mechanism, one place, in the repo that owns the
+# document. Bump it there when the content changes; this script just carries it.
+page() {  # page <src> <dst> <permalink> <title> <heading> <description> [toc]
+  local src="$SRC/$1" dst="$DST/$2" permalink="$3" title="$4" heading="$5" desc="$6" toc="${7:-}"
   {
     printf -- '---\n'
     printf 'layout: legal\n'
@@ -38,7 +41,6 @@ page() {  # page <src> <dst> <permalink> <title> <heading> <description> [stampd
     printf 'permalink: %s\n' "$permalink"
     if [ -n "$toc" ]; then printf 'toc: true\n'; fi
     printf -- '---\n\n'
-    if [ -n "$stamp" ]; then printf '_Last updated: %s._\n\n' "$stamp"; fi
     body "$src"
   } > "$dst"
   echo "wrote $dst"
@@ -47,12 +49,11 @@ page() {  # page <src> <dst> <permalink> <title> <heading> <description> [stampd
 page privacy-policy.md privacy-policy.md /privacy-policy/ \
   "Privacy policy" "Privacy Policy" \
   "How Taxy handles personal information across our website and platform — controller and processor roles, AI sub-processors, data residency, and your rights under the Privacy Act and APPs." \
-  "" toc
+  toc
 
 page security.md security.md /security/ \
   "Security" "Security at Taxy" \
-  "How Taxy protects your clients' data — Australian data residency, encryption in transit and at rest, MFA and zero-trust access, and our ISMS." \
-  "2 July 2026"
+  "How Taxy protects your clients' data — Australian data residency, encryption in transit and at rest, MFA and zero-trust access, and our ISMS."
 
 page website-terms-of-use.md terms.md /terms/ \
   "Website terms of use" "Website Terms of Use" \
@@ -61,17 +62,17 @@ page website-terms-of-use.md terms.md /terms/ \
 page standard-terms.md legal/terms.md /legal/terms/ \
   "Cloud Service Agreement — Standard Terms" "Cloud Service Agreement — Standard Terms" \
   "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the app.taxy.au platform." \
-  "2 July 2026" toc
+  toc
 
 page end-user-agreement.md legal/end-user-agreement.md /legal/end-user-agreement/ \
   "End user agreement" "End User Agreement" \
   "The agreement binding the individuals who log in to app.taxy.au — firm staff and invited clients — covering acceptable use and account security." \
-  "" toc
+  toc
 
 page dpa.md legal/dpa.md /legal/dpa/ \
   "Data Processing Agreement" "Data Processing Agreement" \
   "Taxy's Data Processing Agreement — how we process Customer Personal Data as a processor or sub-processor under the Privacy Act, the APPs, and (where applicable) European data protection law." \
-  "10 June 2026" toc
+  toc
 
 page subprocessors.md legal/subprocessors.md /legal/subprocessors/ \
   "Sub-processors" "Sub-processors" \

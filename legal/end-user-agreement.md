@@ -7,6 +7,8 @@ permalink: /legal/end-user-agreement/
 toc: true
 ---
 
+_Last updated: 2 July 2026._
+
 This agreement is between you and **Taxy Pty Ltd** (ABN 33 666 815 890, Level 7, 88 Phillip
 Street, Sydney NSW 2000) ("Taxy", "we", "us"). It applies to **every individual who accesses or
 uses the Taxy platform at app.taxy.au** (the "Platform") — whether you work at the accounting
@@ -15,8 +17,6 @@ Platform. If you don't agree to it, don't access the Platform.
 
 Your use of the **taxy.au** website is covered separately by our
 [Website Terms of Use](/terms/).
-
-_Last updated: 2 July 2026._
 
 ## 1. Acceptance
 You accept this agreement by accessing or using the Platform. Where we ask you to confirm your

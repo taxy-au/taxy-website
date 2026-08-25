@@ -6,7 +6,7 @@ description: "The sub-processors Taxy engages to provide app.taxy.au, the custom
 permalink: /legal/subprocessors/
 ---
 
-*Last updated: 10 June 2026*
+_Last updated: 10 June 2026._
 
 Taxy engages the sub-processors below to provide app.taxy.au. Each processes Customer Content only
 as needed to deliver the service, under written data-protection terms at least as protective as our

@@ -7,11 +7,11 @@ permalink: /privacy-policy/
 toc: true
 ---
 
+_Last updated: 25 August 2026._
+
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides a cloud-based tax
 workflow platform at app.taxy.au. This policy explains how we handle personal information, in line
 with the **Privacy Act 1988 (Cth)** and the **Australian Privacy Principles (APPs)**.
-
-_Last updated: 25 August 2026._
 
 ## 1. Who we are, and the two ways we handle data
 
