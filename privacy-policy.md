@@ -11,7 +11,7 @@ toc: true
 workflow platform at app.taxy.au. This policy explains how we handle personal information, in line
 with the **Privacy Act 1988 (Cth)** and the **Australian Privacy Principles (APPs)**.
 
-_Last updated: 10 June 2026._
+_Last updated: 25 August 2026._
 
 ## 1. Who we are, and the two ways we handle data
 
@@ -56,15 +56,20 @@ product. We do **not** sell personal information, and we do **not** use Customer
 advertising.
 
 ### Artificial intelligence
-We use **AI tools to build, operate and support the platform**, and in the course of that work
-personal information — including Customer Content — may be **processed by our AI sub-processor
-(Anthropic)**, for example where a working session reads from our systems. Anthropic operates on a
-**business tier under which content is not retained after the session and is not used to train AI
-models**, and is listed on our [Sub-processor list](/legal/subprocessors/).
+There are two separate things here. They involve different providers, and one of them is not
+something Taxy does today.
 
-Where Taxy offers **in-product AI features**, those features use large language models provided by
-**Google Cloud Platform**, run in our Australian Google Cloud environment, and personal information
-is not used to train models.
+**Today — AI in how we build and operate the platform.** We use **AI tools to build, operate and
+support the platform**, and in the course of that work personal information — including Customer
+Content — may be **processed by our AI sub-processor (Anthropic)**, for example where a working
+session reads from our systems. Anthropic operates on a **business tier under which content is not
+retained after the session and is not used to train AI models**, and is listed on our
+[Sub-processor list](/legal/subprocessors/).
+
+**If and when we offer in-product AI features.** Where Taxy offers **in-product AI features**, those
+features use large language models provided by **Google Cloud Platform**, run in our Australian
+Google Cloud environment, and personal information is not used to train models. This is separate
+from the operational use above and does not change how or where Anthropic is used.
 
 ### Meetings and calls
 We may **record and transcribe** meetings and phone calls — for example sales, onboarding and
@@ -75,6 +80,11 @@ of each call that it is being recorded** and may decline; if you ask us not to r
 These recordings sometimes include discussion of client information; we handle them as **our own
 confidential records** (Taxy as controller), keep access least-privilege, and do **not** use them to
 train AI models.
+
+Fireflies and Aircall are **not sub-processors** of the Cloud Service and do not appear on our
+[Sub-processor list](/legal/subprocessors/). They handle our own call and meeting
+records; they do not receive the Customer Content a Firm submits to app.taxy.au, and they play no
+part in delivering the platform.
 
 ## 5. Cookies and website analytics
 We use **essential cookies** to run taxy.au and **Google Analytics 4** to understand website usage.
