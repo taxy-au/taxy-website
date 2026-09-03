@@ -61,12 +61,12 @@ page website-terms-of-use.md terms.md /terms/ \
 
 page standard-terms.md legal/terms.md /legal/terms/ \
   "Cloud Service Agreement — Standard Terms" "Cloud Service Agreement — Standard Terms" \
-  "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the app.taxy.au platform." \
+  "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the Taxy platform." \
   toc
 
 page end-user-agreement.md legal/end-user-agreement.md /legal/end-user-agreement/ \
   "End user agreement" "End User Agreement" \
-  "The agreement binding the individuals who log in to app.taxy.au — firm staff and invited clients — covering acceptable use and account security." \
+  "The agreement binding the individuals who log in to app.taxy.au and iris.taxy.au — firm staff and invited clients — covering acceptable use and account security." \
   toc
 
 page dpa.md legal/dpa.md /legal/dpa/ \
@@ -76,4 +76,8 @@ page dpa.md legal/dpa.md /legal/dpa/ \
 
 page subprocessors.md legal/subprocessors.md /legal/subprocessors/ \
   "Sub-processors" "Sub-processors" \
-  "The sub-processors Taxy engages to provide app.taxy.au, the customer data each processes, and their locations."
+  "The sub-processors Taxy engages to provide the Taxy platform, the customer data each processes, and their locations."
+
+page data-attributions.md legal/attributions.md /legal/attributions/ \
+  "Data attributions" "Data Attributions" \
+  "Third-party data used in Taxy products and the licence attribution each source requires — the TPB Public Register and the ABN Lookup web services."

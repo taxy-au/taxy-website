@@ -2,7 +2,7 @@
 layout: legal
 title: "Cloud Service Agreement — Standard Terms"
 heading: "Cloud Service Agreement — Standard Terms"
-description: "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the app.taxy.au platform."
+description: "Taxy's Cloud Service Agreement Standard Terms (v2.1, AU), governing use of the Taxy platform."
 permalink: /legal/terms/
 toc: true
 ---

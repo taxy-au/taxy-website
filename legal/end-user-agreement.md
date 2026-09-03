@@ -2,7 +2,7 @@
 layout: legal
 title: "End user agreement"
 heading: "End User Agreement"
-description: "The agreement binding the individuals who log in to app.taxy.au — firm staff and invited clients — covering acceptable use and account security."
+description: "The agreement binding the individuals who log in to app.taxy.au and iris.taxy.au — firm staff and invited clients — covering acceptable use and account security."
 permalink: /legal/end-user-agreement/
 toc: true
 ---
@@ -11,7 +11,7 @@ _Last updated: 2 July 2026._
 
 This agreement is between you and **Taxy Pty Ltd** (ABN 33 666 815 890, Level 7, 88 Phillip
 Street, Sydney NSW 2000) ("Taxy", "we", "us"). It applies to **every individual who accesses or
-uses the Taxy platform at app.taxy.au** (the "Platform") — whether you work at the accounting
+uses the Taxy platform at app.taxy.au or iris.taxy.au** (the "Platform") — whether you work at the accounting
 practice that subscribes to Taxy (the "Firm") or you are a client of the Firm invited into the
 Platform. If you don't agree to it, don't access the Platform.
 
@@ -32,7 +32,7 @@ The Firm's use of the Platform is governed by its agreement with us — the **Cl
 Agreement** (Standard Terms at [taxy.au/legal/terms](/legal/terms/), plus the Firm's
 Cover Page). In this agreement:
 
-- the **"Platform"** means the Taxy cloud service at app.taxy.au, together with any software and
+- the **"Platform"** means the Taxy cloud services at app.taxy.au and iris.taxy.au, together with any software and
   documentation we provide for use with it (what the Cloud Service Agreement calls the
   "Product");
 - the **"Firm"** means the entity under whose agreement with us your access is provided (the

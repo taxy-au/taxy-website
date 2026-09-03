@@ -290,10 +290,10 @@ Customer on request.
 |---|---|
 | **Data exporter / Controller** | The Customer (or, where the Customer is a Processor, its third-party Controller). Details are in the Agreement / the Customer's account. |
 | **Data importer / Processor** | Taxy Pty Ltd, ABN 33 666 815 890, Level 7, 88 Phillip Street, Sydney NSW 2000. Role: Processor (or Sub-processor per Section 2.2). |
-| **Categories of Data Subjects** | The Customer's clients (the taxpayers and entities whose information the Customer submits to app.taxy.au), and the Customer's own personnel, contractors and contacts. |
+| **Categories of Data Subjects** | The Customer's clients (the taxpayers and entities whose information the Customer submits to the Cloud Service), and the Customer's own personnel, contractors and contacts. |
 | **Categories of Personal Data** | Names; contact details; tax file numbers and other government identifiers; financial and tax information; identity-document details; and other Personal Data the Customer submits to the Cloud Service. |
 | **Special / sensitive categories** | Not requested by the Cloud Service; may be present only if the Customer chooses to submit it. |
-| **Nature and purpose** | Providing the app.taxy.au tax workflow service described in the Agreement (collecting client information and documents, and tracking progress). |
+| **Nature and purpose** | Providing the tax workflow service described in the Agreement (collecting client information and documents, and tracking progress). |
 | **Frequency** | Continuous, for the duration of the Agreement. |
 | **Duration / retention** | The term of the Agreement, plus up to 60 days after for deletion (Section 10), unless longer retention is required by Applicable Laws. |
 | **Sub-processors** | As listed on the Sub-processor List ([taxy.au/legal/subprocessors](/legal/subprocessors/)). |

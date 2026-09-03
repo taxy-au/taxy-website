@@ -9,8 +9,8 @@ toc: true
 
 _Last updated: 25 August 2026._
 
-**Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides a cloud-based tax
-workflow platform at app.taxy.au. This policy explains how we handle personal information, in line
+**Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
+workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
 with the **Privacy Act 1988 (Cth)** and the **Australian Privacy Principles (APPs)**.
 
 ## 1. Who we are, and the two ways we handle data
@@ -83,7 +83,7 @@ train AI models.
 
 Fireflies and Aircall are **not sub-processors** of the Cloud Service and do not appear on our
 [Sub-processor list](/legal/subprocessors/). They handle our own call and meeting
-records; they do not receive the Customer Content a Firm submits to app.taxy.au, and they play no
+records; they do not receive the Customer Content a Firm submits to the platform, and they play no
 part in delivering the platform.
 
 ## 5. Cookies and website analytics
