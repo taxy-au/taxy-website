@@ -11,9 +11,6 @@ _Last updated: 7 September 2026._
 
 > Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa and incorporated
 > into the Standard Terms by Section 3.1 (Personal Data).
->
-> Adapted from the Common Paper Data Processing Agreement Version 1.1, used and modified under
-> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with changes for Australian law.
 
 This Data Processing Agreement ("**DPA**") forms part of the Taxy Cloud Service Agreement
 Standard Terms and the Agreement between the Customer and Taxy Pty Ltd (ABN 33 666 815 890,
@@ -309,4 +306,4 @@ is available to the Customer on request.
 |---|---|---|
 | 1.0 | 8 June 2026 | First published as part of the Cloud Service Agreement. |
 | 1.1 | 10 June 2026 | Product wording aligned to "tax workflow"; cross-references hyperlinked. |
-| 2.0 | 7 September 2026 | Data residency updated: backups are now held in Australia, and previous replication to the United States has ceased. Security measures described more precisely, in terms of the redundancy our Australian infrastructure provides. Common Paper attribution added. |
+| 2.0 | 7 September 2026 | Data residency updated: backups are now held in Australia, and previous replication to the United States has ceased. Security measures described more precisely, in terms of the redundancy our Australian infrastructure provides. |
