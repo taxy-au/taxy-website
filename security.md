@@ -6,16 +6,18 @@ description: "How Taxy protects your clients' data — Australian data residency
 permalink: /security/
 ---
 
-_Last updated: 2 July 2026._
+_Last updated: 7 September 2026._
 
 Taxy holds some of the most sensitive information an accounting practice has — your clients'
 identities, financials and tax details. We treat all of it as restricted and critical. Here's how we
 protect it.
 
 ## Your data stays in Australia
-All application data is **stored in Australia** on Google Cloud Platform. For disaster-recovery
-resilience we keep **encrypted backups in the United States**. (This matches the international-transfers
-disclosure in our [Privacy Policy](/privacy-policy/).)
+All application data is **stored in Australia** on Google Cloud Platform. We previously replicated
+encrypted backups to the United States; that replication has stopped and the data held there has been
+deleted. Some of our sub-processors operate overseas — see the international-transfers disclosure in
+our [Privacy Policy](/privacy-policy/) and our
+[Sub-processor list](/legal/subprocessors/).
 
 ## Encrypted, always
 Your data is **encrypted in transit and at rest**. (Specific standards are available in our security
@@ -29,9 +31,8 @@ can't store or directly reach customer data, and access to production is least-p
 explicit, logged request.
 
 ## Built to stay online
-Taxy runs **active-active across multiple failure zones in Australia** with no shared single point of
-failure, so a data-centre outage doesn't take the service down. We test full disaster recovery yearly
-and can rebuild from scratch within a business day.
+Taxy runs on Google Cloud Platform's managed infrastructure in Australia. We maintain documented
+business-continuity and incident-response plans.
 
 ## How we use AI
 We use AI tools to build and operate the platform. Where customer content is involved in that work, it
@@ -44,9 +45,9 @@ stored and is not used to train AI models**. Anthropic is named on our
 to train models.
 
 ## Our practices
-We maintain an Information Security Management System: documented policies, annual staff security
-training, regular risk reviews, vendor assessments (ISO 27001 / SOC 2), and incident-response and
-business-continuity plans. **A security questionnaire / summary is available on
+We maintain an Information Security Management System: documented policies, annual security
+awareness training for all staff (most recently completed April 2026), regular risk reviews, vendor
+assessments (ISO 27001 / SOC 2), and incident-response and business-continuity plans. **A security questionnaire / summary is available on
 request** — [security@taxy.au](mailto:security@taxy.au).
 
 ## Report a concern

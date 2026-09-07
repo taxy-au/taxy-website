@@ -6,7 +6,7 @@ description: "The sub-processors Taxy engages to provide the Taxy platform, the 
 permalink: /legal/subprocessors/
 ---
 
-_Last updated: 10 June 2026._
+_Last updated: 7 September 2026._
 
 Taxy engages the sub-processors below to provide app.taxy.au and iris.taxy.au. Each processes Customer Content only
 as needed to deliver the service, under written data-protection terms at least as protective as our
@@ -15,7 +15,7 @@ of any change to this list, as set out in the DPA.
 
 | Sub-processor | Purpose | Customer data processed | Location |
 |---|---|---|---|
-| **Google Cloud Platform** (Google LLC) | Cloud hosting and storage for app.taxy.au and iris.taxy.au | All Customer Content | Australia (primary); United States (backups) |
+| **Google Cloud Platform** (Google LLC) | Cloud hosting and storage for app.taxy.au and iris.taxy.au | All Customer Content | Australia |
 | **Twilio Inc.** (SendGrid, Segment) | Transactional email — reminders and notifications (SendGrid); product analytics (Segment) | Client and entity details contained in notification emails and product-usage events | United States |
 | **Anthropic PBC** | Operational AI — Claude assists Taxy to operate, develop and support the platform and may access Customer Content in that work. Business / zero-retention tier — not stored, not used to train models. | Customer Content accessed during operational and development work | United States |
 

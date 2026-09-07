@@ -7,7 +7,7 @@ permalink: /privacy-policy/
 toc: true
 ---
 
-_Last updated: 25 August 2026._
+_Last updated: 7 September 2026._
 
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
 workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
@@ -107,19 +107,17 @@ where we must retain it by law or in routine backups (which then expire on their
 matches Section 10 of our [DPA](/legal/dpa/).
 
 ## 8. Security
-Customer data is **stored in Australia** and encrypted **in transit and at rest**. For
-disaster-recovery resilience we replicate **encrypted backups to the United States** (see §9). We
+Customer data is **stored in Australia** and encrypted **in transit and at rest**. We
 run a zero-trust model with multi-factor authentication and logged, least-privilege access. See our
 [Security page](/security/) for detail. If a data breach is likely to cause serious
 harm, we will notify affected individuals and the **OAIC without undue delay**, consistent with the
 **Notifiable Data Breaches scheme**.
 
 ## 9. International transfers
-Our primary storage is in **Australia**. For disaster-recovery resilience we replicate **encrypted
-backups to a location in the United States**, and some of our sub-processors — our **AI provider
+We store customer data in **Australia**. Some of our sub-processors — our **AI provider
 (Anthropic)** and our **email and analytics provider (Twilio — SendGrid and Segment)** — are located
-in the **United States** (APP 8). The current list is in our
-[Sub-processor list](/legal/subprocessors/). We take reasonable steps to ensure
+in the **United States**, so personal information is disclosed to them overseas (APP 8). The current
+list is in our [Sub-processor list](/legal/subprocessors/). We take reasonable steps to ensure
 overseas recipients handle the information consistently with the APPs.
 
 ## 10. Your rights
