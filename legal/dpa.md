@@ -7,7 +7,7 @@ permalink: /legal/dpa/
 toc: true
 ---
 
-_Last updated: 10 June 2026._
+_Last updated: 7 September 2026._
 
 > Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa and incorporated
 > into the Standard Terms by Section 3.1 (Personal Data).
@@ -167,9 +167,9 @@ the data and prevent further Processing.
 
 ### 11. International data transfers
 
-11.1 Provider primarily stores Customer Personal Data in **Australia**. Backups of Customer
-Personal Data are replicated to the **United States**. Some Customer Personal Data may also be
-Processed outside Australia by the Sub-processors on the Sub-processor List.
+11.1 Provider stores Customer Personal Data in **Australia**, including backups. Some Customer
+Personal Data may also be Processed outside Australia by the Sub-processors on the Sub-processor
+List.
 
 11.2 To the extent Provider discloses Customer Personal Data outside Australia, Provider will
 comply with its obligations under Applicable Data Protection Laws — including **Australian Privacy
@@ -278,9 +278,9 @@ The technical and organisational measures Provider maintains to protect Customer
 are set out in Provider's Information Security Management System (ISMS), which is based on the
 ISO/IEC 27001 and SOC 2 frameworks, and are summarised on Provider's security page at
 [taxy.au/security](/security/). They include encryption of Customer Personal Data in transit and at rest,
-role-based and least-privilege access controls, and infrastructure operated with active-active
-redundancy across multiple failure zones in Australia. Further detail is available to the
-Customer on request.
+role-based and least-privilege access controls, and infrastructure operated in Australia on
+managed cloud services, with data replicated across multiple availability zones. Further detail
+is available to the Customer on request.
 
 ---
 
@@ -297,3 +297,13 @@ Customer on request.
 | **Frequency** | Continuous, for the duration of the Agreement. |
 | **Duration / retention** | The term of the Agreement, plus up to 60 days after for deletion (Section 10), unless longer retention is required by Applicable Laws. |
 | **Sub-processors** | As listed on the Sub-processor List ([taxy.au/legal/subprocessors](/legal/subprocessors/)). |
+
+---
+
+## Document control
+
+| Version | Published | Change |
+|---|---|---|
+| 1.0 | 8 June 2026 | First published as part of the Cloud Service Agreement. |
+| 1.1 | 10 June 2026 | Product wording aligned to "tax workflow"; cross-references hyperlinked. |
+| 2.0 | 7 September 2026 | Data residency updated: backups are now held in Australia, and previous replication to the United States has ceased. Security measures described more precisely, in terms of the redundancy our Australian infrastructure provides. |
