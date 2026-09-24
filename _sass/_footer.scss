@@ -128,11 +128,3 @@
     &:hover { color: $color-purple; text-decoration: none; }
   }
 }
-
-// TEMPORARY: Stripe account-ownership website code challenge (added 2026-09-22).
-// Remove with the matching markup in _includes/marketing-footer.html.
-.site-footer__verification {
-  margin-top: $space-1;
-  padding-top: 0;
-  border-top: 0;
-}
