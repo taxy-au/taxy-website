@@ -6,7 +6,7 @@ description: "The terms governing use of the taxy.au marketing website. Use of t
 permalink: /terms/
 ---
 
-_Last updated: 2 July 2026._
+_Last updated: 28 September 2026._
 
 These terms govern your use of **taxy.au** (the "Website"). Your use of the Taxy platform at
 app.taxy.au or iris.taxy.au is governed separately by our **Cloud Service Agreement** (Standard Terms at

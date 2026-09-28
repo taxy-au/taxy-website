@@ -7,7 +7,7 @@ permalink: /legal/end-user-agreement/
 toc: true
 ---
 
-_Last updated: 2 July 2026._
+_Last updated: 28 September 2026._
 
 This agreement is between you and **Taxy Pty Ltd** (ABN 33 666 815 890, Level 7, 88 Phillip
 Street, Sydney NSW 2000) ("Taxy", "we", "us"). It applies to **every individual who accesses or
