@@ -22,7 +22,7 @@ home:
       - q: "Is my data secure in Taxy?"
         a: |
           <p>Yes. Security is core to Taxy.</p>
-          <p>All information is encrypted, stored in Australia, and only accessible to authorised users in your workspace.</p>
+          <p>The data in your Taxy account is encrypted and stored in Australia, and every account can use multi-factor authentication.</p>
 
 clients:
   - items:
@@ -54,7 +54,7 @@ clients:
       - q: "Is my information secure?"
         a: |
           <p>Yes. Your information is safer in Taxy than it would be over email, which is where this kind of detail usually travels.</p>
-          <p>All data is encrypted, stored in Australia, and only accessible to authorised users within your accountant's workspace.</p>
+          <p>What you send your accountant through Taxy is encrypted and stored in Australia, and your account can use multi-factor authentication.</p>
 
       - q: "Who should I contact if I have a question?"
         a: |
@@ -92,7 +92,7 @@ firms:
       - q: "Is our information secure in Taxy?"
         a: |
           <p>Yes. Security is core to Taxy.</p>
-          <p>All data is encrypted, stored in Australia, and only accessible to authorised users in your workspace.</p>
+          <p>The data in your Taxy account is encrypted and stored in Australia, and every account can use multi-factor authentication.</p>
           <p>If you'd like more information on our security and data handling practices, please contact us.</p>
 
   - section: "Getting started"
