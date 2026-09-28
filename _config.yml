@@ -28,4 +28,5 @@ exclude:
   - Gemfile.lock
   - README.md
   - HOMEPAGE-CLEANUP.md
+  - script
   - vendor
