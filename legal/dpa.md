@@ -300,13 +300,3 @@ is available to the Customer on request.
 | **Frequency** | Continuous, for the duration of the Agreement. |
 | **Duration / retention** | The term of the Agreement, plus up to 60 days after for deletion (Section 10), unless longer retention is required by Applicable Laws. |
 | **Sub-processors** | As listed on the Sub-processor List ([taxy.au/legal/subprocessors](/legal/subprocessors/)). |
-
----
-
-## Document control
-
-| Version | Published | Change |
-|---|---|---|
-| 1.0 | 8 June 2026 | First published as part of the Cloud Service Agreement. |
-| 1.1 | 10 June 2026 | Product wording aligned to "tax workflow"; cross-references hyperlinked. |
-| 2.0 | 28 September 2026 | Data residency updated: backups are now held in Australia, and previous replication to the United States has ceased. Security measures described more precisely, in terms of the redundancy our Australian infrastructure provides. Sub-processor terms (6.1(b)) aligned to how Taxy assesses its sub-processors; Common Paper credit added. |
