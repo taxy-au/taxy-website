@@ -7,10 +7,13 @@ permalink: /legal/dpa/
 toc: true
 ---
 
-_Last updated: 7 September 2026._
+_Last updated: 28 September 2026._
 
-> Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa and incorporated
-> into the Standard Terms by Section 3.1 (Personal Data).
+> Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa, incorporated by
+> the Cover Page and given effect by Section 3.1 (Personal Data) of the Standard Terms.
+>
+> Adapted from the Common Paper Data Processing Agreement Version 1.1, used and modified under
+> [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), with changes for Australian law.
 
 This Data Processing Agreement ("**DPA**") forms part of the Taxy Cloud Service Agreement
 Standard Terms and the Agreement between the Customer and Taxy Pty Ltd (ABN 33 666 815 890,
@@ -115,8 +118,8 @@ handle them only as necessary to provide the Cloud Service and in accordance wit
 6.1 The Customer authorises Provider to engage the Sub-processors on the Sub-processor List to
 Process Customer Personal Data, provided that Provider: (a) gives the Customer at least **30
 days' advance notice** of any addition or replacement by updating the Sub-processor List; (b)
-imposes written data-protection terms on each Sub-processor at least as protective as this DPA;
-and (c) remains liable for its Sub-processors' acts and omissions.
+binds each Sub-processor by written data-protection terms, and assesses any material difference
+between those terms and this DPA before engaging it; and (c) remains liable for its Sub-processors' acts and omissions.
 
 6.2 The Customer may object to a new or replacement Sub-processor on reasonable data-protection
 grounds within **30 days** of notice. The parties will cooperate in good faith to resolve the
@@ -306,4 +309,4 @@ is available to the Customer on request.
 |---|---|---|
 | 1.0 | 8 June 2026 | First published as part of the Cloud Service Agreement. |
 | 1.1 | 10 June 2026 | Product wording aligned to "tax workflow"; cross-references hyperlinked. |
-| 2.0 | 7 September 2026 | Data residency updated: backups are now held in Australia, and previous replication to the United States has ceased. Security measures described more precisely, in terms of the redundancy our Australian infrastructure provides. |
+| 2.0 | 28 September 2026 | Data residency updated: backups are now held in Australia, and previous replication to the United States has ceased. Security measures described more precisely, in terms of the redundancy our Australian infrastructure provides. Sub-processor terms (6.1(b)) aligned to how Taxy assesses its sub-processors; Common Paper credit restored. |

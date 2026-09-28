@@ -7,7 +7,7 @@ permalink: /privacy-policy/
 toc: true
 ---
 
-_Last updated: 7 September 2026._
+_Last updated: 28 September 2026._
 
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
 workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
@@ -56,20 +56,14 @@ product. We do **not** sell personal information, and we do **not** use Customer
 advertising.
 
 ### Artificial intelligence
-There are two separate things here. They involve different providers, and one of them is not
-something Taxy does today.
+Taxy uses AI tools provided by **Anthropic** to develop, operate and support the platform. That work
+can involve personal information, including Customer Content, which Anthropic then processes on our
+behalf. We use Anthropic with **model training turned off**. Anthropic is listed on
+our [Sub-processor list](/legal/subprocessors/).
 
-**Today — AI in how we build and operate the platform.** We use **AI tools to build, operate and
-support the platform**, and in the course of that work personal information — including Customer
-Content — may be **processed by our AI sub-processor (Anthropic)**, for example where a working
-session reads from our systems. Anthropic operates on a **business tier under which content is not
-retained after the session and is not used to train AI models**, and is listed on our
-[Sub-processor list](/legal/subprocessors/).
-
-**If and when we offer in-product AI features.** Where Taxy offers **in-product AI features**, those
-features use large language models provided by **Google Cloud Platform**, run in our Australian
-Google Cloud environment, and personal information is not used to train models. This is separate
-from the operational use above and does not change how or where Anthropic is used.
+Where Taxy offers **AI features within the platform**, those features use models provided by
+**Google Cloud Platform**, operated in our Australian Google Cloud environment, and personal
+information is not used to train them. This is separate from Taxy's use of Anthropic.
 
 ### Meetings and calls
 We may **record and transcribe** meetings and phone calls — for example sales, onboarding and
@@ -94,8 +88,8 @@ non-essential cookies will not affect your use of the Taxy platform.
 
 ## 6. How we share personal information
 - **Service providers (sub-processors)** who help us run the platform — see our
-  [Sub-processor list](/legal/subprocessors/). They may handle data only to provide
-  their service to us, under terms at least as protective as our DPA.
+  [Sub-processor list](/legal/subprocessors/). Each handles data under its written
+  terms with us.
 - **The Firm** whose account the Customer Content belongs to.
 - **Legal / safety** — where required by law, or to protect rights and safety.
 - On a **business transfer** (merger or sale), under confidentiality.
@@ -107,18 +101,30 @@ where we must retain it by law or in routine backups (which then expire on their
 matches Section 10 of our [DPA](/legal/dpa/).
 
 ## 8. Security
-Customer data is **stored in Australia** and encrypted **in transit and at rest**. We
-run a zero-trust model with multi-factor authentication and logged, least-privilege access. See our
+Customer Content is **stored in Australia** and encrypted **in transit and at rest**. Our staff
+accounts always use multi-factor authentication, and staff access to the Google Cloud systems that
+store it is limited to what the job needs and logged. See our
 [Security page](/security/) for detail. If a data breach is likely to cause serious
 harm, we will notify affected individuals and the **OAIC without undue delay**, consistent with the
-**Notifiable Data Breaches scheme**.
+**Notifiable Data Breaches scheme**. Where the breach involves Customer Content, we agree with the
+Firm which of us notifies.
 
 ## 9. International transfers
-We store customer data in **Australia**. Some of our sub-processors — our **AI provider
-(Anthropic)** and our **email and analytics provider (Twilio — SendGrid and Segment)** — are located
-in the **United States**, so personal information is disclosed to them overseas (APP 8). The current
-list is in our [Sub-processor list](/legal/subprocessors/). We take reasonable steps to ensure
-overseas recipients handle the information consistently with the APPs.
+Customer Content, including backups, is **stored in Australia**.
+
+Some of the service providers we use are located in the **United States**, and personal information
+is disclosed to them there:
+
+- **Twilio (SendGrid)** sends notification emails and receives the emails clients send to the
+  platform;
+- **Twilio (Segment)** receives platform usage data;
+- **Anthropic** processes personal information when Taxy's AI tools are used in work that involves
+  it (section 4).
+
+Each is listed, with the information it handles, on our
+[Sub-processor list](/legal/subprocessors/). We take reasonable steps to ensure
+overseas recipients handle personal information consistently with the Australian Privacy
+Principles (APP 8).
 
 ## 10. Your rights
 You may request **access** to, or **correction** of, your personal information, and may complain

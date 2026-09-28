@@ -7,9 +7,9 @@ permalink: /legal/terms/
 toc: true
 ---
 
-_Last updated: 2 July 2026._
+_Last updated: 28 September 2026._
 
-> Adapted from the Common Paper Cloud Service Agreement Standard Terms v2.1 (CC BY 4.0), modified for Australian law. Published at taxy.au/legal/terms.
+> Adapted from the Common Paper Cloud Service Agreement Standard Terms v2.1 ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), modified for Australian law. Published at taxy.au/legal/terms.
 
 
 ## 1. Service
@@ -119,7 +119,7 @@ _Last updated: 2 July 2026._
 
 **8.3 Applicability.** The limitations and waivers contained in Sections 8.1 (Liability Caps) and 8.2 (Damages Waiver) apply to all liability, whether in tort (including negligence), contract, breach of statutory duty, or otherwise.
 
-**8.4 Exceptions.** The liability cap in Section 8.1(a) does not apply to any Increased Claims. Section 8.1 (Liability Caps) does not apply to any Unlimited Claims. Section 8.2 (Damages Waiver) does not apply to any Increased Claims or a breach of Section 10 (Confidentiality). Nothing in this Agreement will limit, exclude, or restrict a party's liability to the extent prohibited by Applicable Laws.
+**8.4 Exceptions.** The liability cap in Section 8.1.1 does not apply to any Increased Claims. Section 8.1 (Liability Caps) does not apply to any Unlimited Claims. Section 8.2 (Damages Waiver) does not apply to any Increased Claims or a breach of Section 10 (Confidentiality). Nothing in this Agreement will limit, exclude, or restrict a party's liability to the extent prohibited by Applicable Laws.
 
 
 ## 9. Indemnification
@@ -171,7 +171,7 @@ _Last updated: 2 July 2026._
 
 **12.6 Assignment.** Neither party may assign any rights or obligations under this Agreement without the prior written consent of the other party. However, either party may assign this Agreement upon notice if the assigning party undergoes a merger, change of control, reorganisation, or sale of all or substantially all its equity, business, or assets to which this Agreement relates. Any attempted but non-permitted assignment is void. This Agreement will be binding upon and inure to the benefit of the parties and their permitted successors and assigns.
 
-**12.7 Beta Products.** If Provider gives Customer access to a Beta Product, the Beta Product is provided "AS IS" and Section 6.3 (Representations & Warranty From Provider) does not apply to any Beta Products. Customer acknowledges that Beta Products are experimental in nature and may be modified or removed at Provider's discretion with or without notice.
+**12.7 Beta Products.** If Provider gives Customer access to a Beta Product, the Beta Product is provided "AS IS" and Section 6.3 (Representations & Warranties from Provider) does not apply to any Beta Products. Customer acknowledges that Beta Products are experimental in nature and may be modified or removed at Provider's discretion with or without notice.
 
 **12.8** [Reserved].
 
