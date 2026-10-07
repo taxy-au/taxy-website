@@ -7,7 +7,7 @@ permalink: /privacy-policy/
 toc: true
 ---
 
-_Last updated: 28 September 2026._
+_Last updated: 7 October 2026._
 
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
 workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
@@ -97,8 +97,10 @@ non-essential cookies will not affect your use of the Taxy platform.
 ## 7. Retention
 We keep personal information while an account is active and as needed for the purposes above or to
 meet legal obligations. On a Firm's request we **delete Customer Content within 60 days**, except
-where we must retain it by law or in routine backups (which then expire on their normal cycle). This
-matches Section 10 of our [DPA](/legal/dpa/).
+where we must retain it by law. Copies in our backups expire within 30 days after that, and security
+and audit logs of how the platform was used are kept for up to 400 days. When a Firm leaves, the tax
+file numbers, bank details and identity-document details we hold as separate fields are destroyed
+rather than returned to it. This matches Section 10 of our [DPA](/legal/dpa/).
 
 ## 8. Security
 Customer Content is **stored in Australia** and encrypted **in transit and at rest**. Our staff

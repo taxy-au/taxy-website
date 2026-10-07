@@ -7,7 +7,7 @@ permalink: /legal/dpa/
 toc: true
 ---
 
-_Last updated: 28 September 2026._
+_Last updated: 7 October 2026._
 
 > Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa, incorporated by
 > the Cover Page and given effect by Section 3.1 (Personal Data) of the Standard Terms.
@@ -168,6 +168,18 @@ any Customer Content it wishes to retain before access ends (Section 5.5 of the 
 Where return or deletion is impracticable or prohibited by law, Provider will continue to protect
 the data and prevent further Processing.
 
+10.3 **Sensitive identifiers.** Tax file numbers, bank account details and identity-document
+details that the Cloud Service holds as separate data fields are securely destroyed once they are
+no longer needed to provide the Cloud Service. They are not returned, even on an instruction under
+Section 10.2; documents are returned as they were submitted. This gives effect to Section 5.4 and
+the *Privacy (Tax File Number) Rule 2015*.
+
+10.4 **Backups and audit logs.** Customer Personal Data deleted from the live Cloud Service remains
+in backups until they expire, within 30 days of the deletion, and is deleted again if a backup is
+restored. Logs recording use of the Cloud Service for security and audit purposes are kept for a
+fixed period of up to 400 days, as Provider's security obligations require, used only for those
+purposes, and then deleted.
+
 ### 11. International data transfers
 
 11.1 Provider stores Customer Personal Data in **Australia**, including backups. Some Customer
@@ -298,5 +310,5 @@ is available to the Customer on request.
 | **Special / sensitive categories** | Not requested by the Cloud Service; may be present only if the Customer chooses to submit it. |
 | **Nature and purpose** | Providing the tax workflow service described in the Agreement (collecting client information and documents, and tracking progress). |
 | **Frequency** | Continuous, for the duration of the Agreement. |
-| **Duration / retention** | The term of the Agreement, plus up to 60 days after for deletion (Section 10), unless longer retention is required by Applicable Laws. |
+| **Duration / retention** | The term of the Agreement, plus up to 60 days after for deletion (Section 10) and the backup and audit-log periods in Section 10.4, unless longer retention is required by Applicable Laws. |
 | **Sub-processors** | As listed on the Sub-processor List ([taxy.au/legal/subprocessors](/legal/subprocessors/)). |
