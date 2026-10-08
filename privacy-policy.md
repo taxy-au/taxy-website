@@ -7,7 +7,7 @@ permalink: /privacy-policy/
 toc: true
 ---
 
-_Last updated: 8 October 2026._
+_Last updated: 9 October 2026._
 
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
 workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
@@ -126,9 +126,10 @@ disclosed to them there:
   recordings themselves are stored in Australia (section 4).
 
 Each is listed, with the information it handles, on our
-[Sub-processor list](/legal/subprocessors/). We take reasonable steps to ensure
-overseas recipients handle personal information consistently with the Australian Privacy
-Principles (APP 8).
+[Sub-processor list](/legal/subprocessors/). Our own business tools, such as Google
+Workspace, Slack, Xero, Trello and Google Analytics, also hold personal information about our
+contacts in the United States, Europe and elsewhere. We take reasonable steps to ensure overseas
+recipients handle personal information consistently with the Australian Privacy Principles (APP 8).
 
 ## 10. Your rights
 You may request **access** to, or **correction** of, your personal information, and may complain
