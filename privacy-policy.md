@@ -7,7 +7,7 @@ permalink: /privacy-policy/
 toc: true
 ---
 
-_Last updated: 7 October 2026._
+_Last updated: 8 October 2026._
 
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
 workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
@@ -71,14 +71,13 @@ support calls with prospective and existing Firms — to capture notes and follo
 our service. We use **Fireflies** to transcribe video meetings and **Aircall** for business
 telephony (which captures phone numbers and call recordings). Participants are **told at the start
 of each call that it is being recorded** and may decline; if you ask us not to record, we won't.
-These recordings sometimes include discussion of client information; we handle them as **our own
-confidential records** (Taxy as controller), keep access least-privilege, and do **not** use them to
-train AI models.
+We keep access to recordings least-privilege and do **not** use them to train AI models.
 
-Fireflies and Aircall are **not sub-processors** of the Cloud Service and do not appear on our
-[Sub-processor list](/legal/subprocessors/). They handle our own call and meeting
-records; they do not receive the Customer Content a Firm submits to the platform, and they play no
-part in delivering the platform.
+When we speak directly with a Firm or one of its clients, for example in onboarding or support, the
+conversation can include the Firm's client information, which we handle on the Firm's behalf. For
+those calls Fireflies and Aircall are our **sub-processors**, and both are listed on our
+[Sub-processor list](/legal/subprocessors/). Our other recordings, such as sales
+calls, are our own confidential records (Taxy as controller).
 
 ## 5. Cookies and website analytics
 We use **essential cookies** to run taxy.au and **Google Analytics 4** to understand website usage.
@@ -114,14 +113,17 @@ Firm which of us notifies.
 ## 9. International transfers
 Customer Content, including backups, is **stored in Australia**.
 
-Some of the service providers we use are located in the **United States**, and personal information
-is disclosed to them there:
+Some of the service providers we use hold personal information in the **United States**, and it is
+disclosed to them there:
 
 - **Twilio (SendGrid)** sends notification emails and receives the emails clients send to the
   platform;
 - **Twilio (Segment)** receives platform usage data;
 - **Anthropic** processes personal information when Taxy's AI tools are used in work that involves
-  it (section 4).
+  it (section 4);
+- **Fireflies** records and transcribes our video meetings (section 4);
+- **Aircall** holds the names, phone numbers and call details from our phone calls; the call
+  recordings themselves are stored in Australia (section 4).
 
 Each is listed, with the information it handles, on our
 [Sub-processor list](/legal/subprocessors/). We take reasonable steps to ensure
