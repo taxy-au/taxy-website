@@ -1,4 +1,5 @@
-// Design tokens — lifted from brand.md §6 + brand-pack.html.
+// Design tokens — lifted from ~/code/taxy/taxy-ops/brand/brand.md §6 and
+// ~/code/taxy/taxy-ops/brand/assets/kit/taxy-graphics.css.
 // Mix target across pages: 60% white / 25% dark / 10% purple / 5% accent.
 
 // Colour — core
@@ -18,11 +19,11 @@ $color-offwhite-2: #F3F1F6;   // warmer off-white for UI chrome (e.g. browser-fr
 $color-light-grey: #DEDCE0;
 $color-mid-grey: #CCCCCC;
 
-// Colour — supporting shades (brand.md §Supporting Shades)
+// Colour — supporting shades (~/code/taxy/taxy-ops/brand/brand.md §6 Supporting Shades)
 $color-nightshade-muted: #3D3548;  // soft-contrast body text — hero subtitles, lede
 $color-purple-pressed: #7E2EE8;    // hover/active on primary purple CTAs (~8% darker)
 
-// Status pill pairs (brand.md §Status Pill Pairs) — canonical, don't substitute.
+// Status pill pairs (~/code/taxy/taxy-ops/brand/brand.md §6 Status Pill Pairs) — canonical, don't substitute.
 $pill-done-bg:      #dff9ef;  $pill-done-ink:      #0e6b52;  // ready / done — teal
 $pill-waiting-bg:   #efe5ff;  $pill-waiting-ink:   #6a29c4;  // waiting / needs input — lavender
 $pill-submitted-bg: #fff3dc;  $pill-submitted-ink: #8c5a10;  // pending accountant — amber

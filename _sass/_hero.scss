@@ -1,6 +1,7 @@
 @use "tokens" as *;
 
-// Hero partial. Patterned on brand-pack.html .hero treatment.
+// Hero partial. Patterned on the hero block in
+// ~/code/taxy/taxy-ops/brand/assets/kit/taxy-graphics.css (successor to the retired brand-pack.html).
 
 .hero {
   position: relative;
@@ -111,8 +112,10 @@
   color: $color-nightshade;
   text-wrap: balance;
 
-  // Display-scale per brand-pack §Type (.display = clamp(56px, 9vw, 132px)).
-  // Capped below brand-pack's max because the home hero is two-column with a
+  // Display scale from the retired brand-pack.html (.display = clamp(56px, 9vw, 132px));
+  // taxy-graphics.css has no display role, only .headline. Type scale:
+  // ~/code/taxy/taxy-ops/brand/brand.md §6 Typography.
+  // Capped below that max because the home hero is two-column with a
   // proof card on the right — the text column can't hold 132px lines.
   font-size: clamp(44px, 6vw, 84px);
   line-height: 0.95;
