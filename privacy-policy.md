@@ -2,7 +2,7 @@
 layout: legal
 title: "Privacy policy"
 heading: "Privacy Policy"
-description: "How Taxy handles personal information across our website and platform — controller and processor roles, AI sub-processors, data residency, and your rights under the Privacy Act and APPs."
+description: "How Taxy handles personal information across our website and platform — controller and processor roles, AI sub-processors, data residency and your rights."
 permalink: /privacy-policy/
 toc: true
 ---

@@ -63,7 +63,7 @@ function page(src, dst, permalink, title, heading, desc, toc = false) {
 
 page("privacy-policy.md", "privacy-policy.md", "/privacy-policy/",
   "Privacy policy", "Privacy Policy",
-  "How Taxy handles personal information across our website and platform — controller and processor roles, AI sub-processors, data residency, and your rights under the Privacy Act and APPs.",
+  "How Taxy handles personal information across our website and platform — controller and processor roles, AI sub-processors, data residency and your rights.",
   true);
 
 page("security.md", "security.md", "/security/",
@@ -81,12 +81,12 @@ page("standard-terms.md", "legal/terms.md", "/legal/terms/",
 
 page("end-user-agreement.md", "legal/end-user-agreement.md", "/legal/end-user-agreement/",
   "End user agreement", "End User Agreement",
-  "The agreement binding the individuals who log in to app.taxy.au and iris.taxy.au — firm staff and invited clients — covering acceptable use and account security.",
+  "The agreement for everyone who logs in to app.taxy.au and iris.taxy.au — firm staff and invited clients — covering acceptable use and account security.",
   true);
 
 page("dpa.md", "legal/dpa.md", "/legal/dpa/",
   "Data Processing Agreement", "Data Processing Agreement",
-  "Taxy's Data Processing Agreement — how we process Customer Personal Data as a processor or sub-processor under the Privacy Act, the APPs, and (where applicable) European data protection law.",
+  "How Taxy processes Customer Personal Data as a processor or sub-processor under the Privacy Act, the APPs, and (where applicable) European data protection law.",
   true);
 
 page("subprocessors.md", "legal/subprocessors.md", "/legal/subprocessors/",

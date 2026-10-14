@@ -2,7 +2,7 @@
 layout: legal
 title: "End user agreement"
 heading: "End User Agreement"
-description: "The agreement binding the individuals who log in to app.taxy.au and iris.taxy.au — firm staff and invited clients — covering acceptable use and account security."
+description: "The agreement for everyone who logs in to app.taxy.au and iris.taxy.au — firm staff and invited clients — covering acceptable use and account security."
 permalink: /legal/end-user-agreement/
 toc: true
 ---

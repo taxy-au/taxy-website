@@ -2,7 +2,7 @@
 layout: legal
 title: "Data Processing Agreement"
 heading: "Data Processing Agreement"
-description: "Taxy's Data Processing Agreement — how we process Customer Personal Data as a processor or sub-processor under the Privacy Act, the APPs, and (where applicable) European data protection law."
+description: "How Taxy processes Customer Personal Data as a processor or sub-processor under the Privacy Act, the APPs, and (where applicable) European data protection law."
 permalink: /legal/dpa/
 toc: true
 ---
