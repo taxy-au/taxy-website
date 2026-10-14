@@ -3,16 +3,30 @@
 //
 // Used by .github/workflows/link-check.yml once lychee has checked every
 // outbound link on the built site. 403 and 429 are warnings: sites routinely
-// refuse or throttle bots while serving people fine. Any other failure (404,
-// 5xx, DNS, TLS, timeout) fails the job.
+// refuse or throttle bots while serving people fine. A failure with no HTTP
+// status (connection, protocol) gets a second opinion from curl, because
+// lychee's client trips on some servers that load fine elsewhere
+// (tpb.gov.au: "HTTP/2 protocol error"); if curl gets a 2xx/3xx it's a warning.
+// Any other failure (404, 5xx, DNS, TLS, timeout) fails the job.
 //
 // Usage:   node script/report-outbound-links.mjs <lychee-report.json>
 // Env:     LYCHEE_EXIT_CODE     lychee's exit code: 0 all good, 2 link failures,
 //                               anything else means lychee itself failed
 //          GITHUB_STEP_SUMMARY  if set (it is in Actions), a summary table lands there
+import { execFileSync } from "node:child_process";
 import { appendFileSync, existsSync, readFileSync } from "node:fs";
 
 const WARN_CODES = new Set([403, 429]);
+
+// Final HTTP status curl gets for a URL, following redirects; 0 if it can't connect.
+function curlStatus(url) {
+  try {
+    const out = execFileSync("curl", ["-s", "-o", "/dev/null", "-L", "-m", "20", "-A", "Mozilla/5.0", "-w", "%{http_code}", url], { encoding: "utf8" });
+    return Number(out) || 0;
+  } catch {
+    return 0;
+  }
+}
 const file = process.argv[2];
 const lycheeExit = process.env.LYCHEE_EXIT_CODE ?? "";
 
@@ -53,18 +67,27 @@ for (const map of ["error_map", "timeout_map"]) {
   }
 }
 const all = [...groups.values()];
-const warnings = all.filter((g) => WARN_CODES.has(g.code));
-const failures = all.filter((g) => !WARN_CODES.has(g.code));
+for (const g of all) {
+  if (Number.isFinite(g.code) || g.text === "Timeout") continue;
+  const status = curlStatus(g.url);
+  if (status >= 200 && status < 400) g.curl = status;
+}
+const isWarning = (g) => WARN_CODES.has(g.code) || g.curl;
+const warnings = all.filter(isWarning);
+const failures = all.filter((g) => !isWarning(g));
 
 const pagesOf = (g) => {
   const p = [...g.pages].sort();
   return p.slice(0, 3).join(", ") + (p.length > 3 ? ` (+${p.length - 3} more)` : "");
 };
-for (const g of warnings) annotate("warning", `Outbound link ${g.code} (bot blocked or rate-limited)`, `${g.url} on ${pagesOf(g)}`);
+for (const g of warnings)
+  g.curl
+    ? annotate("warning", "Outbound link failed in lychee only", `${g.url}: ${g.text}, but curl got ${g.curl}, on ${pagesOf(g)}`)
+    : annotate("warning", `Outbound link ${g.code} (bot blocked or rate-limited)`, `${g.url} on ${pagesOf(g)}`);
 for (const g of failures)
   annotate("error", "Broken outbound link", `${g.url}: ${g.text}${g.details ? ` (${g.details})` : ""} on ${pagesOf(g)}`);
 
-const line = `${checked} outbound links checked: ${failures.length} broken, ${warnings.length} warning${warnings.length === 1 ? "" : "s"} (403/429)`;
+const line = `${checked} outbound links checked: ${failures.length} broken, ${warnings.length} warning${warnings.length === 1 ? "" : "s"} (403/429, or failed in lychee only)`;
 console.log(line);
 
 if (process.env.GITHUB_STEP_SUMMARY) {
@@ -75,7 +98,7 @@ if (process.env.GITHUB_STEP_SUMMARY) {
     "\n\n";
   let md = `## Outbound links\n\n${line}\n\n`;
   if (failures.length) md += `### Broken\n\n${table(failures)}`;
-  if (warnings.length) md += `### Warnings (403/429, usually bot blocking: check by hand)\n\n${table(warnings)}`;
+  if (warnings.length) md += `### Warnings (403/429 bot blocking, or failed in lychee only: check by hand)\n\n${table(warnings)}`;
   appendFileSync(process.env.GITHUB_STEP_SUMMARY, md);
 }
 
