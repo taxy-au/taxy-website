@@ -34,9 +34,6 @@
 
   {% include marketing-header.html %}
 
-  {%- comment -%} Launch ribbon on every page except the episode page it points to. {%- endcomment -%}
-  {% unless page.url contains "/podcast/" %}{% include site-banner.html %}{% endunless %}
-
   <main id="content">
     {{ content }}
   </main>
