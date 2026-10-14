@@ -338,10 +338,12 @@ permalink: /
     {%- comment -%}
       Self-hosted walkthrough video. To swap it, replace the .mp4 + poster under
       assets/video/ (re-encode to H.264 MP4 with `-movflags +faststart`).
+      No `autoplay` attribute and preload="none": the script below starts it once
+      it's near the viewport, so the 2.5 MB file isn't fetched on every visit.
     {%- endcomment -%}
     <div class="video-embed poc__video">
-      <video autoplay muted loop playsinline controls
-             preload="auto"
+      <video muted loop playsinline controls
+             preload="none"
              poster="{{ '/assets/video/taxy-dashboard-poster.jpg' | relative_url }}">
         <source src="{{ '/assets/video/taxy-dashboard.mp4' | relative_url }}" type="video/mp4">
         Your browser doesn&rsquo;t support embedded video.
@@ -349,16 +351,28 @@ permalink: /
       </video>
     </div>
     <script>
-      // Don't autoplay a looping video at people who've asked the OS for less
-      // motion — park it on the poster frame. `controls` means they can still
-      // play it deliberately.
+      // Autoplay, deferred: start the muted loop once the video is within ~300px
+      // of the viewport, so nothing downloads for visitors who never scroll this far.
+      // People who've asked the OS for less motion stay on the poster frame;
+      // `controls` means they can still play it deliberately.
       (function () {
-        if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         var v = document.querySelector('.poc__video video');
         if (!v) return;
-        v.removeAttribute('autoplay');
-        v.loop = false;
-        v.pause();
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          v.loop = false;
+          return;
+        }
+        function start() {
+          var p = v.play();
+          if (p && p.catch) p.catch(function () {}); // blocked (e.g. iOS Low Power Mode): poster + controls remain
+        }
+        if (!('IntersectionObserver' in window)) { start(); return; }
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          start();
+        }, { rootMargin: '300px 0px' });
+        io.observe(v);
       })();
     </script>
   </div>
