@@ -1,0 +1,20 @@
+# lychee config for .github/workflows/link-check.yml (lychee v0.24.2).
+# Outbound links only: taxy.au links are checked against the build on every
+# deploy by script/check-site.mjs.
+
+no_progress = true
+
+# _site/ is gitignored, and lychee skips gitignored files unless told not to.
+no_ignore = true
+
+# Built pages only.
+extensions = ["html"]
+
+# Relative and root-relative links become taxy.au URLs, which the first
+# exclude then skips.
+base_url = "https://taxy.au/"
+
+exclude = [
+  '^https?://(www\.)?taxy\.au([/?#]|$)',    # our own pages
+  '^https?://([a-z0-9-]+\.)*linkedin\.com', # answers bots with 999
+]

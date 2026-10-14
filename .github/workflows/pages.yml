@@ -31,6 +31,9 @@ jobs:
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+      # Blocks the deploy on SEO or internal-link breakage; see the top of the script.
+      - name: Check the built site
+        run: node script/check-site.mjs _site
       - uses: actions/upload-pages-artifact@v3
 
   deploy:

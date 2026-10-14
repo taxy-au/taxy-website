@@ -1,0 +1,56 @@
+name: Check outbound links
+
+# Monthly and on demand, outside the deploy: a dead third-party link is worth
+# knowing about but shouldn't hold up a release. Internal links, the sitemap and
+# the SEO basics are checked on every deploy by script/check-site.mjs (pages.yml).
+#
+# Every taxy.au link is excluded (check-site.mjs covers them against the build),
+# and so is linkedin.com, which answers bots with 999: see .github/lychee.toml.
+# 403 and 429 come out as warnings, and anything else that fails turns the run
+# red: see script/report-outbound-links.mjs.
+
+on:
+  schedule:
+    - cron: "17 22 1 * *" # 22:17 UTC on the 1st: 08:17 AEST / 09:17 AEDT on the 2nd
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  links:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      # Same Ruby and build as pages.yml, so the links checked are the ones deployed.
+      - uses: ruby/setup-ruby@a0102e0972be65f351c307e2d64b9314a57c8073 # v1.324.0
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+      - name: Build with Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+      - name: Check outbound links with lychee
+        id: lychee
+        uses: lycheeverse/lychee-action@e7477775783ea5526144ba13e8db5eec57747ce8 # v2.9.0
+        with:
+          lycheeVersion: v0.24.2
+          # Options live in the config file: the action evals this string, so it
+          # stays free of quotes, globs and regexes.
+          args: --config .github/lychee.toml _site
+          format: json
+          output: lychee/report.json
+          # The next step decides pass/fail; the action's own empty-run check
+          # only reads markdown output.
+          fail: false
+          failIfEmpty: false
+          jobSummary: false
+          checkbox: false
+      - name: Report (403/429 warn, other failures fail)
+        run: node script/report-outbound-links.mjs lychee/report.json
+        env:
+          LYCHEE_EXIT_CODE: ${{ steps.lychee.outputs.exit_code }}
