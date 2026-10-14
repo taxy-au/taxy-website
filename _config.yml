@@ -35,3 +35,10 @@ exclude:
   - HOMEPAGE-CLEANUP.md
   - script
   - vendor
+
+# Site-wide share image (og:image) for pages without their own `image:`; the source is taxy-ops content/graphics/site-default-og-1200x630-c-mark.html.
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og-default.jpg
