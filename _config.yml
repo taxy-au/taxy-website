@@ -3,6 +3,9 @@ tagline: "Less chasing. More control. Built for Australian tax workflows."
 description: "The tax workflow platform built for Australian accounting firms. Structured requests for every job across the year, so clients know what's needed, staff see progress at a glance, and nothing falls through the cracks."
 url: https://taxy.au
 baseurl: ""
+# Build dates in Sydney time, not the CI runner's UTC: the footer © year comes from
+# the build time, and the 1 January rebuild in pages.yml runs at 13:05 UTC on 31 Dec.
+timezone: Australia/Sydney
 
 author:
   name: Taxy

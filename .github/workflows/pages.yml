@@ -4,6 +4,9 @@ on:
   push:
     branches: [main]
   workflow_dispatch:
+  schedule:
+    # The footer © year is set at build time; rebuild at 00:05 on 1 Jan Sydney (AEDT) so it rolls over without a push.
+    - cron: '5 13 31 12 *'
 
 permissions:
   contents: read
