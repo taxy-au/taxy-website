@@ -69,8 +69,8 @@ for (const map of ["error_map", "timeout_map"]) {
 const all = [...groups.values()];
 for (const g of all) {
   if (Number.isFinite(g.code) || g.text === "Timeout") continue;
-  const status = curlStatus(g.url);
-  if (status >= 200 && status < 400) g.curl = status;
+  g.curlTried = curlStatus(g.url);
+  if ((g.curlTried >= 200 && g.curlTried < 400) || WARN_CODES.has(g.curlTried)) g.curl = g.curlTried;
 }
 const isWarning = (g) => WARN_CODES.has(g.code) || g.curl;
 const warnings = all.filter(isWarning);
@@ -85,7 +85,11 @@ for (const g of warnings)
     ? annotate("warning", "Outbound link failed in lychee only", `${g.url}: ${g.text}, but curl got ${g.curl}, on ${pagesOf(g)}`)
     : annotate("warning", `Outbound link ${g.code} (bot blocked or rate-limited)`, `${g.url} on ${pagesOf(g)}`);
 for (const g of failures)
-  annotate("error", "Broken outbound link", `${g.url}: ${g.text}${g.details ? ` (${g.details})` : ""} on ${pagesOf(g)}`);
+  annotate(
+    "error",
+    "Broken outbound link",
+    `${g.url}: ${g.text}${g.details ? ` (${g.details})` : ""}${g.curlTried !== undefined ? `; curl got ${g.curlTried || "no response"}` : ""} on ${pagesOf(g)}`,
+  );
 
 const line = `${checked} outbound links checked: ${failures.length} broken, ${warnings.length} warning${warnings.length === 1 ? "" : "s"} (403/429, or failed in lychee only)`;
 console.log(line);
