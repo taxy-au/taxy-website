@@ -1,11 +1,15 @@
 ---
 layout: marketing
 title: "Designing workflows to save time and better serve clients"
-description: "Why clients go quiet on information requests, what the chase really costs, and where technology helps (and where it can't). Taxy co-founder Amanda Walker on the Accountants Daily Insider podcast."
+description: "Why clients go quiet on information requests, what the chase costs, and where technology helps. Taxy's Amanda Walker on the Accountants Daily Insider podcast."
 permalink: /podcast/designing-workflows-to-save-time/
 image: /assets/img/podcast/episode-preview.jpg
 date: 2026-08-07
-author: Amanda Walker
+# jekyll-seo-tag's own JSON-LD describes this page as a WebPage by Taxy (site author), not
+# an article: it names the publisher after the page author, which made "Amanda Walker" the
+# publishing organisation. The episode itself (Accountants Daily) is in the @graph below.
+seo:
+  type: WebPage
 ---
 
 {%- comment -%}
@@ -255,7 +259,7 @@ author: Amanda Walker
         { "@type": "Thing", "name": "Tax workflow" },
         { "@type": "Thing", "name": "Australian taxation" }
       ],
-      "partOfSeries": { "@id": "https://www.accountantsdaily.com.au/podcast#series" },
+      "partOfSeries": { "@id": "https://www.accountantsdaily.com.au/podcasts/accountants-daily-insider#series" },
       "author": { "@id": "{{ '/' | absolute_url }}#amanda-walker" },
       "actor": { "@id": "{{ '/' | absolute_url }}#jerome-doraisamy" },
       "publisher": { "@id": "https://www.accountantsdaily.com.au#org" },
@@ -268,9 +272,9 @@ author: Amanda Walker
     },
     {
       "@type": "PodcastSeries",
-      "@id": "https://www.accountantsdaily.com.au/podcast#series",
+      "@id": "https://www.accountantsdaily.com.au/podcasts/accountants-daily-insider#series",
       "name": "Accountants Daily Insider",
-      "url": "https://www.accountantsdaily.com.au/podcast"
+      "url": "https://www.accountantsdaily.com.au/podcasts/accountants-daily-insider"
     },
     {
       "@type": "AudioObject",

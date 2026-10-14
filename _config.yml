@@ -6,8 +6,10 @@ baseurl: ""
 
 author:
   name: Taxy
+  type: Organization
 
-logo: /assets/img/taxy-logo-white.png
+# jekyll-seo-tag's JSON-LD publisher logo; shown on white, so the dark one.
+logo: /assets/img/taxy-logo.png
 
 social:
   name: Taxy
