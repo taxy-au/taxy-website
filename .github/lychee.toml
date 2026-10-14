@@ -17,4 +17,7 @@ base_url = "https://taxy.au/"
 exclude = [
   '^https?://(www\.)?taxy\.au([/?#]|$)',    # our own pages
   '^https?://([a-z0-9-]+\.)*linkedin\.com', # answers bots with 999
+  # Drops connections from GitHub's runners (lychee and curl both get no
+  # response) but loads fine from Australia; checked 2026-10-14.
+  '^https?://(www\.)?tpb\.gov\.au',
 ]
