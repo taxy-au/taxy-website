@@ -7,7 +7,7 @@ permalink: /legal/dpa/
 toc: true
 ---
 
-_Last updated: 7 October 2026._
+_Last updated: 14 October 2026._
 
 > Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa, incorporated by
 > the Cover Page and given effect by Section 3.1 (Personal Data) of the Standard Terms.
@@ -116,13 +116,14 @@ handle them only as necessary to provide the Cloud Service and in accordance wit
 ### 6. Sub-processors
 
 6.1 The Customer authorises Provider to engage the Sub-processors on the Sub-processor List to
-Process Customer Personal Data, provided that Provider: (a) gives the Customer at least **30
-days' advance notice** of any addition or replacement by updating the Sub-processor List; (b)
+Process Customer Personal Data, provided that Provider: (a) notifies the Customer of any addition
+or replacement, by updating the Sub-processor List and by email, **before the new Sub-processor
+first Processes Customer Personal Data**; (b)
 binds each Sub-processor by written data-protection terms, and assesses any material difference
 between those terms and this DPA before engaging it; and (c) remains liable for its Sub-processors' acts and omissions.
 
 6.2 The Customer may object to a new or replacement Sub-processor on reasonable data-protection
-grounds within **30 days** of notice. The parties will cooperate in good faith to resolve the
+grounds within **30 days** of that notice. The parties will cooperate in good faith to resolve the
 objection. If it cannot be resolved, either party may terminate the affected Order Form on
 written notice in accordance with Section 5 (Term & Termination) of the Standard Terms, without
 prejudice to fees already incurred.
@@ -259,7 +260,8 @@ by reference:
 Processor) applies where the Customer is a Controller, and Module Three (Processor to
 Sub-processor) applies where the Customer is a Processor; (ii) in Clause 7, the docking clause
 does not apply; (iii) in Clause 9, Option 2 (general written authorisation) applies, with the
-minimum notice period for Sub-processor changes set at 30 days per Section 6.1; (iv) in Clause 11,
+minimum notice period for Sub-processor changes set at 30 days, which for these transfers applies
+in place of Section 6.1(a); (iv) in Clause 11,
 the optional language does not apply; (v) in Clause 17, Option 1 applies and the EU SCCs are
 governed by the law of Ireland; (vi) in Clause 18(b), disputes are resolved before the courts of
 Ireland; and (vii) Annex I and Annex III are completed with the information in Annex B of this
