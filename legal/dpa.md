@@ -7,7 +7,7 @@ permalink: /legal/dpa/
 toc: true
 ---
 
-_Last updated: 14 October 2026._
+_Last updated: 9 November 2026._
 
 > Forms part of the Taxy Cloud Service Agreement; published at taxy.au/legal/dpa, incorporated by
 > the Cover Page and given effect by Section 3.1 (Personal Data) of the Standard Terms.
@@ -119,8 +119,9 @@ handle them only as necessary to provide the Cloud Service and in accordance wit
 Process Customer Personal Data, provided that Provider: (a) notifies the Customer of any addition
 or replacement, by updating the Sub-processor List and by email, **before the new Sub-processor
 first Processes Customer Personal Data**; (b)
-binds each Sub-processor by written data-protection terms, and assesses any material difference
-between those terms and this DPA before engaging it; and (c) remains liable for its Sub-processors' acts and omissions.
+binds each Sub-processor by written terms that hold it to the standard applicable data-protection
+law requires, names on the Sub-processor List the terms that bind each one, and assesses any
+material difference between those terms and this DPA before engaging it; and (c) remains liable for its Sub-processors' acts and omissions.
 
 6.2 The Customer may object to a new or replacement Sub-processor on reasonable data-protection
 grounds within **30 days** of that notice. The parties will cooperate in good faith to resolve the
@@ -283,9 +284,6 @@ adequacy, the EU SCCs or UK Addendum, or another lawful transfer mechanism).
 
 **B1.4 Conflict.** Where the EU SCCs or the UK Addendum apply, they prevail over the rest of this
 DPA to the extent of any conflict.
-
-> No dedicated United States / CCPA section is required — the generic "Applicable Data Protection
-> Laws" definition in Part A §1.1 absorbs US state privacy laws automatically.
 
 ---
 
