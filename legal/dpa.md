@@ -43,8 +43,9 @@ under the Agreement and this DPA.
 meaning given to that term — or to the substantially similar concept (such as "APP entity") —
 under Applicable Data Protection Laws.
 
-1.3 "**Customer Personal Data**" means Personal Data within Customer Content that the Customer or
-its Users provide to the Cloud Service and that is governed by this DPA.
+1.3 "**Customer Personal Data**" means Personal Data within Customer Content that is governed by this
+DPA. Customer Content, as defined in the Standard Terms, includes information the Cloud Service
+retrieves from connected third-party services at the Customer's direction.
 
 1.4 "**Personal Data**" means information about a Data Subject that is "personal information",
 "personal data" or a substantially similar concept under Applicable Data Protection Laws.
@@ -306,9 +307,9 @@ is available to the Customer on request.
 | **Data exporter / Controller** | The Customer (or, where the Customer is a Processor, its third-party Controller). Details are in the Agreement / the Customer's account. |
 | **Data importer / Processor** | Taxy Pty Ltd, ABN 33 666 815 890, Level 7, 88 Phillip Street, Sydney NSW 2000. Role: Processor (or Sub-processor per Section 2.2). |
 | **Categories of Data Subjects** | The Customer's clients (the taxpayers and entities whose information the Customer submits to the Cloud Service), and the Customer's own personnel, contractors and contacts. |
-| **Categories of Personal Data** | Names; contact details; tax file numbers and other government identifiers; financial and tax information; identity-document details; and other Personal Data the Customer submits to the Cloud Service. |
+| **Categories of Personal Data** | Names; contact details; tax file numbers and other government identifiers; financial and tax information; identity-document details; other Personal Data the Customer submits to the Cloud Service; and information Provider retrieves from connected third-party services at the Customer's direction. |
 | **Special / sensitive categories** | Not requested by the Cloud Service; may be present only if the Customer chooses to submit it. |
-| **Nature and purpose** | Providing the tax workflow service described in the Agreement (collecting client information and documents, and tracking progress). |
+| **Nature and purpose** | Providing the tax workflow service described in the Agreement (collecting client information and documents, and tracking progress); and retrieving information from connected third-party services at the Customer's direction. |
 | **Frequency** | Continuous, for the duration of the Agreement. |
 | **Duration / retention** | The term of the Agreement, plus up to 60 days after for deletion (Section 10) and the backup and audit-log periods in Section 10.4, unless longer retention is required by Applicable Laws. |
 | **Sub-processors** | As listed on the Sub-processor List ([taxy.au/legal/subprocessors](/legal/subprocessors/)). |

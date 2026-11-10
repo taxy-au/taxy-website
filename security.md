@@ -6,7 +6,7 @@ description: "How Taxy protects your clients' data — Australian data residency
 permalink: /security/
 ---
 
-_Last updated: 28 September 2026._
+_Last updated: 9 November 2026._
 
 Taxy holds some of the most sensitive information your practice has: your clients' identities,
 their finances, their tax affairs. Here's how we look after it.
@@ -21,31 +21,38 @@ handles, and our [Privacy Policy](/privacy-policy/) explains how we manage it.
 Your data is encrypted while it travels and while it sits on disk.
 
 ## Who can get to your data
-Every Taxy account can use multi-factor authentication. Our own staff accounts always do.
+Day to day, no one at Taxy can reach the systems your data is stored in. The accounts we use for
+email and everyday work have no path to them; getting in takes a separate, tightly controlled account
+secured with a physical security key — not a password, so there's nothing to phish. Every sign-in
+raises an alert, access is limited to what the job needs, and it's all logged.
 
-The accounts we use for email and everyday work can't reach the Google Cloud systems your data is stored in. Getting in takes a
-separate account, and day to day that means a physical security key. A key can't be phished: there's
-no code to read out, and nothing to type into a fake login page. Every time someone signs in to one
-of those accounts, an alert goes out. Access is limited to what the job needs, and it's logged.
+Your own Taxy logins support multi-factor authentication, and our staff accounts always use it.
 
 
 ## Built to stay online
-Taxy runs on Google Cloud's managed infrastructure in Australia. We keep written plans for staying
-online through a disruption and for handling an incident.
+Taxy runs on Google Cloud's managed infrastructure in Google's Sydney region — the same platform that
+runs Google's own services, engineered for high availability and backed by Google's operations team.
+You can check its live status any time on the [Google Cloud status
+dashboard](https://status.cloud.google.com/), and read how Google engineers for reliability in the
+[Google Cloud reliability guide](https://cloud.google.com/architecture/framework/reliability). On our
+side, we keep written plans for staying online through a disruption and for handling an incident.
 
 ## How we use AI
 We use AI tools from **Anthropic** to develop, operate and support Taxy. Where that work involves
 information in your account, Anthropic processes it on our behalf. Model training is turned off, so
 your information isn't used to train Anthropic's models. Anthropic is on our [Sub-processor list](/legal/subprocessors/).
 
-If and when we build AI features into Taxy itself, they'll use Google Cloud's models, run in our
-Australian Google Cloud environment, and your data won't be used to train them.
+We don't yet build AI into the Taxy products themselves. If we do, we'll update this page, our
+Privacy Policy and our Sub-processor list before it goes live, so you can see exactly how it works and
+what it touches.
 
 ## How we work
-We run a documented information security management system: written policies, security training for
-our team (most recently in April 2026), and checks on our vendors (we look for ISO 27001 or SOC 2).
+We run a documented information security management system: written policies, a monthly security
+risk review, security training for our team (most recently in April 2026), and checks on our
+vendors' security.
 
-Want the detail? Ask us for our security questionnaire — [security@taxy.au](mailto:security@taxy.au).
+Running a vendor security review? We're happy to complete your security questionnaire — just email
+[security@taxy.au](mailto:security@taxy.au).
 
 ## Report a concern
 Found a security problem? Email [**security@taxy.au**](mailto:security@taxy.au).

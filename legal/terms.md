@@ -7,7 +7,7 @@ permalink: /legal/terms/
 toc: true
 ---
 
-_Last updated: 28 September 2026._
+_Last updated: 9 November 2026._
 
 > Adapted from the Common Paper Cloud Service Agreement Standard Terms v2.1 ([CC BY 4.0](https://creativecommons.org/licenses/by/4.0/)), modified for Australian law. Published at taxy.au/legal/terms.
 
@@ -216,7 +216,7 @@ _Last updated: 28 September 2026._
 
 **13.10** "Covered Claim" means either a Provider Covered Claim or Customer Covered Claim.
 
-**13.11** "Customer Content" means data, information, or materials submitted by or on behalf of Customer or Users to the Product but excludes Feedback.
+**13.11** "Customer Content" means data, information, or materials submitted by or on behalf of Customer or Users to the Product, or that the Product retrieves from a third party (such as the ATO) at the direction of Customer or a User, but excludes Feedback.
 
 **13.12** "Discloser" means a party to this Agreement when the party is providing or disclosing Confidential Information to the other party.
 

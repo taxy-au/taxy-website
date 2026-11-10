@@ -7,7 +7,7 @@ permalink: /legal/end-user-agreement/
 toc: true
 ---
 
-_Last updated: 28 September 2026._
+_Last updated: 9 November 2026._
 
 This agreement is between you and **Taxy Pty Ltd** (ABN 33 666 815 890, Level 7, 88 Phillip
 Street, Sydney NSW 2000) ("Taxy", "we", "us"). It applies to **every individual who accesses or
@@ -54,12 +54,13 @@ Platform through your own account — never through someone else's.
 ## 4. Keeping your account secure
 Security on your side of the login matters as much as ours. You must:
 
-- **keep your credentials secret** — don't share your password, login link, or any verification
-  code with anyone, including colleagues and the Firm;
+- **keep your credentials secret** — don't share your password, sign-in link, passkey, or any
+  verification code with anyone, including colleagues and the Firm;
 - **not share logins** — one account, one person; if someone else needs access, ask the Firm to
   invite them;
 - **use multi-factor authentication** where we offer it, and keep it switched on;
-- **choose a strong password** that you don't use on any other service; and
+- **choose a strong password**, where your account uses one, that you don't use on any other
+  service; and
 - **tell us promptly** at [security@taxy.au](mailto:security@taxy.au) — and tell the Firm — if you
   suspect your credentials are lost, stolen, or being used by someone else.
 

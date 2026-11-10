@@ -7,7 +7,7 @@ permalink: /privacy-policy/
 toc: true
 ---
 
-_Last updated: 9 October 2026._
+_Last updated: 9 November 2026._
 
 **Taxy Pty Ltd** (ABN 33 666 815 890) ("Taxy", "we", "us", "our") provides cloud-based tax
 workflow platforms at app.taxy.au and iris.taxy.au. This policy explains how we handle personal information, in line
@@ -106,9 +106,9 @@ Customer Content is **stored in Australia** and encrypted **in transit and at re
 accounts always use multi-factor authentication, and staff access to the Google Cloud systems that
 store it is limited to what the job needs and logged. See our
 [Security page](/security/) for detail. If a data breach is likely to cause serious
-harm, we will notify affected individuals and the **OAIC without undue delay**, consistent with the
-**Notifiable Data Breaches scheme**. Where the breach involves Customer Content, we agree with the
-Firm which of us notifies.
+harm, we assess it within **30 days** and, where it is an eligible data breach, notify the **OAIC**
+and affected individuals **as soon as practicable**, as the **Notifiable Data Breaches scheme**
+requires. Where the breach involves Customer Content, we agree with the Firm which of us notifies.
 
 ## 9. International transfers
 Customer Content, including backups, is **stored in Australia**.
